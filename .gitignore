@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Apple Pages auto-generated lock/temp files
+.~lock.*
+*.tmp
+
+# Logs / env
+*.log
+.env
+.env.local
+
+# Stray media (not part of the prototype)
+*.MOV
