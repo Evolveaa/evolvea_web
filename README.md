@@ -1,57 +1,56 @@
 # Evolvea — Landing Page Prototype
 
-A static, single-page marketing prototype for **Evolvea**, a B2B2C educational-health platform
-that acts as a **digital companion for speech therapy**. It helps children aged **5–10** with
-speech and cognitive development by turning in-office therapy into small, guided, parent-led
-exercises at home — connecting **therapists → parents → children** in one loop.
+A static, single-page prototype for **Evolvea** — *ten minutes a night to rebuild how your
+child thinks.* Evolvea is a daily **metacognitive exercise** parents and children do together
+(ages 6–14): each prompt adapts to the child's last answer so reasoning, reflection, and
+curiosity grow one conversation at a time.
 
-> ⚠️ This is a design/communication prototype. Forms are illustrative and don't submit anywhere.
-> Figures shown (pricing, referral amounts) are taken from the project brief to communicate the
-> business model, not as a final price list.
+This prototype is a faithful rebuild of the recorded design reference and has two parts:
 
-## What's here
+1. **Hero (light)** — the core promise, with *Try the live demo* / *See the app*.
+2. **Live demo (dark)** — an **interactive phone mockup** you can tap through, mirroring the
+   four steps a parent sees in the app for tonight's exercise, the *Think-Aloud Puzzle*.
+
+> ⚠️ Design/communication prototype. The "Join the beta" and app buttons are illustrative.
+
+## The interactive demo
+
+The phone is a real state machine — tap the tabs or the buttons to move through it:
+
+| Step | State | What it shows |
+| --- | --- | --- |
+| Intro | `Intro` | Why this exercise was chosen tonight |
+| Read | `Read` | The parent's three simple jobs |
+| Do | `Do` | Live capture — tap the thinking moves you hear (chips toggle, counter + timer run) |
+| Reflect | `Reflect` | Reflection questions + tomorrow's adaptation |
+| Done | `Done` | Session summary, then *Replay demo* |
+
+## Files
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The full single-page site (semantic HTML). |
-| `css/styles.css` | Design system + all styling (no framework, no build step). |
-| `js/main.js` | Mobile nav, scroll reveals, stat counters, exercise modal. |
-| `The Stuck puzzle.pages` | Source material — a sample parent-mediated exercise featured on the page. |
-
-## Sections
-
-1. **Hero** — the core promise: "therapy continues between sessions."
-2. **Stats** — the model at a glance.
-3. **The gap** — why between-session consistency matters.
-4. **How it works** — the therapist → parent → child loop.
-5. **Exercises** — the three intervention categories.
-6. **Featured exercise** — *The Stuck Puzzle*, the real 6-step protocol (with full modal).
-7. **For therapists** — dashboard, engagement data, referral income.
-8. **For parents** — daily plan, reminders, progress.
-9. **Partnership** — the B2B2C model (families / therapists / Evolvea).
-10. **CTA + footer**.
+| `index.html` | The single-page site (semantic HTML). |
+| `css/styles.css` | Design system + styling (no framework, no build step). |
+| `js/main.js` | Interactive phone state machine, signal chips, live timer, adaptive header. |
+| `The Stuck puzzle.pages` | Source material from an earlier exercise concept. |
 
 ## Run it
 
-No build step — it's plain HTML/CSS/JS.
+No build step — plain HTML/CSS/JS.
 
 ```bash
-# Just open the file…
-open index.html
-
-# …or serve it locally
-python3 -m http.server 8000   # then visit http://localhost:8000
+open index.html                 # or:
+python3 -m http.server 8000     # then visit http://localhost:8000
 ```
 
 ## Tech
 
-- Hand-written HTML/CSS/JS — zero dependencies, zero build.
-- Fonts: *Fraunces* (display) + *Plus Jakarta Sans* (text) via Google Fonts.
-- Responsive (desktop → mobile), with `prefers-reduced-motion` support and basic a11y.
+- Hand-written HTML/CSS/JS, zero dependencies, zero build.
+- Font: *Inter* via Google Fonts.
+- Responsive (desktop two-column → stacked on mobile), `prefers-reduced-motion` aware.
 
 ## Possible next steps
 
-- Wire the early-access form to a real backend / waitlist.
-- Slovak translation (`sk`) with a language toggle.
-- Split into therapist vs. parent landing variants.
-- Real screenshots of the product replacing the mock dashboard/phone.
+- Wire "Join the beta" to a real waitlist.
+- Slovak translation with a language toggle.
+- Replace the demo's mock content with live app screens.

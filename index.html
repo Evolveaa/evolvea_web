@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Evolvea — a digital companion for speech therapy. We help children aged 5–10 with speech and cognitive development through therapist-guided, parent-led exercises at home." />
-  <meta name="theme-color" content="#0f766e" />
-  <title>Evolvea · A digital companion for speech therapy</title>
+  <meta name="description" content="Evolvea — ten minutes a night to rebuild how your child thinks. A daily metacognitive exercise parents and children do together, for ages 6–14." />
+  <meta name="theme-color" content="#0a0e18" />
+  <title>Evolvea · Ten minutes a night to rebuild how your child thinks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Cpath d='M16 7c3 3 4.5 6 4.5 9a4.5 4.5 0 11-9 0c0-3 1.5-6 4.5-9z' fill='%235eead4'/%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b2336'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%238cc0ea'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -17,456 +17,189 @@
   <header class="site-header" id="top">
     <div class="container header-inner">
       <a href="#top" class="brand" aria-label="Evolvea home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="30" height="30">
-            <rect width="32" height="32" rx="9" fill="url(#bg)"/>
-            <path d="M16 6.5c3.2 3.2 4.8 6.4 4.8 9.6a4.8 4.8 0 11-9.6 0c0-3.2 1.6-6.4 4.8-9.6z" fill="#5eead4"/>
-            <path d="M16 13.5v8.5M16 16.5l2.6-2.2M16 18.8l-2.6-2.2" stroke="#0f766e" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-            <defs><linearGradient id="bg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0f766e"/><stop offset="1" stop-color="#0d9488"/></linearGradient></defs>
-          </svg>
-        </span>
+        <span class="brand-dot" aria-hidden="true"></span>
         <span class="brand-name">Evolvea</span>
       </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a href="#how">How it works</a>
-        <a href="#exercises">Exercises</a>
-        <a href="#therapists">For therapists</a>
-        <a href="#parents">For parents</a>
-        <a href="#partnership">Partnership</a>
-      </nav>
-
-      <div class="header-cta">
-        <a href="#partnership" class="btn btn-ghost">Become a partner</a>
-        <a href="#parents" class="btn btn-primary">Get started</a>
-      </div>
-
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mobile-menu" hidden>
-      <a href="#how">How it works</a>
-      <a href="#exercises">Exercises</a>
-      <a href="#therapists">For therapists</a>
-      <a href="#parents">For parents</a>
-      <a href="#partnership">Partnership</a>
-      <a href="#parents" class="btn btn-primary btn-block">Get started</a>
+      <a href="#demo" class="btn btn-join">Join the beta</a>
     </div>
   </header>
 
   <main>
-    <!-- ░░ Hero ░░ -->
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
+    <!-- ░░ Hero (light) ░░ -->
+    <section class="hero" id="hero">
       <div class="container hero-inner">
-        <div class="hero-copy reveal">
-          <span class="eyebrow"><span class="dot"></span> Digital companion for speech &amp; cognitive therapy</span>
-          <h1 class="hero-title">Therapy continues<br><em>between sessions.</em></h1>
-          <p class="hero-lead">
-            Evolvea turns the work your child does in the therapist's office into small,
-            guided exercises at home — so progress doesn't pause when the session ends.
-            Built for children aged <strong>5–10</strong>, their parents, and the therapists who guide them.
-          </p>
-          <div class="hero-actions">
-            <a href="#parents" class="btn btn-primary btn-lg">I'm a parent</a>
-            <a href="#therapists" class="btn btn-outline btn-lg">I'm a therapist</a>
-          </div>
-          <div class="hero-trust">
-            <div class="avatars" aria-hidden="true"><span>👧</span><span>🧒</span><span>👦</span></div>
-            <p>A recommended supplement to in-person therapy — never a replacement.</p>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="hero-card card-float">
-            <div class="card-head">
-              <span class="pill pill-soft">Today's exercise</span>
-              <span class="pill pill-streak">🔥 4-day streak</span>
-            </div>
-            <h3>The Stuck Puzzle</h3>
-            <p class="card-sub">Builds tolerance for difficulty · 10 min · with a parent</p>
-            <ul class="card-steps">
-              <li><span class="step-no">1</span> Present the task, hand over ownership</li>
-              <li><span class="step-no">2</span> "How do you feel looking at this?"</li>
-              <li><span class="step-no">3</span> Plan a first small step together</li>
-            </ul>
-            <div class="card-foot">
-              <div class="progress"><span style="width:64%"></span></div>
-              <small>Step 3 of 6</small>
-            </div>
-          </div>
-          <div class="hero-chip chip-1">Therapist assigned ✓</div>
-          <div class="hero-chip chip-2">Parent feedback sent</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ░░ Stat strip ░░ -->
-    <section class="stats">
-      <div class="container stats-grid">
-        <div class="stat reveal"><strong data-count="3">3</strong><span>people, one loop:<br>therapist · parent · child</span></div>
-        <div class="stat reveal"><strong data-count="5">5</strong><span>minutes a day is<br>all a session takes</span></div>
-        <div class="stat reveal"><strong data-suffix="+" data-count="50">50+</strong><span>guided exercises<br>across three categories</span></div>
-        <div class="stat reveal"><strong>5–10</strong><span>the age range<br>Evolvea is built for</span></div>
-      </div>
-    </section>
-
-    <!-- ░░ Problem ░░ -->
-    <section class="section problem" id="problem">
-      <div class="container narrow center">
-        <span class="kicker">The gap we close</span>
-        <h2 class="section-title">An hour a week in therapy. <span class="muted">167 hours without it.</span></h2>
-        <p class="section-lead">
-          Speech and cognitive progress depends on consistent, everyday practice — but parents are
-          left without structure, therapists can't see what happens at home, and good intentions fade
-          by Tuesday. Evolvea is the thread that keeps everyone connected between appointments.
+        <span class="eyebrow"><span class="dot"></span> Metacognitive learning · Ages 6–14</span>
+        <h1 class="hero-title">Ten minutes a night to rebuild how your child thinks.</h1>
+        <p class="hero-lead">
+          Evolvea is a daily exercise parents and children do together. Each prompt is chosen
+          based on your child's last answer — so reasoning, reflection, and curiosity grow
+          one conversation at a time.
         </p>
-        <div class="problem-row">
-          <div class="problem-card reveal">
-            <div class="emoji">😟</div>
-            <h4>Parents feel unsure</h4>
-            <p>"Am I doing this right?" Without guidance, home practice stops or turns into pressure.</p>
-          </div>
-          <div class="problem-card reveal">
-            <div class="emoji">🔍</div>
-            <h4>Therapists fly blind</h4>
-            <p>No visibility into engagement between sessions means slower, harder-to-target progress.</p>
-          </div>
-          <div class="problem-card reveal">
-            <div class="emoji">📉</div>
-            <h4>Children lose momentum</h4>
-            <p>Skills practised once a week fade. Consistency — not intensity — is what builds them.</p>
-          </div>
+        <div class="hero-actions">
+          <a href="#demo" class="btn btn-dark">Try the live demo</a>
+          <a href="#demo" class="btn btn-text">See the app</a>
         </div>
       </div>
     </section>
 
-    <!-- ░░ How it works ░░ -->
-    <section class="section how" id="how">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">How it works</span>
-          <h2 class="section-title">One connected loop</h2>
-          <p class="section-lead">Evolvea links the three people who matter most into a single, simple workflow.</p>
-        </div>
-
-        <div class="loop">
-          <article class="loop-step reveal">
-            <span class="loop-num">01</span>
-            <div class="loop-icon">🩺</div>
-            <h3>The therapist assigns</h3>
-            <p>From the dashboard, the therapist picks exercises matched to each child's plan and tracks engagement remotely.</p>
-            <ul class="ticks">
-              <li>Assign &amp; sequence exercises</li>
-              <li>Monitor real engagement data</li>
-              <li>Export progress for records</li>
-            </ul>
-          </article>
-
-          <div class="loop-arrow" aria-hidden="true">→</div>
-
-          <article class="loop-step reveal">
-            <span class="loop-num">02</span>
-            <div class="loop-icon">👪</div>
-            <h3>The parent guides</h3>
-            <p>Parents get the day's activity with clear, scripted prompts, gentle reminders, and a place to note how it went.</p>
-            <ul class="ticks">
-              <li>Step-by-step daily activities</li>
-              <li>Reminders that build a habit</li>
-              <li>Two-way notes to the therapist</li>
-            </ul>
-          </article>
-
-          <div class="loop-arrow" aria-hidden="true">→</div>
-
-          <article class="loop-step reveal">
-            <span class="loop-num">03</span>
-            <div class="loop-icon">🧒</div>
-            <h3>The child grows</h3>
-            <p>Short, playful, confidence-building tasks turn difficult moments into small wins — every day.</p>
-            <ul class="ticks">
-              <li>Playful, low-pressure tasks</li>
-              <li>Effort rewarded over outcome</li>
-              <li>Visible streaks &amp; encouragement</li>
-            </ul>
-          </article>
-        </div>
-        <p class="loop-close center muted">…and the child's progress flows straight back to the therapist, closing the loop.</p>
-      </div>
-    </section>
-
-    <!-- ░░ Exercise categories ░░ -->
-    <section class="section exercises" id="exercises">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">What's inside</span>
-          <h2 class="section-title">Three kinds of exercise</h2>
-          <p class="section-lead">Every activity is short, evidence-informed, and designed to fit into an ordinary day.</p>
-        </div>
-
-        <div class="cat-grid">
-          <article class="cat-card reveal">
-            <div class="cat-badge cat-a">💬</div>
-            <h3>Parent–child communication</h3>
-            <p>Structured conversations and reflective prompts that strengthen the bond and model healthy problem-solving — like <em>The Stuck Puzzle</em>.</p>
-            <span class="cat-tag">Guided · offline · together</span>
-          </article>
-
-          <article class="cat-card reveal">
-            <div class="cat-badge cat-b">🧠</div>
-            <h3>Interactive cognitive tasks</h3>
-            <p>Playful digital games targeting memory, attention, and language recognition that adapt to the child's level.</p>
-            <span class="cat-tag">Digital · adaptive · solo</span>
-          </article>
-
-          <article class="cat-card reveal">
-            <div class="cat-badge cat-c">🗣️</div>
-            <h3>Speech &amp; articulation</h3>
-            <p>Focused pronunciation and articulation drills that reinforce exactly what the therapist is working on in session.</p>
-            <span class="cat-tag">Targeted · repeatable · tracked</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ░░ Featured exercise: The Stuck Puzzle ░░ -->
-    <section class="section featured" id="featured">
-      <div class="container featured-inner">
-        <div class="featured-copy reveal">
-          <span class="kicker">A real exercise, in full</span>
-          <h2 class="section-title">"The Stuck Puzzle"</h2>
-          <p class="section-lead">
-            A six-step, parent-led routine that teaches children to stay with difficulty instead of
-            avoiding it. The parent is a <strong>facilitator, not an instructor</strong> — no correcting,
-            no solving, just reflective prompts and emotional containment.
+    <!-- ░░ Live demo (dark) ░░ -->
+    <section class="demo" id="demo">
+      <div class="container demo-inner">
+        <!-- Left: copy -->
+        <div class="demo-copy">
+          <span class="eyebrow eyebrow-dark">Live demo · Tap through it</span>
+          <h2 class="demo-title">Try tonight's exercise:<br><em>Think-Aloud Puzzle.</em></h2>
+          <p class="demo-lead">
+            A 10-minute monitoring exercise for ages 6–8. Move through the same four steps a
+            parent sees on the phone — intro, instructions, live capture, reflection.
           </p>
-          <div class="objectives">
-            <h4>What it builds</h4>
-            <ul class="ticks">
-              <li>Tolerance of cognitive difficulty</li>
-              <li>Adaptive self-talk ("I can try another way")</li>
-              <li>Effort-based, not outcome-based, self-evaluation</li>
-              <li>Parent-mediated scaffolding of problem-solving</li>
-            </ul>
-          </div>
-          <button class="btn btn-primary" id="openExercise">View the full protocol</button>
+          <ol class="demo-steps">
+            <li><span class="ds-no">01</span> Read why this exercise was chosen for tonight.</li>
+            <li><span class="ds-no">02</span> Get three simple parent instructions — no prep.</li>
+            <li><span class="ds-no">03</span> Tap the thinking moves you hear as your child solves.</li>
+            <li><span class="ds-no">04</span> Reflect together and unlock tomorrow's adapted prompt.</li>
+          </ol>
         </div>
 
-        <ol class="steps-flow reveal">
-          <li><span class="sf-num">1</span><div><h5>Task presentation</h5><p>The child is told they own the thinking. Autonomy first; no evaluative language.</p></div></li>
-          <li><span class="sf-num">2</span><div><h5>Emotional awareness</h5><p>"How do you feel when you look at this task?" — discomfort is named and normalised.</p></div></li>
-          <li><span class="sf-num">3</span><div><h5>Metacognitive planning</h5><p>Three questions, plenty of wait time, no answers offered by the parent.</p></div></li>
-          <li><span class="sf-num">4</span><div><h5>Task engagement</h5><p>The child works independently; frustration is met with prompts, never corrections.</p></div></li>
-          <li><span class="sf-num">5</span><div><h5>Reflective evaluation</h5><p>"What did you do well? What was hard, and how did you handle it?"</p></div></li>
-          <li><span class="sf-num">6</span><div><h5>Self-efficacy anchoring</h5><p>The child says a short statement to carry forward: "Being stuck helps me learn."</p></div></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ░░ For therapists ░░ -->
-    <section class="section split therapists" id="therapists">
-      <div class="container split-inner">
-        <div class="split-visual reveal" aria-hidden="true">
-          <div class="dash">
-            <div class="dash-top"><strong>Caseload</strong><span class="pill pill-soft">12 active</span></div>
-            <div class="dash-row"><span class="ava">EM</span><div class="dash-meta"><b>Ema, 6</b><small>Articulation · 5/7 days</small></div><span class="bar"><i style="width:71%"></i></span></div>
-            <div class="dash-row"><span class="ava">JK</span><div class="dash-meta"><b>Jakub, 8</b><small>Memory · 6/7 days</small></div><span class="bar"><i style="width:86%"></i></span></div>
-            <div class="dash-row"><span class="ava">SN</span><div class="dash-meta"><b>Sofia, 5</b><small>Communication · 3/7 days</small></div><span class="bar warn"><i style="width:42%"></i></span></div>
-            <div class="dash-foot"><span class="pill pill-streak">↑ 18% engagement this month</span></div>
-          </div>
-        </div>
-        <div class="split-copy reveal">
-          <span class="kicker">For therapists &amp; clinics</span>
-          <h2 class="section-title">Extend your care beyond the room</h2>
-          <p class="section-lead">For independent speech therapists, logopedic doctors, and small clinics who want better outcomes without more chair time.</p>
-          <ul class="feature-list">
-            <li><b>Assign with confidence</b> — curate exercise plans per child from a vetted library.</li>
-            <li><b>See what's really happening</b> — engagement and consistency data between sessions.</li>
-            <li><b>Export &amp; document</b> — clean progress reports for your records and parents.</li>
-            <li><b>Earn from referrals</b> — recommend Evolvea and receive recurring revenue per active child.</li>
-          </ul>
-          <a href="#partnership" class="btn btn-primary">Explore the partner programme</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ░░ For parents ░░ -->
-    <section class="section split parents reverse" id="parents">
-      <div class="container split-inner">
-        <div class="split-copy reveal">
-          <span class="kicker">For parents</span>
-          <h2 class="section-title">Finally, you know exactly what to do</h2>
-          <p class="section-lead">No guesswork, no pressure. Just five focused minutes a day, guided word-for-word, and the quiet confidence that you're helping.</p>
-          <ul class="feature-list">
-            <li><b>Personalised assignments</b> — exactly what your therapist recommends, nothing more.</li>
-            <li><b>Gentle reminders</b> — turn intention into a daily habit that sticks.</li>
-            <li><b>Progress you can see</b> — streaks and milestones that motivate your child.</li>
-            <li><b>A direct line</b> — share how it went and hear back from your therapist.</li>
-          </ul>
-          <a href="#partnership" class="btn btn-primary">Get started with your therapist</a>
-        </div>
-        <div class="split-visual reveal" aria-hidden="true">
-          <div class="phone">
-            <div class="phone-notch"></div>
+        <!-- Right: interactive phone -->
+        <div class="demo-device">
+          <div class="phone" role="group" aria-label="Evolvea app live demo">
             <div class="phone-screen">
-              <div class="ps-head"><small>Good morning 👋</small><b>Ema's plan · Tuesday</b></div>
-              <div class="ps-card ps-active">
-                <span class="ps-emoji">🧩</span>
-                <div><b>The Stuck Puzzle</b><small>10 min · with you</small></div>
-                <span class="ps-go">Start</span>
+              <!-- Status bar -->
+              <div class="ph-status">
+                <span class="ph-time">9:41</span>
+                <span class="ph-icons" aria-hidden="true">
+                  <svg viewBox="0 0 18 12" width="17" height="11"><rect x="0" y="6" width="3" height="6" rx="1" fill="currentColor"/><rect x="4.5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="9" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="currentColor" opacity=".4"/></svg>
+                  <svg viewBox="0 0 24 12" width="24" height="11"><rect x="0.5" y="0.5" width="20" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="15" height="8" rx="1.5" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+                </span>
               </div>
-              <div class="ps-card"><span class="ps-emoji">🧠</span><div><b>Memory match</b><small>5 min · solo</small></div><span class="ps-check">✓</span></div>
-              <div class="ps-card"><span class="ps-emoji">🗣️</span><div><b>"R" sounds</b><small>4 min · with you</small></div><span class="ps-check">✓</span></div>
-              <div class="ps-streak">🔥 4-day streak — keep it going!</div>
-            </div>
-          </div>
+
+              <!-- App bar -->
+              <div class="ph-appbar">
+                <span class="ph-brand"><span class="ph-brand-dot"></span> Evolvea <small>Cognitive&nbsp;Training</small></span>
+                <span class="ph-kid">Leo · 7</span>
+              </div>
+
+              <!-- Tabs -->
+              <div class="ph-tabs" role="tablist">
+                <button class="ph-tab is-active" data-go="0" role="tab">Intro</button>
+                <button class="ph-tab" data-go="1" role="tab">Read</button>
+                <button class="ph-tab" data-go="2" role="tab">Do</button>
+                <button class="ph-tab" data-go="3" role="tab">Reflect</button>
+                <button class="ph-tab" data-go="4" role="tab">Done</button>
+              </div>
+
+              <!-- Body / panels -->
+              <div class="ph-body">
+
+                <!-- 0 · INTRO -->
+                <section class="ph-panel is-active" data-panel="0">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker">Session · with Leo</span>
+                    <h3 class="ph-h">Think-Aloud Puzzle</h3>
+                    <span class="ph-sub">Monitoring · 10 min · Ages 6–8</span>
+                    <p class="ph-text">Be a thinking detective — Leo says out loud what he's thinking as he tries to solve a puzzle. Builds awareness of his own reasoning.</p>
+                    <div class="ph-note">
+                      <span class="ph-note-label">Why tonight</span>
+                      <p>Last session Leo jumped to answers without explaining. We're practicing the <b>narrate-your-thinking</b> habit.</p>
+                    </div>
+                  </div>
+                  <div class="ph-foot">
+                    <button class="ph-btn ph-btn-primary" data-next>Read instructions →</button>
+                  </div>
+                </section>
+
+                <!-- 1 · READ -->
+                <section class="ph-panel" data-panel="1">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker">Parent instructions</span>
+                    <h3 class="ph-h">Your three jobs.</h3>
+                    <ul class="ph-jobs">
+                      <li><span class="ph-jno">01</span><p>Give Leo a tangram or 12-piece jigsaw.</p></li>
+                      <li><span class="ph-jno">02</span><p>Ask him to talk out loud as he tries to solve it.</p></li>
+                      <li><span class="ph-jno">03</span><p>Listen — don't solve. Only ask: <i>'what are you thinking?'</i></p></li>
+                    </ul>
+                  </div>
+                  <div class="ph-foot ph-foot-split">
+                    <button class="ph-btn ph-btn-ghost" data-back>Back</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Start the activity →</button>
+                  </div>
+                </section>
+
+                <!-- 2 · DO -->
+                <section class="ph-panel" data-panel="2">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker ph-rec"><span class="rec-dot"></span> Recording · Listen mode <span class="ph-timer" data-timer>00:00</span></span>
+                    <h3 class="ph-h">Tap each thinking move you hear.</h3>
+                    <div class="ph-signals">
+                      <button class="ph-signal" data-signal>Notices a pattern</button>
+                      <button class="ph-signal" data-signal>Tries &amp; checks</button>
+                      <button class="ph-signal" data-signal>Names a strategy</button>
+                      <button class="ph-signal" data-signal>Catches a mistake</button>
+                      <button class="ph-signal" data-signal>Asks themselves a Q</button>
+                      <button class="ph-signal" data-signal>Pauses to plan</button>
+                    </div>
+                    <p class="ph-captured"><b data-signal-count>0</b> signals captured</p>
+                  </div>
+                  <div class="ph-foot ph-foot-split">
+                    <button class="ph-btn ph-btn-ghost" data-back>Back</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Reflect together →</button>
+                  </div>
+                </section>
+
+                <!-- 3 · REFLECT -->
+                <section class="ph-panel" data-panel="3">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker">Reflect together</span>
+                    <h3 class="ph-h">Ask Leo, in his words:</h3>
+                    <div class="ph-q">What was the trickiest part?</div>
+                    <div class="ph-q">What did you try first — and why?</div>
+                    <div class="ph-q">If you did it again, what would you change?</div>
+                    <div class="ph-note">
+                      <span class="ph-note-label">Tonight's pattern</span>
+                      <p>Leo stayed quiet — tomorrow's prompt will use a <b>shorter puzzle</b> to lower the load.</p>
+                    </div>
+                  </div>
+                  <div class="ph-foot ph-foot-split">
+                    <button class="ph-btn ph-btn-ghost" data-back>Back</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Finish session →</button>
+                  </div>
+                </section>
+
+                <!-- 4 · DONE -->
+                <section class="ph-panel" data-panel="4">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker">Session complete</span>
+                    <h3 class="ph-h">Nice work, you two.</h3>
+                    <div class="ph-stats">
+                      <div class="ph-stat"><b>+12</b><span>XP</span></div>
+                      <div class="ph-stat"><b>00:02</b><span>Time</span></div>
+                      <div class="ph-stat"><b data-final-signals>0</b><span>Signals</span></div>
+                    </div>
+                    <div class="ph-note">
+                      <span class="ph-note-label">Tomorrow, adapted</span>
+                      <p><b>Strategy Swap</b> — solve the same puzzle a second way and compare.</p>
+                    </div>
+                  </div>
+                  <div class="ph-foot">
+                    <button class="ph-btn ph-btn-primary" data-replay>Replay demo ↻</button>
+                  </div>
+                </section>
+
+              </div><!-- /ph-body -->
+            </div><!-- /phone-screen -->
+          </div><!-- /phone -->
         </div>
-      </div>
-    </section>
-
-    <!-- ░░ Partnership / pricing ░░ -->
-    <section class="section partnership" id="partnership">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">Partnership model</span>
-          <h2 class="section-title">Everyone wins when children progress</h2>
-          <p class="section-lead">A B2B2C model that rewards therapists for great recommendations and keeps Evolvea affordable for families.</p>
-        </div>
-
-        <div class="price-grid">
-          <article class="price-card reveal">
-            <div class="price-icon">👪</div>
-            <h3>Families</h3>
-            <div class="price"><span class="amt">€70–100</span><span class="per">/ child · month</span></div>
-            <p>A complete home programme guided by your own therapist.</p>
-            <ul class="ticks">
-              <li>All exercise categories</li>
-              <li>Daily plan &amp; reminders</li>
-              <li>Therapist feedback loop</li>
-            </ul>
-          </article>
-
-          <article class="price-card featured-price reveal">
-            <span class="ribbon">Recurring income</span>
-            <div class="price-icon">🩺</div>
-            <h3>Therapists</h3>
-            <div class="price"><span class="amt">~€30</span><span class="per">/ active child · month</span></div>
-            <p>Earn for every child you refer who stays active — passive, recurring, and aligned with better care.</p>
-            <ul class="ticks">
-              <li>Free therapist dashboard</li>
-              <li>Referral &amp; engagement tracking</li>
-              <li>No cost, no lock-in</li>
-            </ul>
-            <a href="#cta" class="btn btn-primary btn-block">Become a partner</a>
-          </article>
-
-          <article class="price-card reveal">
-            <div class="price-icon">🌱</div>
-            <h3>Evolvea</h3>
-            <div class="price"><span class="amt">~€18–25</span><span class="per">/ subscription · month</span></div>
-            <p>What's left funds the platform, content, and support — a sustainable model built to last.</p>
-            <ul class="ticks">
-              <li>Continuous new exercises</li>
-              <li>Therapist &amp; family support</li>
-              <li>Privacy-first by design</li>
-            </ul>
-          </article>
-        </div>
-        <p class="price-note center muted">Illustrative figures from the project brief, shown to communicate the model — not a final price list.</p>
-      </div>
-    </section>
-
-    <!-- ░░ CTA ░░ -->
-    <section class="cta" id="cta">
-      <div class="container cta-inner reveal">
-        <h2>Let's keep the progress going — together.</h2>
-        <p>Whether you guide children professionally or you're raising one, Evolvea makes the days between sessions count.</p>
-        <form class="cta-form" onsubmit="return false;">
-          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
-          <select aria-label="I am a">
-            <option value="" disabled selected>I am a…</option>
-            <option>Parent</option>
-            <option>Therapist / clinic</option>
-          </select>
-          <button class="btn btn-primary btn-lg" type="submit">Request early access</button>
-        </form>
-        <small class="cta-fine">Prototype — form is illustrative and doesn't submit anywhere.</small>
       </div>
     </section>
   </main>
 
-  <!-- ░░ Footer ░░ -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#top" class="brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="9" fill="#0f766e"/><path d="M16 6.5c3.2 3.2 4.8 6.4 4.8 9.6a4.8 4.8 0 11-9.6 0c0-3.2 1.6-6.4 4.8-9.6z" fill="#5eead4"/></svg>
-          </span>
-          <span class="brand-name">Evolvea</span>
-        </a>
-        <p>A digital companion for speech &amp; cognitive therapy. A supplement to in-person care — never a replacement.</p>
-      </div>
-      <div class="footer-cols">
-        <div><h5>Product</h5><a href="#how">How it works</a><a href="#exercises">Exercises</a><a href="#parents">For parents</a></div>
-        <div><h5>Partners</h5><a href="#therapists">For therapists</a><a href="#partnership">Partnership</a><a href="#cta">Become a partner</a></div>
-        <div><h5>Company</h5><a href="#problem">Our mission</a><a href="#cta">Contact</a><a href="#cta">Early access</a></div>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <small>© <span id="year">2026</span> Evolvea · Prototype</small>
-      <small>Made for children, parents &amp; therapists.</small>
+      <a href="#top" class="brand"><span class="brand-dot brand-dot-light" aria-hidden="true"></span><span class="brand-name">Evolvea</span></a>
+      <small>Metacognitive learning for ages 6–14 · Prototype</small>
     </div>
   </footer>
-
-  <!-- ░░ Exercise modal ░░ -->
-  <div class="modal" id="exerciseModal" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" data-close aria-label="Close">×</button>
-      <span class="kicker">Communication exercise</span>
-      <h3 id="modalTitle">The Stuck Puzzle — full protocol</h3>
-      <p class="modal-meta">Age 5–10 · ~10 min · parent &amp; child · repeatable with any moderate task</p>
-
-      <div class="modal-section">
-        <h4>Objectives</h4>
-        <ul>
-          <li>Increase tolerance of cognitive difficulty</li>
-          <li>Promote adaptive self-talk</li>
-          <li>Reinforce effort-based rather than outcome-based self-evaluation</li>
-          <li>Support parent-mediated scaffolding of problem-solving</li>
-        </ul>
-      </div>
-
-      <div class="modal-section">
-        <h4>Required materials</h4>
-        <p>One age-appropriate task of moderate difficulty — e.g. a small jigsaw puzzle (10–20 pieces). It must be solvable, but not immediately obvious.</p>
-      </div>
-
-      <div class="modal-section">
-        <h4>Role of the parent</h4>
-        <p>A facilitator, not an instructor. No direct explanation, correction, or solution-giving — only reflective prompts and emotional containment.</p>
-      </div>
-
-      <div class="modal-section">
-        <h4>The six steps</h4>
-        <ol class="modal-steps">
-          <li><b>Task presentation.</b> Present the task; the child owns the thinking process. Emphasise autonomy, avoid evaluative language.</li>
-          <li><b>Emotional awareness.</b> "How do you feel when you look at this task?" Offer descriptors if needed (calm, confused, nervous). Acknowledge without judgement.</li>
-          <li><b>Metacognitive planning.</b> Ask in sequence, with wait time: "What is this asking you to do?" · "What do you already know that could help?" · "What could be a first small step?"</li>
-          <li><b>Task engagement.</b> The child works independently. On frustration, prompt — don't correct: "What could you try next?" · "What did this attempt show you?"</li>
-          <li><b>Reflective evaluation.</b> Regardless of completion: "What did you do well?" · "What was difficult, and how did you handle it?" · "What would you try differently?"</li>
-          <li><b>Self-efficacy anchoring.</b> The child says a short statement aloud: "I can take this step by step." · "Being stuck helps me learn." · "I can try another way."</li>
-        </ol>
-      </div>
-
-      <div class="modal-section">
-        <h4>Expected outcomes</h4>
-        <p>With repeated use: more confidence with unfamiliar problems, less avoidance of difficulty, sharper reflective awareness, and stronger parent–child learning interactions. Consistency of reflective questioning matters more than the task itself.</p>
-      </div>
-    </div>
-  </div>
 
   <script src="js/main.js"></script>
 </body>
