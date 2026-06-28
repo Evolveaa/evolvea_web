@@ -29,30 +29,6 @@
     var panels = phone.querySelectorAll(".ph-panel");
     var tabs = phone.querySelectorAll(".ph-tab");
     var current = 0;
-    var timerEl = phone.querySelector("[data-timer]");
-    var timerId = null;
-    var seconds = 0;
-
-    function fmt(s) {
-      var m = Math.floor(s / 60);
-      var ss = s % 60;
-      return (m < 10 ? "0" : "") + m + ":" + (ss < 10 ? "0" : "") + ss;
-    }
-    function startTimer() {
-      stopTimer();
-      seconds = 0;
-      if (timerEl) timerEl.textContent = "00:00";
-      timerId = window.setInterval(function () {
-        seconds += 1;
-        if (timerEl) timerEl.textContent = fmt(seconds);
-      }, 1000);
-    }
-    function stopTimer() {
-      if (timerId) {
-        window.clearInterval(timerId);
-        timerId = null;
-      }
-    }
 
     function show(i) {
       i = Math.max(0, Math.min(panels.length - 1, i));
@@ -64,9 +40,6 @@
         t.classList.toggle("is-active", idx === i);
         t.classList.toggle("is-done", idx < i);
       });
-      // run the recording timer only on the "Do" step
-      if (i === 2) startTimer();
-      else stopTimer();
     }
 
     // Tabs jump directly
@@ -84,18 +57,18 @@
       else if (el.hasAttribute("data-back")) show(current - 1);
       else if (el.hasAttribute("data-replay")) {
         resetSignals();
+        resetSays();
+        resetFields();
         show(0);
       }
     });
 
-    /* ---- "Do" step: tappable signal chips + counter ---- */
+    /* ---- "Feel" step: tappable emotion chips + counter ---- */
     var signals = phone.querySelectorAll("[data-signal]");
     var countEl = phone.querySelector("[data-signal-count]");
-    var finalEl = phone.querySelector("[data-final-signals]");
     function refreshCount() {
       var n = phone.querySelectorAll("[data-signal].on").length;
       if (countEl) countEl.textContent = String(n);
-      if (finalEl) finalEl.textContent = String(n);
     }
     function resetSignals() {
       signals.forEach(function (s) {
@@ -109,6 +82,29 @@
         refreshCount();
       });
     });
+
+    /* ---- "Anchor" step: pick one statement to say aloud ---- */
+    var says = phone.querySelectorAll("[data-say]");
+    function resetSays() {
+      says.forEach(function (s) {
+        s.classList.remove("sel");
+      });
+    }
+    says.forEach(function (s) {
+      s.addEventListener("click", function () {
+        var wasSel = s.classList.contains("sel");
+        resetSays();
+        if (!wasSel) s.classList.add("sel");
+      });
+    });
+
+    /* ---- Clear the open-question text fields on replay ---- */
+    var fields = phone.querySelectorAll(".ph-input");
+    function resetFields() {
+      fields.forEach(function (f) {
+        f.value = "";
+      });
+    }
 
     show(0);
   }

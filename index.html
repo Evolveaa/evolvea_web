@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Evolvea — ten minutes a night to rebuild how your child thinks. A daily metacognitive exercise parents and children do together, for ages 6–14." />
+  <meta name="description" content="Evolvea — a digital companion to speech and cognitive therapy. Ten minutes a night to rebuild how your child thinks. A logopedist-guided, parent-led daily exercise. Coming soon." />
   <meta name="theme-color" content="#0a0e18" />
-  <title>Evolvea · Ten minutes a night to rebuild how your child thinks</title>
+  <title>Evolvea · A digital companion to therapy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -20,12 +20,12 @@
         <span class="brand-dot" aria-hidden="true"></span>
         <span class="brand-name">Evolvea</span>
       </a>
-      <a href="#demo" class="btn btn-join">Join the beta</a>
+      <span class="badge-soon"><span class="bs-dot" aria-hidden="true"></span> Coming soon</span>
     </div>
   </header>
 
   <main>
-    <!-- ░░ Hero (light) ░░ -->
+    <!-- ░░ 1 · Hero (light) — metacognitive learning ░░ -->
     <section class="hero" id="hero">
       <div class="container hero-inner">
         <span class="eyebrow"><span class="dot"></span> Metacognitive learning · Ages 6–14</span>
@@ -37,27 +37,29 @@
         </p>
         <div class="hero-actions">
           <a href="#demo" class="btn btn-dark">Try the live demo</a>
-          <a href="#demo" class="btn btn-text">See the app</a>
+          <a href="#project" class="btn btn-text">About the project</a>
         </div>
+        <p class="hero-note">In development — the full app launches soon. The demo below is a preview.</p>
       </div>
     </section>
 
-    <!-- ░░ Live demo (dark) ░░ -->
+    <!-- ░░ 2 · Live demo (dark) — the exercise ░░ -->
     <section class="demo" id="demo">
       <div class="container demo-inner">
         <!-- Left: copy -->
         <div class="demo-copy">
           <span class="eyebrow eyebrow-dark">Live demo · Tap through it</span>
-          <h2 class="demo-title">Try tonight's exercise:<br><em>Think-Aloud Puzzle.</em></h2>
+          <h2 class="demo-title">Tonight's exercise:<br><em>The Stuck Puzzle.</em></h2>
           <p class="demo-lead">
-            A 10-minute monitoring exercise for ages 6–8. Move through the same four steps a
-            parent sees on the phone — intro, instructions, live capture, reflection.
+            A parent-guided routine that turns "I can't" into "I'll try a small step." Walk
+            the same path a parent follows at the table — then send the session to your
+            logopedist for evaluation.
           </p>
           <ol class="demo-steps">
-            <li><span class="ds-no">01</span> Read why this exercise was chosen for tonight.</li>
-            <li><span class="ds-no">02</span> Get three simple parent instructions — no prep.</li>
-            <li><span class="ds-no">03</span> Tap the thinking moves you hear as your child solves.</li>
-            <li><span class="ds-no">04</span> Reflect together and unlock tomorrow's adapted prompt.</li>
+            <li><span class="ds-no">01</span> Name the feeling — being stuck is normal, not failure.</li>
+            <li><span class="ds-no">02</span> Plan and reflect — type the answers as you go.</li>
+            <li><span class="ds-no">03</span> Let them try; prompt when stuck, never solve.</li>
+            <li><span class="ds-no">04</span> Anchor a takeaway, then send it to the logopedist.</li>
           </ol>
         </div>
 
@@ -83,10 +85,12 @@
               <!-- Tabs -->
               <div class="ph-tabs" role="tablist">
                 <button class="ph-tab is-active" data-go="0" role="tab">Intro</button>
-                <button class="ph-tab" data-go="1" role="tab">Read</button>
-                <button class="ph-tab" data-go="2" role="tab">Do</button>
-                <button class="ph-tab" data-go="3" role="tab">Reflect</button>
-                <button class="ph-tab" data-go="4" role="tab">Done</button>
+                <button class="ph-tab" data-go="1" role="tab">Feel</button>
+                <button class="ph-tab" data-go="2" role="tab">Plan</button>
+                <button class="ph-tab" data-go="3" role="tab">Engage</button>
+                <button class="ph-tab" data-go="4" role="tab">Reflect</button>
+                <button class="ph-tab" data-go="5" role="tab">Anchor</button>
+                <button class="ph-tab" data-go="6" role="tab">Sent</button>
               </div>
 
               <!-- Body / panels -->
@@ -96,89 +100,149 @@
                 <section class="ph-panel is-active" data-panel="0">
                   <div class="ph-scroll">
                     <span class="ph-kicker">Session · with Leo</span>
-                    <h3 class="ph-h">Think-Aloud Puzzle</h3>
-                    <span class="ph-sub">Monitoring · 10 min · Ages 6–8</span>
-                    <p class="ph-text">Be a thinking detective — Leo says out loud what he's thinking as he tries to solve a puzzle. Builds awareness of his own reasoning.</p>
+                    <h3 class="ph-h">The Stuck Puzzle</h3>
+                    <span class="ph-sub">Parent-guided · 10–15 min · Ages 6–10</span>
+                    <p class="ph-text">Give Leo a small jigsaw (10–20 pieces) — solvable, but not obvious. He owns the thinking. You're a facilitator, not an instructor: no solving, no correcting.</p>
                     <div class="ph-note">
-                      <span class="ph-note-label">Why tonight</span>
-                      <p>Last session Leo jumped to answers without explaining. We're practicing the <b>narrate-your-thinking</b> habit.</p>
+                      <span class="ph-note-label">What it builds</span>
+                      <p>Tolerance for difficulty, <b>adaptive self-talk</b>, and effort-based confidence.</p>
                     </div>
                   </div>
                   <div class="ph-foot">
-                    <button class="ph-btn ph-btn-primary" data-next>Read instructions →</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Begin →</button>
                   </div>
                 </section>
 
-                <!-- 1 · READ -->
+                <!-- 1 · FEEL -->
                 <section class="ph-panel" data-panel="1">
                   <div class="ph-scroll">
-                    <span class="ph-kicker">Parent instructions</span>
-                    <h3 class="ph-h">Your three jobs.</h3>
-                    <ul class="ph-jobs">
-                      <li><span class="ph-jno">01</span><p>Give Leo a tangram or 12-piece jigsaw.</p></li>
-                      <li><span class="ph-jno">02</span><p>Ask him to talk out loud as he tries to solve it.</p></li>
-                      <li><span class="ph-jno">03</span><p>Listen — don't solve. Only ask: <i>'what are you thinking?'</i></p></li>
-                    </ul>
+                    <span class="ph-kicker">Step 1 · Emotional awareness</span>
+                    <h3 class="ph-h">"How do you feel looking at this?"</h3>
+                    <p class="ph-text">Ask, then listen. Tap what Leo names — no judgement.</p>
+                    <div class="ph-signals">
+                      <button class="ph-signal" data-signal>Calm</button>
+                      <button class="ph-signal" data-signal>Confused</button>
+                      <button class="ph-signal" data-signal>Nervous</button>
+                      <button class="ph-signal" data-signal>Frustrated</button>
+                      <button class="ph-signal" data-signal>Curious</button>
+                      <button class="ph-signal" data-signal>Determined</button>
+                    </div>
+                    <p class="ph-captured"><b data-signal-count>0</b> feelings named</p>
+                    <div class="ph-note">
+                      <span class="ph-note-label">Why</span>
+                      <p>Naming the discomfort lowers the threat. Stuck is allowed here.</p>
+                    </div>
                   </div>
                   <div class="ph-foot ph-foot-split">
                     <button class="ph-btn ph-btn-ghost" data-back>Back</button>
-                    <button class="ph-btn ph-btn-primary" data-next>Start the activity →</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Make a plan →</button>
                   </div>
                 </section>
 
-                <!-- 2 · DO -->
+                <!-- 2 · PLAN -->
                 <section class="ph-panel" data-panel="2">
                   <div class="ph-scroll">
-                    <span class="ph-kicker ph-rec"><span class="rec-dot"></span> Recording · Listen mode <span class="ph-timer" data-timer>00:00</span></span>
-                    <h3 class="ph-h">Tap each thinking move you hear.</h3>
-                    <div class="ph-signals">
-                      <button class="ph-signal" data-signal>Notices a pattern</button>
-                      <button class="ph-signal" data-signal>Tries &amp; checks</button>
-                      <button class="ph-signal" data-signal>Names a strategy</button>
-                      <button class="ph-signal" data-signal>Catches a mistake</button>
-                      <button class="ph-signal" data-signal>Asks themselves a Q</button>
-                      <button class="ph-signal" data-signal>Pauses to plan</button>
+                    <span class="ph-kicker">Step 2 · Metacognitive planning</span>
+                    <h3 class="ph-h">Ask, then jot it down.</h3>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What is this task asking you to do?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
                     </div>
-                    <p class="ph-captured"><b data-signal-count>0</b> signals captured</p>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What do you already know that could help?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
+                    </div>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What could be a first small step?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
+                    </div>
+                    <div class="ph-note">
+                      <span class="ph-note-label">Hold back</span>
+                      <p>Give plenty of wait time. <b>Don't offer the answers.</b></p>
+                    </div>
                   </div>
                   <div class="ph-foot ph-foot-split">
                     <button class="ph-btn ph-btn-ghost" data-back>Back</button>
-                    <button class="ph-btn ph-btn-primary" data-next>Reflect together →</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Start solving →</button>
                   </div>
                 </section>
 
-                <!-- 3 · REFLECT -->
+                <!-- 3 · ENGAGE -->
                 <section class="ph-panel" data-panel="3">
                   <div class="ph-scroll">
-                    <span class="ph-kicker">Reflect together</span>
-                    <h3 class="ph-h">Ask Leo, in his words:</h3>
-                    <div class="ph-q">What was the trickiest part?</div>
-                    <div class="ph-q">What did you try first — and why?</div>
-                    <div class="ph-q">If you did it again, what would you change?</div>
-                    <div class="ph-note">
-                      <span class="ph-note-label">Tonight's pattern</span>
-                      <p>Leo stayed quiet — tomorrow's prompt will use a <b>shorter puzzle</b> to lower the load.</p>
+                    <span class="ph-kicker">Step 3 · Task engagement</span>
+                    <h3 class="ph-h">When he gets stuck.</h3>
+                    <p class="ph-text">Leo works on his own. If frustration rises, prompt — never correct:</p>
+                    <ul class="ph-jobs">
+                      <li><span class="ph-jno">→</span><p>"What could you try next?"</p></li>
+                      <li><span class="ph-jno">→</span><p>"What did this attempt show you?"</p></li>
+                      <li><span class="ph-jno">→</span><p>"What's one small thing you could test?"</p></li>
+                    </ul>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What did Leo try? <span class="ph-opt">(optional)</span></label>
+                      <textarea class="ph-input" rows="2" placeholder="A quick note for the logopedist…"></textarea>
                     </div>
                   </div>
                   <div class="ph-foot ph-foot-split">
                     <button class="ph-btn ph-btn-ghost" data-back>Back</button>
-                    <button class="ph-btn ph-btn-primary" data-next>Finish session →</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Look back →</button>
                   </div>
                 </section>
 
-                <!-- 4 · DONE -->
+                <!-- 4 · REFLECT -->
                 <section class="ph-panel" data-panel="4">
                   <div class="ph-scroll">
-                    <span class="ph-kicker">Session complete</span>
-                    <h3 class="ph-h">Nice work, you two.</h3>
-                    <div class="ph-stats">
-                      <div class="ph-stat"><b>+12</b><span>XP</span></div>
-                      <div class="ph-stat"><b>00:02</b><span>Time</span></div>
-                      <div class="ph-stat"><b data-final-signals>0</b><span>Signals</span></div>
+                    <span class="ph-kicker">Step 4 · Reflective evaluation</span>
+                    <h3 class="ph-h">However it went, ask:</h3>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What did you do well while working on this?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
                     </div>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What was difficult — and how did you handle it?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
+                    </div>
+                    <div class="ph-field">
+                      <label class="ph-field-label">What would you try differently next time?</label>
+                      <textarea class="ph-input" rows="2" placeholder="Type Leo's answer…"></textarea>
+                    </div>
+                  </div>
+                  <div class="ph-foot ph-foot-split">
+                    <button class="ph-btn ph-btn-ghost" data-back>Back</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Anchor it →</button>
+                  </div>
+                </section>
+
+                <!-- 5 · ANCHOR -->
+                <section class="ph-panel" data-panel="5">
+                  <div class="ph-scroll">
+                    <span class="ph-kicker">Step 5 · Self-efficacy anchoring</span>
+                    <h3 class="ph-h">One line to carry forward.</h3>
+                    <p class="ph-text">Leo picks a statement and says it out loud:</p>
+                    <button class="ph-say" data-say>"I can take this step by step."</button>
+                    <button class="ph-say" data-say>"Being stuck helps me learn."</button>
+                    <button class="ph-say" data-say>"I can try another way."</button>
                     <div class="ph-note">
-                      <span class="ph-note-label">Tomorrow, adapted</span>
-                      <p><b>Strategy Swap</b> — solve the same puzzle a second way and compare.</p>
+                      <span class="ph-note-label">Tomorrow</span>
+                      <p>Repeat with a new task. <b>Consistency of the questions</b> matters more than the puzzle.</p>
+                    </div>
+                  </div>
+                  <div class="ph-foot ph-foot-split">
+                    <button class="ph-btn ph-btn-ghost" data-back>Back</button>
+                    <button class="ph-btn ph-btn-primary" data-next>Finish &amp; send →</button>
+                  </div>
+                </section>
+
+                <!-- 6 · SENT -->
+                <section class="ph-panel" data-panel="6">
+                  <div class="ph-scroll ph-sent">
+                    <div class="ph-check" aria-hidden="true">✓</div>
+                    <span class="ph-kicker">Session saved</span>
+                    <h3 class="ph-h">Sent to Leo's logopedist.</h3>
+                    <p class="ph-text">Tonight's session and your notes have been shared with Leo's logopedist for evaluation. They'll review the answers and adapt tomorrow's exercise.</p>
+                    <div class="ph-note ph-note-full">
+                      <span class="ph-note-label">Status</span>
+                      <p>Awaiting review · usually within <b>24 hours</b></p>
                     </div>
                   </div>
                   <div class="ph-foot">
@@ -192,12 +256,71 @@
         </div>
       </div>
     </section>
+
+    <!-- ░░ 3 · About the project (light) ░░ -->
+    <section class="project" id="project">
+      <div class="container">
+        <span class="eyebrow info-eyebrow"><span class="dot"></span> The project</span>
+        <h2 class="sec-title">A companion to therapy, not a replacement.</h2>
+        <p class="project-lead">
+          Evolvea is a B2B2C educational-health platform that supports young children with speech
+          and cognitive development. It bridges the gap between the therapy room and the living
+          room: a logopedist recommends it, a parent runs a short guided exercise each day, and the
+          child's progress flows back to shape the next session.
+        </p>
+        <p class="project-lead">
+          A logopedist assigns a personalised plan from their dashboard. At home, parents get
+          guided <b>parent-and-child</b> activities — never unsupervised screen time — while the
+          platform quietly tracks progress and engagement.
+        </p>
+
+        <div class="who-grid">
+          <div class="who-card">
+            <h3><span class="who-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></span> Logopedists</h3>
+            <p>Independent logopedists, speech specialists, and small clinics extend their care between appointments — and earn recurring income for every active referral.</p>
+          </div>
+          <div class="who-card">
+            <h3><span class="who-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Parents</h3>
+            <p>Families get clear, guided exercises and the confidence that the few minutes they spend each day are spent on the right things.</p>
+          </div>
+          <div class="who-card">
+            <h3><span class="who-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></span> Children</h3>
+            <p>Children working on speech, memory, or concentration get steady, low-pressure practice that feels like time with a parent — not homework.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ 4 · Why it works (light) ░░ -->
+    <section class="info" id="info">
+      <div class="container">
+        <span class="eyebrow info-eyebrow"><span class="dot"></span> Why it works</span>
+        <h2 class="sec-title sec-title-tight">A small habit with a serious idea behind it.</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <span class="info-no">01</span>
+            <h3>Thinking out loud</h3>
+            <p>Children who put their reasoning into words learn to notice it — and to steer it. That awareness is the skill being built.</p>
+          </div>
+          <div class="info-card">
+            <span class="info-no">02</span>
+            <h3>Effort over answers</h3>
+            <p>The parent never solves or corrects. They ask, then wait. Being stuck stops feeling like failure and starts feeling like the work.</p>
+          </div>
+          <div class="info-card">
+            <span class="info-no">03</span>
+            <h3>One day at a time</h3>
+            <p>Consistency of the questions matters far more than the puzzle in front of them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <a href="#top" class="brand"><span class="brand-dot brand-dot-light" aria-hidden="true"></span><span class="brand-name">Evolvea</span></a>
-      <small>Metacognitive learning for ages 6–14 · Prototype</small>
+      <small>A digital companion to speech &amp; cognitive therapy · Coming soon</small>
     </div>
   </footer>
 

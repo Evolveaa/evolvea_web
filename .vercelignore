@@ -1,0 +1,4 @@
+# Keep internal / source files out of the public deploy
+The Stuck puzzle.pages
+*.MOV
+.claude/
