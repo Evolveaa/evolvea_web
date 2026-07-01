@@ -21,3 +21,18 @@ Thumbs.db
 
 # Stray media (not part of the prototype)
 *.MOV
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# Next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# Production / misc
+*.tsbuildinfo
+.vercel
