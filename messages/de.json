@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "Evolvea · Ein digitaler Begleiter zur Therapie",
+    "description": "Evolvea — ein digitaler Begleiter zur Sprach- und kognitiven Therapie. Zehn Minuten am Abend, die verändern, wie Ihr Kind denkt. Eine tägliche Übung, angeleitet von einer Logopädin und begleitet von den Eltern. Bald verfügbar."
+  },
+  "header": {
+    "comingSoon": "Bald verfügbar"
+  },
+  "hero": {
+    "eyebrow": "Metakognitives Lernen · Alter 6–14 Jahre",
+    "title": "Zehn Minuten am Abend, die verändern, wie Ihr Kind denkt.",
+    "lead": "Evolvea ist eine tägliche Übung, die Eltern und Kind gemeinsam machen. Jede Frage knüpft an die letzte Antwort Ihres Kindes an — so wachsen Denken, Reflexion und Neugier, ein Gespräch nach dem anderen.",
+    "ctaDemo": "Live-Demo ausprobieren",
+    "ctaProject": "Über das Projekt",
+    "note": "In Entwicklung — die vollständige App erscheint bald. Die Demo unten ist eine Vorschau."
+  },
+  "demo": {
+    "eyebrow": "Live-Demo · Klicken Sie sich durch",
+    "titleLead": "Die heutige Abendübung:",
+    "titleEm": "Das festgefahrene Puzzle.",
+    "lead": "Eine elternbegleitete Routine, die aus „Ich kann das nicht.“ ein „Ich probiere einen kleinen Schritt.“ macht. Gehen Sie denselben Weg, den ein Elternteil am Tisch geht — und senden Sie die Sitzung anschließend zur Auswertung an Ihre Logopädin.",
+    "steps": [
+      "Benennen Sie das Gefühl — festzustecken ist normal, kein Versagen.",
+      "Planen und reflektieren — tippen Sie die Antworten unterwegs ein.",
+      "Lassen Sie es ihn versuchen; geben Sie einen Anstoß, wenn er feststeckt, lösen Sie es nie für ihn.",
+      "Verankern Sie eine Erkenntnis und senden Sie sie dann an die Logopädin."
+    ]
+  },
+  "phone": {
+    "brandSub": "Kognitives Training",
+    "kid": "Leo · 7",
+    "tabs": {
+      "intro": "Intro",
+      "feel": "Fühlen",
+      "plan": "Planen",
+      "engage": "Lösen",
+      "reflect": "Reflektieren",
+      "anchor": "Verankern",
+      "sent": "Gesendet"
+    },
+    "nav": {
+      "back": "Zurück",
+      "begin": "Beginnen",
+      "makePlan": "Plan machen",
+      "startSolving": "Loslegen",
+      "lookBack": "Zurückblicken",
+      "anchorIt": "Verankern",
+      "finishSend": "Abschließen & senden",
+      "replay": "Demo wiederholen"
+    },
+    "answerPlaceholder": "Leos Antwort eintippen…",
+    "intro": {
+      "kicker": "Sitzung · mit Leo",
+      "h": "Das festgefahrene Puzzle",
+      "sub": "Elternbegleitet · 10–15 Min. · Alter 6–10 Jahre",
+      "text": "Geben Sie Leo ein kleines Puzzle (10–20 Teile) — lösbar, aber nicht offensichtlich. Das Denken liegt bei ihm. Sie sind Begleiter, nicht Lehrer: nicht lösen, nicht korrigieren.",
+      "noteLabel": "Was es aufbaut",
+      "noteBody": "Toleranz gegenüber Schwierigkeiten, <b>adaptives Selbstgespräch</b> und Selbstvertrauen, das auf Anstrengung beruht."
+    },
+    "feel": {
+      "kicker": "Schritt 1 · Emotionales Bewusstsein",
+      "h": "„Wie fühlst du dich, wenn du das ansiehst?“",
+      "text": "Fragen Sie, dann hören Sie zu. Tippen Sie an, was Leo benennt — ohne Wertung.",
+      "signals": ["Ruhig", "Verwirrt", "Nervös", "Frustriert", "Neugierig", "Entschlossen"],
+      "captured": "<b>{count}</b> {count, plural, one {Gefühl benannt} other {Gefühle benannt}}",
+      "noteLabel": "Warum",
+      "noteBody": "Das Benennen des Unbehagens senkt das Bedrohungsgefühl. Feststecken ist hier erlaubt."
+    },
+    "plan": {
+      "kicker": "Schritt 2 · Metakognitive Planung",
+      "h": "Fragen Sie, dann notieren Sie es.",
+      "fields": [
+        "Was sollst du bei dieser Aufgabe tun?",
+        "Was weißt du bereits, das helfen könnte?",
+        "Was könnte ein erster kleiner Schritt sein?"
+      ],
+      "noteLabel": "Halten Sie sich zurück",
+      "noteBody": "Geben Sie viel Zeit zum Nachdenken. <b>Geben Sie nicht die Antworten vor.</b>"
+    },
+    "engage": {
+      "kicker": "Schritt 3 · Aufgabenbearbeitung",
+      "h": "Wenn er feststeckt.",
+      "text": "Leo arbeitet allein. Steigt die Frustration, geben Sie einen Anstoß — korrigieren Sie nie:",
+      "jobs": [
+        "„Was könntest du als Nächstes versuchen?“",
+        "„Was hat dir dieser Versuch gezeigt?“",
+        "„Was ist eine kleine Sache, die du testen könntest?“"
+      ],
+      "fieldLabel": "Was hat Leo versucht?",
+      "fieldOptional": "(optional)",
+      "fieldPlaceholder": "Eine kurze Notiz für die Logopädin…"
+    },
+    "reflect": {
+      "kicker": "Schritt 4 · Reflektierende Auswertung",
+      "h": "Wie auch immer es lief, fragen Sie:",
+      "fields": [
+        "Was hast du gut gemacht, während du daran gearbeitet hast?",
+        "Was war schwierig — und wie bist du damit umgegangen?",
+        "Was würdest du beim nächsten Mal anders versuchen?"
+      ]
+    },
+    "anchor": {
+      "kicker": "Schritt 5 · Verankerung der Selbstwirksamkeit",
+      "h": "Ein Satz, den er mitnimmt.",
+      "text": "Leo wählt eine Aussage und sagt sie laut:",
+      "says": [
+        "„Ich kann das Schritt für Schritt schaffen.“",
+        "„Feststecken hilft mir zu lernen.“",
+        "„Ich kann es anders versuchen.“"
+      ],
+      "noteLabel": "Morgen",
+      "noteBody": "Wiederholen Sie es mit einer neuen Aufgabe. <b>Die Beständigkeit der Fragen</b> zählt mehr als das Puzzle."
+    },
+    "sent": {
+      "kicker": "Sitzung gespeichert",
+      "h": "An Leos Logopädin gesendet.",
+      "text": "Die heutige Sitzung und Ihre Notizen wurden zur Auswertung mit Leos Logopädin geteilt. Sie sieht die Antworten durch und passt die morgige Übung an.",
+      "noteLabel": "Status",
+      "noteBody": "Wartet auf Prüfung · in der Regel innerhalb von <b>24 Stunden</b>"
+    }
+  },
+  "project": {
+    "eyebrow": "Das Projekt",
+    "title": "Ein Begleiter zur Therapie, kein Ersatz.",
+    "lead1": "Evolvea ist eine B2B2C-Bildungs- und Gesundheitsplattform, die kleine Kinder in ihrer Sprach- und kognitiven Entwicklung unterstützt. Sie überbrückt die Lücke zwischen dem Therapieraum und dem Wohnzimmer: Eine Logopädin empfiehlt sie, ein Elternteil führt täglich eine kurze angeleitete Übung durch, und der Fortschritt des Kindes fließt zurück, um die nächste Sitzung zu gestalten.",
+    "lead2": "Eine Logopädin weist über ihr Dashboard einen personalisierten Plan zu. Zu Hause erhalten Eltern angeleitete Aktivitäten <b>für Eltern und Kind</b> — niemals unbeaufsichtigte Bildschirmzeit — während die Plattform still Fortschritt und Beteiligung verfolgt.",
+    "cards": [
+      {
+        "title": "Logopäd:innen",
+        "body": "Selbstständige Logopäd:innen, Sprachexpert:innen und kleine Praxen erweitern ihre Betreuung zwischen den Terminen — und verdienen für jede aktive Empfehlung ein wiederkehrendes Einkommen."
+      },
+      {
+        "title": "Eltern",
+        "body": "Familien erhalten klare, angeleitete Übungen und die Gewissheit, dass die wenigen Minuten, die sie täglich aufwenden, den richtigen Dingen gewidmet sind."
+      },
+      {
+        "title": "Kinder",
+        "body": "Kinder, die an Sprache, Gedächtnis oder Konzentration arbeiten, bekommen regelmäßige Übung ohne Druck, die sich wie Zeit mit einem Elternteil anfühlt — nicht wie Hausaufgaben."
+      }
+    ]
+  },
+  "info": {
+    "eyebrow": "Warum es funktioniert",
+    "title": "Eine kleine Gewohnheit mit einer ernsten Idee dahinter.",
+    "cards": [
+      {
+        "title": "Laut denken",
+        "body": "Kinder, die ihr Denken in Worte fassen, lernen, es wahrzunehmen — und zu lenken. Genau dieses Bewusstsein ist die Fähigkeit, die aufgebaut wird."
+      },
+      {
+        "title": "Anstrengung vor Antworten",
+        "body": "Der Elternteil löst und korrigiert nie. Er fragt und wartet dann. Feststecken fühlt sich nicht mehr wie Versagen an, sondern wie die eigentliche Arbeit."
+      },
+      {
+        "title": "Einen Tag nach dem anderen",
+        "body": "Die Beständigkeit der Fragen zählt weit mehr als das Puzzle vor ihnen."
+      }
+    ]
+  },
+  "footer": {
+    "text": "Ein digitaler Begleiter zur Sprach- und kognitiven Therapie · Bald verfügbar"
+  },
+  "lang": {
+    "label": "Sprache"
+  }
+}

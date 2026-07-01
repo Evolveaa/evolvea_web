@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "Evolvea · Digitálny spoločník k terapii",
+    "description": "Evolvea — digitálny spoločník k logopedickej a kognitívnej terapii. Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa. Denné cvičenie vedené logopédom a sprevádzané rodičom. Už čoskoro."
+  },
+  "header": {
+    "comingSoon": "Už čoskoro"
+  },
+  "hero": {
+    "eyebrow": "Metakognitívne učenie · Vek 6 – 14 rokov",
+    "title": "Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa.",
+    "lead": "Evolvea je každodenné cvičenie, ktoré rodič a dieťa robia spoločne. Každá otázka nadväzuje na poslednú odpoveď vášho dieťaťa — takže uvažovanie, sebareflexia a zvedavosť rastú rozhovor po rozhovore.",
+    "ctaDemo": "Vyskúšať živú ukážku",
+    "ctaProject": "O projekte",
+    "note": "Vo vývoji — celá aplikácia bude spustená čoskoro. Ukážka nižšie je náhľad."
+  },
+  "demo": {
+    "eyebrow": "Živá ukážka · Preklikajte si ju",
+    "titleLead": "Dnešné večerné cvičenie:",
+    "titleEm": "Zaseknutá skladačka.",
+    "lead": "Rodičom vedená rutina, ktorá mení „Nedokážem to“ na „Skúsim malý krok“. Prejdite rovnakou cestou, akou rodič postupuje pri stole — a potom toto sedenie pošlite svojmu logopédovi na vyhodnotenie.",
+    "steps": [
+      "Pomenujte pocit — byť zaseknutý je normálne, nie je to zlyhanie.",
+      "Plánujte a reflektujte — odpovede zapisujte priebežne.",
+      "Nechajte ho skúšať; keď sa zasekne, naveďte ho, no nikdy neriešte za neho.",
+      "Ukotvite ponaučenie a potom ho pošlite logopédovi."
+    ]
+  },
+  "phone": {
+    "brandSub": "Kognitívny tréning",
+    "kid": "Leo · 7",
+    "tabs": {
+      "intro": "Úvod",
+      "feel": "Pocit",
+      "plan": "Plán",
+      "engage": "Riešenie",
+      "reflect": "Reflexia",
+      "anchor": "Ukotvenie",
+      "sent": "Odoslané"
+    },
+    "nav": {
+      "back": "Späť",
+      "begin": "Začať",
+      "makePlan": "Naplánovať",
+      "startSolving": "Začať riešiť",
+      "lookBack": "Ohliadnuť sa",
+      "anchorIt": "Ukotviť",
+      "finishSend": "Dokončiť a odoslať",
+      "replay": "Prehrať znova"
+    },
+    "answerPlaceholder": "Napíšte Leovu odpoveď…",
+    "intro": {
+      "kicker": "Sedenie · s Leom",
+      "h": "Zaseknutá skladačka",
+      "sub": "Vedené rodičom · 10 – 15 min · Vek 6 – 10 rokov",
+      "text": "Dajte Leovi malú skladačku (10 – 20 dielikov) — riešiteľnú, no nie na prvý pohľad zrejmú. Myslenie je na ňom. Vy ste sprievodca, nie inštruktor: neriešte, neopravujte.",
+      "noteLabel": "Čo to buduje",
+      "noteBody": "Odolnosť voči ťažkostiam, <b>adaptívny vnútorný dialóg</b> a sebadôveru založenú na úsilí."
+    },
+    "feel": {
+      "kicker": "Krok 1 · Uvedomovanie emócií",
+      "h": "„Ako sa cítiš, keď sa na to pozeráš?“",
+      "text": "Spýtajte sa a potom počúvajte. Ťuknite na to, čo Leo pomenuje — bez hodnotenia.",
+      "signals": ["Pokoj", "Zmätok", "Nervozita", "Frustrácia", "Zvedavosť", "Odhodlanie"],
+      "captured": "<b>{count}</b> {count, plural, one {pomenovaný pocit} few {pomenované pocity} other {pomenovaných pocitov}}",
+      "noteLabel": "Prečo",
+      "noteBody": "Pomenovanie nepohody znižuje pocit ohrozenia. Byť zaseknutý je tu úplne v poriadku."
+    },
+    "plan": {
+      "kicker": "Krok 2 · Metakognitívne plánovanie",
+      "h": "Spýtajte sa a odpoveď si zapíšte.",
+      "fields": [
+        "Čo od teba táto úloha žiada?",
+        "Čo už vieš, čo by ti mohlo pomôcť?",
+        "Aký by mohol byť prvý malý krok?"
+      ],
+      "noteLabel": "Zadržte sa",
+      "noteBody": "Doprajte veľa času na rozmyslenie. <b>Neponúkajte odpovede.</b>"
+    },
+    "engage": {
+      "kicker": "Krok 3 · Zapojenie do úlohy",
+      "h": "Keď sa zasekne.",
+      "text": "Leo pracuje sám. Ak stúpa frustrácia, naveďte ho — no nikdy neopravujte:",
+      "jobs": [
+        "„Čo by si mohol skúsiť ďalej?“",
+        "„Čo ti tento pokus ukázal?“",
+        "„Aká je jedna malá vec, ktorú by si mohol vyskúšať?“"
+      ],
+      "fieldLabel": "Čo Leo skúsil?",
+      "fieldOptional": "(nepovinné)",
+      "fieldPlaceholder": "Krátka poznámka pre logopéda…"
+    },
+    "reflect": {
+      "kicker": "Krok 4 · Reflexívne zhodnotenie",
+      "h": "Nech to dopadlo akokoľvek, spýtajte sa:",
+      "fields": [
+        "Čo sa ti darilo, keď si na tom pracoval?",
+        "Čo bolo ťažké — a ako si to zvládol?",
+        "Čo by si nabudúce skúsil inak?"
+      ]
+    },
+    "anchor": {
+      "kicker": "Krok 5 · Ukotvenie sebadôvery",
+      "h": "Jedna veta, ktorú si odnesie ďalej.",
+      "text": "Leo si vyberie výrok a nahlas ho vysloví:",
+      "says": [
+        "„Zvládnem to krok za krokom.“",
+        "„Zaseknutie mi pomáha učiť sa.“",
+        "„Môžem to skúsiť inak.“"
+      ],
+      "noteLabel": "Zajtra",
+      "noteBody": "Zopakujte s novou úlohou. <b>Stálosť otázok</b> je dôležitejšia než samotná skladačka."
+    },
+    "sent": {
+      "kicker": "Sedenie uložené",
+      "h": "Odoslané Leovmu logopédovi.",
+      "text": "Dnešné sedenie a vaše poznámky sme poslali Leovmu logopédovi na vyhodnotenie. Prezrie si odpovede a prispôsobí zajtrajšie cvičenie.",
+      "noteLabel": "Stav",
+      "noteBody": "Čaká na posúdenie · zvyčajne do <b>24 hodín</b>"
+    }
+  },
+  "project": {
+    "eyebrow": "Projekt",
+    "title": "Spoločník k terapii, nie jej náhrada.",
+    "lead1": "Evolvea je B2B2C vzdelávacio-zdravotná platforma, ktorá podporuje malé deti pri rozvoji reči a kognitívnych schopností. Preklenuje priepasť medzi terapeutickou miestnosťou a obývačkou: logopéd ju odporučí, rodič každý deň vedie krátke sprevádzané cvičenie a pokrok dieťaťa sa vracia späť, aby formoval ďalšie sedenie.",
+    "lead2": "Logopéd priradí personalizovaný plán zo svojho panela. Doma potom rodičia dostávajú sprevádzané aktivity <b>pre rodiča a dieťa</b> — nikdy nie čas pri obrazovke bez dozoru — zatiaľ čo platforma ticho sleduje pokrok a zapojenie.",
+    "cards": [
+      {
+        "title": "Logopédi",
+        "body": "Nezávislí logopédi, rečoví špecialisti a malé kliniky rozširujú svoju starostlivosť aj medzi návštevami — a za každé aktívne odporúčanie získavajú pravidelný príjem."
+      },
+      {
+        "title": "Rodičia",
+        "body": "Rodiny dostávajú jasné, sprevádzané cvičenia a istotu, že tých pár minút, ktoré denne venujú, smeruje k tomu, na čom naozaj záleží."
+      },
+      {
+        "title": "Deti",
+        "body": "Deti, ktoré pracujú na reči, pamäti či sústredení, dostávajú pravidelné cvičenie bez tlaku, ktoré pôsobí ako čas strávený s rodičom — nie ako domáca úloha."
+      }
+    ]
+  },
+  "info": {
+    "eyebrow": "Prečo to funguje",
+    "title": "Malý návyk s vážnou myšlienkou v pozadí.",
+    "cards": [
+      {
+        "title": "Myslenie nahlas",
+        "body": "Deti, ktoré svoje uvažovanie vyjadria slovami, sa ho učia vnímať — a usmerňovať. Práve toto uvedomenie je zručnosť, ktorá sa buduje."
+      },
+      {
+        "title": "Úsilie namiesto odpovedí",
+        "body": "Rodič nikdy nerieši ani neopravuje. Spýta sa a potom čaká. Zaseknutie prestáva pôsobiť ako zlyhanie a začína pôsobiť ako súčasť práce."
+      },
+      {
+        "title": "Deň po dni",
+        "body": "Stálosť otázok je oveľa dôležitejšia než samotná skladačka pred nimi."
+      }
+    ]
+  },
+  "footer": {
+    "text": "Digitálny spoločník k logopedickej a kognitívnej terapii · Už čoskoro"
+  },
+  "lang": {
+    "label": "Jazyk"
+  }
+}

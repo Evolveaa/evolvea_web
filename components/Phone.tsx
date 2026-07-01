@@ -1,17 +1,20 @@
 "use client";
 
-import { useCallback, useState } from "react";
-import {
-  ANSWER_PLACEHOLDER,
-  ENGAGE_JOBS,
-  PANEL_COUNT,
-  PLAN_FIELDS,
-  REFLECT_FIELDS,
-  SAYS,
-  SIGNALS,
-  TABS,
-  type FieldDef,
-} from "@/lib/phone-content";
+import { useCallback, useState, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
+
+const TAB_KEYS = [
+  "intro",
+  "feel",
+  "plan",
+  "engage",
+  "reflect",
+  "anchor",
+  "sent",
+] as const;
+const PANEL_COUNT = TAB_KEYS.length;
+
+const bold = (chunks: ReactNode) => <b>{chunks}</b>;
 
 /**
  * The Evolvea live-demo phone — a self-contained state machine mirroring the
@@ -20,18 +23,20 @@ import {
  *
  * Tabs jump directly; Begin / Back / Next / Replay walk the flow. The Feel
  * chips toggle and count, one affirmation can be selected on Anchor, and every
- * text field clears on Replay.
+ * text field clears on Replay. Selections are keyed by index so they survive a
+ * language switch.
  */
 export default function Phone() {
+  const t = useTranslations("phone");
+
   const [current, setCurrent] = useState(0);
-  const [signals, setSignals] = useState<ReadonlySet<string>>(new Set());
-  const [selectedSay, setSelectedSay] = useState<string | null>(null);
+  const [signals, setSignals] = useState<ReadonlySet<number>>(new Set());
+  const [selectedSay, setSelectedSay] = useState<number | null>(null);
   const [fields, setFields] = useState<Record<string, string>>({});
 
   const go = useCallback((i: number) => {
     setCurrent(Math.max(0, Math.min(PANEL_COUNT - 1, i)));
   }, []);
-
   const next = useCallback(() => setCurrent((c) => Math.min(PANEL_COUNT - 1, c + 1)), []);
   const back = useCallback(() => setCurrent((c) => Math.max(0, c - 1)), []);
 
@@ -42,26 +47,32 @@ export default function Phone() {
     setCurrent(0);
   }, []);
 
-  const toggleSignal = useCallback((name: string) => {
+  const toggleSignal = useCallback((i: number) => {
     setSignals((prev) => {
       const nextSet = new Set(prev);
-      if (nextSet.has(name)) nextSet.delete(name);
-      else nextSet.add(name);
+      if (nextSet.has(i)) nextSet.delete(i);
+      else nextSet.add(i);
       return nextSet;
     });
   }, []);
 
-  const pickSay = useCallback((text: string) => {
-    setSelectedSay((prev) => (prev === text ? null : text));
+  const pickSay = useCallback((i: number) => {
+    setSelectedSay((prev) => (prev === i ? null : i));
   }, []);
 
   const setField = useCallback((id: string, value: string) => {
     setFields((prev) => ({ ...prev, [id]: value }));
   }, []);
 
+  const signalLabels = t.raw("feel.signals") as string[];
+  const sayLabels = t.raw("anchor.says") as string[];
+  const planFields = t.raw("plan.fields") as string[];
+  const reflectFields = t.raw("reflect.fields") as string[];
+  const engageJobs = t.raw("engage.jobs") as string[];
+  const answerPlaceholder = t("answerPlaceholder");
+
   const panelClass = (i: number) =>
     i === current ? "ph-panel is-active" : "ph-panel";
-
   const tabClass = (i: number) => {
     if (i === current) return "ph-tab is-active";
     if (i < current) return "ph-tab is-done";
@@ -92,23 +103,22 @@ export default function Phone() {
         {/* App bar */}
         <div className="ph-appbar">
           <span className="ph-brand">
-            <span className="ph-brand-dot" /> Evolvea{" "}
-            <small>Cognitive&nbsp;Training</small>
+            <span className="ph-brand-dot" /> Evolvea <small>{t("brandSub")}</small>
           </span>
-          <span className="ph-kid">Leo · 7</span>
+          <span className="ph-kid">{t("kid")}</span>
         </div>
 
         {/* Tabs */}
         <div className="ph-tabs" role="tablist">
-          {TABS.map((label, i) => (
+          {TAB_KEYS.map((key, i) => (
             <button
-              key={label}
+              key={key}
               className={tabClass(i)}
               role="tab"
               aria-selected={i === current}
               onClick={() => go(i)}
             >
-              {label}
+              {t(`tabs.${key}`)}
             </button>
           ))}
         </div>
@@ -118,25 +128,18 @@ export default function Phone() {
           {/* 0 · INTRO */}
           <section className={panelClass(0)} data-panel={0}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Session · with Leo</span>
-              <h3 className="ph-h">The Stuck Puzzle</h3>
-              <span className="ph-sub">Parent-guided · 10–15 min · Ages 6–10</span>
-              <p className="ph-text">
-                Give Leo a small jigsaw (10–20 pieces) — solvable, but not
-                obvious. He owns the thinking. You&apos;re a facilitator, not an
-                instructor: no solving, no correcting.
-              </p>
+              <span className="ph-kicker">{t("intro.kicker")}</span>
+              <h3 className="ph-h">{t("intro.h")}</h3>
+              <span className="ph-sub">{t("intro.sub")}</span>
+              <p className="ph-text">{t("intro.text")}</p>
               <div className="ph-note">
-                <span className="ph-note-label">What it builds</span>
-                <p>
-                  Tolerance for difficulty, <b>adaptive self-talk</b>, and
-                  effort-based confidence.
-                </p>
+                <span className="ph-note-label">{t("intro.noteLabel")}</span>
+                <p>{t.rich("intro.noteBody", { b: bold })}</p>
               </div>
             </div>
             <div className="ph-foot">
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Begin →
+                {t("nav.begin")} →
               </button>
             </div>
           </section>
@@ -144,38 +147,34 @@ export default function Phone() {
           {/* 1 · FEEL */}
           <section className={panelClass(1)} data-panel={1}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Step 1 · Emotional awareness</span>
-              <h3 className="ph-h">&quot;How do you feel looking at this?&quot;</h3>
-              <p className="ph-text">
-                Ask, then listen. Tap what Leo names — no judgement.
-              </p>
+              <span className="ph-kicker">{t("feel.kicker")}</span>
+              <h3 className="ph-h">{t("feel.h")}</h3>
+              <p className="ph-text">{t("feel.text")}</p>
               <div className="ph-signals">
-                {SIGNALS.map((name) => (
+                {signalLabels.map((label, i) => (
                   <button
-                    key={name}
-                    className={signals.has(name) ? "ph-signal on" : "ph-signal"}
-                    onClick={() => toggleSignal(name)}
+                    key={i}
+                    className={signals.has(i) ? "ph-signal on" : "ph-signal"}
+                    onClick={() => toggleSignal(i)}
                   >
-                    {name}
+                    {label}
                   </button>
                 ))}
               </div>
               <p className="ph-captured">
-                <b>{signals.size}</b> feelings named
+                {t.rich("feel.captured", { count: signals.size, b: bold })}
               </p>
               <div className="ph-note">
-                <span className="ph-note-label">Why</span>
-                <p>
-                  Naming the discomfort lowers the threat. Stuck is allowed here.
-                </p>
+                <span className="ph-note-label">{t("feel.noteLabel")}</span>
+                <p>{t("feel.noteBody")}</p>
               </div>
             </div>
             <div className="ph-foot ph-foot-split">
               <button className="ph-btn ph-btn-ghost" onClick={back}>
-                Back
+                {t("nav.back")}
               </button>
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Make a plan →
+                {t("nav.makePlan")} →
               </button>
             </div>
           </section>
@@ -183,29 +182,28 @@ export default function Phone() {
           {/* 2 · PLAN */}
           <section className={panelClass(2)} data-panel={2}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Step 2 · Metacognitive planning</span>
-              <h3 className="ph-h">Ask, then jot it down.</h3>
-              {PLAN_FIELDS.map((f) => (
+              <span className="ph-kicker">{t("plan.kicker")}</span>
+              <h3 className="ph-h">{t("plan.h")}</h3>
+              {planFields.map((label, i) => (
                 <PhoneField
-                  key={f.id}
-                  field={f}
-                  value={fields[f.id] ?? ""}
-                  onChange={(v) => setField(f.id, v)}
+                  key={i}
+                  label={label}
+                  placeholder={answerPlaceholder}
+                  value={fields[`plan-${i}`] ?? ""}
+                  onChange={(v) => setField(`plan-${i}`, v)}
                 />
               ))}
               <div className="ph-note">
-                <span className="ph-note-label">Hold back</span>
-                <p>
-                  Give plenty of wait time. <b>Don&apos;t offer the answers.</b>
-                </p>
+                <span className="ph-note-label">{t("plan.noteLabel")}</span>
+                <p>{t.rich("plan.noteBody", { b: bold })}</p>
               </div>
             </div>
             <div className="ph-foot ph-foot-split">
               <button className="ph-btn ph-btn-ghost" onClick={back}>
-                Back
+                {t("nav.back")}
               </button>
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Start solving →
+                {t("nav.startSolving")} →
               </button>
             </div>
           </section>
@@ -213,15 +211,12 @@ export default function Phone() {
           {/* 3 · ENGAGE */}
           <section className={panelClass(3)} data-panel={3}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Step 3 · Task engagement</span>
-              <h3 className="ph-h">When he gets stuck.</h3>
-              <p className="ph-text">
-                Leo works on his own. If frustration rises, prompt — never
-                correct:
-              </p>
+              <span className="ph-kicker">{t("engage.kicker")}</span>
+              <h3 className="ph-h">{t("engage.h")}</h3>
+              <p className="ph-text">{t("engage.text")}</p>
               <ul className="ph-jobs">
-                {ENGAGE_JOBS.map((job) => (
-                  <li key={job}>
+                {engageJobs.map((job, i) => (
+                  <li key={i}>
                     <span className="ph-jno">→</span>
                     <p>{job}</p>
                   </li>
@@ -229,23 +224,24 @@ export default function Phone() {
               </ul>
               <div className="ph-field">
                 <label className="ph-field-label">
-                  What did Leo try? <span className="ph-opt">(optional)</span>
+                  {t("engage.fieldLabel")}{" "}
+                  <span className="ph-opt">{t("engage.fieldOptional")}</span>
                 </label>
                 <textarea
                   className="ph-input"
                   rows={2}
-                  placeholder="A quick note for the logopedist…"
-                  value={fields["engage-1"] ?? ""}
-                  onChange={(e) => setField("engage-1", e.target.value)}
+                  placeholder={t("engage.fieldPlaceholder")}
+                  value={fields["engage-0"] ?? ""}
+                  onChange={(e) => setField("engage-0", e.target.value)}
                 />
               </div>
             </div>
             <div className="ph-foot ph-foot-split">
               <button className="ph-btn ph-btn-ghost" onClick={back}>
-                Back
+                {t("nav.back")}
               </button>
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Look back →
+                {t("nav.lookBack")} →
               </button>
             </div>
           </section>
@@ -253,23 +249,24 @@ export default function Phone() {
           {/* 4 · REFLECT */}
           <section className={panelClass(4)} data-panel={4}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Step 4 · Reflective evaluation</span>
-              <h3 className="ph-h">However it went, ask:</h3>
-              {REFLECT_FIELDS.map((f) => (
+              <span className="ph-kicker">{t("reflect.kicker")}</span>
+              <h3 className="ph-h">{t("reflect.h")}</h3>
+              {reflectFields.map((label, i) => (
                 <PhoneField
-                  key={f.id}
-                  field={f}
-                  value={fields[f.id] ?? ""}
-                  onChange={(v) => setField(f.id, v)}
+                  key={i}
+                  label={label}
+                  placeholder={answerPlaceholder}
+                  value={fields[`reflect-${i}`] ?? ""}
+                  onChange={(v) => setField(`reflect-${i}`, v)}
                 />
               ))}
             </div>
             <div className="ph-foot ph-foot-split">
               <button className="ph-btn ph-btn-ghost" onClick={back}>
-                Back
+                {t("nav.back")}
               </button>
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Anchor it →
+                {t("nav.anchorIt")} →
               </button>
             </div>
           </section>
@@ -277,32 +274,29 @@ export default function Phone() {
           {/* 5 · ANCHOR */}
           <section className={panelClass(5)} data-panel={5}>
             <div className="ph-scroll">
-              <span className="ph-kicker">Step 5 · Self-efficacy anchoring</span>
-              <h3 className="ph-h">One line to carry forward.</h3>
-              <p className="ph-text">Leo picks a statement and says it out loud:</p>
-              {SAYS.map((text) => (
+              <span className="ph-kicker">{t("anchor.kicker")}</span>
+              <h3 className="ph-h">{t("anchor.h")}</h3>
+              <p className="ph-text">{t("anchor.text")}</p>
+              {sayLabels.map((label, i) => (
                 <button
-                  key={text}
-                  className={selectedSay === text ? "ph-say sel" : "ph-say"}
-                  onClick={() => pickSay(text)}
+                  key={i}
+                  className={selectedSay === i ? "ph-say sel" : "ph-say"}
+                  onClick={() => pickSay(i)}
                 >
-                  {text}
+                  {label}
                 </button>
               ))}
               <div className="ph-note">
-                <span className="ph-note-label">Tomorrow</span>
-                <p>
-                  Repeat with a new task. <b>Consistency of the questions</b>{" "}
-                  matters more than the puzzle.
-                </p>
+                <span className="ph-note-label">{t("anchor.noteLabel")}</span>
+                <p>{t.rich("anchor.noteBody", { b: bold })}</p>
               </div>
             </div>
             <div className="ph-foot ph-foot-split">
               <button className="ph-btn ph-btn-ghost" onClick={back}>
-                Back
+                {t("nav.back")}
               </button>
               <button className="ph-btn ph-btn-primary" onClick={next}>
-                Finish &amp; send →
+                {t("nav.finishSend")} →
               </button>
             </div>
           </section>
@@ -313,23 +307,17 @@ export default function Phone() {
               <div className="ph-check" aria-hidden="true">
                 ✓
               </div>
-              <span className="ph-kicker">Session saved</span>
-              <h3 className="ph-h">Sent to Leo&apos;s logopedist.</h3>
-              <p className="ph-text">
-                Tonight&apos;s session and your notes have been shared with
-                Leo&apos;s logopedist for evaluation. They&apos;ll review the
-                answers and adapt tomorrow&apos;s exercise.
-              </p>
+              <span className="ph-kicker">{t("sent.kicker")}</span>
+              <h3 className="ph-h">{t("sent.h")}</h3>
+              <p className="ph-text">{t("sent.text")}</p>
               <div className="ph-note ph-note-full">
-                <span className="ph-note-label">Status</span>
-                <p>
-                  Awaiting review · usually within <b>24 hours</b>
-                </p>
+                <span className="ph-note-label">{t("sent.noteLabel")}</span>
+                <p>{t.rich("sent.noteBody", { b: bold })}</p>
               </div>
             </div>
             <div className="ph-foot">
               <button className="ph-btn ph-btn-primary" onClick={replay}>
-                Replay demo ↻
+                {t("nav.replay")} ↻
               </button>
             </div>
           </section>
@@ -343,21 +331,23 @@ export default function Phone() {
 
 /** A single open-question text field inside the phone. */
 function PhoneField({
-  field,
+  label,
+  placeholder,
   value,
   onChange,
 }: {
-  field: FieldDef;
+  label: string;
+  placeholder: string;
   value: string;
   onChange: (value: string) => void;
 }) {
   return (
     <div className="ph-field">
-      <label className="ph-field-label">{field.label}</label>
+      <label className="ph-field-label">{label}</label>
       <textarea
         className="ph-input"
         rows={2}
-        placeholder={ANSWER_PLACEHOLDER}
+        placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

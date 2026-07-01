@@ -1,5 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 /** Site footer (dark). */
-export default function SiteFooter() {
+export default async function SiteFooter() {
+  const t = await getTranslations("footer");
+
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
@@ -7,9 +11,7 @@ export default function SiteFooter() {
           <span className="brand-dot brand-dot-light" aria-hidden="true" />
           <span className="brand-name">Evolvea</span>
         </a>
-        <small>
-          A digital companion to speech &amp; cognitive therapy · Coming soon
-        </small>
+        <small>{t("text")}</small>
       </div>
     </footer>
   );

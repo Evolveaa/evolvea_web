@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 /**
  * Sticky header that mirrors the original prototype behaviour:
@@ -11,6 +13,7 @@ import { useEffect, useState } from "react";
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [onDark, setOnDark] = useState(false);
+  const t = useTranslations("header");
 
   useEffect(() => {
     const onScroll = () => {
@@ -48,9 +51,12 @@ export default function SiteHeader() {
           <span className="brand-dot" aria-hidden="true" />
           <span className="brand-name">Evolvea</span>
         </a>
-        <span className="badge-soon">
-          <span className="bs-dot" aria-hidden="true" /> Coming soon
-        </span>
+        <div className="header-actions">
+          <LanguageSwitcher />
+          <span className="badge-soon">
+            <span className="bs-dot" aria-hidden="true" /> {t("comingSoon")}
+          </span>
+        </div>
       </div>
     </header>
   );

@@ -1,41 +1,30 @@
+import { getTranslations } from "next-intl/server";
 import Phone from "./Phone";
 
 /** Section 2 · Live demo (dark) — copy on the left, interactive phone on the right. */
-export default function DemoSection() {
+export default async function DemoSection() {
+  const t = await getTranslations("demo");
+  const steps = t.raw("steps") as string[];
+
   return (
     <section className="demo" id="demo">
       <div className="container demo-inner">
         {/* Left: copy */}
         <div className="demo-copy">
-          <span className="eyebrow eyebrow-dark">Live demo · Tap through it</span>
+          <span className="eyebrow eyebrow-dark">{t("eyebrow")}</span>
           <h2 className="demo-title">
-            Tonight&apos;s exercise:
+            {t("titleLead")}
             <br />
-            <em>The Stuck Puzzle.</em>
+            <em>{t("titleEm")}</em>
           </h2>
-          <p className="demo-lead">
-            A parent-guided routine that turns &quot;I can&apos;t&quot; into
-            &quot;I&apos;ll try a small step.&quot; Walk the same path a parent
-            follows at the table — then send the session to your logopedist for
-            evaluation.
-          </p>
+          <p className="demo-lead">{t("lead")}</p>
           <ol className="demo-steps">
-            <li>
-              <span className="ds-no">01</span> Name the feeling — being stuck is
-              normal, not failure.
-            </li>
-            <li>
-              <span className="ds-no">02</span> Plan and reflect — type the
-              answers as you go.
-            </li>
-            <li>
-              <span className="ds-no">03</span> Let them try; prompt when stuck,
-              never solve.
-            </li>
-            <li>
-              <span className="ds-no">04</span> Anchor a takeaway, then send it to
-              the logopedist.
-            </li>
+            {steps.map((step, i) => (
+              <li key={i}>
+                <span className="ds-no">{String(i + 1).padStart(2, "0")}</span>{" "}
+                {step}
+              </li>
+            ))}
           </ol>
         </div>
 

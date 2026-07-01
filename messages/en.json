@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "Evolvea · A digital companion to therapy",
+    "description": "Evolvea — a digital companion to speech and cognitive therapy. Ten minutes a night to rebuild how your child thinks. A logopedist-guided, parent-led daily exercise. Coming soon."
+  },
+  "header": {
+    "comingSoon": "Coming soon"
+  },
+  "hero": {
+    "eyebrow": "Metacognitive learning · Ages 6–14",
+    "title": "Ten minutes a night to rebuild how your child thinks.",
+    "lead": "Evolvea is a daily exercise parents and children do together. Each prompt is chosen based on your child's last answer — so reasoning, reflection, and curiosity grow one conversation at a time.",
+    "ctaDemo": "Try the live demo",
+    "ctaProject": "About the project",
+    "note": "In development — the full app launches soon. The demo below is a preview."
+  },
+  "demo": {
+    "eyebrow": "Live demo · Tap through it",
+    "titleLead": "Tonight's exercise:",
+    "titleEm": "The Stuck Puzzle.",
+    "lead": "A parent-guided routine that turns \"I can't\" into \"I'll try a small step.\" Walk the same path a parent follows at the table — then send the session to your logopedist for evaluation.",
+    "steps": [
+      "Name the feeling — being stuck is normal, not failure.",
+      "Plan and reflect — type the answers as you go.",
+      "Let them try; prompt when stuck, never solve.",
+      "Anchor a takeaway, then send it to the logopedist."
+    ]
+  },
+  "phone": {
+    "brandSub": "Cognitive Training",
+    "kid": "Leo · 7",
+    "tabs": {
+      "intro": "Intro",
+      "feel": "Feel",
+      "plan": "Plan",
+      "engage": "Engage",
+      "reflect": "Reflect",
+      "anchor": "Anchor",
+      "sent": "Sent"
+    },
+    "nav": {
+      "back": "Back",
+      "begin": "Begin",
+      "makePlan": "Make a plan",
+      "startSolving": "Start solving",
+      "lookBack": "Look back",
+      "anchorIt": "Anchor it",
+      "finishSend": "Finish & send",
+      "replay": "Replay demo"
+    },
+    "answerPlaceholder": "Type Leo's answer…",
+    "intro": {
+      "kicker": "Session · with Leo",
+      "h": "The Stuck Puzzle",
+      "sub": "Parent-guided · 10–15 min · Ages 6–10",
+      "text": "Give Leo a small jigsaw (10–20 pieces) — solvable, but not obvious. He owns the thinking. You're a facilitator, not an instructor: no solving, no correcting.",
+      "noteLabel": "What it builds",
+      "noteBody": "Tolerance for difficulty, <b>adaptive self-talk</b>, and effort-based confidence."
+    },
+    "feel": {
+      "kicker": "Step 1 · Emotional awareness",
+      "h": "\"How do you feel looking at this?\"",
+      "text": "Ask, then listen. Tap what Leo names — no judgement.",
+      "signals": ["Calm", "Confused", "Nervous", "Frustrated", "Curious", "Determined"],
+      "captured": "<b>{count}</b> {count, plural, one {feeling named} other {feelings named}}",
+      "noteLabel": "Why",
+      "noteBody": "Naming the discomfort lowers the threat. Stuck is allowed here."
+    },
+    "plan": {
+      "kicker": "Step 2 · Metacognitive planning",
+      "h": "Ask, then jot it down.",
+      "fields": [
+        "What is this task asking you to do?",
+        "What do you already know that could help?",
+        "What could be a first small step?"
+      ],
+      "noteLabel": "Hold back",
+      "noteBody": "Give plenty of wait time. <b>Don't offer the answers.</b>"
+    },
+    "engage": {
+      "kicker": "Step 3 · Task engagement",
+      "h": "When he gets stuck.",
+      "text": "Leo works on his own. If frustration rises, prompt — never correct:",
+      "jobs": [
+        "\"What could you try next?\"",
+        "\"What did this attempt show you?\"",
+        "\"What's one small thing you could test?\""
+      ],
+      "fieldLabel": "What did Leo try?",
+      "fieldOptional": "(optional)",
+      "fieldPlaceholder": "A quick note for the logopedist…"
+    },
+    "reflect": {
+      "kicker": "Step 4 · Reflective evaluation",
+      "h": "However it went, ask:",
+      "fields": [
+        "What did you do well while working on this?",
+        "What was difficult — and how did you handle it?",
+        "What would you try differently next time?"
+      ]
+    },
+    "anchor": {
+      "kicker": "Step 5 · Self-efficacy anchoring",
+      "h": "One line to carry forward.",
+      "text": "Leo picks a statement and says it out loud:",
+      "says": [
+        "\"I can take this step by step.\"",
+        "\"Being stuck helps me learn.\"",
+        "\"I can try another way.\""
+      ],
+      "noteLabel": "Tomorrow",
+      "noteBody": "Repeat with a new task. <b>Consistency of the questions</b> matters more than the puzzle."
+    },
+    "sent": {
+      "kicker": "Session saved",
+      "h": "Sent to Leo's logopedist.",
+      "text": "Tonight's session and your notes have been shared with Leo's logopedist for evaluation. They'll review the answers and adapt tomorrow's exercise.",
+      "noteLabel": "Status",
+      "noteBody": "Awaiting review · usually within <b>24 hours</b>"
+    }
+  },
+  "project": {
+    "eyebrow": "The project",
+    "title": "A companion to therapy, not a replacement.",
+    "lead1": "Evolvea is a B2B2C educational-health platform that supports young children with speech and cognitive development. It bridges the gap between the therapy room and the living room: a logopedist recommends it, a parent runs a short guided exercise each day, and the child's progress flows back to shape the next session.",
+    "lead2": "A logopedist assigns a personalised plan from their dashboard. At home, parents get guided <b>parent-and-child</b> activities — never unsupervised screen time — while the platform quietly tracks progress and engagement.",
+    "cards": [
+      {
+        "title": "Logopedists",
+        "body": "Independent logopedists, speech specialists, and small clinics extend their care between appointments — and earn recurring income for every active referral."
+      },
+      {
+        "title": "Parents",
+        "body": "Families get clear, guided exercises and the confidence that the few minutes they spend each day are spent on the right things."
+      },
+      {
+        "title": "Children",
+        "body": "Children working on speech, memory, or concentration get steady, low-pressure practice that feels like time with a parent — not homework."
+      }
+    ]
+  },
+  "info": {
+    "eyebrow": "Why it works",
+    "title": "A small habit with a serious idea behind it.",
+    "cards": [
+      {
+        "title": "Thinking out loud",
+        "body": "Children who put their reasoning into words learn to notice it — and to steer it. That awareness is the skill being built."
+      },
+      {
+        "title": "Effort over answers",
+        "body": "The parent never solves or corrects. They ask, then wait. Being stuck stops feeling like failure and starts feeling like the work."
+      },
+      {
+        "title": "One day at a time",
+        "body": "Consistency of the questions matters far more than the puzzle in front of them."
+      }
+    ]
+  },
+  "footer": {
+    "text": "A digital companion to speech & cognitive therapy · Coming soon"
+  },
+  "lang": {
+    "label": "Language"
+  }
+}
