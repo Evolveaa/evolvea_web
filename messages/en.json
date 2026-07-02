@@ -210,7 +210,8 @@
       "rate_limit": "Too many attempts. Please try again in a moment.",
       "unknown": "Something went wrong. Please try again.",
       "callback": "This link is no longer valid. Sign in, or request a new one."
-    }
+    },
+    "confirmNotice": "If you clicked the confirmation link in your e-mail, your account is already confirmed — just sign in below."
   },
   "shell": {
     "navLabel": "Main navigation",

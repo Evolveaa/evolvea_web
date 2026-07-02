@@ -10,8 +10,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string; error?: string }>;
+  searchParams: Promise<{ next?: string; error?: string; confirm?: string }>;
 }) {
-  const { next, error } = await searchParams;
-  return <LoginForm next={next} calloutError={error === "auth_callback"} />;
+  const { next, error, confirm } = await searchParams;
+  return (
+    <LoginForm
+      next={next}
+      calloutError={error === "auth_callback"}
+      confirmNotice={confirm === "1"}
+    />
+  );
 }

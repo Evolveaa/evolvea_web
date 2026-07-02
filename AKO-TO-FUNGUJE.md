@@ -89,8 +89,14 @@ Vstavaná knižnica má **51 cvičení v slovenčine** v troch úrovniach náro�
 | Rola | E-mail | Heslo |
 |---|---|---|
 | Logopéd | `stuodstrelovaci+logoped@gmail.com` | `EvolveaDemo2026` |
+| Rodič — **test, všetky cvičenia priradené** | `stuodstrelovaci+test@gmail.com` | `EvolveaDemo2026` |
 | Rodič (platí, 3 týždne cvičení) | `stuodstrelovaci+rodic1@gmail.com` | `EvolveaDemo2026` |
 | Rodič (čerstvé skúšobné obdobie) | `stuodstrelovaci+rodic2@gmail.com` | `EvolveaDemo2026` |
+
+- **Účet na vyskúšanie celého toku:** `+test` (dieťa Miško) má priradených všetkých
+  51 cvičení a aktívne predplatné — cez záložku **Plán** sa vieš prekliknúť do
+  ktoréhokoľvek typu úlohy. Všetky demo účty sú vopred potvrdené, takže sa
+  prihlásiš rovno bez e-mailu.
 
 - Spustite `npm run dev`, otvorte `http://localhost:3000`, kliknite **Prihlásiť sa**.
 - Najlepšia prehliadka: najprv rodič 1 (plná domáca obrazovka), potom logopéd (dashboard, detail Emky, plán, knižnica, provízie).

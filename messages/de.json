@@ -210,7 +210,8 @@
       "rate_limit": "Zu viele Versuche. Bitte versuchen Sie es gleich noch einmal.",
       "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
       "callback": "Der Link ist nicht mehr gültig. Melden Sie sich an oder lassen Sie sich einen neuen senden."
-    }
+    },
+    "confirmNotice": "Wenn Sie auf den Bestätigungslink in Ihrer E-Mail geklickt haben, ist Ihr Konto bereits bestätigt — melden Sie sich einfach unten an."
   },
   "shell": {
     "navLabel": "Hauptnavigation",

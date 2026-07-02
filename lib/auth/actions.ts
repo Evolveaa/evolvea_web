@@ -80,6 +80,10 @@ export async function registerAction(_prev: AuthState, formData: FormData): Prom
   // Supabase obfuscates duplicate signups: existing users come back with no identities.
   if (data.user && (data.user.identities?.length ?? 0) === 0) return { error: "exists" };
 
+  // If e-mail confirmation is disabled, signUp already returns a session —
+  // skip the (fragile) e-mail round-trip and go straight into the app.
+  if (data.session) redirect(role === "therapist" ? "/therapist" : "/app");
+
   return { sentTo: email };
 }
 

@@ -9,9 +9,11 @@ import ResendButton from "./ResendButton";
 export default function LoginForm({
   next,
   calloutError,
+  confirmNotice,
 }: {
   next?: string;
   calloutError?: boolean;
+  confirmNotice?: boolean;
 }) {
   const t = useTranslations("auth");
   const [state, action, pending] = useActionState<AuthState, FormData>(loginAction, null);
@@ -21,7 +23,14 @@ export default function LoginForm({
       <h1 className="auth-title">{t("loginTitle")}</h1>
       <p className="auth-lead">{t("loginLead")}</p>
 
-      {calloutError && !state && <p className="form-error">{t("errors.callback")}</p>}
+      {confirmNotice && !state && (
+        <p className="form-success" role="status">
+          {t("confirmNotice")}
+        </p>
+      )}
+      {calloutError && !confirmNotice && !state && (
+        <p className="form-error">{t("errors.callback")}</p>
+      )}
       {state?.error && (
         <p className="form-error" role="alert">
           {t(`errors.${state.error}`)}

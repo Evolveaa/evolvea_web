@@ -210,7 +210,8 @@
       "rate_limit": "Priveľa pokusov. Skúste to o chvíľu.",
       "unknown": "Niečo sa pokazilo. Skúste to znova.",
       "callback": "Odkaz už nie je platný. Prihláste sa alebo si nechajte poslať nový."
-    }
+    },
+    "confirmNotice": "Ak si klikol na potvrdzovací odkaz v e-maile, tvoj účet je už potvrdený — stačí sa prihlásiť nižšie."
   },
   "shell": {
     "navLabel": "Hlavná navigácia",

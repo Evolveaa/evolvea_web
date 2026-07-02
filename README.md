@@ -35,8 +35,11 @@ Demo účty (heslo pre všetky: `EvolveaDemo2026`):
 | Rola | E-mail |
 |---|---|
 | Logopéd | `stuodstrelovaci+logoped@gmail.com` |
+| Rodič — test, všetkých 51 cvičení + aktívne predplatné | `stuodstrelovaci+test@gmail.com` |
 | Rodič — aktívne predplatné, 3 týždne dát | `stuodstrelovaci+rodic1@gmail.com` |
 | Rodič — čerstvý trial | `stuodstrelovaci+rodic2@gmail.com` |
+
+Všetky demo účty sú vopred potvrdené (prihlásenie funguje okamžite, bez e-mailu).
 
 ## Architektúra
 
