@@ -417,6 +417,44 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          activated_at: string | null
+          canceled_at: string | null
+          child_id: string
+          created_at: string
+          id: string
+          status: string
+          trial_ends_at: string
+        }
+        Insert: {
+          activated_at?: string | null
+          canceled_at?: string | null
+          child_id: string
+          created_at?: string
+          id?: string
+          status?: string
+          trial_ends_at?: string
+        }
+        Update: {
+          activated_at?: string | null
+          canceled_at?: string | null
+          child_id?: string
+          created_at?: string
+          id?: string
+          status?: string
+          trial_ends_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

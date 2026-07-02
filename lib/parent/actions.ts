@@ -119,6 +119,45 @@ export async function markThreadReadAction(childId: string): Promise<void> {
   revalidatePath("/", "layout");
 }
 
+export type CheckoutState = { error?: "fields" | "unknown"; ok?: boolean } | null;
+
+/**
+ * Mock payment gateway: no card data is read or stored, nothing is charged.
+ * Flips the child's subscription to `active` — the DB trigger enforces
+ * legal transitions and stamps `activated_at`.
+ */
+export async function activateSubscriptionAction(
+  _prev: CheckoutState,
+  formData: FormData,
+): Promise<CheckoutState> {
+  const childId = String(formData.get("child_id") ?? "");
+  if (!childId) return { error: "fields" };
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .update({ status: "active" })
+    .eq("child_id", childId)
+    .neq("status", "active")
+    .select("id");
+
+  if (error || !data || data.length === 0) return { error: "unknown" };
+  revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+export async function cancelSubscriptionAction(formData: FormData): Promise<void> {
+  const childId = String(formData.get("child_id") ?? "");
+  if (!childId) return;
+  const supabase = await createClient();
+  await supabase
+    .from("subscriptions")
+    .update({ status: "canceled" })
+    .eq("child_id", childId)
+    .eq("status", "active");
+  revalidatePath("/", "layout");
+}
+
 export interface SessionPayload {
   childId: string;
   exerciseId: string;

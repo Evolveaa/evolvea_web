@@ -8,6 +8,19 @@ export type Child = Database["public"]["Tables"]["children"]["Row"];
 export type PlanRow = Database["public"]["Tables"]["plans"]["Row"];
 export type PlanItemRow = Database["public"]["Tables"]["plan_items"]["Row"];
 export type SessionRow = Database["public"]["Tables"]["sessions"]["Row"];
+export type SubscriptionRow = Database["public"]["Tables"]["subscriptions"]["Row"];
+
+export const getSubscription = cache(
+  async (childId: string): Promise<SubscriptionRow | null> => {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("subscriptions")
+      .select("*")
+      .eq("child_id", childId)
+      .maybeSingle();
+    return data;
+  },
+);
 
 export const ACTIVE_CHILD_COOKIE = "evolvea_child";
 

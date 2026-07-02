@@ -2,7 +2,9 @@ import { getTranslations } from "next-intl/server";
 import ChildSettingsForm from "@/components/app/ChildSettingsForm";
 import ChildSwitcher from "@/components/app/ChildSwitcher";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
-import { getActiveChild } from "@/lib/data/parent";
+import SubscriptionManage from "@/components/app/SubscriptionManage";
+import { accessState, trialDaysLeft } from "@/lib/billing";
+import { getActiveChild, getSubscription } from "@/lib/data/parent";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function ChildSettingsPage() {
@@ -19,13 +21,17 @@ export default async function ChildSettingsPage() {
   }
 
   const supabase = await createClient();
-  const { data: therapist } = child.therapist_id
-    ? await supabase
-        .from("profiles")
-        .select("full_name")
-        .eq("id", child.therapist_id)
-        .maybeSingle()
-    : { data: null };
+  const [{ data: therapist }, sub] = await Promise.all([
+    child.therapist_id
+      ? supabase
+          .from("profiles")
+          .select("full_name")
+          .eq("id", child.therapist_id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    getSubscription(child.id),
+  ]);
+  const subState = accessState(sub);
 
   return (
     <>
@@ -42,6 +48,14 @@ export default async function ChildSettingsPage() {
           <p style={{ marginTop: "0.35rem", fontWeight: 600 }}>🩺 {therapist.full_name}</p>
         </div>
       )}
+
+      <div style={{ marginBottom: "1rem" }}>
+        <SubscriptionManage
+          childId={child.id}
+          state={subState}
+          daysLeft={sub && subState === "trial" ? trialDaysLeft(sub) : 0}
+        />
+      </div>
 
       <ChildSettingsForm child={child} />
 

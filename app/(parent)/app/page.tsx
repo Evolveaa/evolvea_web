@@ -3,12 +3,15 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import ChildSwitcher from "@/components/app/ChildSwitcher";
 import ExerciseCard from "@/components/app/ExerciseCard";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
+import SubscriptionBanner from "@/components/app/SubscriptionBanner";
+import { accessState, trialDaysLeft } from "@/lib/billing";
 import {
   buildWeekOverview,
   computeStreak,
   getActiveChild,
   getActivePlan,
   getRecentSessions,
+  getSubscription,
   weekDays,
 } from "@/lib/data/parent";
 
@@ -29,10 +32,12 @@ export default async function ParentHomePage() {
     );
   }
 
-  const [plan, sessions] = await Promise.all([
+  const [plan, sessions, sub] = await Promise.all([
     getActivePlan(child.id),
     getRecentSessions(child.id),
+    getSubscription(child.id),
   ]);
+  const subState = accessState(sub);
   const week = buildWeekOverview(plan, sessions);
   const streak = computeStreak(sessions);
   const days = weekDays(sessions);
@@ -50,6 +55,11 @@ export default async function ParentHomePage() {
   return (
     <>
       <ChildSwitcher kids={children} activeId={child.id} />
+
+      <SubscriptionBanner
+        state={subState}
+        daysLeft={sub && subState === "trial" ? trialDaysLeft(sub) : 0}
+      />
 
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
         <div>

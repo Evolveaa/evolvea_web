@@ -1,6 +1,8 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import ExercisePlayer from "@/components/player/ExercisePlayer";
+import { hasAccess } from "@/lib/billing";
+import { getSubscription } from "@/lib/data/parent";
 import { requireRole } from "@/lib/data/user";
 import { createClient } from "@/lib/supabase/server";
 import { asSupportLevel, tryParseExerciseContent, type ExerciseRow } from "@/lib/exercises/types";
@@ -21,6 +23,10 @@ export default async function ExercisePage({
     .maybeSingle();
 
   if (!item || !item.exercises || !item.plans) notFound();
+
+  // Practice is gated on a living trial or active subscription.
+  const sub = await getSubscription(item.plans.child_id);
+  if (!hasAccess(sub)) redirect("/app/checkout");
 
   const exercise = item.exercises as ExerciseRow;
   const content = tryParseExerciseContent(exercise.content);
