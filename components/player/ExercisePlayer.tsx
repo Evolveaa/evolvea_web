@@ -5,7 +5,13 @@ import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { completeSessionAction } from "@/lib/parent/actions";
-import { DOMAIN_META, type ExerciseContent, type ExerciseRow, type SupportLevel } from "@/lib/exercises/types";
+import {
+  contentItemCount,
+  DOMAIN_META,
+  type ExerciseContent,
+  type ExerciseRow,
+  type SupportLevel,
+} from "@/lib/exercises/types";
 import type { FinishSummary } from "./shared";
 import ChoiceTask from "./ChoiceTask";
 import SoundBoxesTask from "./SoundBoxesTask";
@@ -40,7 +46,7 @@ export default function ExercisePlayer({
   const router = useRouter();
 
   const [phase, setPhase] = useState<Phase>("intro");
-  const [progress, setProgress] = useState({ current: 0, total: 1 });
+  const [progress, setProgress] = useState({ current: 0, total: contentItemCount(content) });
   const [summary, setSummary] = useState<FinishSummary | null>(null);
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);

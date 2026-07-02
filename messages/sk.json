@@ -4,7 +4,6 @@
     "description": "Evolvea — digitálny spoločník k logopedickej a kognitívnej terapii. Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa. Denné cvičenie vedené logopédom a sprevádzané rodičom. Už čoskoro."
   },
   "header": {
-    "comingSoon": "Už čoskoro",
     "signIn": "Prihlásiť sa"
   },
   "hero": {
@@ -13,7 +12,7 @@
     "lead": "Evolvea je každodenné cvičenie, ktoré rodič a dieťa robia spoločne. Každá otázka nadväzuje na poslednú odpoveď vášho dieťaťa — takže uvažovanie, sebareflexia a zvedavosť rastú rozhovor po rozhovore.",
     "ctaDemo": "Vyskúšať živú ukážku",
     "ctaProject": "O projekte",
-    "note": "Vo vývoji — celá aplikácia bude spustená čoskoro. Ukážka nižšie je náhľad."
+    "note": "Pilotná prevádzka — prihláste sa, alebo požiadajte svojho logopéda o pozvánku."
   },
   "demo": {
     "eyebrow": "Živá ukážka · Preklikajte si ju",
@@ -62,7 +61,14 @@
       "kicker": "Krok 1 · Uvedomovanie emócií",
       "h": "„Ako sa cítiš, keď sa na to pozeráš?“",
       "text": "Spýtajte sa a potom počúvajte. Ťuknite na to, čo Leo pomenuje — bez hodnotenia.",
-      "signals": ["Pokoj", "Zmätok", "Nervozita", "Frustrácia", "Zvedavosť", "Odhodlanie"],
+      "signals": [
+        "Pokoj",
+        "Zmätok",
+        "Nervozita",
+        "Frustrácia",
+        "Zvedavosť",
+        "Odhodlanie"
+      ],
       "captured": "<b>{count}</b> {count, plural, one {pomenovaný pocit} few {pomenované pocity} other {pomenovaných pocitov}}",
       "noteLabel": "Prečo",
       "noteBody": "Pomenovanie nepohody znižuje pocit ohrozenia. Byť zaseknutý je tu úplne v poriadku."
@@ -159,7 +165,7 @@
     ]
   },
   "footer": {
-    "text": "Digitálny spoločník k logopedickej a kognitívnej terapii · Už čoskoro"
+    "text": "Digitálny spoločník k logopedickej a kognitívnej terapii"
   },
   "lang": {
     "label": "Jazyk"
@@ -242,7 +248,7 @@
   "parent": {
     "welcomeTitle": "Vitajte v Evolvei 👋",
     "welcomeLead": "Prepojte svoje dieťa s logopédom pomocou kódu z pozvánky a môžete začať cvičiť.",
-    "homeTitle": "Dnes s {name}",
+    "homeTitle": "Dnes cvičí {name}",
     "childSettings": "Profil dieťaťa",
     "childSettingsLead": "Meno, rok narodenia a avatar — nič viac o dieťati neukladáme.",
     "switchChild": "Prepnúť dieťa",
@@ -262,7 +268,7 @@
     "planTitle": "Plán cvičení",
     "planMeta": "{title} · od {date}",
     "progressTitle": "Pokrok",
-    "progressLead": "Ako sa darí {name} za posledných 90 dní.",
+    "progressLead": "Prehľad dieťaťa {name} za posledných 90 dní.",
     "statSessions": "cvičení spolu",
     "statMinutes": "minút cvičenia",
     "statStreak": "dní v rade",
@@ -272,7 +278,7 @@
     "noSessionsTitle": "Zatiaľ žiadne cvičenia",
     "noSessionsLead": "Po prvom dokončenom cvičení tu uvidíte históriu aj pokrok.",
     "messagesTitle": "Správy",
-    "messagesLead": "Píšete si s {name}. Odpovede prichádzajú zvyčajne do 24 hodín.",
+    "messagesLead": "Váš logopéd: {name}. Odpovede prichádzajú zvyčajne do 24 hodín.",
     "messagesLeadNoTherapist": "Správy pre vášho logopéda.",
     "yourTherapist": "Váš logopéd",
     "addAnotherChild": "Pridať ďalšie dieťa",
@@ -353,14 +359,14 @@
       "roundErrors": "{round}. kolo: {errors, plural, =0 {bez chyby} one {# chyba} few {# chyby} other {# chýb}}"
     },
     "builder": {
-      "pageTitle": "Plán pre {name}",
+      "pageTitle": "Plán — {name}",
       "pageLead": "Vyberte cvičenia z knižnice, nastavte frekvenciu a mieru opory. Po zverejnení plán rodina hneď uvidí.",
-      "defaultTitle": "Plán pre {name}",
+      "defaultTitle": "Plán — {name}",
       "libraryPane": "Knižnica cvičení",
       "allDomains": "Všetky",
       "searchPlaceholder": "Hľadať cvičenie…",
       "custom": "vlastné",
-      "planPane": "Plán pre {name}",
+      "planPane": "Plán — {name}",
       "titleLabel": "Názov plánu",
       "noteLabel": "Odkaz pre rodiča",
       "notePlaceholder": "Napr. Tento týždeň sa zameriavame na sluchové rozlišovanie…",
@@ -419,9 +425,18 @@
       "contentSection": "Obsah cvičenia",
       "typeLabel": "Typ cvičenia",
       "types": {
-        "choice": { "name": "Výber z možností", "hint": "Dieťa ťuká na správnu odpoveď." },
-        "speech_items": { "name": "Rečové kartičky", "hint": "Dieťa hovorí, rodič hodnotí." },
-        "guided_steps": { "name": "Vedená aktivita", "hint": "Spoločná úloha s krokmi a reflexiou." }
+        "choice": {
+          "name": "Výber z možností",
+          "hint": "Dieťa ťuká na správnu odpoveď."
+        },
+        "speech_items": {
+          "name": "Rečové kartičky",
+          "hint": "Dieťa hovorí, rodič hodnotí."
+        },
+        "guided_steps": {
+          "name": "Vedená aktivita",
+          "hint": "Spoločná úloha s krokmi a reflexiou."
+        }
       },
       "itemN": "Položka {n}",
       "choicePrompt": "Otázka (rodič ju prečíta nahlas)",
@@ -519,7 +534,7 @@
     "checkoutLeadTrial": "Skúšobné obdobie beží {count, plural, =0 {už len dnes} one {ešte # deň} few {ešte # dni} other {ešte # dní}}. Aktivujte si predplatné a nič vás nezastaví.",
     "checkoutLeadExpired": "Aktivujte predplatné a pokračujte v cvičení bez prerušenia.",
     "planName": "Rodinný plán",
-    "planFor": "pre {name} · plný prístup",
+    "planFor": "{name} · plný prístup",
     "perMonth": "/ mesiac",
     "benefit1": "Denné odporúčania podľa plánu od logopéda",
     "benefit2": "Celá knižnica cvičení zo všetkých oblastí",

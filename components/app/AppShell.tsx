@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AppTabs, { type TabItem } from "@/components/app/AppTabs";
 import SignOutButton from "@/components/app/SignOutButton";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import type { Profile } from "@/lib/data/user";
 import "@/styles/app.css";
 
@@ -28,6 +29,7 @@ export default function AppShell({
             Evolvea
           </Link>
           <div className="app-header-actions">
+            <LanguageSwitcher />
             <span className="app-user">{profile.full_name}</span>
             <SignOutButton />
           </div>
