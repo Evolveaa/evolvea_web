@@ -199,7 +199,11 @@ export default async function FamilyDetailPage({
                             📝 <i>„{s.parent_note}“</i>
                           </p>
                         )}
-                        <SessionDetail detail={s.detail} />
+                        <SessionDetail
+                          detail={s.detail}
+                          scoreCorrect={s.score_correct}
+                          scoreTotal={s.score_total}
+                        />
                       </div>
                     </details>
                   </li>

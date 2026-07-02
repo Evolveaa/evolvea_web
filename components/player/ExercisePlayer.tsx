@@ -22,7 +22,44 @@ import StorySequenceTask from "./StorySequenceTask";
 import SpeechTask from "./SpeechTask";
 import GuidedTask from "./GuidedTask";
 
-type Phase = "intro" | "play" | "done" | "saved";
+/**
+ * Every exercise runs inside Mikulajová's metacognitive cycle:
+ *   plan (pick a strategy) → monitor (strategy stays visible, hints ask
+ *   questions) → evaluate (child self-assesses) → anchor (say one sentence).
+ * Guided activities skip the wrapper — they carry their own arc.
+ * The child's strategy + self-assessment travel to the therapist, enabling
+ * calibration (self-view vs. actual performance).
+ */
+type Phase = "intro" | "strategy" | "play" | "selfEval" | "done" | "saved";
+
+type SelfEval = "great" | "ok" | "hard";
+type Helped = "yes" | "some" | "no";
+
+/** Per-type emoji for the three strategy options (labels live in i18n). */
+const STRATEGY_EMOJI: Record<string, [string, string, string]> = {
+  choice: ["👂", "🗣️", "🐢"],
+  sound_boxes: ["🐢", "👆", "👂"],
+  memory_sequence: ["🗣️", "📖", "👀"],
+  pairs: ["🧠", "➡️", "🎯"],
+  number_track: ["🔢", "👆", "🎯"],
+  story_sequence: ["1️⃣", "👀", "🗣️"],
+  speech_items: ["👂", "🐢", "👄"],
+};
+
+const SELF_EVAL: { key: SelfEval; emoji: string }[] = [
+  { key: "great", emoji: "🌟" },
+  { key: "ok", emoji: "🙂" },
+  { key: "hard", emoji: "🌱" },
+];
+
+const HELPED: { key: Helped; emoji: string }[] = [
+  { key: "yes", emoji: "✅" },
+  { key: "some", emoji: "🤏" },
+  { key: "no", emoji: "❌" },
+];
+
+const ANCHOR_COUNT = 5;
+const BURST = ["🎉", "⭐", "✨", "🎈", "🌟", "🎊"];
 
 export default function ExercisePlayer({
   exercise,
@@ -48,32 +85,66 @@ export default function ExercisePlayer({
   const [phase, setPhase] = useState<Phase>("intro");
   const [progress, setProgress] = useState({ current: 0, total: contentItemCount(content) });
   const [summary, setSummary] = useState<FinishSummary | null>(null);
+  const [strategyIdx, setStrategyIdx] = useState<number | null>(null);
+  const [selfEval, setSelfEval] = useState<SelfEval | null>(null);
+  const [helped, setHelped] = useState<Helped | null>(null);
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const startedAt = useRef<string>("");
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // stable per exercise, varied across the library — and pure (React compiler)
+  const anchorIdx =
+    (exercise.id.charCodeAt(0) + exercise.id.charCodeAt(6)) % ANCHOR_COUNT;
 
   const meta = DOMAIN_META[exercise.domain];
   const hintsEnabled = supportLevel >= 2;
   const guided = content.type === "guided_steps";
   const scored = !guided;
+  const strategyLabel =
+    strategyIdx !== null ? t(`strategy.${content.type}.${strategyIdx}`) : null;
 
   const onProgress = useCallback(
     (current: number, total: number) => setProgress({ current, total }),
     [],
   );
-  const onFinish = useCallback((s: FinishSummary) => {
-    setSummary(s);
-    setPhase("done");
-  }, []);
+  const onFinish = useCallback(
+    (s: FinishSummary) => {
+      setSummary(s);
+      setPhase(content.type === "guided_steps" ? "done" : "selfEval");
+    },
+    [content.type],
+  );
 
   function start() {
-    startedAt.current = new Date().toISOString();
-    setPhase("play");
+    if (guided) {
+      startedAt.current = new Date().toISOString();
+      setPhase("play");
+    } else {
+      setPhase("strategy");
+    }
+  }
+
+  function pickStrategy(i: number) {
+    if (strategyIdx !== null) return;
+    setStrategyIdx(i);
+    timer.current = setTimeout(() => {
+      startedAt.current = new Date().toISOString();
+      setPhase("play");
+    }, 550);
+  }
+
+  function pickHelped(h: Helped) {
+    if (helped !== null) return;
+    setHelped(h);
+    timer.current = setTimeout(() => setPhase("done"), 550);
   }
 
   function quit() {
-    if (phase === "play" && !window.confirm(t("quitConfirm"))) return;
+    if ((phase === "play" || phase === "strategy" || phase === "selfEval") && !window.confirm(t("quitConfirm")))
+      return;
+    if (timer.current) clearTimeout(timer.current);
     router.push(closeHref);
   }
 
@@ -81,19 +152,30 @@ export default function ExercisePlayer({
     if (!summary || !childId) return;
     setSaving(true);
     setSaveError(false);
+    const baseDetail =
+      summary.detail && typeof summary.detail === "object" && !Array.isArray(summary.detail)
+        ? summary.detail
+        : {};
+    const detail = guided
+      ? summary.detail
+      : {
+          ...baseDetail,
+          metacognition: {
+            strategy: strategyLabel,
+            selfEval,
+            strategyHelped: helped,
+          },
+        };
     const { ok } = await completeSessionAction({
       childId,
       exerciseId: exercise.id,
       planItemId: planItemId ?? null,
       supportLevel,
       startedAt: startedAt.current || new Date().toISOString(),
-      durationSeconds: startedAt.current
-        ? Math.round((Date.now() - new Date(startedAt.current).getTime()) / 1000)
-        : 0,
       scoreCorrect: scored ? summary.correct : null,
       scoreTotal: scored ? summary.total : null,
       hintsUsed: summary.hintsUsed,
-      detail: summary.detail,
+      detail,
       parentNote: note,
     });
     setSaving(false);
@@ -101,10 +183,12 @@ export default function ExercisePlayer({
     else setSaveError(true);
   }
 
+  const wrapProps = { className: "player-wrap", "data-hue": meta.hue } as const;
+
   /* ---------------- intro ---------------- */
   if (phase === "intro") {
     return (
-      <div className="player-wrap">
+      <div {...wrapProps}>
         <div className="player-top">
           <button type="button" className="player-quit" onClick={quit} aria-label={t("close")}>
             ✕
@@ -112,7 +196,11 @@ export default function ExercisePlayer({
         </div>
         <div className="player-main" style={{ justifyContent: "center" }}>
           <div style={{ textAlign: "center", marginBottom: "1.4rem" }}>
-            <span className={`row-ico hue-${meta.hue}`} style={{ width: 64, height: 64, fontSize: "2rem", background: "var(--chip-bg)", margin: "0 auto 0.9rem", display: "grid" }} aria-hidden="true">
+            <span
+              className={`row-ico hue-${meta.hue}`}
+              style={{ width: 72, height: 72, fontSize: "2.3rem", background: "var(--chip-bg)", margin: "0 auto 0.9rem", display: "grid", borderRadius: 22 }}
+              aria-hidden="true"
+            >
               {meta.emoji}
             </span>
             <span className={`chip chip-hue hue-${meta.hue}`}>{td(exercise.domain)}</span>
@@ -145,9 +233,93 @@ export default function ExercisePlayer({
             </details>
           )}
 
-          <button type="button" className="btn btn-primary btn-block" onClick={start}>
+          <button type="button" className="btn btn-play btn-block" onClick={start}>
             {t("start")}
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ---------------- strategy (plan) ---------------- */
+  if (phase === "strategy") {
+    const emojis = STRATEGY_EMOJI[content.type] ?? ["💡", "💡", "💡"];
+    return (
+      <div {...wrapProps}>
+        <div className="player-top">
+          <button type="button" className="player-quit" onClick={quit} aria-label={t("close")}>
+            ✕
+          </button>
+        </div>
+        <div className="player-main" style={{ justifyContent: "center" }}>
+          <p className="player-kicker">🧭 {t("strategyKicker")}</p>
+          <p className="player-prompt">{t("strategyTitle")}</p>
+          <p className="player-intro">{t("strategyLead")}</p>
+          <div className="strategy-grid">
+            {[0, 1, 2].map((i) => (
+              <button
+                key={i}
+                type="button"
+                className="opt-card opt-strategy"
+                data-state={strategyIdx === i ? "correct" : strategyIdx !== null ? "dim" : undefined}
+                onClick={() => pickStrategy(i)}
+              >
+                <span className="opt-emoji" aria-hidden="true">
+                  {emojis[i]}
+                </span>
+                <span>{t(`strategy.${content.type}.${i}`)}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ---------------- self-evaluation ---------------- */
+  if (phase === "selfEval") {
+    return (
+      <div {...wrapProps}>
+        <div className="player-main" style={{ justifyContent: "center" }}>
+          <p className="player-kicker">🪞 {t("selfEvalKicker")}</p>
+          <p className="player-prompt">{t("selfEvalTitle")}</p>
+          <div className="strategy-grid">
+            {SELF_EVAL.map((o) => (
+              <button
+                key={o.key}
+                type="button"
+                className="opt-card opt-strategy"
+                data-state={selfEval === o.key ? "correct" : selfEval !== null ? "dim" : undefined}
+                onClick={() => setSelfEval((prev) => prev ?? o.key)}
+              >
+                <span className="opt-emoji" aria-hidden="true">
+                  {o.emoji}
+                </span>
+                <span>{t(`selfEval.${o.key}`)}</span>
+              </button>
+            ))}
+          </div>
+
+          {selfEval !== null && strategyLabel && (
+            <div className="selfeval-followup">
+              <p className="player-prompt" style={{ fontSize: "1.15rem", marginTop: "1.6rem" }}>
+                {t("helpedTitle", { strategy: strategyLabel })}
+              </p>
+              <div className="helped-row">
+                {HELPED.map((o) => (
+                  <button
+                    key={o.key}
+                    type="button"
+                    className="gd-choice"
+                    aria-pressed={helped === o.key}
+                    onClick={() => pickHelped(o.key)}
+                  >
+                    {o.emoji} {t(`helped.${o.key}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -160,8 +332,15 @@ export default function ExercisePlayer({
         ? Math.round((100 * summary.correct) / summary.total)
         : null;
     return (
-      <div className="player-wrap">
+      <div {...wrapProps}>
         <div className="done-wrap">
+          <div className="done-burst" aria-hidden="true">
+            {BURST.map((b, i) => (
+              <span key={i} style={{ ["--i" as string]: i }}>
+                {b}
+              </span>
+            ))}
+          </div>
           <span className="done-check" aria-hidden="true">
             ✓
           </span>
@@ -206,6 +385,13 @@ export default function ExercisePlayer({
             </div>
           )}
 
+          {phase === "done" && !guided && (
+            <div className="anchor-box">
+              <span className="anchor-label">{t("anchorLabel")}</span>
+              <p className="anchor-text">„{t(`anchors.${anchorIdx}`)}“</p>
+            </div>
+          )}
+
           {phase === "done" && mode === "live" && (
             <div style={{ width: "100%", maxWidth: 430 }}>
               <label className="label" htmlFor="parent-note" style={{ textAlign: "left" }}>
@@ -222,7 +408,7 @@ export default function ExercisePlayer({
                 style={{ marginBottom: "0.9rem" }}
               />
               {saveError && <p className="form-error">{t("saveError")}</p>}
-              <button type="button" className="btn btn-primary btn-block" onClick={save} disabled={saving}>
+              <button type="button" className="btn btn-play btn-block" onClick={save} disabled={saving}>
                 {saving ? t("saving") : t("saveAndSend")}
               </button>
             </div>
@@ -230,7 +416,7 @@ export default function ExercisePlayer({
 
           {(phase === "saved" || mode === "preview") && (
             <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap", justifyContent: "center" }}>
-              <Link href={closeHref} className="btn btn-primary">
+              <Link href={closeHref} className="btn btn-play">
                 {mode === "preview" ? t("closePreview") : t("backHome")}
               </Link>
             </div>
@@ -244,7 +430,7 @@ export default function ExercisePlayer({
   const pctBar = progress.total > 0 ? (100 * progress.current) / progress.total : 0;
 
   return (
-    <div className="player-wrap">
+    <div {...wrapProps}>
       <div className="player-top">
         <button type="button" className="player-quit" onClick={quit} aria-label={t("close")}>
           ✕
@@ -265,6 +451,12 @@ export default function ExercisePlayer({
           {Math.min(progress.current + 1, progress.total)}/{progress.total}
         </span>
       </div>
+
+      {strategyLabel && (
+        <p className="myplan-chip">
+          🧭 {t("myPlan")}: <b>{strategyLabel}</b>
+        </p>
+      )}
 
       <div className="player-main">
         {content.type === "choice" && (

@@ -162,7 +162,7 @@
       },
       {
         "title": "Einen Tag nach dem anderen",
-        "body": "Die Beständigkeit der Fragen zählt weit mehr als das Puzzle vor ihnen."
+        "body": "Die Beständigkeit der Fragen zählt weit mehr als das Puzzle vor ihnen. Studien zeigen, dass regelmäßiges, von Eltern angeleitetes Üben zu Hause genauso wirksam sein kann wie Sitzungen in der Praxis."
       }
     ]
   },
@@ -258,7 +258,7 @@
     "childSettingsLead": "Name, Geburtsjahr und Avatar — mehr speichern wir über Ihr Kind nicht.",
     "switchChild": "Kind wechseln",
     "streak": "{count, plural, =0 {Starten Sie heute} one {# Tag in Folge} other {# Tage in Folge}}",
-    "streakHint": "Eine kurze Übung jeden Tag bewirkt mehr als eine lange einmal pro Woche.",
+    "streakHint": "Eine kurze Übung jeden Tag bringt mehr als eine lange pro Woche — Studien zeigen, dass elterngeleitetes Üben zu Hause genauso wirksam sein kann wie eine Sitzung beim Logopäden.",
     "weekDaysLabel": "Wochenübersicht",
     "todaySection": "Die heutige Portion",
     "noPlanTitle": "Der Plan ist unterwegs",
@@ -367,7 +367,23 @@
     "session": {
       "hinted": "mit Tipp",
       "pairsMoves": "Memory: {pairs} Paare in {moves} Zügen gefunden.",
-      "roundErrors": "Runde {round}: {errors, plural, =0 {ohne Fehler} one {# Fehler} other {# Fehler}}"
+      "roundErrors": "Runde {round}: {errors, plural, =0 {ohne Fehler} one {# Fehler} other {# Fehler}}",
+      "strategyChip": "Plan des Kindes: {strategy}",
+      "selfEval": {
+        "great": "Kind: es lief super",
+        "ok": "Kind: ganz gut",
+        "hard": "Kind: es war schwer"
+      },
+      "helped": {
+        "yes": "Plan hat geholfen",
+        "some": "Plan hat etwas geholfen",
+        "no": "Plan hat nicht geholfen"
+      },
+      "calibration": {
+        "ok": "Die Selbsteinschätzung des Kindes passt zur Leistung.",
+        "under": "Das Kind unterschätzt sich — die Leistung war deutlich besser als seine Einschätzung.",
+        "over": "Das Kind überschätzt sich — die Leistung war schwächer als seine Einschätzung."
+      }
     },
     "builder": {
       "pageTitle": "Plan für {name}",
@@ -695,6 +711,68 @@
     "backHome": "Zurück zu Heute",
     "closePreview": "Vorschau schließen",
     "brokenTitle": "Die Übung lässt sich nicht laden",
-    "brokenLead": "Der Inhalt der Übung ist beschädigt. Informieren Sie Ihren Logopäden."
+    "brokenLead": "Der Inhalt der Übung ist beschädigt. Informieren Sie Ihren Logopäden.",
+    "strategyKicker": "Schritt 1 · Mein Plan",
+    "strategyTitle": "Wie schaffst du das heute?",
+    "strategyLead": "Wähl aus, was dir hilft. Das ist dein Plan!",
+    "myPlan": "Mein Plan",
+    "selfEvalKicker": "Rückblick",
+    "selfEvalTitle": "Wie ist es gelaufen?",
+    "selfEval": {
+      "great": "Super!",
+      "ok": "Ganz gut",
+      "hard": "Es war schwer"
+    },
+    "helpedTitle": "Hat dir dein Plan „{strategy}“ geholfen?",
+    "helped": {
+      "yes": "Ja!",
+      "some": "Ein bisschen",
+      "no": "Nein"
+    },
+    "anchorLabel": "Sag es laut",
+    "anchors": {
+      "0": "Ich schaffe das Schritt für Schritt.",
+      "1": "Mit Übung werde ich besser.",
+      "2": "Fehler helfen mir beim Lernen.",
+      "3": "Ich habe einen Plan und bleibe dabei.",
+      "4": "Wenn ich es noch einmal versuche, wird es leichter."
+    },
+    "strategy": {
+      "choice": {
+        "0": "Ich höre der Frage genau zu",
+        "1": "Ich sage die Möglichkeiten laut",
+        "2": "Ich gehe langsam vor, ohne Eile"
+      },
+      "sound_boxes": {
+        "0": "Ich sage das Wort ganz langsam",
+        "1": "Ich tippe bei jedem Laut",
+        "2": "Erst höre ich zu, dann tippe ich"
+      },
+      "memory_sequence": {
+        "0": "Ich sage die Bilder laut",
+        "1": "Ich mache eine kleine Geschichte daraus",
+        "2": "Ich schaue ganz genau hin"
+      },
+      "pairs": {
+        "0": "Ich merke mir, wo was liegt",
+        "1": "Ich decke der Reihe nach auf",
+        "2": "Ich konzentriere mich nur auf die Karten"
+      },
+      "number_track": {
+        "0": "Ich suche die Zahlen der Reihe nach",
+        "1": "Ich zeige mit dem Finger",
+        "2": "Ich lasse mich nicht ablenken"
+      },
+      "story_sequence": {
+        "0": "Ich sage, was zuerst passiert ist",
+        "1": "Erst schaue ich mir alle Bilder an",
+        "2": "Ich erzähle die Geschichte laut"
+      },
+      "speech_items": {
+        "0": "Erst höre ich zu, dann spreche ich",
+        "1": "Ich spreche langsam und deutlich",
+        "2": "Ich achte auf Mund und Zunge"
+      }
+    }
   }
 }

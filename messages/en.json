@@ -162,7 +162,7 @@
       },
       {
         "title": "One day at a time",
-        "body": "Consistency of the questions matters far more than the puzzle in front of them."
+        "body": "Consistency of the questions matters far more than the puzzle in front of them. Research shows that regular parent-led practice at home can be as effective as clinic sessions."
       }
     ]
   },
@@ -258,7 +258,7 @@
     "childSettingsLead": "Name, birth year, and avatar — that's all we store about your child.",
     "switchChild": "Switch child",
     "streak": "{count, plural, =0 {Start today} one {# day in a row} other {# days in a row}}",
-    "streakHint": "A short exercise every day means more than a long one once a week.",
+    "streakHint": "A short exercise every day beats a long one once a week — research shows parent-led home practice can be as effective as a session with the therapist.",
     "weekDaysLabel": "Week overview",
     "todaySection": "Today's dose",
     "noPlanTitle": "Your plan is on its way",
@@ -367,7 +367,23 @@
     "session": {
       "hinted": "with a hint",
       "pairsMoves": "Memory game: {pairs} pairs found in {moves} moves.",
-      "roundErrors": "Round {round}: {errors, plural, =0 {no mistakes} one {# mistake} other {# mistakes}}"
+      "roundErrors": "Round {round}: {errors, plural, =0 {no mistakes} one {# mistake} other {# mistakes}}",
+      "strategyChip": "Child's plan: {strategy}",
+      "selfEval": {
+        "great": "child: it went great",
+        "ok": "child: pretty well",
+        "hard": "child: it was hard"
+      },
+      "helped": {
+        "yes": "plan helped",
+        "some": "plan helped a little",
+        "no": "plan didn't help"
+      },
+      "calibration": {
+        "ok": "The child's self-assessment matches their performance.",
+        "under": "The child underrates themselves — performance was much better than their own view.",
+        "over": "The child overrates themselves — performance was weaker than their own view."
+      }
     },
     "builder": {
       "pageTitle": "Plan for {name}",
@@ -695,6 +711,68 @@
     "backHome": "Back to Today",
     "closePreview": "Close preview",
     "brokenTitle": "This exercise can't be loaded",
-    "brokenLead": "The exercise content is corrupted. Please let your speech therapist know."
+    "brokenLead": "The exercise content is corrupted. Please let your speech therapist know.",
+    "strategyKicker": "Step 1 · My plan",
+    "strategyTitle": "How will you tackle it today?",
+    "strategyLead": "Pick what will help you. That's your plan!",
+    "myPlan": "My plan",
+    "selfEvalKicker": "Looking back",
+    "selfEvalTitle": "How did it go?",
+    "selfEval": {
+      "great": "Great!",
+      "ok": "Pretty well",
+      "hard": "It was hard"
+    },
+    "helpedTitle": "Did your plan “{strategy}” help you?",
+    "helped": {
+      "yes": "Yes!",
+      "some": "A little",
+      "no": "No"
+    },
+    "anchorLabel": "Say it out loud",
+    "anchors": {
+      "0": "I can do it step by step.",
+      "1": "Practice makes me better.",
+      "2": "Mistakes help me learn.",
+      "3": "I have a plan and I stick to it.",
+      "4": "When I try again, it gets easier."
+    },
+    "strategy": {
+      "choice": {
+        "0": "I listen to the question carefully",
+        "1": "I say the options out loud",
+        "2": "I go slowly, no rushing"
+      },
+      "sound_boxes": {
+        "0": "I say the word very slowly",
+        "1": "I tap once for every sound",
+        "2": "First I listen, then I tap"
+      },
+      "memory_sequence": {
+        "0": "I say the pictures out loud",
+        "1": "I turn them into a little story",
+        "2": "I watch very carefully"
+      },
+      "pairs": {
+        "0": "I remember where things are",
+        "1": "I flip cards one by one",
+        "2": "I focus only on the cards"
+      },
+      "number_track": {
+        "0": "I look for numbers in order",
+        "1": "I point with my finger",
+        "2": "I don't let anything distract me"
+      },
+      "story_sequence": {
+        "0": "I say what happened first",
+        "1": "First I look at all the pictures",
+        "2": "I tell the story out loud"
+      },
+      "speech_items": {
+        "0": "First I listen, then I speak",
+        "1": "I speak slowly and clearly",
+        "2": "I mind my mouth and tongue"
+      }
+    }
   }
 }

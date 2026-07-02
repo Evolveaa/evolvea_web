@@ -164,7 +164,6 @@ export interface SessionPayload {
   planItemId: string | null;
   supportLevel: number;
   startedAt: string;
-  durationSeconds: number;
   scoreCorrect: number | null;
   scoreTotal: number | null;
   hintsUsed: number;
@@ -181,6 +180,12 @@ export async function completeSessionAction(
   const clamp = (n: number, lo: number, hi: number) =>
     Math.max(lo, Math.min(hi, Math.round(n)));
 
+  // duration derives from startedAt server-side — clients only report the start
+  const startedMs = new Date(payload.startedAt).getTime();
+  const durationSeconds = Number.isFinite(startedMs)
+    ? (Date.now() - startedMs) / 1000
+    : 0;
+
   const supabase = await createClient();
   const { error } = await supabase.from("sessions").insert({
     child_id: payload.childId,
@@ -189,7 +194,7 @@ export async function completeSessionAction(
     support_level: clamp(payload.supportLevel, 1, 3),
     started_at: new Date(payload.startedAt).toISOString(),
     completed_at: new Date().toISOString(),
-    duration_seconds: clamp(payload.durationSeconds, 0, 60 * 60 * 4),
+    duration_seconds: clamp(durationSeconds, 0, 60 * 60 * 4),
     score_correct: payload.scoreCorrect === null ? null : clamp(payload.scoreCorrect, 0, 999),
     score_total: payload.scoreTotal === null ? null : clamp(payload.scoreTotal, 0, 999),
     hints_used: clamp(payload.hintsUsed, 0, 999),

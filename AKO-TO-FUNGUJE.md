@@ -8,6 +8,7 @@ Jednoduchý sprievodca aplikáciou — ľudskou rečou, bez technických výrazo
 
 - Evolvea je **domáci spoločník k logopedickej terapii** pre deti vo veku asi 5 – 10 rokov.
 - Nenahrádza logopéda — **predlžuje jeho prácu domov**. Logopéd vidí dieťa raz za čas; doma sa dá cvičiť každý deň po troške.
+- **Výskumy pritom ukazujú, že pravidelné domáce cvičenie vedené rodičom môže byť rovnako účinné ako sedenia v ambulancii** — rozhoduje stálosť, nie miestnosť. Presne na tom Evolvea stojí.
 - Základná myšlienka: **rodič a dieťa cvičia spolu**, krátko a pravidelne. Aplikácia rodiča presne vedie, čo povedať a kedy sa naopak stiahnuť a nechať dieťa pracovať samé.
 - Všetko, čo dieťa doma spraví, sa **automaticky vracia logopédovi** — takže na najbližšom stretnutí presne vie, ako sa darilo, a podľa toho upraví ďalší plán.
 
@@ -37,14 +38,18 @@ Jednoduchý sprievodca aplikáciou — ľudskou rečou, bez technických výrazo
   - **S malou pomocou** — dieťa pracuje samo, rodič je poruke a môže použiť „pomôcku“.
   - **Samostatne** — dieťa to zvláda samo, rodič už len sleduje a chváli.
   - Postupné uberanie pomoci je jadro metódy — dieťa preberá kormidlo krok za krokom.
-- Počas cvičenia dieťa ťuká na veľké kartičky, skladá, hľadá a hovorí. Chyba nie je trest — aplikácia povzbudí a nechá skúsiť znova. „Pomôcka“ nikdy neprezradí riešenie, len navedie otázkou.
+- Každé cvičenie beží v **metakognitívnom kolobehu** (myslenie o vlastnom myslení):
+  1. **Môj plán** — dieťa si pred úlohou vyberie stratégiu („Poviem si to nahlas“, „Idem pomaly“…). Plán mu potom svieti nad úlohou ako pripomienka.
+  2. **Úloha** — dieťa ťuká na veľké kartičky, skladá, hľadá a hovorí. Chyba nie je trest — aplikácia povzbudí a nechá skúsiť znova. „Pomôcka“ nikdy neprezradí riešenie, len navedie otázkou.
+  3. **Ohliadnutie** — dieťa sa samo ohodnotí („Ako ti to išlo?“) a povie, či mu jeho plán pomohol.
+  4. **Kotva** — na záver si nahlas povie jednu posilňujúcu vetu („Zvládnem to krok za krokom.“).
 - Na konci rodič môže dopísať **krátku poznámku pre logopéda** („dnes ju bavilo…, toto išlo ťažko…“) a všetko sa odošle.
 
 ## Aké cvičenia v aplikácii sú
 
-Vstavaná knižnica má **51 cvičení v slovenčine** v troch úrovniach náročnosti, pokrýva všetky oblasti, na ktorých stojí prevencia porúch čítania:
+Vstavaná knižnica má **53 cvičení v slovenčine** v troch úrovniach náročnosti, pokrýva všetky oblasti, na ktorých stojí prevencia porúch čítania:
 
-- **Hlásky a zvuky** — dieťa počíta hlásky v slovách pomocou farebných žetónov (červené samohlásky, modré spoluhlásky), hľadá prvú a poslednú hlásku, rýmy, slabiky, skladá slová z hlások.
+- **Hlásky a zvuky** — dieťa počíta hlásky v slovách pomocou farebných žetónov (červené samohlásky, modré spoluhlásky), hľadá prvú a poslednú hlásku, rýmy, slabiky, skladá slová z hlások a na najvyššej úrovni hlásky **schováva a vymieňa** („povedz vlak bez v“ → lak) — úplná hierarchia fonematického uvedomovania.
 - **Pamäť** — zapamätaj si poradie obrázkov, pexeso, opakovanie čísel a slov odzadu, opakovanie stále dlhších viet.
 - **Pozornosť** — ťukanie čísel po poradí (aj odzadu, aj s „rušičmi“), hľadanie odlišného obrázka, počítanie tvarov, počúvanie s tlesknutím na zvieratká, minúta sústredenia.
 - **Rozprávanie** — usporiadanie obrázkového príbehu a prerozprávanie vlastnými slovami, dokončovanie príbehov, prerozprávanie rozprávky pomocou symbolov, rozprávanie o vlastnom dni.
@@ -59,9 +64,10 @@ Vstavaná knižnica má **51 cvičení v slovenčine** v troch úrovniach náro�
   - úspešnosť podľa oblastí a séria dní,
   - každé jedno cvičenie aj s výsledkami, použitými pomôckami a poznámkami rodiča,
   - pri spoločných aktivitách aj **doslovné odpovede dieťaťa** z reflexií — pre logopéda zlato,
+  - pri každom cvičení **akú stratégiu si dieťa vybralo a ako sa samo ohodnotilo** — vrátane kalibrácie (či sa dieťa podceňuje alebo nadhodnocuje voči skutočnému výkonu),
   - správy s rodičom priamo vedľa toho.
 - **Plán** — logopéd poskladá dieťaťu plán z knižnice: vyberie cvičenia, nastaví koľkokrát do týždňa a akú mieru pomoci. Po zverejnení ho rodina okamžite vidí a starý plán sa odloží do archívu.
-- **Knižnica** — všetkých 51 vstavaných cvičení sa dá prezrieť a **vyskúšať naostro** v náhľade. Logopéd si navyše vie **vytvoriť vlastné cvičenia** v jednoduchom formulári (výber z možností, rečové kartičky alebo vedená aktivita) — bez akéhokoľvek programovania.
+- **Knižnica** — všetkých 53 vstavaných cvičení sa dá prezrieť a **vyskúšať naostro** v náhľade. Logopéd si navyše vie **vytvoriť vlastné cvičenia** v jednoduchom formulári (výber z možností, rečové kartičky alebo vedená aktivita) — bez akéhokoľvek programovania.
 - **Pozvánky** — tu vznikajú kódy pre nové rodiny; kód sa dá skopírovať alebo rovno poslať e-mailom.
 - **Provízie** — za každú aktívne platiacu rodinu, ktorú logopéd priviedol, mu patrí 30 % z predplatného (2,97 € mesačne za rodinu). Stránka ukazuje aktuálnu aj potenciálnu sumu.
 
@@ -94,7 +100,7 @@ Vstavaná knižnica má **51 cvičení v slovenčine** v troch úrovniach náro�
 | Rodič (čerstvé skúšobné obdobie) | `stuodstrelovaci+rodic2@gmail.com` | `EvolveaDemo2026` |
 
 - **Účet na vyskúšanie celého toku:** `+test` (dieťa Miško) má priradených všetkých
-  51 cvičení a aktívne predplatné — cez záložku **Plán** sa vieš prekliknúť do
+  53 cvičení a aktívne predplatné — cez záložku **Plán** sa vieš prekliknúť do
   ktoréhokoľvek typu úlohy. Všetky demo účty sú vopred potvrdené, takže sa
   prihlásiš rovno bez e-mailu.
 

@@ -1,705 +1,1431 @@
 [
-  {
-    "slug": "pa-pocitaj-hlasky-1",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Spočítaj hlásky",
-    "summary": "Fonematická analýza krátkych slov — dieťa segmentuje slovo na hlásky a určuje ich počet pomocou žetónov (Eľkoninova metodika, prípravná etapa hláskovej analýzy).",
-    "parent_guide": "Sadnite si vedľa dieťaťa a povedzte slovo najprv prirodzene, potom pomaly a zreteľne: o… k… o. Zopakujte ho spolu a pri každej hláske ťuknite prstom na jeden rámček. Potom sa spýtajte: Koľko hlások sme napočítali? Ak dieťa váha, povedzte slovo ešte pomalšie a hlásky spolu počítajte na prstoch. Chváľte každý pokus, nielen správny výsledok.",
-    "difficulty": 1,
-    "age_min": 5,
-    "age_max": 7,
-    "duration_minutes": 5,
-    "content": {
-      "type": "sound_boxes",
-      "mode": "count",
-      "intro": "Každé slovo je poskladané z malých zvukov — hlások. Počúvaj pozorne a spočítaj ich!",
-      "items": [
-        {
-          "word": "oko",
-          "emoji": "👁️",
-          "phonemes": [
-            { "sound": "o", "kind": "vowel" },
-            { "sound": "k", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" }
-          ],
-          "hint": "Povedz slovo pomaličky. Čo počuješ na začiatku, čo v strede a čo na konci?"
-        },
-        {
-          "word": "mak",
-          "emoji": "🌸",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" },
-            { "sound": "k", "kind": "consonant" }
-          ],
-          "hint": "Natiahni slovo ako žuvačku: mmm… aaa… k. Koľko zvukov počuješ?"
-        },
-        {
-          "word": "dom",
-          "emoji": "🏠",
-          "phonemes": [
-            { "sound": "d", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" },
-            { "sound": "m", "kind": "consonant" }
-          ],
-          "hint": "Ťukni prstom pri každom zvuku, ktorý v slove počuješ. Koľko ťuknutí to bolo?"
-        },
-        {
-          "word": "syr",
-          "emoji": "🧀",
-          "phonemes": [
-            { "sound": "s", "kind": "consonant" },
-            { "sound": "y", "kind": "vowel" },
-            { "sound": "r", "kind": "consonant" }
-          ],
-          "hint": "Skús slovo povedať pomaly od začiatku až do konca. Koľko hlások po ceste stretneš?"
-        },
-        {
-          "word": "les",
-          "emoji": "🌲",
-          "phonemes": [
-            { "sound": "l", "kind": "consonant" },
-            { "sound": "e", "kind": "vowel" },
-            { "sound": "s", "kind": "consonant" }
-          ],
-          "hint": "Povedz slovo šeptom a pomaly. Koľko zvukov sa v ňom skrýva?"
-        },
-        {
-          "word": "nos",
-          "emoji": "👃",
-          "phonemes": [
-            { "sound": "n", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" },
-            { "sound": "s", "kind": "consonant" }
-          ],
-          "hint": "Vyslov slovo pomaly a na každú hlásku vystri jeden prst. Koľko prstov máš vystretých?"
-        }
-      ]
+ {
+  "slug": "pa-pocitaj-hlasky-1",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Spočítaj hlásky",
+  "summary": "Fonematická analýza krátkych slov — dieťa segmentuje slovo na hlásky a určuje ich počet pomocou žetónov (Eľkoninova metodika, prípravná etapa hláskovej analýzy).",
+  "parent_guide": "Sadnite si vedľa dieťaťa a povedzte slovo najprv prirodzene, potom pomaly a zreteľne: o… k… o. Zopakujte ho spolu a pri každej hláske ťuknite prstom na jeden rámček. Potom sa spýtajte: Koľko hlások sme napočítali? Ak dieťa váha, povedzte slovo ešte pomalšie a hlásky spolu počítajte na prstoch. Chváľte každý pokus, nielen správny výsledok.",
+  "difficulty": 1,
+  "age_min": 5,
+  "age_max": 7,
+  "duration_minutes": 5,
+  "content": {
+   "type": "sound_boxes",
+   "mode": "count",
+   "intro": "Každé slovo je poskladané z malých zvukov — hlások. Počúvaj pozorne a spočítaj ich!",
+   "items": [
+    {
+     "word": "oko",
+     "emoji": "👁️",
+     "phonemes": [
+      {
+       "sound": "o",
+       "kind": "vowel"
+      },
+      {
+       "sound": "k",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Povedz slovo pomaličky. Čo počuješ na začiatku, čo v strede a čo na konci?"
+    },
+    {
+     "word": "mak",
+     "emoji": "🌸",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      },
+      {
+       "sound": "k",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Natiahni slovo ako žuvačku: mmm… aaa… k. Koľko zvukov počuješ?"
+    },
+    {
+     "word": "dom",
+     "emoji": "🏠",
+     "phonemes": [
+      {
+       "sound": "d",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      },
+      {
+       "sound": "m",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Ťukni prstom pri každom zvuku, ktorý v slove počuješ. Koľko ťuknutí to bolo?"
+    },
+    {
+     "word": "syr",
+     "emoji": "🧀",
+     "phonemes": [
+      {
+       "sound": "s",
+       "kind": "consonant"
+      },
+      {
+       "sound": "y",
+       "kind": "vowel"
+      },
+      {
+       "sound": "r",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Skús slovo povedať pomaly od začiatku až do konca. Koľko hlások po ceste stretneš?"
+    },
+    {
+     "word": "les",
+     "emoji": "🌲",
+     "phonemes": [
+      {
+       "sound": "l",
+       "kind": "consonant"
+      },
+      {
+       "sound": "e",
+       "kind": "vowel"
+      },
+      {
+       "sound": "s",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Povedz slovo šeptom a pomaly. Koľko zvukov sa v ňom skrýva?"
+    },
+    {
+     "word": "nos",
+     "emoji": "👃",
+     "phonemes": [
+      {
+       "sound": "n",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      },
+      {
+       "sound": "s",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Vyslov slovo pomaly a na každú hlásku vystri jeden prst. Koľko prstov máš vystretých?"
     }
-  },
-  {
-    "slug": "pa-farebne-zetony-2",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Farebné žetóny",
-    "summary": "Fonematická analýza s farebným kódovaním hlások — dieťa rozlišuje krátke a dlhé samohlásky od spoluhlások (Eľkonin–Mikulajová, žetónová etapa).",
-    "parent_guide": "Slovo najprv spoločne rozložte na hlásky. Pri každej hláske sa spýtajte: Dá sa táto hláska zaspievať? Znie krátko, alebo dlho? Dlhé samohlásky spolu poriadne natiahnite: vááá-za. Farbu žetónu vyberajte spoločne a nahlas povedzte prečo. Ak dieťa siahne po nesprávnom žetóne, nezastavujte ho — na konci slovo skontrolujte spolu a nechajte ho chybu nájsť samo.",
-    "difficulty": 2,
-    "age_min": 6,
-    "age_max": 9,
-    "duration_minutes": 6,
-    "content": {
-      "type": "sound_boxes",
-      "mode": "colors",
-      "intro": "Každá hláska dostane svoj žetón. Počúvaj, ktorá sa dá spievať, ktorá znie krátko a ktorá dlho!",
-      "items": [
-        {
-          "word": "mama",
-          "emoji": "👩",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" },
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Ktoré hlásky v slove sa dajú zaspievať? Kde stoja?"
-        },
-        {
-          "word": "ryba",
-          "emoji": "🐟",
-          "phonemes": [
-            { "sound": "r", "kind": "consonant" },
-            { "sound": "y", "kind": "vowel" },
-            { "sound": "b", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Povedz slovo pomaly. Ktoré hlásky znejú krátko a dajú sa spievať?"
-        },
-        {
-          "word": "sova",
-          "emoji": "🦉",
-          "phonemes": [
-            { "sound": "s", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" },
-            { "sound": "v", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Striedajú sa v slove hlásky, ktoré sa spievať dajú, a tie, ktoré nie?"
-        },
-        {
-          "word": "váza",
-          "emoji": "🏺",
-          "phonemes": [
-            { "sound": "v", "kind": "consonant" },
-            { "sound": "á", "kind": "long_vowel" },
-            { "sound": "z", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Natiahni slovo pomaly. Ktorá hláska znie dlhšie než ostatné?"
-        },
-        {
-          "word": "lúka",
-          "emoji": "🌼",
-          "phonemes": [
-            { "sound": "l", "kind": "consonant" },
-            { "sound": "ú", "kind": "long_vowel" },
-            { "sound": "k", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Počuješ v slove hlásku, ktorá sa ťahá ako dlhá niť?"
-        },
-        {
-          "word": "múr",
-          "emoji": "🧱",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "ú", "kind": "long_vowel" },
-            { "sound": "r", "kind": "consonant" }
-          ],
-          "hint": "Ktorá hláska v strede slova znie dlho? Skús ju natiahnuť."
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-farebne-zetony-3",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Farebné žetóny pre majstrov",
-    "summary": "Náročnejšia fonematická analýza slov s dvojhláskami (ie) a digrafom ch — dieťa si upevňuje vzťah medzi počutou hláskou a jej zápisom, čo je priama príprava na čítanie a písanie.",
-    "parent_guide": "Povedzte slovo najprv prirodzene, potom po hláskach. Pri dvojhláske dieťaťu ukážte, že dve písmenká môžu znieť ako jeden zvuk: vyslovte mli-e-ko aj mlie-ko a nechajte dieťa porovnať, čo znie správne. Pri slove mucha sa spýtajte: Počuješ ch ako jeden zvuk, alebo ako dva? Žetóny ukladajte spoločne zľava doprava a na konci celé slovo po žetónoch prečítajte.",
-    "difficulty": 3,
-    "age_min": 7,
-    "age_max": 10,
-    "duration_minutes": 8,
-    "content": {
-      "type": "sound_boxes",
-      "mode": "colors",
-      "intro": "Slová pre majstrov! Pozor — niekedy dve písmenká znejú spolu ako jeden zvuk.",
-      "items": [
-        {
-          "word": "mlieko",
-          "emoji": "🥛",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "l", "kind": "consonant" },
-            { "sound": "ie", "kind": "diphthong" },
-            { "sound": "k", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" }
-          ],
-          "hint": "Počuješ, ako i a e znejú spolu ako jeden zvuk? Koľko zvukov má potom celé slovo?"
-        },
-        {
-          "word": "hviezda",
-          "emoji": "⭐",
-          "phonemes": [
-            { "sound": "h", "kind": "consonant" },
-            { "sound": "v", "kind": "consonant" },
-            { "sound": "ie", "kind": "diphthong" },
-            { "sound": "z", "kind": "consonant" },
-            { "sound": "d", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Povedz slovo pomaly. Kde v ňom znejú dve písmenká spolu ako jeden zvuk?"
-        },
-        {
-          "word": "mucha",
-          "emoji": "🪰",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "u", "kind": "vowel" },
-            { "sound": "ch", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Počuješ ch ako jeden zvuk, alebo ako dva? Skús ho vysloviť samostatne."
-        },
-        {
-          "word": "žaba",
-          "emoji": "🐸",
-          "phonemes": [
-            { "sound": "ž", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" },
-            { "sound": "b", "kind": "consonant" },
-            { "sound": "a", "kind": "vowel" }
-          ],
-          "hint": "Ktoré hlásky v slove sa dajú zaspievať? Kde stoja?"
-        },
-        {
-          "word": "slnko",
-          "emoji": "☀️",
-          "phonemes": [
-            { "sound": "s", "kind": "consonant" },
-            { "sound": "l", "kind": "consonant" },
-            { "sound": "n", "kind": "consonant" },
-            { "sound": "k", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" }
-          ],
-          "hint": "V tomto slove je samohláska až na samom konci. Koľko hlások počuješ pred ňou?"
-        },
-        {
-          "word": "motýľ",
-          "emoji": "🦋",
-          "phonemes": [
-            { "sound": "m", "kind": "consonant" },
-            { "sound": "o", "kind": "vowel" },
-            { "sound": "t", "kind": "consonant" },
-            { "sound": "ý", "kind": "long_vowel" },
-            { "sound": "ľ", "kind": "consonant" }
-          ],
-          "hint": "Natiahni slovo pomaly. Ktorá hláska v ňom znie dlho ako spev?"
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-prva-hlaska-1",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Prvá hláska",
-    "summary": "Izolácia iniciálnej hlásky slova — jeden z najsilnejších prediktorov úspešného osvojenia čítania; dieťa identifikuje slovo začínajúce sa cieľovou hláskou z troch počutých možností.",
-    "parent_guide": "Hlásku vyslovujte vždy ako zvuk (mmm), nie ako názov písmena (em). Prečítajte otázku aj všetky tri slová nahlas. Ak dieťa váha, povedzte každé slovo znova a jeho prvú hlásku zvýraznite — ťahavé hlásky natiahnite (mmmačka, rrryba), ostatné zopakujte samostatne (p — pes). Nechajte dieťa slová zopakovať po vás a až potom vybrať. Pri chybe sa len spýtajte: Naozaj? Skúsme to slovo povedať ešte raz pomaly.",
-    "difficulty": 1,
-    "age_min": 5,
-    "age_max": 8,
-    "duration_minutes": 5,
-    "content": {
-      "type": "choice",
-      "intro": "Nastraž uši! Ktoré slovo sa začína hláskou, ktorú hľadáme?",
-      "items": [
-        {
-          "prompt": "Ktoré slovo sa začína hláskou M — mačka, pes alebo ryba?",
-          "options": [
-            { "label": "mačka", "emoji": "🐱", "correct": true },
-            { "label": "pes", "emoji": "🐶" },
-            { "label": "ryba", "emoji": "🐟" }
-          ],
-          "hint": "Povedz každé slovo pomaly a jeho prvú hlásku natiahni. Ktorá znie ako mmm?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou S — slon, koza alebo auto?",
-          "options": [
-            { "label": "slon", "emoji": "🐘", "correct": true },
-            { "label": "koza", "emoji": "🐐" },
-            { "label": "auto", "emoji": "🚗" }
-          ],
-          "hint": "Ktoré slovo sa začína zvukom, ktorý syčí ako had — sss?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou A — dom, auto alebo mesiac?",
-          "options": [
-            { "label": "dom", "emoji": "🏠" },
-            { "label": "auto", "emoji": "🚗", "correct": true },
-            { "label": "mesiac", "emoji": "🌙" }
-          ],
-          "hint": "Povedz slová nahlas a počúvaj úplne prvý zvuk. Ktorý znie ako aaa?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou P — oko, les alebo pes?",
-          "options": [
-            { "label": "oko", "emoji": "👁️" },
-            { "label": "les", "emoji": "🌲" },
-            { "label": "pes", "emoji": "🐶", "correct": true }
-          ],
-          "hint": "Hláska P vybuchne ako malá bublinka na perách. Pri ktorom slove to cítiš?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou L — lopta, syr alebo mama?",
-          "options": [
-            { "label": "lopta", "emoji": "⚽", "correct": true },
-            { "label": "syr", "emoji": "🧀" },
-            { "label": "mama", "emoji": "👩" }
-          ],
-          "hint": "Pri hláske L ťukne jazyk hore za predné zúbky. Pri ktorom slove sa ti to stane hneď na začiatku?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou O — oko, ucho alebo noha?",
-          "options": [
-            { "label": "oko", "emoji": "👁️", "correct": true },
-            { "label": "ucho", "emoji": "👂" },
-            { "label": "noha", "emoji": "🦵" }
-          ],
-          "hint": "Povedz slová nahlas a počúvaj úplne prvý zvuk. Ktorý znie ako ooo?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou K — žaba, kôň alebo vlak?",
-          "options": [
-            { "label": "žaba", "emoji": "🐸" },
-            { "label": "kôň", "emoji": "🐴", "correct": true },
-            { "label": "vlak", "emoji": "🚂" }
-          ],
-          "hint": "Pozor, jedno slovo má hlásku K až na konci! Ktoré ju má hneď na začiatku?"
-        },
-        {
-          "prompt": "Ktoré slovo sa začína hláskou R — slnko, ryba alebo dáždnik?",
-          "options": [
-            { "label": "slnko", "emoji": "☀️" },
-            { "label": "ryba", "emoji": "🐟", "correct": true },
-            { "label": "dáždnik", "emoji": "☂️" }
-          ],
-          "hint": "Hláska R drnčí ako motorček — rrr. Pri ktorom slove ho naštartuješ hneď na začiatku?"
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-posledna-hlaska-2",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Posledná hláska",
-    "summary": "Izolácia finálnej hlásky slova — náročnejšia úroveň auditívnej analýzy než iniciálna pozícia; podporuje presnú fonologickú reprezentáciu slova potrebnú pre písanie.",
-    "parent_guide": "Posledná hláska sa hľadá ťažšie než prvá. Povedzte slovo a jeho poslednú hlásku zvýraznite — ťahavé hlásky natiahnite (nosss), ostatné zopakujte samostatne (vlak — k). Ak dieťa váha, vyslovte slovo spoločne a postupne stišujte hlas, takže posledná hláska zaznie ako ozvena. Nesprávnu odpoveď hneď neopravujte — slovo len zopakujte a nechajte dieťa počúvať znova.",
-    "difficulty": 2,
-    "age_min": 6,
-    "age_max": 9,
-    "duration_minutes": 6,
-    "content": {
-      "type": "choice",
-      "intro": "Teraz počúvaj koniec slova. Ktorá hláska zaznie ako posledná?",
-      "items": [
-        {
-          "prompt": "Ktoré slovo sa končí hláskou K — vlak, dom alebo les?",
-          "options": [
-            { "label": "vlak", "emoji": "🚂", "correct": true },
-            { "label": "dom", "emoji": "🏠" },
-            { "label": "les", "emoji": "🌲" }
-          ],
-          "hint": "Povedz každé slovo a dobre počúvaj jeho úplne posledný zvuk. Ktorý znie ako k?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou S — kôň, nos alebo mak?",
-          "options": [
-            { "label": "kôň", "emoji": "🐴" },
-            { "label": "nos", "emoji": "👃", "correct": true },
-            { "label": "mak", "emoji": "🌸" }
-          ],
-          "hint": "Ktoré slovo na konci syčí ako had — sss?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou M — strom, syr alebo lopta?",
-          "options": [
-            { "label": "strom", "emoji": "🌳", "correct": true },
-            { "label": "syr", "emoji": "🧀" },
-            { "label": "lopta", "emoji": "⚽" }
-          ],
-          "hint": "Pri ktorom slove máš na konci zavreté pery a zvuk ti bzučí v nose — mmm?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou A — oko, slon alebo ryba?",
-          "options": [
-            { "label": "oko", "emoji": "👁️" },
-            { "label": "slon", "emoji": "🐘" },
-            { "label": "ryba", "emoji": "🐟", "correct": true }
-          ],
-          "hint": "Povedz slová pomaly a posledný zvuk natiahni. Ktorý znie ako aaa?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou R — mama, syr alebo vlak?",
-          "options": [
-            { "label": "mama", "emoji": "👩" },
-            { "label": "syr", "emoji": "🧀", "correct": true },
-            { "label": "vlak", "emoji": "🚂" }
-          ],
-          "hint": "Ktoré slovo má na konci drnčiaci motorček — rrr?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou O — žaba, auto alebo les?",
-          "options": [
-            { "label": "žaba", "emoji": "🐸" },
-            { "label": "auto", "emoji": "🚗", "correct": true },
-            { "label": "les", "emoji": "🌲" }
-          ],
-          "hint": "Pri ktorom slove sa ti ústa na konci zaokrúhlia ako koliesko?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou N — pes, ruka alebo slon?",
-          "options": [
-            { "label": "pes", "emoji": "🐶" },
-            { "label": "ruka", "emoji": "✋" },
-            { "label": "slon", "emoji": "🐘", "correct": true }
-          ],
-          "hint": "Povedz slová pomaly a poslednú hlásku podrž. Ktorá ti bzučí v nose ako nnn?"
-        },
-        {
-          "prompt": "Ktoré slovo sa končí hláskou Š — koza, myš alebo strom?",
-          "options": [
-            { "label": "koza", "emoji": "🐐" },
-            { "label": "myš", "emoji": "🐭", "correct": true },
-            { "label": "strom", "emoji": "🌳" }
-          ],
-          "hint": "Ktoré slovo na konci šumí ako vlak — ššš?"
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-rymy-1",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Rýmovačky",
-    "summary": "Identifikácia rýmu — epilingvistická úroveň fonologického uvedomovania; dieťa porovnáva zvukové zakončenia slov, čo pripravuje neskoršiu analýzu na úrovni hlások.",
-    "parent_guide": "Prečítajte slovo aj všetky tri možnosti nahlas, rytmicky, akoby ste recitovali riekanku. Spýtajte sa: Ktoré dve slová znejú na konci rovnako? Ak dieťa váha, povedzte dvojice za sebou (mak — dom, mak — rak) a nechajte ho počúvať, ktorá dvojica znie ako pesnička. Rýmujúcu dvojicu si na záver spolu veselo zopakujte.",
-    "difficulty": 1,
-    "age_min": 5,
-    "age_max": 7,
-    "duration_minutes": 5,
-    "content": {
-      "type": "choice",
-      "intro": "Rýmy sú slová, ktoré znejú na konci rovnako — ako v riekanke. Nájdeš ich?",
-      "items": [
-        {
-          "prompt": "Čo sa rýmuje so slovom mak — rak, dom alebo syr?",
-          "options": [
-            { "label": "rak", "emoji": "🦞", "correct": true },
-            { "label": "dom", "emoji": "🏠" },
-            { "label": "syr", "emoji": "🧀" }
-          ],
-          "hint": "Povedz slová za sebou ako riekanku. Ktorá dvojica znie na konci rovnako?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom pes — mačka, les alebo auto?",
-          "options": [
-            { "label": "mačka", "emoji": "🐱" },
-            { "label": "les", "emoji": "🌲", "correct": true },
-            { "label": "auto", "emoji": "🚗" }
-          ],
-          "hint": "Skús dvojice: pes — mačka, pes — les, pes — auto. Ktorá znie ako pesnička?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom mačka — pes, slon alebo kačka?",
-          "options": [
-            { "label": "pes", "emoji": "🐶" },
-            { "label": "slon", "emoji": "🐘" },
-            { "label": "kačka", "emoji": "🦆", "correct": true }
-          ],
-          "hint": "Počúvaj konce slov: -čka. Ktoré slovo končí rovnako ako mačka?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom dom — strom, ryba alebo oko?",
-          "options": [
-            { "label": "strom", "emoji": "🌳", "correct": true },
-            { "label": "ryba", "emoji": "🐟" },
-            { "label": "oko", "emoji": "👁️" }
-          ],
-          "hint": "Povedz slová nahlas a počúvaj ich konce. Ktoré slovo znie na konci ako dom?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom nos — ucho, kos alebo noha?",
-          "options": [
-            { "label": "ucho", "emoji": "👂" },
-            { "label": "kos", "emoji": "🐦", "correct": true },
-            { "label": "noha", "emoji": "🦵" }
-          ],
-          "hint": "Skús dvojice povedať ako básničku: nos — ucho, nos — kos. Ktorá sa ti rýmuje?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom myška — slon, vlak alebo líška?",
-          "options": [
-            { "label": "slon", "emoji": "🐘" },
-            { "label": "vlak", "emoji": "🚂" },
-            { "label": "líška", "emoji": "🦊", "correct": true }
-          ],
-          "hint": "Počúvaj konce slov: -ška. Ktoré slovo končí rovnako ako myška?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom vlak — slnko, mrak alebo kniha?",
-          "options": [
-            { "label": "slnko", "emoji": "☀️" },
-            { "label": "mrak", "emoji": "☁️", "correct": true },
-            { "label": "kniha", "emoji": "📖" }
-          ],
-          "hint": "Povedz dvojice nahlas: vlak — slnko, vlak — mrak. Ktorá znie ako riekanka?"
-        },
-        {
-          "prompt": "Čo sa rýmuje so slovom žaba — strom, baba alebo myš?",
-          "options": [
-            { "label": "strom", "emoji": "🌳" },
-            { "label": "baba", "emoji": "👵", "correct": true },
-            { "label": "myš", "emoji": "🐭" }
-          ],
-          "hint": "Počúvaj konce slov: -aba. Ktoré slovo končí rovnako ako žaba?"
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-slabiky-1",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Vytlieskaj slabiky",
-    "summary": "Slabičná analýza s motorickou oporou (vytlieskavanie) — východisková úroveň fonologického uvedomovania; dieťa určuje počet slabík v slove.",
-    "parent_guide": "Slovo najprv povedzte celé a potom ho spoločne vytlieskajte — pri každej slabike jedno tlesknutie. Tlesknutia počítajte nahlas spolu. Ak dieťa tlieska inak, chyťte jeho dlane do svojich a vytlieskajte slovo spoločne ešte raz, pomaly. Číslo nechajte vybrať dieťa — vy len tlieskate a počúvate.",
-    "difficulty": 1,
-    "age_min": 5,
-    "age_max": 7,
-    "duration_minutes": 5,
-    "content": {
-      "type": "choice",
-      "intro": "Každé slovo sa dá vytlieskať po kúskoch — slabikách. Tlieskaj a počítaj!",
-      "items": [
-        {
-          "prompt": "Vytlieskaj slovo mak. Koľko slabík má?",
-          "options": [
-            { "label": "1", "emoji": "1️⃣", "correct": true },
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: mak. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo ryba. Koľko slabík má?",
-          "options": [
-            { "label": "1", "emoji": "1️⃣" },
-            { "label": "2", "emoji": "2️⃣", "correct": true },
-            { "label": "3", "emoji": "3️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: ry — ba. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo koleso. Koľko slabík má?",
-          "options": [
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣", "correct": true },
-            { "label": "4", "emoji": "4️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: ko — le — so. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo pes. Koľko slabík má?",
-          "options": [
-            { "label": "1", "emoji": "1️⃣", "correct": true },
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: pes. Stačilo jedno tlesknutie, alebo viac?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo čokoláda. Koľko slabík má?",
-          "options": [
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣" },
-            { "label": "4", "emoji": "4️⃣", "correct": true }
-          ],
-          "hint": "Tlieskaj a hovor: čo — ko — lá — da. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo banán. Koľko slabík má?",
-          "options": [
-            { "label": "1", "emoji": "1️⃣" },
-            { "label": "2", "emoji": "2️⃣", "correct": true },
-            { "label": "3", "emoji": "3️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: ba — nán. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo motorka. Koľko slabík má?",
-          "options": [
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣", "correct": true },
-            { "label": "4", "emoji": "4️⃣" }
-          ],
-          "hint": "Tlieskaj a hovor: mo — tor — ka. Koľko tlesknutí to bolo?"
-        },
-        {
-          "prompt": "Vytlieskaj slovo paradajka. Koľko slabík má?",
-          "options": [
-            { "label": "2", "emoji": "2️⃣" },
-            { "label": "3", "emoji": "3️⃣" },
-            { "label": "4", "emoji": "4️⃣", "correct": true }
-          ],
-          "hint": "Tlieskaj a hovor: pa — ra — daj — ka. Koľko tlesknutí to bolo?"
-        }
-      ]
-    }
-  },
-  {
-    "slug": "pa-skladanie-hlasok-2",
-    "domain": "phonemic_awareness",
-    "modality": "interactive",
-    "title": "Poskladaj slovo",
-    "summary": "Fonematická syntéza — spájanie izolovane prezentovaných hlások do slova; zručnosť priamo podporujúca dekódovanie pri čítaní.",
-    "parent_guide": "Hlásky vyslovujte ako zvuky (nie názvy písmen), pomaly a s krátkou pauzou: m… a… k. Ak dieťa slovo nezloží, pauzy postupne skracujte a hlásky spájajte: ma… k, mak. Nechajte dieťa slovo najprv povedať nahlas a až potom vybrať obrázok. Keď sa mu darí, pauzy medzi hláskami naopak predlžujte.",
-    "difficulty": 2,
-    "age_min": 6,
-    "age_max": 9,
-    "duration_minutes": 6,
-    "content": {
-      "type": "choice",
-      "intro": "Poviem ti slovo po jednotlivých hláskach. Poskladáš ho a nájdeš správny obrázok?",
-      "items": [
-        {
-          "prompt": "Aké slovo poviem? P — E — S",
-          "options": [
-            { "label": "pes", "emoji": "🐶", "correct": true },
-            { "label": "mačka", "emoji": "🐱" },
-            { "label": "dom", "emoji": "🏠" }
-          ],
-          "hint": "Povedz hlásky za sebou stále rýchlejšie. Aké slovo ti z nich vyskočí?"
-        },
-        {
-          "prompt": "Aké slovo poviem? M — A — K",
-          "options": [
-            { "label": "mak", "emoji": "🌸", "correct": true },
-            { "label": "syr", "emoji": "🧀" },
-            { "label": "vlak", "emoji": "🚂" }
-          ],
-          "hint": "Zopakuj hlásky so mnou a spájaj ich k sebe. Čo ti vyšlo?"
-        },
-        {
-          "prompt": "Aké slovo poviem? D — O — M",
-          "options": [
-            { "label": "auto", "emoji": "🚗" },
-            { "label": "dom", "emoji": "🏠", "correct": true },
-            { "label": "pes", "emoji": "🐶" }
-          ],
-          "hint": "Počúvaj prvú hlásku. Ktorý obrázok sa ňou začína?"
-        },
-        {
-          "prompt": "Aké slovo poviem? R — Y — B — A",
-          "options": [
-            { "label": "žaba", "emoji": "🐸" },
-            { "label": "sova", "emoji": "🦉" },
-            { "label": "ryba", "emoji": "🐟", "correct": true }
-          ],
-          "hint": "Povedz hlásky spolu ako jedno slovo. Ktorý obrázok tak voláme?"
-        },
-        {
-          "prompt": "Aké slovo poviem? O — K — O",
-          "options": [
-            { "label": "oko", "emoji": "👁️", "correct": true },
-            { "label": "ucho", "emoji": "👂" },
-            { "label": "noha", "emoji": "🦵" }
-          ],
-          "hint": "Slovo sa začína aj končí rovnakou hláskou. Ktoré to je?"
-        },
-        {
-          "prompt": "Aké slovo poviem? S — O — V — A",
-          "options": [
-            { "label": "koza", "emoji": "🐐" },
-            { "label": "sova", "emoji": "🦉", "correct": true },
-            { "label": "ryba", "emoji": "🐟" }
-          ],
-          "hint": "Počúvaj prvú hlásku. Ktoré zviera sa ňou začína?"
-        },
-        {
-          "prompt": "Aké slovo poviem? V — L — A — K",
-          "options": [
-            { "label": "vlak", "emoji": "🚂", "correct": true },
-            { "label": "bicykel", "emoji": "🚲" },
-            { "label": "lopta", "emoji": "⚽" }
-          ],
-          "hint": "Spoj hlásky do jedného slova. Čo z nich vzniklo?"
-        },
-        {
-          "prompt": "Aké slovo poviem? Ž — A — B — A",
-          "options": [
-            { "label": "myš", "emoji": "🐭" },
-            { "label": "slon", "emoji": "🐘" },
-            { "label": "žaba", "emoji": "🐸", "correct": true }
-          ],
-          "hint": "Povedz hlásky rýchlo za sebou. Ktoré zviera tak skáče z tvojich úst?"
-        }
-      ]
-    }
+   ]
   }
+ },
+ {
+  "slug": "pa-farebne-zetony-2",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Farebné žetóny",
+  "summary": "Fonematická analýza s farebným kódovaním hlások — dieťa rozlišuje krátke a dlhé samohlásky od spoluhlások (Eľkonin–Mikulajová, žetónová etapa).",
+  "parent_guide": "Slovo najprv spoločne rozložte na hlásky. Pri každej hláske sa spýtajte: Dá sa táto hláska zaspievať? Znie krátko, alebo dlho? Dlhé samohlásky spolu poriadne natiahnite: vááá-za. Farbu žetónu vyberajte spoločne a nahlas povedzte prečo. Ak dieťa siahne po nesprávnom žetóne, nezastavujte ho — na konci slovo skontrolujte spolu a nechajte ho chybu nájsť samo.",
+  "difficulty": 2,
+  "age_min": 6,
+  "age_max": 9,
+  "duration_minutes": 6,
+  "content": {
+   "type": "sound_boxes",
+   "mode": "colors",
+   "intro": "Každá hláska dostane svoj žetón. Počúvaj, ktorá sa dá spievať, ktorá znie krátko a ktorá dlho!",
+   "items": [
+    {
+     "word": "mama",
+     "emoji": "👩",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      },
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Ktoré hlásky v slove sa dajú zaspievať? Kde stoja?"
+    },
+    {
+     "word": "ryba",
+     "emoji": "🐟",
+     "phonemes": [
+      {
+       "sound": "r",
+       "kind": "consonant"
+      },
+      {
+       "sound": "y",
+       "kind": "vowel"
+      },
+      {
+       "sound": "b",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Povedz slovo pomaly. Ktoré hlásky znejú krátko a dajú sa spievať?"
+    },
+    {
+     "word": "sova",
+     "emoji": "🦉",
+     "phonemes": [
+      {
+       "sound": "s",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      },
+      {
+       "sound": "v",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Striedajú sa v slove hlásky, ktoré sa spievať dajú, a tie, ktoré nie?"
+    },
+    {
+     "word": "váza",
+     "emoji": "🏺",
+     "phonemes": [
+      {
+       "sound": "v",
+       "kind": "consonant"
+      },
+      {
+       "sound": "á",
+       "kind": "long_vowel"
+      },
+      {
+       "sound": "z",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Natiahni slovo pomaly. Ktorá hláska znie dlhšie než ostatné?"
+    },
+    {
+     "word": "lúka",
+     "emoji": "🌼",
+     "phonemes": [
+      {
+       "sound": "l",
+       "kind": "consonant"
+      },
+      {
+       "sound": "ú",
+       "kind": "long_vowel"
+      },
+      {
+       "sound": "k",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Počuješ v slove hlásku, ktorá sa ťahá ako dlhá niť?"
+    },
+    {
+     "word": "múr",
+     "emoji": "🧱",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "ú",
+       "kind": "long_vowel"
+      },
+      {
+       "sound": "r",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Ktorá hláska v strede slova znie dlho? Skús ju natiahnuť."
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-farebne-zetony-3",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Farebné žetóny pre majstrov",
+  "summary": "Náročnejšia fonematická analýza slov s dvojhláskami (ie) a digrafom ch — dieťa si upevňuje vzťah medzi počutou hláskou a jej zápisom, čo je priama príprava na čítanie a písanie.",
+  "parent_guide": "Povedzte slovo najprv prirodzene, potom po hláskach. Pri dvojhláske dieťaťu ukážte, že dve písmenká môžu znieť ako jeden zvuk: vyslovte mli-e-ko aj mlie-ko a nechajte dieťa porovnať, čo znie správne. Pri slove mucha sa spýtajte: Počuješ ch ako jeden zvuk, alebo ako dva? Žetóny ukladajte spoločne zľava doprava a na konci celé slovo po žetónoch prečítajte.",
+  "difficulty": 3,
+  "age_min": 7,
+  "age_max": 10,
+  "duration_minutes": 8,
+  "content": {
+   "type": "sound_boxes",
+   "mode": "colors",
+   "intro": "Slová pre majstrov! Pozor — niekedy dve písmenká znejú spolu ako jeden zvuk.",
+   "items": [
+    {
+     "word": "mlieko",
+     "emoji": "🥛",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "l",
+       "kind": "consonant"
+      },
+      {
+       "sound": "ie",
+       "kind": "diphthong"
+      },
+      {
+       "sound": "k",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Počuješ, ako i a e znejú spolu ako jeden zvuk? Koľko zvukov má potom celé slovo?"
+    },
+    {
+     "word": "hviezda",
+     "emoji": "⭐",
+     "phonemes": [
+      {
+       "sound": "h",
+       "kind": "consonant"
+      },
+      {
+       "sound": "v",
+       "kind": "consonant"
+      },
+      {
+       "sound": "ie",
+       "kind": "diphthong"
+      },
+      {
+       "sound": "z",
+       "kind": "consonant"
+      },
+      {
+       "sound": "d",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Povedz slovo pomaly. Kde v ňom znejú dve písmenká spolu ako jeden zvuk?"
+    },
+    {
+     "word": "mucha",
+     "emoji": "🪰",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "u",
+       "kind": "vowel"
+      },
+      {
+       "sound": "ch",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Počuješ ch ako jeden zvuk, alebo ako dva? Skús ho vysloviť samostatne."
+    },
+    {
+     "word": "žaba",
+     "emoji": "🐸",
+     "phonemes": [
+      {
+       "sound": "ž",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      },
+      {
+       "sound": "b",
+       "kind": "consonant"
+      },
+      {
+       "sound": "a",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "Ktoré hlásky v slove sa dajú zaspievať? Kde stoja?"
+    },
+    {
+     "word": "slnko",
+     "emoji": "☀️",
+     "phonemes": [
+      {
+       "sound": "s",
+       "kind": "consonant"
+      },
+      {
+       "sound": "l",
+       "kind": "consonant"
+      },
+      {
+       "sound": "n",
+       "kind": "consonant"
+      },
+      {
+       "sound": "k",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      }
+     ],
+     "hint": "V tomto slove je samohláska až na samom konci. Koľko hlások počuješ pred ňou?"
+    },
+    {
+     "word": "motýľ",
+     "emoji": "🦋",
+     "phonemes": [
+      {
+       "sound": "m",
+       "kind": "consonant"
+      },
+      {
+       "sound": "o",
+       "kind": "vowel"
+      },
+      {
+       "sound": "t",
+       "kind": "consonant"
+      },
+      {
+       "sound": "ý",
+       "kind": "long_vowel"
+      },
+      {
+       "sound": "ľ",
+       "kind": "consonant"
+      }
+     ],
+     "hint": "Natiahni slovo pomaly. Ktorá hláska v ňom znie dlho ako spev?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-prva-hlaska-1",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Prvá hláska",
+  "summary": "Izolácia iniciálnej hlásky slova — jeden z najsilnejších prediktorov úspešného osvojenia čítania; dieťa identifikuje slovo začínajúce sa cieľovou hláskou z troch počutých možností.",
+  "parent_guide": "Hlásku vyslovujte vždy ako zvuk (mmm), nie ako názov písmena (em). Prečítajte otázku aj všetky tri slová nahlas. Ak dieťa váha, povedzte každé slovo znova a jeho prvú hlásku zvýraznite — ťahavé hlásky natiahnite (mmmačka, rrryba), ostatné zopakujte samostatne (p — pes). Nechajte dieťa slová zopakovať po vás a až potom vybrať. Pri chybe sa len spýtajte: Naozaj? Skúsme to slovo povedať ešte raz pomaly.",
+  "difficulty": 1,
+  "age_min": 5,
+  "age_max": 8,
+  "duration_minutes": 5,
+  "content": {
+   "type": "choice",
+   "intro": "Nastraž uši! Ktoré slovo sa začína hláskou, ktorú hľadáme?",
+   "items": [
+    {
+     "prompt": "Ktoré slovo sa začína hláskou M — mačka, pes alebo ryba?",
+     "options": [
+      {
+       "label": "mačka",
+       "emoji": "🐱",
+       "correct": true
+      },
+      {
+       "label": "pes",
+       "emoji": "🐶"
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟"
+      }
+     ],
+     "hint": "Povedz každé slovo pomaly a jeho prvú hlásku natiahni. Ktorá znie ako mmm?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou S — slon, koza alebo auto?",
+     "options": [
+      {
+       "label": "slon",
+       "emoji": "🐘",
+       "correct": true
+      },
+      {
+       "label": "koza",
+       "emoji": "🐐"
+      },
+      {
+       "label": "auto",
+       "emoji": "🚗"
+      }
+     ],
+     "hint": "Ktoré slovo sa začína zvukom, ktorý syčí ako had — sss?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou A — dom, auto alebo mesiac?",
+     "options": [
+      {
+       "label": "dom",
+       "emoji": "🏠"
+      },
+      {
+       "label": "auto",
+       "emoji": "🚗",
+       "correct": true
+      },
+      {
+       "label": "mesiac",
+       "emoji": "🌙"
+      }
+     ],
+     "hint": "Povedz slová nahlas a počúvaj úplne prvý zvuk. Ktorý znie ako aaa?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou P — oko, les alebo pes?",
+     "options": [
+      {
+       "label": "oko",
+       "emoji": "👁️"
+      },
+      {
+       "label": "les",
+       "emoji": "🌲"
+      },
+      {
+       "label": "pes",
+       "emoji": "🐶",
+       "correct": true
+      }
+     ],
+     "hint": "Hláska P vybuchne ako malá bublinka na perách. Pri ktorom slove to cítiš?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou L — lopta, syr alebo mama?",
+     "options": [
+      {
+       "label": "lopta",
+       "emoji": "⚽",
+       "correct": true
+      },
+      {
+       "label": "syr",
+       "emoji": "🧀"
+      },
+      {
+       "label": "mama",
+       "emoji": "👩"
+      }
+     ],
+     "hint": "Pri hláske L ťukne jazyk hore za predné zúbky. Pri ktorom slove sa ti to stane hneď na začiatku?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou O — oko, ucho alebo noha?",
+     "options": [
+      {
+       "label": "oko",
+       "emoji": "👁️",
+       "correct": true
+      },
+      {
+       "label": "ucho",
+       "emoji": "👂"
+      },
+      {
+       "label": "noha",
+       "emoji": "🦵"
+      }
+     ],
+     "hint": "Povedz slová nahlas a počúvaj úplne prvý zvuk. Ktorý znie ako ooo?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou K — žaba, kôň alebo vlak?",
+     "options": [
+      {
+       "label": "žaba",
+       "emoji": "🐸"
+      },
+      {
+       "label": "kôň",
+       "emoji": "🐴",
+       "correct": true
+      },
+      {
+       "label": "vlak",
+       "emoji": "🚂"
+      }
+     ],
+     "hint": "Pozor, jedno slovo má hlásku K až na konci! Ktoré ju má hneď na začiatku?"
+    },
+    {
+     "prompt": "Ktoré slovo sa začína hláskou R — slnko, ryba alebo dáždnik?",
+     "options": [
+      {
+       "label": "slnko",
+       "emoji": "☀️"
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟",
+       "correct": true
+      },
+      {
+       "label": "dáždnik",
+       "emoji": "☂️"
+      }
+     ],
+     "hint": "Hláska R drnčí ako motorček — rrr. Pri ktorom slove ho naštartuješ hneď na začiatku?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-posledna-hlaska-2",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Posledná hláska",
+  "summary": "Izolácia finálnej hlásky slova — náročnejšia úroveň auditívnej analýzy než iniciálna pozícia; podporuje presnú fonologickú reprezentáciu slova potrebnú pre písanie.",
+  "parent_guide": "Posledná hláska sa hľadá ťažšie než prvá. Povedzte slovo a jeho poslednú hlásku zvýraznite — ťahavé hlásky natiahnite (nosss), ostatné zopakujte samostatne (vlak — k). Ak dieťa váha, vyslovte slovo spoločne a postupne stišujte hlas, takže posledná hláska zaznie ako ozvena. Nesprávnu odpoveď hneď neopravujte — slovo len zopakujte a nechajte dieťa počúvať znova.",
+  "difficulty": 2,
+  "age_min": 6,
+  "age_max": 9,
+  "duration_minutes": 6,
+  "content": {
+   "type": "choice",
+   "intro": "Teraz počúvaj koniec slova. Ktorá hláska zaznie ako posledná?",
+   "items": [
+    {
+     "prompt": "Ktoré slovo sa končí hláskou K — vlak, dom alebo les?",
+     "options": [
+      {
+       "label": "vlak",
+       "emoji": "🚂",
+       "correct": true
+      },
+      {
+       "label": "dom",
+       "emoji": "🏠"
+      },
+      {
+       "label": "les",
+       "emoji": "🌲"
+      }
+     ],
+     "hint": "Povedz každé slovo a dobre počúvaj jeho úplne posledný zvuk. Ktorý znie ako k?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou S — kôň, nos alebo mak?",
+     "options": [
+      {
+       "label": "kôň",
+       "emoji": "🐴"
+      },
+      {
+       "label": "nos",
+       "emoji": "👃",
+       "correct": true
+      },
+      {
+       "label": "mak",
+       "emoji": "🌸"
+      }
+     ],
+     "hint": "Ktoré slovo na konci syčí ako had — sss?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou M — strom, syr alebo lopta?",
+     "options": [
+      {
+       "label": "strom",
+       "emoji": "🌳",
+       "correct": true
+      },
+      {
+       "label": "syr",
+       "emoji": "🧀"
+      },
+      {
+       "label": "lopta",
+       "emoji": "⚽"
+      }
+     ],
+     "hint": "Pri ktorom slove máš na konci zavreté pery a zvuk ti bzučí v nose — mmm?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou A — oko, slon alebo ryba?",
+     "options": [
+      {
+       "label": "oko",
+       "emoji": "👁️"
+      },
+      {
+       "label": "slon",
+       "emoji": "🐘"
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟",
+       "correct": true
+      }
+     ],
+     "hint": "Povedz slová pomaly a posledný zvuk natiahni. Ktorý znie ako aaa?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou R — mama, syr alebo vlak?",
+     "options": [
+      {
+       "label": "mama",
+       "emoji": "👩"
+      },
+      {
+       "label": "syr",
+       "emoji": "🧀",
+       "correct": true
+      },
+      {
+       "label": "vlak",
+       "emoji": "🚂"
+      }
+     ],
+     "hint": "Ktoré slovo má na konci drnčiaci motorček — rrr?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou O — žaba, auto alebo les?",
+     "options": [
+      {
+       "label": "žaba",
+       "emoji": "🐸"
+      },
+      {
+       "label": "auto",
+       "emoji": "🚗",
+       "correct": true
+      },
+      {
+       "label": "les",
+       "emoji": "🌲"
+      }
+     ],
+     "hint": "Pri ktorom slove sa ti ústa na konci zaokrúhlia ako koliesko?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou N — pes, ruka alebo slon?",
+     "options": [
+      {
+       "label": "pes",
+       "emoji": "🐶"
+      },
+      {
+       "label": "ruka",
+       "emoji": "✋"
+      },
+      {
+       "label": "slon",
+       "emoji": "🐘",
+       "correct": true
+      }
+     ],
+     "hint": "Povedz slová pomaly a poslednú hlásku podrž. Ktorá ti bzučí v nose ako nnn?"
+    },
+    {
+     "prompt": "Ktoré slovo sa končí hláskou Š — koza, myš alebo strom?",
+     "options": [
+      {
+       "label": "koza",
+       "emoji": "🐐"
+      },
+      {
+       "label": "myš",
+       "emoji": "🐭",
+       "correct": true
+      },
+      {
+       "label": "strom",
+       "emoji": "🌳"
+      }
+     ],
+     "hint": "Ktoré slovo na konci šumí ako vlak — ššš?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-rymy-1",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Rýmovačky",
+  "summary": "Identifikácia rýmu — epilingvistická úroveň fonologického uvedomovania; dieťa porovnáva zvukové zakončenia slov, čo pripravuje neskoršiu analýzu na úrovni hlások.",
+  "parent_guide": "Prečítajte slovo aj všetky tri možnosti nahlas, rytmicky, akoby ste recitovali riekanku. Spýtajte sa: Ktoré dve slová znejú na konci rovnako? Ak dieťa váha, povedzte dvojice za sebou (mak — dom, mak — rak) a nechajte ho počúvať, ktorá dvojica znie ako pesnička. Rýmujúcu dvojicu si na záver spolu veselo zopakujte.",
+  "difficulty": 1,
+  "age_min": 5,
+  "age_max": 7,
+  "duration_minutes": 5,
+  "content": {
+   "type": "choice",
+   "intro": "Rýmy sú slová, ktoré znejú na konci rovnako — ako v riekanke. Nájdeš ich?",
+   "items": [
+    {
+     "prompt": "Čo sa rýmuje so slovom mak — rak, dom alebo syr?",
+     "options": [
+      {
+       "label": "rak",
+       "emoji": "🦞",
+       "correct": true
+      },
+      {
+       "label": "dom",
+       "emoji": "🏠"
+      },
+      {
+       "label": "syr",
+       "emoji": "🧀"
+      }
+     ],
+     "hint": "Povedz slová za sebou ako riekanku. Ktorá dvojica znie na konci rovnako?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom pes — mačka, les alebo auto?",
+     "options": [
+      {
+       "label": "mačka",
+       "emoji": "🐱"
+      },
+      {
+       "label": "les",
+       "emoji": "🌲",
+       "correct": true
+      },
+      {
+       "label": "auto",
+       "emoji": "🚗"
+      }
+     ],
+     "hint": "Skús dvojice: pes — mačka, pes — les, pes — auto. Ktorá znie ako pesnička?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom mačka — pes, slon alebo kačka?",
+     "options": [
+      {
+       "label": "pes",
+       "emoji": "🐶"
+      },
+      {
+       "label": "slon",
+       "emoji": "🐘"
+      },
+      {
+       "label": "kačka",
+       "emoji": "🦆",
+       "correct": true
+      }
+     ],
+     "hint": "Počúvaj konce slov: -čka. Ktoré slovo končí rovnako ako mačka?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom dom — strom, ryba alebo oko?",
+     "options": [
+      {
+       "label": "strom",
+       "emoji": "🌳",
+       "correct": true
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟"
+      },
+      {
+       "label": "oko",
+       "emoji": "👁️"
+      }
+     ],
+     "hint": "Povedz slová nahlas a počúvaj ich konce. Ktoré slovo znie na konci ako dom?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom nos — ucho, kos alebo noha?",
+     "options": [
+      {
+       "label": "ucho",
+       "emoji": "👂"
+      },
+      {
+       "label": "kos",
+       "emoji": "🐦",
+       "correct": true
+      },
+      {
+       "label": "noha",
+       "emoji": "🦵"
+      }
+     ],
+     "hint": "Skús dvojice povedať ako básničku: nos — ucho, nos — kos. Ktorá sa ti rýmuje?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom myška — slon, vlak alebo líška?",
+     "options": [
+      {
+       "label": "slon",
+       "emoji": "🐘"
+      },
+      {
+       "label": "vlak",
+       "emoji": "🚂"
+      },
+      {
+       "label": "líška",
+       "emoji": "🦊",
+       "correct": true
+      }
+     ],
+     "hint": "Počúvaj konce slov: -ška. Ktoré slovo končí rovnako ako myška?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom vlak — slnko, mrak alebo kniha?",
+     "options": [
+      {
+       "label": "slnko",
+       "emoji": "☀️"
+      },
+      {
+       "label": "mrak",
+       "emoji": "☁️",
+       "correct": true
+      },
+      {
+       "label": "kniha",
+       "emoji": "📖"
+      }
+     ],
+     "hint": "Povedz dvojice nahlas: vlak — slnko, vlak — mrak. Ktorá znie ako riekanka?"
+    },
+    {
+     "prompt": "Čo sa rýmuje so slovom žaba — strom, baba alebo myš?",
+     "options": [
+      {
+       "label": "strom",
+       "emoji": "🌳"
+      },
+      {
+       "label": "baba",
+       "emoji": "👵",
+       "correct": true
+      },
+      {
+       "label": "myš",
+       "emoji": "🐭"
+      }
+     ],
+     "hint": "Počúvaj konce slov: -aba. Ktoré slovo končí rovnako ako žaba?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-slabiky-1",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Vytlieskaj slabiky",
+  "summary": "Slabičná analýza s motorickou oporou (vytlieskavanie) — východisková úroveň fonologického uvedomovania; dieťa určuje počet slabík v slove.",
+  "parent_guide": "Slovo najprv povedzte celé a potom ho spoločne vytlieskajte — pri každej slabike jedno tlesknutie. Tlesknutia počítajte nahlas spolu. Ak dieťa tlieska inak, chyťte jeho dlane do svojich a vytlieskajte slovo spoločne ešte raz, pomaly. Číslo nechajte vybrať dieťa — vy len tlieskate a počúvate.",
+  "difficulty": 1,
+  "age_min": 5,
+  "age_max": 7,
+  "duration_minutes": 5,
+  "content": {
+   "type": "choice",
+   "intro": "Každé slovo sa dá vytlieskať po kúskoch — slabikách. Tlieskaj a počítaj!",
+   "items": [
+    {
+     "prompt": "Vytlieskaj slovo mak. Koľko slabík má?",
+     "options": [
+      {
+       "label": "1",
+       "emoji": "1️⃣",
+       "correct": true
+      },
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: mak. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo ryba. Koľko slabík má?",
+     "options": [
+      {
+       "label": "1",
+       "emoji": "1️⃣"
+      },
+      {
+       "label": "2",
+       "emoji": "2️⃣",
+       "correct": true
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: ry — ba. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo koleso. Koľko slabík má?",
+     "options": [
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣",
+       "correct": true
+      },
+      {
+       "label": "4",
+       "emoji": "4️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: ko — le — so. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo pes. Koľko slabík má?",
+     "options": [
+      {
+       "label": "1",
+       "emoji": "1️⃣",
+       "correct": true
+      },
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: pes. Stačilo jedno tlesknutie, alebo viac?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo čokoláda. Koľko slabík má?",
+     "options": [
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      },
+      {
+       "label": "4",
+       "emoji": "4️⃣",
+       "correct": true
+      }
+     ],
+     "hint": "Tlieskaj a hovor: čo — ko — lá — da. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo banán. Koľko slabík má?",
+     "options": [
+      {
+       "label": "1",
+       "emoji": "1️⃣"
+      },
+      {
+       "label": "2",
+       "emoji": "2️⃣",
+       "correct": true
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: ba — nán. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo motorka. Koľko slabík má?",
+     "options": [
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣",
+       "correct": true
+      },
+      {
+       "label": "4",
+       "emoji": "4️⃣"
+      }
+     ],
+     "hint": "Tlieskaj a hovor: mo — tor — ka. Koľko tlesknutí to bolo?"
+    },
+    {
+     "prompt": "Vytlieskaj slovo paradajka. Koľko slabík má?",
+     "options": [
+      {
+       "label": "2",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "3",
+       "emoji": "3️⃣"
+      },
+      {
+       "label": "4",
+       "emoji": "4️⃣",
+       "correct": true
+      }
+     ],
+     "hint": "Tlieskaj a hovor: pa — ra — daj — ka. Koľko tlesknutí to bolo?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-skladanie-hlasok-2",
+  "domain": "phonemic_awareness",
+  "modality": "interactive",
+  "title": "Poskladaj slovo",
+  "summary": "Fonematická syntéza — spájanie izolovane prezentovaných hlások do slova; zručnosť priamo podporujúca dekódovanie pri čítaní.",
+  "parent_guide": "Hlásky vyslovujte ako zvuky (nie názvy písmen), pomaly a s krátkou pauzou: m… a… k. Ak dieťa slovo nezloží, pauzy postupne skracujte a hlásky spájajte: ma… k, mak. Nechajte dieťa slovo najprv povedať nahlas a až potom vybrať obrázok. Keď sa mu darí, pauzy medzi hláskami naopak predlžujte.",
+  "difficulty": 2,
+  "age_min": 6,
+  "age_max": 9,
+  "duration_minutes": 6,
+  "content": {
+   "type": "choice",
+   "intro": "Poviem ti slovo po jednotlivých hláskach. Poskladáš ho a nájdeš správny obrázok?",
+   "items": [
+    {
+     "prompt": "Aké slovo poviem? P — E — S",
+     "options": [
+      {
+       "label": "pes",
+       "emoji": "🐶",
+       "correct": true
+      },
+      {
+       "label": "mačka",
+       "emoji": "🐱"
+      },
+      {
+       "label": "dom",
+       "emoji": "🏠"
+      }
+     ],
+     "hint": "Povedz hlásky za sebou stále rýchlejšie. Aké slovo ti z nich vyskočí?"
+    },
+    {
+     "prompt": "Aké slovo poviem? M — A — K",
+     "options": [
+      {
+       "label": "mak",
+       "emoji": "🌸",
+       "correct": true
+      },
+      {
+       "label": "syr",
+       "emoji": "🧀"
+      },
+      {
+       "label": "vlak",
+       "emoji": "🚂"
+      }
+     ],
+     "hint": "Zopakuj hlásky so mnou a spájaj ich k sebe. Čo ti vyšlo?"
+    },
+    {
+     "prompt": "Aké slovo poviem? D — O — M",
+     "options": [
+      {
+       "label": "auto",
+       "emoji": "🚗"
+      },
+      {
+       "label": "dom",
+       "emoji": "🏠",
+       "correct": true
+      },
+      {
+       "label": "pes",
+       "emoji": "🐶"
+      }
+     ],
+     "hint": "Počúvaj prvú hlásku. Ktorý obrázok sa ňou začína?"
+    },
+    {
+     "prompt": "Aké slovo poviem? R — Y — B — A",
+     "options": [
+      {
+       "label": "žaba",
+       "emoji": "🐸"
+      },
+      {
+       "label": "sova",
+       "emoji": "🦉"
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟",
+       "correct": true
+      }
+     ],
+     "hint": "Povedz hlásky spolu ako jedno slovo. Ktorý obrázok tak voláme?"
+    },
+    {
+     "prompt": "Aké slovo poviem? O — K — O",
+     "options": [
+      {
+       "label": "oko",
+       "emoji": "👁️",
+       "correct": true
+      },
+      {
+       "label": "ucho",
+       "emoji": "👂"
+      },
+      {
+       "label": "noha",
+       "emoji": "🦵"
+      }
+     ],
+     "hint": "Slovo sa začína aj končí rovnakou hláskou. Ktoré to je?"
+    },
+    {
+     "prompt": "Aké slovo poviem? S — O — V — A",
+     "options": [
+      {
+       "label": "koza",
+       "emoji": "🐐"
+      },
+      {
+       "label": "sova",
+       "emoji": "🦉",
+       "correct": true
+      },
+      {
+       "label": "ryba",
+       "emoji": "🐟"
+      }
+     ],
+     "hint": "Počúvaj prvú hlásku. Ktoré zviera sa ňou začína?"
+    },
+    {
+     "prompt": "Aké slovo poviem? V — L — A — K",
+     "options": [
+      {
+       "label": "vlak",
+       "emoji": "🚂",
+       "correct": true
+      },
+      {
+       "label": "bicykel",
+       "emoji": "🚲"
+      },
+      {
+       "label": "lopta",
+       "emoji": "⚽"
+      }
+     ],
+     "hint": "Spoj hlásky do jedného slova. Čo z nich vzniklo?"
+    },
+    {
+     "prompt": "Aké slovo poviem? Ž — A — B — A",
+     "options": [
+      {
+       "label": "myš",
+       "emoji": "🐭"
+      },
+      {
+       "label": "slon",
+       "emoji": "🐘"
+      },
+      {
+       "label": "žaba",
+       "emoji": "🐸",
+       "correct": true
+      }
+     ],
+     "hint": "Povedz hlásky rýchlo za sebou. Ktoré zviera tak skáče z tvojich úst?"
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-vynechaj-hlasku-3",
+  "domain": "phonemic_awareness",
+  "modality": "speech",
+  "title": "Kúzelník hlások — schovaj hlásku",
+  "summary": "Elízia iniciálnej hlásky — najvyššia úroveň fonematického uvedomovania (fonematická manipulácia). Každá položka vedie k reálnemu slovu, takže dieťa priamo počuje význam operácie a jej dôsledok.",
+  "parent_guide": "Povedzte slovo zreteľne a spýtajte sa: „Povedz vlak — ale bez v.“ Doprajte dieťaťu veľa času. Ak sa nedarí, povedzte slovo pomaly po hláskach (v — l — a — k), prvú hlásku len zašepkajte a zvyšok povedzte nahlas. Výsledok nikdy neprezraďte — nech nové slovo objaví dieťa samo a tešte sa spolu, že sa z jedného slova vyčarovalo druhé.",
+  "difficulty": 3,
+  "age_min": 7,
+  "age_max": 10,
+  "duration_minutes": 6,
+  "content": {
+   "type": "speech_items",
+   "intro": "Si kúzelník hlások! Schovaj prvú hlásku a z jedného slova vyčaruješ úplne iné.",
+   "items": [
+    {
+     "text": "vlak — povedz bez V",
+     "emoji": "🚂",
+     "tip": "Správne: lak. Ak sa nedarí, povedzte pomaly v — lak a prvú hlásku zašepkajte."
+    },
+    {
+     "text": "mrak — povedz bez M",
+     "emoji": "☁️",
+     "tip": "Správne: rak. Spýtajte sa: „Aké zvieratko sa skrývalo v mraku?“"
+    },
+    {
+     "text": "hrad — povedz bez H",
+     "emoji": "🏰",
+     "tip": "Správne: rad."
+    },
+    {
+     "text": "plot — povedz bez P",
+     "emoji": "🚧",
+     "tip": "Správne: lot."
+    },
+    {
+     "text": "kosa — povedz bez K",
+     "emoji": "🌾",
+     "tip": "Správne: osa. „Čo bzučalo v kose?“"
+    },
+    {
+     "text": "smech — povedz bez S",
+     "emoji": "😂",
+     "tip": "Správne: mech."
+    },
+    {
+     "text": "slama — povedz bez S",
+     "emoji": "🌾",
+     "tip": "Správne: lama. „Aké zvieratko sa schovalo v slame?“"
+    },
+    {
+     "text": "krok — povedz bez K",
+     "emoji": "👣",
+     "tip": "Správne: rok. Najťažšia položka — pokojne zopakujte slovo po hláskach."
+    }
+   ]
+  }
+ },
+ {
+  "slug": "pa-vymen-hlasku-3",
+  "domain": "phonemic_awareness",
+  "modality": "speech",
+  "title": "Kúzelník hlások — vymeň hlásku",
+  "summary": "Substitúcia hlásky v iniciálnej, mediálnej aj finálnej pozícii s oporou o minimálne páry — komplexná fonematická manipulácia, ktorá završuje hierarchiu fonematického uvedomovania.",
+  "parent_guide": "Povedzte pokyn presne: „Povedz mak — ale namiesto m daj r.“ Hlásky vyslovujte ako zvuky (m, r), nie ako názvy písmen (em, er). Nechajte dieťa slovo vysloviť a spolu objavte, čo znamená. Ak sa nedarí, povedzte slovo pomaly po hláskach a pri vymieňanej hláske sa zastavte. Výsledok neprezrádzajte.",
+  "difficulty": 3,
+  "age_min": 7,
+  "age_max": 10,
+  "duration_minutes": 6,
+  "content": {
+   "type": "speech_items",
+   "intro": "Vymeň jednu jedinú hlásku — a slovo sa premení na úplne iné!",
+   "items": [
+    {
+     "text": "mak — namiesto M daj R",
+     "emoji": "🌸",
+     "tip": "Správne: rak. Začíname výmenou prvej hlásky — tá je najľahšia."
+    },
+    {
+     "text": "les — namiesto L daj P",
+     "emoji": "🌲",
+     "tip": "Správne: pes."
+    },
+    {
+     "text": "rok — namiesto O daj A",
+     "emoji": "📅",
+     "tip": "Správne: rak. Výmena v strede slova je ťažšia — pokojne slovo rozložte: r — o — k."
+    },
+    {
+     "text": "sud — namiesto U daj A",
+     "emoji": "🛢️",
+     "tip": "Správne: sad."
+    },
+    {
+     "text": "lak — namiesto A daj U",
+     "emoji": "💅",
+     "tip": "Správne: luk."
+    },
+    {
+     "text": "kosa — namiesto S daj Z",
+     "emoji": "🌾",
+     "tip": "Správne: koza. Rozdiel s/z je len v zapnutí hlasu — nech si dieťa priloží ruku na krk."
+    },
+    {
+     "text": "nos — namiesto S daj C",
+     "emoji": "👃",
+     "tip": "Správne: noc. Výmena poslednej hlásky."
+    },
+    {
+     "text": "píla — namiesto P daj S",
+     "emoji": "🪚",
+     "tip": "Správne: sila."
+    }
+   ]
+  }
+ }
 ]

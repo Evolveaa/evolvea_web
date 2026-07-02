@@ -162,7 +162,7 @@
       },
       {
         "title": "Deň po dni",
-        "body": "Stálosť otázok je oveľa dôležitejšia než samotná skladačka pred nimi."
+        "body": "Stálosť otázok je oveľa dôležitejšia než samotná skladačka pred nimi. Výskumy pritom ukazujú, že pravidelné domáce cvičenie vedené rodičom môže byť rovnako účinné ako sedenia v ambulancii."
       }
     ]
   },
@@ -258,7 +258,7 @@
     "childSettingsLead": "Meno, rok narodenia a avatar — nič viac o dieťati neukladáme.",
     "switchChild": "Prepnúť dieťa",
     "streak": "{count, plural, =0 {Začnite dnes} one {# deň v rade} few {# dni v rade} other {# dní v rade}}",
-    "streakHint": "Krátke cvičenie každý deň znamená viac než dlhé raz za týždeň.",
+    "streakHint": "Krátke cvičenie každý deň znamená viac než dlhé raz za týždeň — výskum ukazuje, že domáce cvičenie s rodičom môže byť rovnako účinné ako sedenie u logopéda.",
     "weekDaysLabel": "Prehľad týždňa",
     "todaySection": "Dnešná dávka",
     "noPlanTitle": "Plán je na ceste",
@@ -367,7 +367,23 @@
     "session": {
       "hinted": "s pomôckou",
       "pairsMoves": "Pexeso: {pairs} párov nájdených na {moves} ťahov.",
-      "roundErrors": "{round}. kolo: {errors, plural, =0 {bez chyby} one {# chyba} few {# chyby} other {# chýb}}"
+      "roundErrors": "{round}. kolo: {errors, plural, =0 {bez chyby} one {# chyba} few {# chyby} other {# chýb}}",
+      "strategyChip": "Plán dieťaťa: {strategy}",
+      "selfEval": {
+        "great": "dieťa: išlo mi to výborne",
+        "ok": "dieťa: celkom dobre",
+        "hard": "dieťa: bolo to ťažké"
+      },
+      "helped": {
+        "yes": "plán pomohol",
+        "some": "plán pomohol čiastočne",
+        "no": "plán nepomohol"
+      },
+      "calibration": {
+        "ok": "Sebahodnotenie dieťaťa zodpovedá výkonu.",
+        "under": "Dieťa sa podceňuje — výkon bol výrazne lepší než jeho vlastný odhad.",
+        "over": "Dieťa sa nadhodnocuje — výkon bol slabší než jeho vlastný odhad."
+      }
     },
     "builder": {
       "pageTitle": "Plán — {name}",
@@ -695,6 +711,68 @@
     "backHome": "Späť na Dnes",
     "closePreview": "Zavrieť náhľad",
     "brokenTitle": "Cvičenie sa nedá načítať",
-    "brokenLead": "Obsah cvičenia je poškodený. Dajte vedieť svojmu logopédovi."
+    "brokenLead": "Obsah cvičenia je poškodený. Dajte vedieť svojmu logopédovi.",
+    "strategyKicker": "Krok 1 · Môj plán",
+    "strategyTitle": "Ako to dnes zvládneš?",
+    "strategyLead": "Vyber si, čo ti pomôže. To je tvoj plán!",
+    "myPlan": "Môj plán",
+    "selfEvalKicker": "Ohliadnutie",
+    "selfEvalTitle": "Ako ti to išlo?",
+    "selfEval": {
+      "great": "Výborne!",
+      "ok": "Celkom dobre",
+      "hard": "Bolo to ťažké"
+    },
+    "helpedTitle": "Pomohol ti tvoj plán „{strategy}“?",
+    "helped": {
+      "yes": "Áno!",
+      "some": "Trochu",
+      "no": "Nie"
+    },
+    "anchorLabel": "Povedz si nahlas",
+    "anchors": {
+      "0": "Zvládnem to krok za krokom.",
+      "1": "Cvičením sa zlepšujem.",
+      "2": "Chyby mi pomáhajú učiť sa.",
+      "3": "Mám svoj plán a držím sa ho.",
+      "4": "Keď to skúsim znova, ide to ľahšie."
+    },
+    "strategy": {
+      "choice": {
+        "0": "Pozorne počúvam otázku",
+        "1": "Poviem si možnosti nahlas",
+        "2": "Idem pomaly, neponáhľam sa"
+      },
+      "sound_boxes": {
+        "0": "Poviem slovo pomaličky",
+        "1": "Pri každej hláske ťuknem",
+        "2": "Najprv počúvam, potom ťukám"
+      },
+      "memory_sequence": {
+        "0": "Poviem si obrázky nahlas",
+        "1": "Vymyslím si z nich príbeh",
+        "2": "Pozerám sa veľmi pozorne"
+      },
+      "pairs": {
+        "0": "Zapamätám si, kde čo leží",
+        "1": "Otáčam pekne po poriadku",
+        "2": "Sústredím sa len na karty"
+      },
+      "number_track": {
+        "0": "Hľadám čísla po poriadku",
+        "1": "Ukazujem si prstom",
+        "2": "Nenechám sa ničím vyrušiť"
+      },
+      "story_sequence": {
+        "0": "Poviem si, čo sa stalo najprv",
+        "1": "Najprv si pozriem všetky obrázky",
+        "2": "Rozprávam si dej nahlas"
+      },
+      "speech_items": {
+        "0": "Najprv počúvam, potom hovorím",
+        "1": "Hovorím pomaly a zreteľne",
+        "2": "Dávam pozor na ústa a jazyk"
+      }
+    }
   }
 }

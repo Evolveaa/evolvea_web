@@ -83,12 +83,21 @@ async function login(page, who) {
     await page.screenshot({ path: `${SHOTS}/13-parent-messages.png`, fullPage: true });
   });
 
-  await step("player intro → play → quit", async () => {
+  await step("player intro → strategy → play → quit", async () => {
     await page.goto(`${BASE}/app`);
     await page.click(".row-list a.row-item");
     await page.waitForSelector("text=Sprievodca pre rodiča");
     await page.screenshot({ path: `${SHOTS}/14-player-intro.png`, fullPage: true });
     await page.click("text=Začať");
+    // interactive exercises open with the metacognitive strategy pick;
+    // guided activities carry their own arc and skip it
+    try {
+      const strategy = page.locator(".strategy-grid .opt-card").first();
+      await strategy.click({ timeout: 4000 });
+      await page.screenshot({ path: `${SHOTS}/14b-player-strategy.png` });
+    } catch {
+      /* guided exercise — no strategy step */
+    }
     await page.waitForSelector(".player-prompt, .gd-step");
     await page.screenshot({ path: `${SHOTS}/15-player-play.png` });
     await page.click(".player-quit");

@@ -35,7 +35,7 @@ Demo účty (heslo pre všetky: `EvolveaDemo2026`):
 | Rola | E-mail |
 |---|---|
 | Logopéd | `stuodstrelovaci+logoped@gmail.com` |
-| Rodič — test, všetkých 51 cvičení + aktívne predplatné | `stuodstrelovaci+test@gmail.com` |
+| Rodič — test, všetkých 53 cvičení + aktívne predplatné | `stuodstrelovaci+test@gmail.com` |
 | Rodič — aktívne predplatné, 3 týždne dát | `stuodstrelovaci+rodic1@gmail.com` |
 | Rodič — čerstvý trial | `stuodstrelovaci+rodic2@gmail.com` |
 
@@ -59,7 +59,7 @@ lib/
   exercises/      typový model obsahu + runtime validácia
   data/           dotazy + čisté odvodené funkcie (odporúčania, séria, štatistiky)
   auth|parent|therapist/actions.ts   server actions (mutácie len na serveri)
-content/exercises/  zdrojové JSON knižnice (51 cvičení, 7 domén) + SPEC.md
+content/exercises/  zdrojové JSON knižnice (53 cvičení, 7 domén) + SPEC.md
 supabase/
   migrations/     schéma + RLS (aplikované cez Supabase MCP)
   seed/           generovaný SQL seed knižnice
@@ -79,6 +79,12 @@ ukotvenie). Prehrávač renderuje čisto z dát; nové cvičenia nevyžadujú k�
 Scaffolding: každá položka plánu má `support_level` 3 → 1 (plná opora →
 samostatnosť) — mení správanie prehrávača (sprievodca pre rodiča, dostupnosť
 pomôcok) podľa Vygotského princípu interiorizácie.
+
+Metakognitívny cyklus (Mikulajová): každé cvičenie beží v obale
+plán → monitorovanie → hodnotenie — dieťa si pred úlohou vyberie stratégiu
+(zostáva viditeľná počas hry), po úlohe sa samo ohodnotí a povie si kotviacu
+vetu; logopéd vidí stratégiu, sebahodnotenie aj kalibráciu voči skutočnému
+výkonu (`sessions.detail.metacognition`).
 
 ### Bezpečnosť a GDPR
 
