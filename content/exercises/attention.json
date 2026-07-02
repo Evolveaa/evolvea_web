@@ -1,0 +1,393 @@
+[
+  {
+    "slug": "at-ciselny-rad-1",
+    "domain": "attention",
+    "modality": "interactive",
+    "title": "Číselný rad do 10",
+    "summary": "Nácvik riadenej zrakovej pozornosti a sebakontroly podľa metodiky Achutinovej a Pylajevovej — číselný rad slúži ako externá opora usporiadania činnosti.",
+    "parent_guide": "Sadnite si vedľa dieťaťa a povedzte: „Ťukaj na čísla pekne po poriadku a každé nahlas prečítaj.“ Ak dieťa zaváha, opýtajte sa: „Ktoré číslo príde po trojke?“ a spolu rátajte nahlas od jednotky. Neukazujte správne číslo prstom — počkajte, kým ho dieťa nájde samo.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 4,
+    "content": {
+      "type": "number_track",
+      "intro": "Ťukaj na čísla po poriadku, od najmenšieho po najväčšie. Každé číslo povedz nahlas.",
+      "rounds": [
+        { "from": 1, "to": 4 },
+        { "from": 1, "to": 6 },
+        { "from": 1, "to": 8 },
+        { "from": 1, "to": 10 }
+      ]
+    }
+  },
+  {
+    "slug": "at-ciselny-rad-2",
+    "domain": "attention",
+    "modality": "interactive",
+    "title": "Číselný rad s rušičmi",
+    "summary": "Selektívna pozornosť a inhibícia rušivých podnetov na číselnom rade do 15 — dieťa udržiava cieľ činnosti napriek distraktorom mimo hľadaného rozsahu.",
+    "parent_guide": "Povedzte dieťaťu: „Na obrazovke sú aj čísla, ktoré do radu nepatria — tie nechaj tak.“ Keď zaváha, opýtajte sa: „Aké číslo teraz hľadáš? Je väčšie, alebo menšie ako to posledné?“ Pri chybe pokojne povedzte: „Nič sa nedeje, skús ešte raz a rátaj nahlas.“",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "number_track",
+      "intro": "Pozor, medzi číslami sa skrývajú aj také, ktoré do radu nepatria. Ťukaj len na správne čísla, pekne po poriadku.",
+      "rounds": [
+        { "from": 1, "to": 10, "distractors": [12, 14] },
+        { "from": 1, "to": 12, "distractors": [14, 15] },
+        { "from": 1, "to": 14, "distractors": [16, 18] },
+        { "from": 1, "to": 15, "distractors": [17, 19] }
+      ]
+    }
+  },
+  {
+    "slug": "at-ciselny-rad-3",
+    "domain": "attention",
+    "modality": "interactive",
+    "title": "Číselný rad odzadu",
+    "summary": "Zostupný číselný rad s distraktormi rozvíja flexibilitu pozornosti, pracovnú pamäť a inhibičnú kontrolu pri zmene zaužívaného smeru rátania.",
+    "parent_guide": "Najprv spolu nahlas rátajte odzadu: desať, deväť, osem… Potom povedzte: „Teraz pôjdeš odzadu ty — od najväčšieho čísla k najmenšiemu. Čísla, ktoré do radu nepatria, nechaj tak.“ Ak sa dieťa stratí, opýtajte sa: „Ktoré číslo je o jedno menšie?“ a doprajte mu čas.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "number_track",
+      "intro": "Dnes to otočíme — ťukaj na čísla odzadu, od najväčšieho po najmenšie. A pozor na čísla, ktoré do radu nepatria!",
+      "rounds": [
+        { "from": 1, "to": 10, "reverse": true, "distractors": [11, 13] },
+        { "from": 1, "to": 12, "reverse": true, "distractors": [14, 15] },
+        { "from": 5, "to": 15, "reverse": true, "distractors": [1, 3] },
+        { "from": 1, "to": 15, "reverse": true, "distractors": [17, 18] }
+      ]
+    }
+  },
+  {
+    "slug": "at-najdi-ineho-1",
+    "domain": "attention",
+    "modality": "interactive",
+    "title": "Nájdi iný obrázok",
+    "summary": "Zraková diferenciácia a selektívna pozornosť — vyhľadanie odlišného podnetu v rade rovnakých; základ pre neskoršie rozlišovanie grafém.",
+    "parent_guide": "Prečítajte otázku a nechajte dieťa pozerať sa v pokoji. Ak si nie je isté, povedzte: „Porovnaj obrázky po dvojiciach — ktoré dva sú úplne rovnaké?“ Nech dieťa svoj výber vždy povie nahlas celou vetou: „Iný je banán, lebo ostatné sú jablká.“",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 4,
+    "content": {
+      "type": "choice",
+      "intro": "Pozri sa pozorne. Tri obrázky sú úplne rovnaké a jeden sa odlišuje.",
+      "items": [
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "banán", "emoji": "🍌", "correct": true }
+          ],
+          "hint": "Pozri sa na farby a tvary. Ktoré tri obrázky sú úplne rovnaké?"
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "pes", "emoji": "🐶" },
+            { "label": "mačka", "emoji": "🐱", "correct": true },
+            { "label": "pes", "emoji": "🐶" },
+            { "label": "pes", "emoji": "🐶" }
+          ],
+          "hint": "Sú tu tri rovnaké zvieratká. Ktoré zvieratko medzi ne nepatrí?"
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "mesiac", "emoji": "🌙", "correct": true },
+            { "label": "hviezda", "emoji": "⭐" },
+            { "label": "hviezda", "emoji": "⭐" },
+            { "label": "hviezda", "emoji": "⭐" }
+          ],
+          "hint": "Nájdi najprv obrázky, ktoré sú úplne rovnaké. Ktorý zostal sám?"
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "auto", "emoji": "🚗" },
+            { "label": "auto", "emoji": "🚗" },
+            { "label": "bicykel", "emoji": "🚲", "correct": true },
+            { "label": "auto", "emoji": "🚗" }
+          ],
+          "hint": "Prezri si obrázky pekne zaradom, jeden po druhom. Čo sa opakuje?"
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "kvet", "emoji": "🌸" },
+            { "label": "kvet", "emoji": "🌸" },
+            { "label": "kvet", "emoji": "🌸" },
+            { "label": "hríb", "emoji": "🍄", "correct": true }
+          ],
+          "hint": "Ktoré tri obrázky patria do jednej skupinky?"
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "žaba", "emoji": "🐸", "correct": true },
+            { "label": "ryba", "emoji": "🐟" },
+            { "label": "ryba", "emoji": "🐟" },
+            { "label": "ryba", "emoji": "🐟" }
+          ],
+          "hint": "Skús to od konca — porovnaj najprv posledné tri obrázky."
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "lopta", "emoji": "⚽" },
+            { "label": "lopta", "emoji": "⚽" },
+            { "label": "balón", "emoji": "🎈", "correct": true },
+            { "label": "lopta", "emoji": "⚽" }
+          ],
+          "hint": "Tri obrázky sú úplne rovnaké — nájdi najprv tie."
+        },
+        {
+          "prompt": "Ktorý obrázok je iný ako ostatné?",
+          "options": [
+            { "label": "motýľ", "emoji": "🦋" },
+            { "label": "lienka", "emoji": "🐞", "correct": true },
+            { "label": "motýľ", "emoji": "🦋" },
+            { "label": "motýľ", "emoji": "🦋" }
+          ],
+          "hint": "Pozri sa pozorne na krídla a bodky. Ktorý obrázok vidíš len raz?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "at-spocitaj-tvary-2",
+    "domain": "attention",
+    "modality": "interactive",
+    "title": "Spočítaj obrázky",
+    "summary": "Selektívne počítanie cieľových podnetov v rade rozvíja distribúciu pozornosti, systematické prehľadávanie zľava doprava a sebakontrolu pri rátaní.",
+    "parent_guide": "Ukážte dieťaťu riadok obrázkov a prečítajte otázku. Naučte ho ukazovať prstom na každý hľadaný obrázok a rátať nahlas: jeden, dva, tri… Ak sa pomýli, povedzte: „Skús to ešte raz a rátaj pomalšie.“ Výsledok nech vyberie vždy samo.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "choice",
+      "intro": "Rátame obrázky v riadku. Ukazuj si prstom a rátaj nahlas.",
+      "items": [
+        {
+          "prompt": "🔺🔵🔺⭐🔺🔵 — Koľko je 🔺?",
+          "options": [
+            { "label": "dva", "emoji": "2️⃣" },
+            { "label": "tri", "emoji": "3️⃣", "correct": true },
+            { "label": "štyri", "emoji": "4️⃣" }
+          ],
+          "hint": "Rátaj pomaly zľava doprava a každý 🔺 si ukáž prstom."
+        },
+        {
+          "prompt": "🟢🟡🟢🟢🟡 — Koľko je 🟡?",
+          "options": [
+            { "label": "dva", "emoji": "2️⃣", "correct": true },
+            { "label": "tri", "emoji": "3️⃣" },
+            { "label": "štyri", "emoji": "4️⃣" }
+          ],
+          "hint": "Hľadáš len žlté koliesko. Ostatné farby nechaj tak."
+        },
+        {
+          "prompt": "⭐🌙⭐⭐🌙⭐ — Koľko je ⭐?",
+          "options": [
+            { "label": "tri", "emoji": "3️⃣" },
+            { "label": "päť", "emoji": "5️⃣" },
+            { "label": "štyri", "emoji": "4️⃣", "correct": true }
+          ],
+          "hint": "Pri každej hviezde povedz číslo nahlas. Mesiačiky preskoč."
+        },
+        {
+          "prompt": "🔵🔵🔺🔵🔺🔵 — Koľko je 🔵?",
+          "options": [
+            { "label": "štyri", "emoji": "4️⃣", "correct": true },
+            { "label": "tri", "emoji": "3️⃣" },
+            { "label": "päť", "emoji": "5️⃣" }
+          ],
+          "hint": "Začni úplne vľavo a nepreskoč ani jedno koliesko."
+        },
+        {
+          "prompt": "🟥🟨🟥🟥🟨🟥🟥 — Koľko je 🟥?",
+          "options": [
+            { "label": "štyri", "emoji": "4️⃣" },
+            { "label": "päť", "emoji": "5️⃣", "correct": true },
+            { "label": "šesť", "emoji": "6️⃣" }
+          ],
+          "hint": "Rátaj len červené štvorčeky. Pri každom na chvíľu zastav prst."
+        },
+        {
+          "prompt": "🐤🐟🐤🐟🐟 — Koľko je 🐟?",
+          "options": [
+            { "label": "tri", "emoji": "3️⃣", "correct": true },
+            { "label": "dva", "emoji": "2️⃣" },
+            { "label": "štyri", "emoji": "4️⃣" }
+          ],
+          "hint": "Rátaš len rybky, kuriatka nechaj tak. Rátaj nahlas."
+        },
+        {
+          "prompt": "🍓🍇🍓🍇🍓🍇🍇 — Koľko je 🍇?",
+          "options": [
+            { "label": "päť", "emoji": "5️⃣" },
+            { "label": "tri", "emoji": "3️⃣" },
+            { "label": "štyri", "emoji": "4️⃣", "correct": true }
+          ],
+          "hint": "Ukazuj prstom len na strapce hrozna a pri každom povedz číslo."
+        },
+        {
+          "prompt": "🔺🔺🔵🔺🔵🔺🔺 — Koľko je 🔺?",
+          "options": [
+            { "label": "päť", "emoji": "5️⃣", "correct": true },
+            { "label": "štyri", "emoji": "4️⃣" },
+            { "label": "šesť", "emoji": "6️⃣" }
+          ],
+          "hint": "Riadok je dlhý — rátaj pomaly a skontroluj sa ešte raz od začiatku."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "at-pocuvaj-a-tlieskaj-1",
+    "domain": "attention",
+    "modality": "guided",
+    "title": "Počúvaj a tlieskaj",
+    "summary": "Sluchová selektívna pozornosť s motorickou odpoveďou typu go/no-go — dieťa reaguje len na cieľovú kategóriu slov a inhibuje reakciu na ostatné podnety.",
+    "parent_guide": "Čítajte slová pomaly a zreteľne, medzi slovami počkajte dve sekundy. Pred prvým kolom si hru vyskúšajte na dvoch slovách: stôl — ruky sú ticho, mačka — tlesk. Pri chybe nekomentujte, len pokojne čítajte ďalej; dieťa sa zvyčajne opraví samo pri ďalšom slove. Na záver pochváľte konkrétne, čo sa podarilo.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 6,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Zahráme sa na pozorné uši — tleskneš vždy, keď začuješ zvieratko.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vysvetlíme si hru",
+          "body": "Povedzte dieťaťu: „Budem ti pomaly čítať slová. Vždy, keď začuješ zvieratko, tleskni. Pri ostatných slovách sú ruky ticho.“ Vyskúšajte si to na dvoch slovách: stôl (ruky ticho) a mačka (tlesk). Potom sa opýtajte: „Ako sa cítiš pred hrou?“",
+          "choices": ["Teším sa 😊", "Cítim sa pokojne 😌", "Zaujíma ma to 🤔", "Trochu sa bojím 😕"],
+          "tip": "Nechajte dieťa vybrať pocit bez komentára — každý pocit je v poriadku."
+        },
+        {
+          "kicker": "Krok 2 · Plán",
+          "title": "Vyber si, čo ti pomôže",
+          "body": "Opýtajte sa dieťaťa: „Čo ti pomôže dobre počúvať?“ Nechajte ho vybrať si stratégiu a spolu ju nahlas zopakujte.",
+          "choices": ["Sedím pokojne 🧘", "Pozorne počúvam každé slovo 👂", "Ruky mám pripravené na tlesk 🙌", "Poviem si: čakám na zvieratko 🐾"],
+          "tip": "Stratégiu vyberá dieťa — vy ju len nahlas zopakujete."
+        },
+        {
+          "kicker": "Krok 3 · Kolo 1",
+          "title": "Prvé kolo",
+          "body": "Čítajte pomaly, s prestávkou po každom slove: lopta — mačka — stôl — pes — kvet — sova — topánka — kôň.",
+          "tip": "Zvieratá sú štyri: mačka, pes, sova, kôň. Ak dieťa tleskne inde, nekomentujte to — pokojne čítajte ďalej. Nikdy neriešte úlohu za dieťa.",
+          "fields": [
+            { "label": "Koľko zo štyroch zvierat dieťa zachytilo?", "placeholder": "napr. 3 zo 4" }
+          ]
+        },
+        {
+          "kicker": "Krok 4 · Kolo 2",
+          "title": "Druhé kolo — dlhší rad",
+          "body": "Čítajte o kúsok rýchlejšie: slnko — ryba — kniha — zajac — auto — žaba — mrak — veverička — dvere — medveď.",
+          "tip": "Zvierat je päť: ryba, zajac, žaba, veverička, medveď. Ak sa dieťa pomýli, nechajte ho prísť na to samo pri ďalšom slove.",
+          "fields": [
+            { "label": "Koľko z piatich zvierat dieťa zachytilo?", "placeholder": "napr. 4 z 5" }
+          ]
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Ako sa ti počúvalo?",
+          "body": "Opýtajte sa dieťaťa: „Čo ti pomáhalo počúvať pozorne? Ktoré slovo ťa skoro nachytalo?“ Odpovede zapíšte vlastnými slovami dieťaťa.",
+          "tip": "Počkajte na odpoveď v tichu — aj dlhšia pauza je v poriadku.",
+          "fields": [
+            { "label": "Čo dieťaťu pomáhalo sústrediť sa?", "placeholder": "napr. zatvorilo si oči a počúvalo" },
+            { "label": "Pri ktorom slove zaváhalo?", "placeholder": "napr. pri slove mrak" }
+          ]
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Pochvala a veta na záver",
+          "body": "Pochváľte konkrétne, napríklad: „Tvoje ruky pekne počkali na zvieratko a tleskli presne včas.“ Na záver si spolu povedzte: „Keď pozorne počúvam, veľa toho zachytím.“",
+          "tip": "Chváľte snahu a stratégiu, nie len výsledok."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "at-minuta-sustredenia-3",
+    "domain": "attention",
+    "modality": "guided",
+    "title": "Minúta sústredenia",
+    "summary": "Udržiavaná pozornosť počas 60 sekúnd pri grafomotorickej úlohe s riadeným návratom k činnosti po distrakcii; metakognitívny cyklus plán → monitorovanie → reflexia podľa Mikulajovej.",
+    "parent_guide": "Pripravte papier s bludiskom alebo veľkým tvarom, ceruzku a časovač. Pred štartom nechajte dieťa vybrať si stratégiu sústredenia a nahlas ju spolu zopakujte. Počas minúty seďte ticho a nezasahujte, ani keď dieťa spomalí. Po každom pokuse najprv oceňte snahu, až potom sa rozprávajte o tom, čo ho vyrušilo.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 8,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Jedna minúta, jedna úloha, žiadne vyrušenie — dokážeš to?",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Pripravíme si všetko",
+          "body": "Pripravte papier s jednoduchým bludiskom alebo veľkým tvarom na obťahovanie (stačí nakresliť vlnovku či špirálu), ceruzku a časovač na 60 sekúnd. Povedzte dieťaťu: „Tvoja úloha je jediná — celú minútu ťahať čiaru a nenechať sa ničím vyrušiť.“ Potom sa opýtajte: „Ako sa cítiš pred takouto výzvou?“",
+          "choices": ["Teším sa 😊", "Cítim sa pokojne 😌", "Trochu sa obávam 😕", "Mám chuť to skúsiť 💪"],
+          "tip": "Vyberte pokojné miesto bez televízora a mobilu. Každý pocit je v poriadku — len ho spolu pomenujte."
+        },
+        {
+          "kicker": "Krok 2 · Plán",
+          "title": "Vyber si stratégiu",
+          "body": "Opýtajte sa: „Čo ti pomôže vydržať celú minútu?“ Nechajte dieťa vybrať si jednu alebo dve stratégie a nahlas ich zopakujte.",
+          "choices": [
+            "Pozerám len na papier 👀",
+            "Poviem si: pomaly a pokojne 🐢",
+            "Keď ma niečo vyruší, vrátim sa k čiare ↩️",
+            "Pokojne dýcham 🌬️"
+          ],
+          "tip": "Stratégiu vyberá dieťa, nie vy. Vy mu ju len pomôžete pomenovať."
+        },
+        {
+          "kicker": "Krok 3 · Prvý pokus",
+          "title": "Minúta sústredenia",
+          "body": "Spustite časovač na 60 sekúnd. Dieťa ťahá čiaru cez bludisko alebo obťahuje tvar. Vy sedíte ticho a len pozorujete.",
+          "tip": "Ani slovkom nepomáhajte — všímajte si, kedy pozornosť uletí a kedy sa sama vráti. Nikdy neriešte úlohu za dieťa.",
+          "fields": [
+            { "label": "Vydržalo dieťa celých 60 sekúnd?", "placeholder": "áno / nie — kedy prestalo" }
+          ]
+        },
+        {
+          "kicker": "Krok 4 · Druhý pokus",
+          "title": "Minúta s malým vyrušením",
+          "body": "Zopakujte minútu na novom tvare, ale tentoraz počas nej raz potichu položte na stôl hrnček alebo si odkašlite. Úlohou dieťaťa je zostať pri svojej čiare. Pred štartom si spolu zopakujte vybranú stratégiu.",
+          "tip": "Vyrušenie má byť jemné — cieľom je zážitok úspechu, nie nachytanie dieťaťa.",
+          "fields": [
+            { "label": "Ako dieťa zareagovalo na vyrušenie?", "placeholder": "napr. pozrelo sa a vrátilo sa k čiare" }
+          ]
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Zhodnotíme minútu",
+          "body": "Opýtajte sa: „Čo ťa najviac ťahalo preč od úlohy? Ktorá stratégia ti pomohla?“ Odpovede dieťaťa zapíšte jeho vlastnými slovami.",
+          "tip": "Neponúkajte odpovede — počkajte, kým dieťa samo pomenuje, čo mu pomohlo.",
+          "fields": [
+            { "label": "Čo dieťa najviac vyrušovalo?", "placeholder": "napr. zvuky z vedľajšej izby" },
+            { "label": "Ktorá stratégia mu pomohla?", "placeholder": "napr. pozerať len na papier" }
+          ]
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta na záver",
+          "body": "Pochváľte konkrétne, napríklad: „Aj po vyrušení sa tvoja ceruzka vrátila k čiare — to je majstrovské sústredenie.“ Na záver si spolu povedzte: „Dokážem sa sústrediť krok za krokom.“",
+          "tip": "Oceňte návrat k úlohe po vyrušení — to je väčší úspech než minúta bez zaváhania."
+        }
+      ]
+    }
+  }
+]

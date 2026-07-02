@@ -1,0 +1,373 @@
+[
+  {
+    "slug": "na-usporiadaj-pribeh-1",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Poskladaj príbeh",
+    "summary": "Usporadúvanie trojkartových dejových sekvencií s následným prerozprávaním rozvíja chápanie časovej postupnosti a základnej makroštruktúry naratívu (začiatok – priebeh – koniec).",
+    "parent_guide": "Prečítajte dieťaťu názov príbehu a spolu si pomenujte, čo je na jednotlivých kartách. Spýtajte sa: „Čo sa muselo stať najprv?“ Kartu nechajte vybrať dieťa. Ak váha, ukážte na dve karty a spýtajte sa, ktorá z nich bola skôr. Po usporiadaní nechajte dieťa príbeh porozprávať vlastnými slovami a pomáhajte len otázkami: Čo bolo potom? Ako sa to skončilo?",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 6,
+    "content": {
+      "type": "story_sequence",
+      "intro": "Karty sa pomiešali! Ulož ich tak, ako sa príbeh naozaj stal, a potom mi ho porozprávaj.",
+      "items": [
+        {
+          "title": "Dobré ráno, Ema!",
+          "cards": [
+            { "emoji": "😴", "label": "Ema spí" },
+            { "emoji": "⏰", "label": "Zazvoní budík" },
+            { "emoji": "🥣", "label": "Ema raňajkuje" }
+          ],
+          "retellPrompt": "Porozprávaj mi Emino ráno vlastnými slovami. Čo bolo najprv, čo potom a čo nakoniec?",
+          "hint": "Čo robí Ema, kým ešte budík nezazvoní?"
+        },
+        {
+          "title": "Snehuliak",
+          "cards": [
+            { "emoji": "❄️", "label": "Vonku sneží" },
+            { "emoji": "⛄", "label": "Deti postavia snehuliaka" },
+            { "emoji": "🥕", "label": "Dajú mu nos z mrkvy" }
+          ],
+          "retellPrompt": "Porozprávaj, ako deti stavali snehuliaka. Čím sa to celé začalo?",
+          "hint": "Môžu deti stavať snehuliaka skôr, ako nasneží?"
+        },
+        {
+          "title": "Slnečnica",
+          "cards": [
+            { "emoji": "🌱", "label": "Zasadíme semienko" },
+            { "emoji": "💧", "label": "Polievame ho" },
+            { "emoji": "🌻", "label": "Vyrastie slnečnica" }
+          ],
+          "retellPrompt": "Porozprávaj mi, ako zo semienka vyrástla veľká slnečnica.",
+          "hint": "Čo potrebuje semienko, aby mohlo rásť?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-usporiadaj-pribeh-2",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Poskladaj dlhší príbeh",
+    "summary": "Štvorkartové dejové sekvencie s dôrazom na temporálne konektory (najprv, potom, nakoniec) posilňujú kohéziu naratívu a plánovanie deja.",
+    "parent_guide": "Prečítajte názov príbehu a spolu pomenujte všetky štyri karty. Spýtajte sa: „Čím sa to celé začalo?“ Dieťa ukladá karty samo; ak si nie je isté, porovnajte dve karty otázkou, ktorá z nich bola skôr. Pri prerozprávaní veďte dieťa k slovám najprv, potom a nakoniec — povedzte prvé slovo a nechajte ho vetu dokončiť.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 8,
+    "duration_minutes": 7,
+    "content": {
+      "type": "story_sequence",
+      "intro": "Tieto príbehy majú štyri karty. Ulož ich pekne po poriadku a potom mi ich porozprávaj.",
+      "items": [
+        {
+          "title": "Narodeninová torta",
+          "cards": [
+            { "emoji": "🥚", "label": "Prichystáme vajcia a múku" },
+            { "emoji": "🥣", "label": "Zamiešame cesto" },
+            { "emoji": "🎂", "label": "Torta sa upečie" },
+            { "emoji": "🎉", "label": "Oslávime narodeniny" }
+          ],
+          "retellPrompt": "Porozprávaj, ako vznikla narodeninová torta — od surovín až po oslavu.",
+          "hint": "Dá sa miešať cesto, keď ešte nemáme suroviny?"
+        },
+        {
+          "title": "Dážď a dúha",
+          "cards": [
+            { "emoji": "☁️", "label": "Na oblohe sa objavia tmavé mraky" },
+            { "emoji": "🌧️", "label": "Spustí sa dážď" },
+            { "emoji": "☀️", "label": "Vykukne slnko" },
+            { "emoji": "🌈", "label": "Zažiari dúha" }
+          ],
+          "retellPrompt": "Porozprávaj, čo sa dialo na oblohe. Skús použiť slová najprv, potom a nakoniec.",
+          "hint": "Kedy vidíme dúhu — pred dažďom, alebo po ňom?"
+        },
+        {
+          "title": "Zablatený psík",
+          "cards": [
+            { "emoji": "🐕", "label": "Psík sa vyváľa v blate" },
+            { "emoji": "🛁", "label": "Dáme ho do vane" },
+            { "emoji": "🧴", "label": "Umyjeme ho šampónom" },
+            { "emoji": "✨", "label": "Psík je zase čistučký" }
+          ],
+          "retellPrompt": "Porozprávaj psíkov príbeh. Prečo sa musel kúpať a ako to dopadlo?",
+          "hint": "Čo sa muselo stať, aby psík potreboval kúpeľ?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-usporiadaj-pribeh-3",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Prečo sa to stalo?",
+    "summary": "Päť- až šesťkartové sekvencie s príčinno-následkovými vzťahmi rozvíjajú kauzálne usudzovanie a produkciu komplexného naratívu s kauzálnymi konektormi (pretože, preto, a tak).",
+    "parent_guide": "Nechajte dieťa najprv v tichosti prezrieť všetky karty. Spýtajte sa: „O čom asi ten príbeh bude?“ Pri ukladaní sa pýtajte na príčiny: „Prečo sa to stalo? Čo sa muselo stať predtým?“ Pri prerozprávaní oceňte, keď dieťa použije slová pretože, preto alebo a tak — sú znakom, že dej naozaj pochopilo.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 8,
+    "content": {
+      "type": "story_sequence",
+      "intro": "Toto sú dlhšie príbehy. Ulož karty po poriadku a rozmýšľaj, prečo sa veci stali práve takto.",
+      "items": [
+        {
+          "title": "Mačiatko na strome",
+          "cards": [
+            { "emoji": "🐱", "label": "Mačiatko vybehne z domu" },
+            { "emoji": "🌳", "label": "Vylezie vysoko na strom" },
+            { "emoji": "😿", "label": "Bojí sa zliezť a smutne mňauká" },
+            { "emoji": "👧", "label": "Zuzka ho začuje a beží po pomoc" },
+            { "emoji": "🧑‍🚒", "label": "Hasič mačiatko opatrne znesie" },
+            { "emoji": "🏡", "label": "Mačiatko je doma v bezpečí" }
+          ],
+          "retellPrompt": "Porozprávaj celý príbeh o mačiatku. Skús povedať aj to, prečo sa bálo a kto mu pomohol.",
+          "hint": "Prečo mačiatko mňaukalo? Čo sa stalo tesne predtým?"
+        },
+        {
+          "title": "Tomáš a bicykel",
+          "cards": [
+            { "emoji": "🚲", "label": "Tomáš sa učí jazdiť na bicykli" },
+            { "emoji": "🪨", "label": "Nevšimne si kameň na ceste" },
+            { "emoji": "🤕", "label": "Spadne a odrie si koleno" },
+            { "emoji": "🩹", "label": "Mama mu koleno ošetrí" },
+            { "emoji": "💪", "label": "Skúsi to znova a podarí sa mu to" }
+          ],
+          "retellPrompt": "Porozprávaj Tomášov príbeh. Prečo spadol a ako sa to celé skončilo?",
+          "hint": "Prečo Tomáš spadol? Čo ležalo na ceste?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-rozpravaj-obrazok-1",
+    "domain": "narrative",
+    "modality": "speech",
+    "title": "Rozprávaj o obrázku",
+    "summary": "Tvorba jednoduchých rozvitých viet k obrazovému podnetu. Cieľom je stabilná štruktúra podmet – prísudok a rozširovanie výpovede otázkami kto – čo robí – kde.",
+    "parent_guide": "Ukážte dieťaťu obrázok a spýtajte sa: „Čo sa tu deje?“ Ak odpovie jedným slovom, položte tri pomocné otázky: Kto to je? Čo robí? Kde je? Potom celú vetu spoločne nahlas zopakujte. Chváľte každú celú vetu — presnosť je dôležitejšia než rýchlosť.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Pozri sa na obrázky a povedz celou vetou, čo sa deje.",
+      "items": [
+        {
+          "text": "Povedz celou vetou, čo sa deje: 🐱🌳",
+          "emoji": "🐱🌳",
+          "tip": "Ak dieťa povie len jedno slovo, pýtajte sa: Kto to je? Čo robí? Kde je? Vzorová veta: „Mačka vyliezla na strom.“"
+        },
+        {
+          "text": "Povedz celou vetou, čo sa deje: 👦⚽",
+          "emoji": "👦⚽",
+          "tip": "Pomôžte otázkami: Kto je na obrázku? Čo robí? S čím sa hrá?"
+        },
+        {
+          "text": "Povedz celou vetou, čo sa deje: 🐶🦴",
+          "emoji": "🐶🦴",
+          "tip": "Ak vznikne len krátka veta, poproste dieťa, nech pridá, kde sa to deje alebo aká je kosť."
+        },
+        {
+          "text": "Povedz celou vetou, čo sa deje: 👧📖",
+          "emoji": "👧📖",
+          "tip": "Rozšírte vetu otázkami: Kde dievčatko číta? O čom asi tá kniha je?"
+        },
+        {
+          "text": "Povedz celou vetou, čo sa deje: 🐰🥕",
+          "emoji": "🐰🥕",
+          "tip": "Opýtajte sa: Kto to je? Čo chrúme? Ako mu asi chutí?"
+        },
+        {
+          "text": "Povedz celou vetou, čo sa deje: 🐟🌊",
+          "emoji": "🐟🌊",
+          "tip": "Skúste vetu spoločne predĺžiť: Kde rybka pláva? Pláva rýchlo, či pomaly?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-dokonci-pribeh-2",
+    "domain": "narrative",
+    "modality": "speech",
+    "title": "Dokonči príbeh",
+    "summary": "Generovanie pokračovania a záveru príbehu rozvíja epizodickú štruktúru naratívu (zápletka – riešenie – záver), naratívnu fluenciu a divergentné myslenie.",
+    "parent_guide": "Prečítajte začiatok príbehu pomaly a trochu tajomne. Potom sa spýtajte: „Čo sa stalo potom?“ Keď dieťa dorozpráva, pridajte druhú otázku: „A ako to celé dopadlo?“ Ak sa dieťa zasekne, ponúknite dve možnosti na výber, ale rozhodnutie nechajte vždy na ňom.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 8,
+    "content": {
+      "type": "speech_items",
+      "intro": "Vypočuj si začiatok príbehu a vymysli, ako pokračuje a ako sa skončí.",
+      "items": [
+        {
+          "text": "Maja našla v tráve malé mačiatko. Bolo celkom samo a tíško mňaukalo…",
+          "emoji": "🐱",
+          "tip": "Navádzajte štruktúrou: Čo urobila Maja potom? A ako to nakoniec dopadlo?"
+        },
+        {
+          "text": "Kubo staval z kociek vysokánsku vežu. Vtom do izby vbehol jeho malý braček…",
+          "emoji": "🧱",
+          "tip": "Ak dieťa skončí jednou vetou, spýtajte sa: Čo sa stalo potom? Ako sa cítil Kubo?"
+        },
+        {
+          "text": "Hanka na výlete zbadala, že sa pod starým stromom niečo ligoce…",
+          "emoji": "✨",
+          "tip": "Podporte fantáziu: Čo to mohlo byť? Čo s tým Hanka urobila? Ako sa príbeh skončil?"
+        },
+        {
+          "text": "Psík Dunčo vyhrabal na dvore starú škatuľku…",
+          "emoji": "🐶",
+          "tip": "Pýtajte sa: Čo bolo vnútri? Komu to Dunčo ukázal? Ako to dopadlo?"
+        },
+        {
+          "text": "Lienka Bodka sa ráno zobudila a zistila, že jej chýba jedna bodka…",
+          "emoji": "🐞",
+          "tip": "Ak sa dieťa zasekne, ponúknite otázku: Kde ju mohla stratiť? Kto jej pomohol hľadať?"
+        },
+        {
+          "text": "Do triedy prišiel nový chlapec. Nikoho nepoznal a hanbil sa…",
+          "emoji": "🏫",
+          "tip": "Zamerajte sa na záver: Kto sa s ním skamarátil? Ako sa cítil na konci dňa?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-tajna-rec-rozpravok-2",
+    "domain": "narrative",
+    "modality": "guided",
+    "title": "Tajná reč rozprávok",
+    "summary": "Symbolické modelovanie deja podľa metodiky Ďjačenkovej: dieťa externalizuje makroštruktúru známej rozprávky pomocou zástupných predmetov a prerozpráva ju s vizuálnou oporou — rozvoj sukcesívneho radenia deja a samostatnej naratívnej produkcie.",
+    "parent_guide": "Prichystajte misku drobných predmetov (gombíky, kocky, viečka, kamienky) a vyberte rozprávku, ktorú dieťa dobre pozná. Prvýkrát rozprávate vy a dieťa ukladá predmety-postavy do radu. Potom si úlohy vymeníte: dieťa rozpráva, vy počúvate. Do rozprávania nevstupujte — ak sa dieťa stratí, iba ticho ukážte na ďalší predmet v rade.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes budeme rozprávať rozprávku tajnou rečou — každú postavu zahrá malý predmet.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Naladenie",
+          "title": "Ako sa cítiš pred rozprávkou?",
+          "body": "Povedzte: „Chystá sa rozprávková hra! Ale najprv mi povedz, ako sa práve teraz cítiš.“ Nechajte dieťa vybrať a pocit spolu pomenujte.",
+          "choices": ["Veselo", "Zvedavo", "Pokojne", "Unavene"]
+        },
+        {
+          "kicker": "Krok 2 · Plán",
+          "title": "Vyberte si rozprávku",
+          "body": "Povedzte: „Zahráme sa na tajnú reč rozprávok. Postavy nebudú na obrázkoch — zahrajú ich drobné predmety zo stola.“ Spolu si vyberte rozprávku, ktorú dieťa dobre pozná, a vymenujte jej postavy.",
+          "choices": ["O repke", "O troch prasiatkach", "Červená čiapočka", "O medovníkovom domčeku"],
+          "tip": "Vyberte rozprávku, ktorú dieťa počulo veľakrát. Cieľom nie je učiť nový dej, ale rozprávať."
+        },
+        {
+          "kicker": "Krok 3 · Príprava",
+          "title": "Tajné symboly postáv",
+          "body": "Nachystajte kôpku drobných predmetov: gombíky, kocky, viečka, kamienky, lyžičku. Za každú postavu nech si dieťa vyberie jeden predmet a povie, prečo sa hodí: „Myška bude tento malý gombík, lebo je maličká.“",
+          "fields": [
+            {
+              "label": "Kto koho hrá?",
+              "placeholder": "napr. veľká kocka = dedko, malý gombík = myška"
+            }
+          ],
+          "tip": "Nevyberajte predmety za dieťa. Každý výber je správny, ak ho dieťa vie zdôvodniť."
+        },
+        {
+          "kicker": "Krok 4 · Dej",
+          "title": "Poskladajte dej z predmetov",
+          "body": "Pomaly rozprávajte rozprávku. Dieťa pri každej postave položí jej predmet do radu presne v poradí, v akom postavy vstupujú do deja. Na konci sa na rad spolu pozrite a povedzte: „Toto je celá naša rozprávka.“"
+        },
+        {
+          "kicker": "Krok 5 · Samostatný pokus",
+          "title": "Dieťa rozpráva samo",
+          "body": "Teraz je rozprávačom dieťa. Prstom prechádza po rade predmetov a rozpráva rozprávku od začiatku do konca vlastnými slovami.",
+          "tip": "Nevstupujte do rozprávania a neopravujte. Ak sa dieťa zasekne, iba ticho ukážte na ďalší predmet v rade."
+        },
+        {
+          "kicker": "Krok 6 · Reflexia",
+          "title": "Ako sa nám darilo?",
+          "body": "Spolu sa porozprávajte, ako sa dieťaťu rozprávalo. Spýtajte sa: „Čo ti išlo najľahšie? Kde ti pomohli predmety?“ Dieťa nech si vyberie, čo naň sedí.",
+          "choices": ["Išlo mi to ľahko", "Miestami to bolo ťažké", "Pomohli mi predmety v rade"],
+          "fields": [
+            {
+              "label": "Čo sa dieťaťu darilo najviac?",
+              "placeholder": "napr. vymenovalo všetky postavy v správnom poradí"
+            },
+            {
+              "label": "Kde potrebovalo pomoc?",
+              "placeholder": "napr. pripomenúť, kto prišiel na rad po psíkovi"
+            }
+          ]
+        },
+        {
+          "kicker": "Krok 7 · Ukotvenie",
+          "title": "Zvládnem to krok za krokom",
+          "body": "Pomenujte úspech konkrétne: dieťa porozprávalo celú rozprávku samo a predmety mu pomohli udržať poradie. Spolu nahlas zopakujte: „Rozprávku zvládnem krok za krokom.“"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-moj-den-1",
+    "domain": "narrative",
+    "modality": "guided",
+    "title": "Môj deň",
+    "summary": "Personálny naratív so štruktúrovanou časovou osnovou (ráno – doobeda – poobede – večer) rozvíja autobiografické rozprávanie, sekvenčné radenie udalostí a epizodickú pamäť.",
+    "parent_guide": "Nájdite si pokojnú chvíľu, najlepšie večer. Držte sa poradia ráno → doobeda → poobede → večer a pri každej časti položte len jednu úvodnú otázku, napríklad: „Čo bolo ráno?“ Počkajte, kým dieťa dohovorí, a jeho vety nedokončujte. Na záver spolu vyberte najkrajšiu chvíľu dňa a zapíšte ju slovami dieťaťa.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 8,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Porozprávaš mi, aký bol tvoj deň? Pôjdeme pekne po poriadku: ráno, doobeda, poobede a večer.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Naladenie",
+          "title": "Ako sa dnes cítiš?",
+          "body": "Sadnite si k dieťaťu a povedzte: „Poď mi porozprávať o svojom dni. Ale najprv — ako sa práve teraz cítiš?“ Nechajte dieťa vybrať a pocit spolu pomenujte.",
+          "choices": ["Veselo", "Pokojne", "Unavene", "Trochu namrzene"]
+        },
+        {
+          "kicker": "Krok 2 · Plán",
+          "title": "Deň má štyri časti",
+          "body": "Vysvetlite: „Deň si rozdelíme ako koláč na štyri kúsky: ráno, doobeda, poobede a večer.“ Pri každej časti zdvihnite jeden prst — dieťa nech ich zopakuje po vás.",
+          "tip": "Ak máte poruke papier, nakreslite štyri okienka — dieťa si do nich môže pri rozprávaní kresliť malé obrázky."
+        },
+        {
+          "kicker": "Krok 3 · Rozprávanie",
+          "title": "Rozprávaj po poriadku",
+          "body": "Dieťa rozpráva o svojom dni po častiach. Pri každej časti položte len úvodnú otázku: „Čo bolo ráno?“ — a potom počúvajte. Keď časť skončí, presuňte sa na ďalšiu.",
+          "tip": "V tichosti vydržte aj dlhšiu pauzu. Nedopĺňajte vety za dieťa — pomôže skôr zopakovanie jeho poslednej vety."
+        },
+        {
+          "kicker": "Krok 4 · Najkrajšia chvíľa",
+          "title": "Čo bolo dnes najkrajšie?",
+          "body": "Spýtajte sa: „Ktorá chvíľa dňa bola dnes najkrajšia?“ Odpoveď dieťaťa zapíšte jeho vlastnými slovami.",
+          "fields": [
+            {
+              "label": "Najkrajšia časť dňa",
+              "placeholder": "napr. poobede sme púšťali šarkana s ockom"
+            }
+          ]
+        },
+        {
+          "kicker": "Krok 5 · Ukotvenie",
+          "title": "Viem rozprávať po poriadku",
+          "body": "Pochváľte dieťa konkrétne — pomenujte, že rozprávalo pekne po poriadku od rána až po večer. Spolu nahlas zopakujte: „Svoj deň viem porozprávať krok za krokom.“",
+          "fields": [
+            {
+              "label": "Ktorá časť dňa sa rozprávala najľahšie?",
+              "placeholder": "napr. ráno — presne vedelo, čo raňajkovalo"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

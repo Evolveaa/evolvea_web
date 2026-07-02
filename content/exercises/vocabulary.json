@@ -1,0 +1,606 @@
+[
+  {
+    "slug": "vo-co-nepatri-1",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Čo medzi ostatné nepatrí?",
+    "summary": "Sémantická klasifikácia na úrovni základných kategórií: dieťa vylučuje položku, ktorá nepatrí do skupiny. Buduje nadradené pojmy a organizáciu slovnej zásoby.",
+    "parent_guide": "Pomaly prečítajte všetky štyri slová a pri každom ukážte na obrázok. Ak si dieťa nie je isté, vymenujte tri podobné veci ešte raz a spýtajte sa: „Čo majú tieto tri spoločné?“ Keď dieťa ukáže odpoveď, poproste ho, aby povedalo prečo, a spolu sa potešte: „Áno, presne tak!“",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "choice",
+      "intro": "Pozri sa na obrázky. Tri veci k sebe patria a jedna sa medzi ne zatúlala. Nájdeš ju?",
+      "items": [
+        {
+          "prompt": "Počúvaj: pes, mačka, krava a auto. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "pes", "emoji": "🐶" },
+            { "label": "mačka", "emoji": "🐱" },
+            { "label": "krava", "emoji": "🐮" },
+            { "label": "auto", "emoji": "🚗", "correct": true }
+          ],
+          "hint": "Tri z nich vedia behať a papať. Ktorá vec to nevie?"
+        },
+        {
+          "prompt": "Počúvaj: jablko, banán, hruška a stolička. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "banán", "emoji": "🍌" },
+            { "label": "hruška", "emoji": "🍐" },
+            { "label": "stolička", "emoji": "🪑", "correct": true }
+          ],
+          "hint": "Do troch z nich si môžeš zahryznúť. Ktorú vec nezješ?"
+        },
+        {
+          "prompt": "Počúvaj: tričko, čiapka, topánka a banán. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "tričko", "emoji": "👕" },
+            { "label": "čiapka", "emoji": "🧢" },
+            { "label": "topánka", "emoji": "👟" },
+            { "label": "banán", "emoji": "🍌", "correct": true }
+          ],
+          "hint": "Tri veci si ráno obliekaš alebo obúvaš. Ktorú si na seba nedáš?"
+        },
+        {
+          "prompt": "Počúvaj: auto, vlak, lietadlo a mačka. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "auto", "emoji": "🚗" },
+            { "label": "vlak", "emoji": "🚂" },
+            { "label": "lietadlo", "emoji": "✈️" },
+            { "label": "mačka", "emoji": "🐱", "correct": true }
+          ],
+          "hint": "Tromi z nich sa môžeš odviezť na výlet. Čo z toho ťa neodvezie?"
+        },
+        {
+          "prompt": "Počúvaj: lyžica, vidlička, tanier a lopta. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "lyžica", "emoji": "🥄" },
+            { "label": "vidlička", "emoji": "🍴" },
+            { "label": "tanier", "emoji": "🍽️" },
+            { "label": "lopta", "emoji": "⚽", "correct": true }
+          ],
+          "hint": "Tri veci nájdeš na stole pri obede. Ktorá tam nepatrí?"
+        },
+        {
+          "prompt": "Počúvaj: slon, žirafa, lev a jahoda. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "slon", "emoji": "🐘" },
+            { "label": "žirafa", "emoji": "🦒" },
+            { "label": "lev", "emoji": "🦁" },
+            { "label": "jahoda", "emoji": "🍓", "correct": true }
+          ],
+          "hint": "Tri z nich uvidíš v zoo. Ktorú tam nenájdeš?"
+        },
+        {
+          "prompt": "Počúvaj: ruža, tulipán, slnečnica a autobus. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "ruža", "emoji": "🌹" },
+            { "label": "tulipán", "emoji": "🌷" },
+            { "label": "slnečnica", "emoji": "🌻" },
+            { "label": "autobus", "emoji": "🚌", "correct": true }
+          ],
+          "hint": "Tri z nich rastú v záhrade a voňajú. Ktorá vec nerastie?"
+        },
+        {
+          "prompt": "Počúvaj: lopta, medvedík, šarkan a mrkva. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "lopta", "emoji": "⚽" },
+            { "label": "medvedík", "emoji": "🧸" },
+            { "label": "šarkan", "emoji": "🪁" },
+            { "label": "mrkva", "emoji": "🥕", "correct": true }
+          ],
+          "hint": "S tromi z nich sa môžeš hrať. Čo z toho nie je na hranie?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-co-nepatri-3",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Zatúlané slovo",
+    "summary": "Vylučovanie podľa jemnejších sémantických kritérií (ovocie vs. zelenina, lietajúce vs. nelietajúce, domáce vs. divé). Prehlbuje pojmovú diferenciáciu a flexibilitu kategorizácie.",
+    "parent_guide": "Prečítajte všetky štyri slová a nechajte dieťa chvíľu premýšľať — skupiny sú tu záludnejšie. Ak váha, prečítajte pomocnú otázku: pomenúva, podľa čoho sa veci delia. Po odpovedi poproste dieťa o zdôvodnenie celou vetou: „Nepatrí tam, lebo…“ Ak sa pomýli, neprezrádzajte — vráťte sa k pomocnej otázke a skúste to spolu ešte raz.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "choice",
+      "intro": "Toto sú hádanky pre bystré hlavičky. Jedno slovo sa medzi ostatné zatúlalo — musíš dobre premýšľať, prečo!",
+      "items": [
+        {
+          "prompt": "Počúvaj: jablko, hruška, čerešňa a mrkva. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "hruška", "emoji": "🍐" },
+            { "label": "čerešňa", "emoji": "🍒" },
+            { "label": "mrkva", "emoji": "🥕", "correct": true }
+          ],
+          "hint": "Čo z toho je ovocie a čo zelenina?"
+        },
+        {
+          "prompt": "Počúvaj: motýľ, včela, vtáčik a slimák. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "motýľ", "emoji": "🦋" },
+            { "label": "včela", "emoji": "🐝" },
+            { "label": "vtáčik", "emoji": "🐦" },
+            { "label": "slimák", "emoji": "🐌", "correct": true }
+          ],
+          "hint": "Ktoré z nich vedia lietať a ktoré nie?"
+        },
+        {
+          "prompt": "Počúvaj: pes, mačka, kôň a vlk. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "pes", "emoji": "🐶" },
+            { "label": "mačka", "emoji": "🐱" },
+            { "label": "kôň", "emoji": "🐴" },
+            { "label": "vlk", "emoji": "🐺", "correct": true }
+          ],
+          "hint": "Ktoré zvieratá žijú s ľuďmi doma či na dvore a ktoré v divokej prírode?"
+        },
+        {
+          "prompt": "Počúvaj: rukavice, šál, kabát a plavky. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "rukavice", "emoji": "🧤" },
+            { "label": "šál", "emoji": "🧣" },
+            { "label": "kabát", "emoji": "🧥" },
+            { "label": "plavky", "emoji": "🩱", "correct": true }
+          ],
+          "hint": "Čo si obliekaš v zime a čo v lete?"
+        },
+        {
+          "prompt": "Počúvaj: gitara, bubon, trúbka a kladivo. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "gitara", "emoji": "🎸" },
+            { "label": "bubon", "emoji": "🥁" },
+            { "label": "trúbka", "emoji": "🎺" },
+            { "label": "kladivo", "emoji": "🔨", "correct": true }
+          ],
+          "hint": "Na čom z toho sa dá zahrať pesnička a na čom nie?"
+        },
+        {
+          "prompt": "Počúvaj: bicykel, skejtbord, kolobežka a sánky. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "bicykel", "emoji": "🚲" },
+            { "label": "skejtbord", "emoji": "🛹" },
+            { "label": "kolobežka", "emoji": "🛴" },
+            { "label": "sánky", "emoji": "🛷", "correct": true }
+          ],
+          "hint": "Ktoré z nich majú kolesá a ktoré sa kĺžu po snehu?"
+        },
+        {
+          "prompt": "Počúvaj: syr, maslo, mlieko a chlieb. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "syr", "emoji": "🧀" },
+            { "label": "maslo", "emoji": "🧈" },
+            { "label": "mlieko", "emoji": "🥛" },
+            { "label": "chlieb", "emoji": "🍞", "correct": true }
+          ],
+          "hint": "Čo z toho máme vďaka kravičke a čo sa pečie z múky?"
+        },
+        {
+          "prompt": "Počúvaj: čaj, polievka, kakao a zmrzlina. Čo medzi ostatné nepatrí?",
+          "options": [
+            { "label": "čaj", "emoji": "☕" },
+            { "label": "polievka", "emoji": "🍲" },
+            { "label": "kakao", "emoji": "🍵" },
+            { "label": "zmrzlina", "emoji": "🍦", "correct": true }
+          ],
+          "hint": "Čo z toho je horúce a čo studené?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-protiklady-1",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Slová naopak",
+    "summary": "Antonymá — dieťa priraďuje k slovu jeho protiklad. Rozširuje slovník prídavných mien a prísloviek a upevňuje chápanie sémantických vzťahov.",
+    "parent_guide": "Slovo prečítajte pomaly a zahrajte ho telom: pri slove veľký sa vystrite a rozpažte, pri slove malý sa prikrčte. Ak dieťa váha, povedzte vetu s medzerou na doplnenie: „Slon je veľký a myška je…?“ a nechajte dieťa vetu dokončiť. Správnu odpoveď spolu zopakujte v celej vete.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "choice",
+      "intro": "Zahráme sa na slová naopak. Poviem ti slovo a ty nájdeš jeho opak!",
+      "items": [
+        {
+          "prompt": "Aký je opak slova veľký?",
+          "options": [
+            { "label": "malý", "emoji": "🐭", "correct": true },
+            { "label": "vysoký", "emoji": "🦒" },
+            { "label": "rýchly", "emoji": "🐇" }
+          ],
+          "hint": "Slon je veľký. Aká je myška?"
+        },
+        {
+          "prompt": "Aký je opak slova horúci?",
+          "options": [
+            { "label": "studený", "emoji": "❄️", "correct": true },
+            { "label": "sladký", "emoji": "🍬" },
+            { "label": "hlasný", "emoji": "📣" }
+          ],
+          "hint": "Čaj je horúci. Aká je zmrzlina?"
+        },
+        {
+          "prompt": "Čo je opakom slova deň?",
+          "options": [
+            { "label": "noc", "emoji": "🌙", "correct": true },
+            { "label": "jar", "emoji": "🌷" },
+            { "label": "slnko", "emoji": "☀️" }
+          ],
+          "hint": "Cez deň svieti slnko. Čo je vtedy, keď svieti mesiac a hviezdy?"
+        },
+        {
+          "prompt": "Aký je opak slova rýchly?",
+          "options": [
+            { "label": "pomalý", "emoji": "🐌", "correct": true },
+            { "label": "malý", "emoji": "🐭" },
+            { "label": "hladný", "emoji": "🍽️" }
+          ],
+          "hint": "Zajac beží rýchlo. Ako sa pohybuje slimák?"
+        },
+        {
+          "prompt": "Aký je opak slova veselý?",
+          "options": [
+            { "label": "smutný", "emoji": "😢", "correct": true },
+            { "label": "ospalý", "emoji": "😴" },
+            { "label": "prekvapený", "emoji": "😮" }
+          ],
+          "hint": "Keď sa smeješ, si veselý. Aký si, keď plačeš?"
+        },
+        {
+          "prompt": "Čo je opakom slova hore?",
+          "options": [
+            { "label": "dole", "emoji": "⬇️", "correct": true },
+            { "label": "dopredu", "emoji": "➡️" },
+            { "label": "dokola", "emoji": "🔄" }
+          ],
+          "hint": "Vtáčik vyletí hore na strom. Kam padá list zo stromu?"
+        },
+        {
+          "prompt": "Aký je opak slova ťažký?",
+          "options": [
+            { "label": "ľahký", "emoji": "🪶", "correct": true },
+            { "label": "tvrdý", "emoji": "🪨" },
+            { "label": "dlhý", "emoji": "📏" }
+          ],
+          "hint": "Kameň je ťažký. Aké je pierko?"
+        },
+        {
+          "prompt": "Aký je opak slova starý?",
+          "options": [
+            { "label": "mladý", "emoji": "👶", "correct": true },
+            { "label": "múdry", "emoji": "🦉" },
+            { "label": "vysoký", "emoji": "🦒" }
+          ],
+          "hint": "Dedko je starý. Aké je bábätko?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-kategorie-2",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Kam to patrí?",
+    "summary": "Priraďovanie slov k miestam a témam (kuchyňa, les, zima). Upevňuje sémantické polia a kontextovú organizáciu slovnej zásoby.",
+    "parent_guide": "Otázku prečítajte a nechajte dieťa najprv hádať samo. Ak váha, spolu si miesto predstavte: „Zavri oči. Sme v kuchyni. Čo tam vidíš? Čo tam vonia?“ Po správnej odpovedi poproste dieťa, aby vymenovalo ešte jednu vec, ktorá tam tiež patrí — tým si slovnú zásobu upevní.",
+    "difficulty": 2,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "choice",
+      "intro": "Každá vec má svoje miesto. Uhádneš, čo kam patrí?",
+      "items": [
+        {
+          "prompt": "Čo patrí do kuchyne?",
+          "options": [
+            { "label": "hrniec", "emoji": "🍲", "correct": true },
+            { "label": "vankúš", "emoji": "🛏️" },
+            { "label": "kolobežka", "emoji": "🛴" }
+          ],
+          "hint": "Predstav si, ako sa varí polievka. Čo je na to potrebné?"
+        },
+        {
+          "prompt": "Čo patrí do lesa?",
+          "options": [
+            { "label": "veverička", "emoji": "🐿️", "correct": true },
+            { "label": "televízor", "emoji": "📺" },
+            { "label": "plavky", "emoji": "🩱" }
+          ],
+          "hint": "Čo z toho môžeš stretnúť medzi stromami?"
+        },
+        {
+          "prompt": "Čo patrí k zime?",
+          "options": [
+            { "label": "snehuliak", "emoji": "⛄", "correct": true },
+            { "label": "motýľ", "emoji": "🦋" },
+            { "label": "jahody", "emoji": "🍓" }
+          ],
+          "hint": "Čo z toho uvidíš vonku, keď sneží?"
+        },
+        {
+          "prompt": "Čo patrí do kúpeľne?",
+          "options": [
+            { "label": "zubná kefka", "emoji": "🪥", "correct": true },
+            { "label": "lyžica", "emoji": "🥄" },
+            { "label": "lopta", "emoji": "⚽" }
+          ],
+          "hint": "Čo z toho používaš každý večer pri umývaní?"
+        },
+        {
+          "prompt": "Čo patrí na oblohu?",
+          "options": [
+            { "label": "mrak", "emoji": "☁️", "correct": true },
+            { "label": "ryba", "emoji": "🐟" },
+            { "label": "stolička", "emoji": "🪑" }
+          ],
+          "hint": "Čo z toho uvidíš, keď sa pozrieš hore na oblohu?"
+        },
+        {
+          "prompt": "Čo patrí do mora?",
+          "options": [
+            { "label": "chobotnica", "emoji": "🐙", "correct": true },
+            { "label": "ťava", "emoji": "🐫" },
+            { "label": "sova", "emoji": "🦉" }
+          ],
+          "hint": "Kto z nich vie plávať hlboko pod vodou?"
+        },
+        {
+          "prompt": "Čo patrí do školy?",
+          "options": [
+            { "label": "aktovka", "emoji": "🎒", "correct": true },
+            { "label": "hrniec", "emoji": "🍲" },
+            { "label": "sánky", "emoji": "🛷" }
+          ],
+          "hint": "Čo z toho potrebuje školák na vyučovaní?"
+        },
+        {
+          "prompt": "Čo patrí k letu?",
+          "options": [
+            { "label": "slnečné okuliare", "emoji": "🕶️", "correct": true },
+            { "label": "rukavice", "emoji": "🧤" },
+            { "label": "snehuliak", "emoji": "⛄" }
+          ],
+          "hint": "Čo z toho si berieš von, keď silno svieti slniečko?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-hadanky-2",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Hádanky",
+    "summary": "Počúvanie s porozumením a inferencia: dieťa spája viacero vlastností z opisu do jedného pojmu. Rozvíja porozumenie súvislej reči a aktívny slovník.",
+    "parent_guide": "Hádanku prečítajte pomaly a s tajomným hlasom, pokojne aj dvakrát. Ak dieťa nevie, zopakujte ju po častiach a pri každej sa spýtajte: „Kto to robí? Kto tak vyzerá?“ Nechajte dieťa hádať bez náhlenia — hádanie je hra, nie skúšanie. Na záver nech dieťa hádanku zopakuje vlastnými slovami.",
+    "difficulty": 2,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 6,
+    "content": {
+      "type": "choice",
+      "intro": "Mám pre teba hádanky! Dobre počúvaj a uhádni, o kom alebo o čom hovorím.",
+      "items": [
+        {
+          "prompt": "Má štyri nohy, šteká a stráži dom. Kto je to?",
+          "options": [
+            { "label": "pes", "emoji": "🐶", "correct": true },
+            { "label": "mačka", "emoji": "🐱" },
+            { "label": "kohút", "emoji": "🐓" }
+          ],
+          "hint": "Ktoré z týchto zvierat počuješ štekať?"
+        },
+        {
+          "prompt": "Je oranžová, chrumkavá a rastie v zemi. Zajačik ju rád chrúme. Čo je to?",
+          "options": [
+            { "label": "mrkva", "emoji": "🥕", "correct": true },
+            { "label": "jablko", "emoji": "🍎" },
+            { "label": "syr", "emoji": "🧀" }
+          ],
+          "hint": "Ktorá z týchto vecí je oranžová a rastie v zemi?"
+        },
+        {
+          "prompt": "V noci svieti na oblohe a cez deň sa schová. Čo je to?",
+          "options": [
+            { "label": "mesiac", "emoji": "🌙", "correct": true },
+            { "label": "slnko", "emoji": "☀️" },
+            { "label": "kvet", "emoji": "🌷" }
+          ],
+          "hint": "Čo vidíš na oblohe, keď je tma?"
+        },
+        {
+          "prompt": "Má veľmi dlhý krk a vidí ponad všetky stromy. Kto je to?",
+          "options": [
+            { "label": "žirafa", "emoji": "🦒", "correct": true },
+            { "label": "myš", "emoji": "🐭" },
+            { "label": "korytnačka", "emoji": "🐢" }
+          ],
+          "hint": "Ktoré z týchto zvierat je najvyššie?"
+        },
+        {
+          "prompt": "Padá z neba, je biely a studený. V zime z neho staviame snehuliaka. Čo je to?",
+          "options": [
+            { "label": "sneh", "emoji": "❄️", "correct": true },
+            { "label": "dážď", "emoji": "🌧️" },
+            { "label": "list", "emoji": "🍂" }
+          ],
+          "hint": "Čo z toho je biele a studené?"
+        },
+        {
+          "prompt": "Má dve kolesá a zvonček. Šliapeš na ňom do pedálov. Čo je to?",
+          "options": [
+            { "label": "bicykel", "emoji": "🚲", "correct": true },
+            { "label": "auto", "emoji": "🚗" },
+            { "label": "vlak", "emoji": "🚂" }
+          ],
+          "hint": "Na čom z toho šliapeš nohami, aby sa pohlo?"
+        },
+        {
+          "prompt": "Býva v úli, bzučí a vyrába sladký med. Kto je to?",
+          "options": [
+            { "label": "včela", "emoji": "🐝", "correct": true },
+            { "label": "motýľ", "emoji": "🦋" },
+            { "label": "mravec", "emoji": "🐜" }
+          ],
+          "hint": "Kto z nich robí bzzz?"
+        },
+        {
+          "prompt": "Keď prší, roztvoríš ho a držíš nad hlavou, aby na teba nepršalo. Čo je to?",
+          "options": [
+            { "label": "dáždnik", "emoji": "☂️", "correct": true },
+            { "label": "čiapka", "emoji": "🧢" },
+            { "label": "lyžica", "emoji": "🥄" }
+          ],
+          "hint": "Čo z toho ti pomôže, keď vonku prší?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-vymenuj-2",
+    "domain": "vocabulary",
+    "modality": "speech",
+    "title": "Vymenuj čo najviac",
+    "summary": "Verbálna fluencia — generatívne menovanie v sémantických kategóriách. Ukazovateľ dostupnosti a organizácie lexikónu; posilňuje lexikálne vybavovanie.",
+    "parent_guide": "Zadajte kategóriu a pre rozbeh povedzte jedno slovo ako príklad. Slová dieťaťa počítajte nahlas na prstoch, nech vidí, ako mu pribúdajú body. Keď sa zasekne, pomôžte otázkou: „A čo vidíš v izbe? Čo máme na dvore?“ Pochváľte každé slovo — počet je hra, nie skúška.",
+    "difficulty": 2,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 8,
+    "content": {
+      "type": "speech_items",
+      "intro": "Zahráme sa na zbieranie slov. Vymenuj čo najviac vecí — každé slovo je jeden bod!",
+      "items": [
+        {
+          "text": "Vymenuj čo najviac zvierat.",
+          "emoji": "🐾",
+          "tip": "Cieľ je aspoň 6 slov — počítajte ich na prstoch. Ak sa dieťa zasekne, spýtajte sa: „A čo žije vo vode? Čo lieta?“"
+        },
+        {
+          "text": "Vymenuj čo najviac farieb.",
+          "emoji": "🎨",
+          "tip": "Cieľ okolo 6 slov. Pomôžte otázkou: „Akú farbu má tvoje tričko? A obloha? A tráva?“"
+        },
+        {
+          "text": "Vymenuj čo najviac vecí, ktoré nájdeš v kuchyni.",
+          "emoji": "🍳",
+          "tip": "Počítajte na prstoch, cieľ aspoň 6. Pomôžte otázkou: „Čo potrebuješ na polievku? Z čoho ješ a piješ?“"
+        },
+        {
+          "text": "Vymenuj čo najviac druhov ovocia a zeleniny.",
+          "emoji": "🍎",
+          "tip": "Cieľ 6 a viac. Pomôže predstava obchodu: „Ideme nakupovať — čo dáme do košíka?“"
+        },
+        {
+          "text": "Vymenuj čo najviac kusov oblečenia.",
+          "emoji": "👕",
+          "tip": "Cieľ okolo 6 slov. Pomôžte otázkou: „Čo si obliekaš ráno? A čo navyše v zime?“"
+        },
+        {
+          "text": "Vymenuj čo najviac hračiek.",
+          "emoji": "🧸",
+          "tip": "Cieľ aspoň 6. Ak treba, spýtajte sa: „S čím sa hráš vonku? Čo máš v izbe na poličke?“"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-nadradene-slova-3",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Jedným slovom",
+    "summary": "Nadradené pojmy — dieťa zovšeobecňuje skupinu slov do kategórie. Kľúčové pre hierarchickú organizáciu lexikónu a neskoršie definičné schopnosti.",
+    "parent_guide": "Tri slová vymenujte pomaly, pri každom urobte malú pauzu a spýtajte sa: „Ako ich nazveme jedným slovom?“ Ak dieťa váha, pridajte ďalší príklad z rovnakej skupiny a spýtajte sa, kde všetky tieto veci nájdeme. Na záver nech dieťa samo vymyslí ešte jednu vec z tej istej skupiny.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "choice",
+      "intro": "Niektoré slová sú ako kúzelné vrecúška — zmestí sa do nich veľa vecí naraz. Skús ich nájsť!",
+      "items": [
+        {
+          "prompt": "Jablko, hruška a slivka — ako sa volajú jedným slovom?",
+          "options": [
+            { "label": "ovocie", "emoji": "🍎", "correct": true },
+            { "label": "zelenina", "emoji": "🥕" },
+            { "label": "sladkosti", "emoji": "🍬" }
+          ],
+          "hint": "Všetky rastú na stromoch v sade. Aká je to skupina?"
+        },
+        {
+          "prompt": "Pes, mačka a zajac — ako ich nazveme jedným slovom?",
+          "options": [
+            { "label": "zvieratá", "emoji": "🐾", "correct": true },
+            { "label": "hračky", "emoji": "🧸" },
+            { "label": "vtáky", "emoji": "🐦" }
+          ],
+          "hint": "Všetky sú živé, majú srsť a štyri nohy. Do akej skupiny patria?"
+        },
+        {
+          "prompt": "Tričko, nohavice a ponožky — čo je to jedným slovom?",
+          "options": [
+            { "label": "oblečenie", "emoji": "👕", "correct": true },
+            { "label": "riad", "emoji": "🍽️" },
+            { "label": "nábytok", "emoji": "🪑" }
+          ],
+          "hint": "Čo so všetkými robíme každé ráno, keď vstaneme?"
+        },
+        {
+          "prompt": "Stôl, stolička a skriňa — ako sa volajú jedným slovom?",
+          "options": [
+            { "label": "nábytok", "emoji": "🪑", "correct": true },
+            { "label": "oblečenie", "emoji": "👕" },
+            { "label": "ovocie", "emoji": "🍎" }
+          ],
+          "hint": "Všetky stoja v izbe a bývajú z dreva. Aká je to skupina?"
+        },
+        {
+          "prompt": "Auto, vlak a lietadlo — čo je to jedným slovom?",
+          "options": [
+            { "label": "dopravné prostriedky", "emoji": "🚗", "correct": true },
+            { "label": "zvieratá", "emoji": "🐾" },
+            { "label": "budovy", "emoji": "🏠" }
+          ],
+          "hint": "Na čo nám všetky slúžia, keď ideme na výlet?"
+        },
+        {
+          "prompt": "Mrkva, uhorka a kapusta — ako ich nazveme jedným slovom?",
+          "options": [
+            { "label": "zelenina", "emoji": "🥕", "correct": true },
+            { "label": "ovocie", "emoji": "🍎" },
+            { "label": "kvety", "emoji": "🌷" }
+          ],
+          "hint": "Všetky rastú v záhradke na hriadke a dávame ich do šalátu. Aká je to skupina?"
+        },
+        {
+          "prompt": "Gitara, bubon a trúbka — čo je to jedným slovom?",
+          "options": [
+            { "label": "hudobné nástroje", "emoji": "🎸", "correct": true },
+            { "label": "náradie", "emoji": "🔨" },
+            { "label": "hračky", "emoji": "🧸" }
+          ],
+          "hint": "Čo so všetkými robíme, keď chceme počuť hudbu?"
+        },
+        {
+          "prompt": "Ruža, tulipán a slnečnica — ako sa volajú jedným slovom?",
+          "options": [
+            { "label": "kvety", "emoji": "🌷", "correct": true },
+            { "label": "stromy", "emoji": "🌳" },
+            { "label": "zelenina", "emoji": "🥕" }
+          ],
+          "hint": "Voňajú, majú lupienky a dávame ich do vázy. Aká je to skupina?"
+        }
+      ]
+    }
+  }
+]

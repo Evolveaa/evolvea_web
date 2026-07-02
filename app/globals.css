@@ -81,6 +81,8 @@ h1,h2,h3{letter-spacing:-.03em;line-height:1.06;font-weight:700;color:var(--ink)
 .site-header.on-dark .brand{color:#fff}
 .site-header.on-dark.scrolled{background:rgba(10,14,26,.8);border-color:var(--navy-line)}
 .site-header.on-dark .badge-soon{background:rgba(255,255,255,.06);border-color:var(--navy-line);color:#c2cce0}
+.site-header.on-dark .btn-text{color:#fff}
+.site-header.on-dark .btn-text:hover{color:var(--sky-soft)}
 
 /* ===== Header actions + language switcher ===== */
 .header-actions{display:flex;align-items:center;gap:.7rem}

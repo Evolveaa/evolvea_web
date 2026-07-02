@@ -1,0 +1,75 @@
+"use client";
+
+import Link from "next/link";
+import { useActionState } from "react";
+import { useTranslations } from "next-intl";
+import { loginAction, type AuthState } from "@/lib/auth/actions";
+import ResendButton from "./ResendButton";
+
+export default function LoginForm({
+  next,
+  calloutError,
+}: {
+  next?: string;
+  calloutError?: boolean;
+}) {
+  const t = useTranslations("auth");
+  const [state, action, pending] = useActionState<AuthState, FormData>(loginAction, null);
+
+  return (
+    <div className="auth-card">
+      <h1 className="auth-title">{t("loginTitle")}</h1>
+      <p className="auth-lead">{t("loginLead")}</p>
+
+      {calloutError && !state && <p className="form-error">{t("errors.callback")}</p>}
+      {state?.error && (
+        <p className="form-error" role="alert">
+          {t(`errors.${state.error}`)}
+        </p>
+      )}
+
+      <form action={action}>
+        {next && <input type="hidden" name="next" value={next} />}
+        <div className="field">
+          <label className="label" htmlFor="email">
+            {t("email")}
+          </label>
+          <input
+            className="input"
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+          />
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="password">
+            {t("password")}
+          </label>
+          <input
+            className="input"
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary btn-block" disabled={pending}>
+          {pending ? t("signingIn") : t("signIn")}
+        </button>
+      </form>
+
+      {state?.error === "unconfirmed" && state.sentTo && (
+        <div style={{ marginTop: "0.8rem" }}>
+          <ResendButton email={state.sentTo} />
+        </div>
+      )}
+
+      <p className="auth-alt">
+        {t("noAccount")} <Link href="/register">{t("goRegister")}</Link>
+      </p>
+    </div>
+  );
+}

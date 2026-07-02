@@ -1,0 +1,286 @@
+[
+  {
+    "slug": "wm-zapamataj-poradie-1",
+    "domain": "working_memory",
+    "modality": "interactive",
+    "title": "Zapamätaj si poradie — prvé kroky",
+    "summary": "Tréning vizuálnej sekvenčnej pamäti na krátkych radoch (2 – 3 prvky). Buduje kapacitu krátkodobej pamäti a schopnosť udržať sériové poradie podnetov.",
+    "parent_guide": "Sadnite si vedľa dieťaťa a povedzte: „Obrázky sa nám ukážu len na chvíľku. Poď, pomenujeme ich spolu nahlas.“ Kým sú obrázky viditeľné, pomenujte ich s dieťaťom: „pes — jablko“. Potom nechajte dieťa ukladať samo. Ak zaváha, spýtajte sa: „Čo sme povedali ako prvé?“ Až keď si nevie pomôcť, pripomeňte prvý obrázok a nechajte ho dokončiť zvyšok. Nakoniec pochváľte konkrétne: „Výborne, celý rad bol správny!“",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 4,
+    "content": {
+      "type": "memory_sequence",
+      "intro": "Obrázky sa ti ukážu len na chvíľku. Dobre sa pozeraj a potom ich poukladaj presne v rovnakom poradí!",
+      "revealMsPerItem": 1500,
+      "items": [
+        {
+          "sequence": ["🐶", "🍎"],
+          "distractors": ["🐱", "⚽"],
+          "hint": "Ktorý obrázok sa ukázal ako prvý — zvieratko alebo jedlo?"
+        },
+        {
+          "sequence": ["🌞", "🚗"],
+          "distractors": ["🌙", "🚲"],
+          "hint": "Skús si obrázky povedať nahlas ako riekanku. Čím sa začínala?"
+        },
+        {
+          "sequence": ["🐟", "🌸", "⭐"],
+          "distractors": ["🐸", "🍄"],
+          "hint": "Čo sa objavilo ako prvé? Začni od neho a pokračuj ďalej."
+        },
+        {
+          "sequence": ["🎈", "🐰", "🍌"],
+          "distractors": ["🧸", "🦆"],
+          "hint": "Predstav si, že obrázky sú malý príbeh. Kto v ňom bol prvý?"
+        },
+        {
+          "sequence": ["🏠", "☂️", "🍓"],
+          "distractors": ["🌳", "🐝"],
+          "hint": "Zavri na chvíľku oči a skús rad vidieť v hlave. Čo bolo na začiatku?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "wm-zapamataj-poradie-2",
+    "domain": "working_memory",
+    "modality": "interactive",
+    "title": "Zapamätaj si poradie — dlhšie rady",
+    "summary": "Rozširovanie rozsahu vizuálnej sekvenčnej pamäti na 3 – 4 prvky s distraktormi. Posilňuje udržanie sériového poradia a odolnosť voči interferencii, podporuje stratégiu verbálneho opakovania.",
+    "parent_guide": "Pred začiatkom povedzte: „Skús si obrázky potichu opakovať, kým sa na ne pozeráš.“ Stratégiu raz predveďte nahlas: „slnko — auto — pes, slnko — auto — pes“. Počas ukladania nezasahujte. Ak si dieťa poradie pomýli, spýtajte sa: „Čím sa rad začínal?“ a nechajte ho opraviť sa samo. Prvý obrázok prezraďte, až keď si dieťa naozaj nevie pomôcť. Po každom rade oceňte snahu, nielen výsledok.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "memory_sequence",
+      "intro": "Rady obrázkov sú teraz dlhšie. Skús si ich potichu opakovať, kým sa pozeráš — potom ich poukladaj v správnom poradí!",
+      "revealMsPerItem": 1200,
+      "items": [
+        {
+          "sequence": ["🐶", "🌞", "🍎"],
+          "distractors": ["🐱", "🚗"],
+          "hint": "Skús si rad zopakovať potichu ako pesničku. Čo bolo prvé?"
+        },
+        {
+          "sequence": ["⭐", "🐸", "🎈"],
+          "distractors": ["🌸", "🐟"],
+          "hint": "Jeden z obrázkov svieti na oblohe — bol na začiatku, alebo na konci radu?"
+        },
+        {
+          "sequence": ["🚂", "🐘", "🌼", "🔑"],
+          "distractors": ["🚁", "🦁"],
+          "hint": "Rozdeľ si rad na dve dvojice. Ktorá dvojica bola prvá?"
+        },
+        {
+          "sequence": ["🎩", "🐢", "🍇", "👟"],
+          "distractors": ["🧦", "🐍"],
+          "hint": "Predstav si obrázky ako príbeh: čo sa v ňom objavilo najskôr?"
+        },
+        {
+          "sequence": ["🍦", "🐥", "🌈", "⚽"],
+          "distractors": ["🍩", "🐙"],
+          "hint": "Zopakuj si rad ešte raz v hlave. Ktorý obrázok ti utiekol?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "wm-zapamataj-poradie-3",
+    "domain": "working_memory",
+    "modality": "interactive",
+    "title": "Zapamätaj si poradie — majstrovská výzva",
+    "summary": "Náročné sekvencie 4 – 6 prvkov rozvíjajú kapacitu vizuálnej pracovnej pamäti a metakognitívne stratégie zapamätávania (verbálne opakovanie, vizualizácia, zoskupovanie do dvojíc).",
+    "parent_guide": "Ukážte dieťaťu stratégiu zoskupovania: „Zapamätaj si obrázky po dvojiciach — najprv prvé dve, potom ďalšie.“ Počas ukladania nezasahujte a nechajte dieťa pracovať vlastným tempom. Ak sa pomýli, povedzte pokojne: „Skoro! Ktorá časť radu ti utiekla?“ a doprajte mu nový pokus. Po každom rade spolu zhodnoťte: „Čo ti dnes pomohlo zapamätať si obrázky?“ Chyba je súčasť tréningu — dôležitý je plán, nie dokonalosť.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "memory_sequence",
+      "intro": "Toto je výzva pre majstrov pamäti! Rady sú dlhé, tak si ich rozdeľ na menšie časti — a do toho!",
+      "revealMsPerItem": 1000,
+      "items": [
+        {
+          "sequence": ["🐶", "🍎", "🌞", "⚽"],
+          "distractors": ["🐱", "🍌", "🚗"],
+          "hint": "Rozdeľ si rad na dve dvojice. Ktorá dvojica bola prvá?"
+        },
+        {
+          "sequence": ["🌸", "🐟", "🎈", "⭐"],
+          "distractors": ["🐸", "🌙", "🧸"],
+          "hint": "Skús si rad povedať nahlas ako riekanku. Čím sa začínala?"
+        },
+        {
+          "sequence": ["🚗", "🐰", "🍓", "🌳", "🔑"],
+          "distractors": ["🚲", "🐝", "🍪"],
+          "hint": "Predstav si obrázky ako cestu: čo ťa na nej čakalo najprv a čo potom?"
+        },
+        {
+          "sequence": ["🦁", "🌈", "🍕", "🐢", "⛵"],
+          "distractors": ["🐙", "🍇", "🎁"],
+          "hint": "Ktoré zvieratko bolo na začiatku? Začni od neho a spomínaj ďalej."
+        },
+        {
+          "sequence": ["🌞", "🐶", "🍎", "⭐", "🚗", "🎈"],
+          "distractors": ["🐱", "🌸", "🍌"],
+          "hint": "Šesť obrázkov je veľa — rozdeľ si ich na tri dvojice. Ako znela prvá?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "wm-pexeso-1",
+    "domain": "working_memory",
+    "modality": "interactive",
+    "title": "Pexeso so zvieratkami",
+    "summary": "Pexeso rozvíja vizuálno-priestorovú pracovnú pamäť a zámerné zapamätávanie polohy podnetov; súčasne podporuje udržiavanie pozornosti a striedanie v hre.",
+    "parent_guide": "Hrajte spolu a striedajte sa v ťahoch. Každú otočenú kartu spolu nahlas pomenujte: „mačka!“ — pomenovanie pomáha pamäti. Keď dieťa hľadá pár, spýtajte sa: „Kde sme už mačku videli?“ a doprajte mu čas. Správnu kartu nikdy neukazujte; radšej zúžte výber otázkou: „Bola v hornom alebo dolnom rade?“ Na konci spolu spočítajte páry a pochváľte, čo sa dieťaťu podarilo zapamätať.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "pairs",
+      "intro": "Zvieratká sa poschovávali do kartičiek — vždy dve rovnaké. Dobre si pamätaj, kde sa ktoré skrýva, a nájdi všetky páry!",
+      "pairs": ["🐶", "🐱", "🐰", "🐸", "🦁"],
+      "columns": 5
+    }
+  },
+  {
+    "slug": "wm-pexeso-2",
+    "domain": "working_memory",
+    "modality": "interactive",
+    "title": "Veľké ovocné pexeso",
+    "summary": "Náročnejšia verzia pexesa (8 párov) zvyšuje pamäťovú záťaž a nároky na systematické prehľadávanie poľa a priebežnú aktualizáciu obsahu pracovnej pamäti.",
+    "parent_guide": "Pred hrou sa dohodnite na pláne: „Budeme otáčať karty pekne po poriadku, aby sa nám ľahšie pamätalo.“ Každú otočenú kartu nahlas pomenujte. Ak dieťa dlhšie nenachádza pár, spýtajte sa: „Ktoré ovocie si pamätáš najlepšie? Skús nájsť jeho druhú kartu.“ Nesúrte ho a neukazujte správne karty. Na konci sa spolu porozprávajte, čo dieťaťu pomáhalo — plán je pri pamäti rovnako dôležitý ako šťastie.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 8,
+    "content": {
+      "type": "pairs",
+      "intro": "Ovocie sa pomiešalo! Nájdi vždy dve rovnaké kartičky. Dobre si pamätaj, kde čo leží — kariet je tentoraz naozaj veľa.",
+      "pairs": ["🍎", "🍌", "🍓", "🍇", "🍉", "🍒", "🍋", "🍐"],
+      "columns": 4
+    }
+  },
+  {
+    "slug": "wm-opakuj-odzadu-2",
+    "domain": "working_memory",
+    "modality": "speech",
+    "title": "Povedz to odzadu",
+    "summary": "Reprodukcia radu čísel a slov v opačnom poradí (backward span) zaťažuje centrálnu exekutívu — dieťa musí podnety súčasne podržať v pamäti a mentálne preusporiadať.",
+    "parent_guide": "Povedzte: „Zahráme sa na opačnú ozvenu. Ja poviem slová a ty ich povieš odzadu.“ Najprv hru predveďte: „Poviem: oko — nos. Odzadu je to: nos — oko.“ Čítajte pomaly a zreteľne, medzi slovami urobte krátku pauzu. Ak sa dieťaťu nedarí, položte na stôl za každé slovo jeden gombík a ukážte prstom, že začíname od posledného. Chybu neopravujte hneď — najprv sa spýtajte: „Ktoré slovo bolo posledné?“",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Zahráme sa na kúzelnú ozvenu — všetko, čo počuješ, povieš odzadu!",
+      "items": [
+        {
+          "text": "2 – 5",
+          "emoji": "🔢",
+          "tip": "Správne odzadu: 5 – 2. Čítajte pomaly, medzi číslami urobte krátku pauzu."
+        },
+        {
+          "text": "8 – 3",
+          "emoji": "🔢",
+          "tip": "Správne odzadu: 3 – 8."
+        },
+        {
+          "text": "mama – dom",
+          "emoji": "💬",
+          "tip": "Správne odzadu: dom – mama."
+        },
+        {
+          "text": "slnko – ryba",
+          "emoji": "💬",
+          "tip": "Správne odzadu: ryba – slnko."
+        },
+        {
+          "text": "4 – 9 – 1",
+          "emoji": "🔢",
+          "tip": "Správne odzadu: 1 – 9 – 4. Tri čísla sú ťažšie — ak treba, prečítajte rad ešte raz."
+        },
+        {
+          "text": "6 – 2 – 7",
+          "emoji": "🔢",
+          "tip": "Správne odzadu: 7 – 2 – 6."
+        },
+        {
+          "text": "pes – kvet – lopta",
+          "emoji": "💬",
+          "tip": "Správne odzadu: lopta – kvet – pes."
+        },
+        {
+          "text": "med – zima – vlak",
+          "emoji": "💬",
+          "tip": "Správne odzadu: vlak – zima – med. Ak treba, pomôžte gombíkmi: jeden za každé slovo, začnite od posledného."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "wm-zopakuj-vetu-3",
+    "domain": "working_memory",
+    "modality": "speech",
+    "title": "Zopakuj vetu",
+    "summary": "Opakovanie viet so stúpajúcou dĺžkou (4 – 12 slov) mapuje kapacitu verbálnej pracovnej pamäti a morfosyntaktické spracovanie; je citlivým ukazovateľom vývinových jazykových ťažkostí.",
+    "parent_guide": "Povedzte: „Prečítam ti vetu iba raz. Dobre počúvaj a potom ju povieš presne tak isto.“ Čítajte pokojne, prirodzeným tempom, bez slabikovania. Ak dieťa vetu zmení, nehovorte, čo bolo zle — prečítajte ju ešte raz a nechajte nový pokus. Pri dlhých vetách pomôžte rozdelením: prečítajte prvú polovicu, dieťa ju zopakuje, potom druhú a nakoniec celú vetu. Oceňte každé presné zopakovanie: „Ani slovko ti neušlo!“",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "speech_items",
+      "intro": "Dobre počúvaj a zopakuj vetu presne tak, ako ju počuješ — ani slovko navyše, ani slovko menej!",
+      "items": [
+        {
+          "text": "Mačka spí na okne.",
+          "emoji": "🐱",
+          "tip": "Sledujte predložku „na“ — deti ju často vynechajú."
+        },
+        {
+          "text": "Malý psík behá po záhrade.",
+          "emoji": "🐶",
+          "tip": "Pozor na predložku „po“ a na slovo „malý“ — veta musí zaznieť celá."
+        },
+        {
+          "text": "Mama kúpila v obchode čerstvé rožky.",
+          "emoji": "🥐",
+          "tip": "Sledujte predložku „v“ a poradie slov — „čerstvé rožky“, nie naopak."
+        },
+        {
+          "text": "V lete sa radi kúpeme v jazere.",
+          "emoji": "🏊",
+          "tip": "Veta má dve predložky „v“ — obe musia zaznieť. Pozor aj na slovko „sa“."
+        },
+        {
+          "text": "Babka nám upiekla koláč s jablkami a orechmi.",
+          "emoji": "🥧",
+          "tip": "Sledujte predložku „s“ a poradie: najprv jablká, potom orechy."
+        },
+        {
+          "text": "Ráno si obujem topánky a bežím rýchlo do školy.",
+          "emoji": "👟",
+          "tip": "Pozor na slovko „si“ a predložku „do“. Časti vety sa nesmú vymeniť."
+        },
+        {
+          "text": "V sobotu pôjdeme s rodinou na výlet do vysokých hôr.",
+          "emoji": "⛰️",
+          "tip": "Veta má až štyri predložky: „v“, „s“, „na“, „do“ — sledujte, či zaznejú všetky."
+        },
+        {
+          "text": "Keď vonku prší, sadneme si k oknu a spolu kreslíme veselé obrázky.",
+          "emoji": "🌧️",
+          "tip": "Dlhá veta — sledujte spojku „keď“, predložku „k“ a či z vety nič nevypadlo."
+        }
+      ]
+    }
+  }
+]

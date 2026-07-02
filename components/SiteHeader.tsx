@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -53,9 +54,9 @@ export default function SiteHeader() {
         </a>
         <div className="header-actions">
           <LanguageSwitcher />
-          <span className="badge-soon">
-            <span className="bs-dot" aria-hidden="true" /> {t("comingSoon")}
-          </span>
+          <Link href="/login" className="btn btn-text">
+            {t("signIn")}
+          </Link>
         </div>
       </div>
     </header>

@@ -1,0 +1,426 @@
+[
+  {
+    "slug": "ar-gymnastika-1",
+    "domain": "articulation",
+    "modality": "guided",
+    "title": "Gymnastika pre jazýček",
+    "summary": "Oromotorická gymnastika pred zrkadlom rozvíja pohyblivosť a koordináciu jazyka, pier a líc aj cielené ovládanie výdychového prúdu — motorický základ správnej artikulácie hlások.",
+    "parent_guide": "Sadnite si s dieťaťom pred zrkadlo tak, aby ste sa v ňom obaja videli. Každý cvik najprv sami pomaly predveďte a až potom cvičte spolu — dieťa napodobňuje vás aj svoj obraz v zrkadle. Chváľte snahu, nie dokonalosť: „Vidím, že tvoj jazýček dnes poriadne cvičí!“ Ak cvik nejde, zasmejte sa spolu a skúste ho ešte raz pomalšie.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 8,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Tvoj jazýček je športovec — poď s ním do telocvične pred zrkadlom!",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Naladenie",
+          "title": "Ako sa dnes cítiš?",
+          "body": "Sadnite si spolu pred zrkadlo a povedzte: „Dnes ideme cvičiť s jazýčkom ako ozajstní športovci. Ako sa cítiš pred tréningom?“ Nechajte dieťa vybrať, čo cíti. Potom si spolu povedzte plán tréningu: najprv výťah, potom žabka s rybkou, fúkanie a nakoniec maškrtenie.",
+          "choices": [
+            "Teším sa 😊",
+            "Som zvedavý/zvedavá 🤔",
+            "Trochu sa hanbím 😳",
+            "Dnes sa mi nechce 😴"
+          ],
+          "tip": "Každý pocit je v poriadku. Ak sa dieťaťu nechce, dohodnite sa len na dvoch cvikoch — chuť často príde počas cvičenia."
+        },
+        {
+          "kicker": "Krok 2 · Rozcvička",
+          "title": "Jazýček — výťah",
+          "body": "Povedzte: „Tvoj jazýček je výťah. Ide hore k nosu… a pomaly dole k brade.“ Predveďte cvik a potom ho spolu zopakujte päťkrát. Ústa sú otvorené a brada sa nehýbe — pracuje len jazyk.",
+          "tip": "Ak sa hýbe celá brada, jemne ju dieťaťu podoprite prstom. Nikdy necvičte za dieťa — len znova pomaly predveďte."
+        },
+        {
+          "kicker": "Krok 3 · Pery",
+          "title": "Žabka a rybka",
+          "body": "Povedzte: „Teraz sa hráme na zvieratká. Žabka sa široko usmieva — ííí. Rybka špúli pery dopredu — úúú.“ Striedajte úsmev a špúlenie päťkrát, pomaly a poriadne.",
+          "tip": "Sledujte v zrkadle, či je úsmev naozaj široký a špúlenie naozaj dopredu. Pomáha striedať cviky na povel: „žabka — rybka“."
+        },
+        {
+          "kicker": "Krok 4 · Fúkanie",
+          "title": "Veterná súťaž",
+          "body": "Položte na stôl vatovú guličku alebo malý kúsok papiera. Povedzte: „Nadýchni sa nosom a fúkni, nech gulička dobehne na druhý koniec stola.“ Skúste tri jazdy — raz silno, raz jemne, raz čo najdlhšie.",
+          "fields": [
+            {
+              "label": "Čo išlo pri fúkaní ťažko?",
+              "placeholder": "napr. krátky výdych, nafukovanie líc, fúkanie nosom"
+            }
+          ],
+          "tip": "Nádych nosom, výdych ústami. Ak dieťa nafukuje líca, jemne mu ich pridržte prstami a skúste znova."
+        },
+        {
+          "kicker": "Krok 5 · Maškrtenie",
+          "title": "Maškrtný jazýček",
+          "body": "Povedzte: „Predstav si, že máš okolo pier medík. Obliž si pery pekne dookola — najprv na jednu stranu, potom na druhú.“ Ak chcete, dajte dieťaťu na hornú peru ozajstnú kvapku medu alebo džemu — jazýček ju musí nájsť.",
+          "tip": "Pohyb má byť pomalý a plynulý. Radšej raz poriadne dookola než päťkrát narýchlo."
+        },
+        {
+          "kicker": "Krok 6 · Zhodnotenie",
+          "title": "Malý športovec hodnotí",
+          "body": "Spýtajte sa: „Ktorý cvik bol pre teba najťažší? A ktorý ti išiel najlepšie?“ Zapíšte, čo dieťa povie. Na záver povedzte spolu nahlas: „Moja pusa cvičila a je silnejšia!“",
+          "fields": [
+            {
+              "label": "Ktorý cvik išiel dieťaťu najťažšie?",
+              "placeholder": "napr. výťah hore k nosu"
+            },
+            {
+              "label": "Čo sa dnes podarilo?",
+              "placeholder": "napr. udržalo široký úsmev, fúkalo dlho a jemne"
+            }
+          ],
+          "tip": "Nechajte najprv hodnotiť dieťa. Vaše pozorovanie doplňte až potom — a vždy začnite tým, čo sa podarilo."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-hlaska-l-1",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Slová s hláskou L",
+    "summary": "Fixácia hlásky L v slovách v iniciálnej, mediálnej a finálnej pozícii s oporou o správne artikulačné postavenie — špička jazyka na ďasne za hornými rezákmi.",
+    "parent_guide": "Predveďte slovo pomaly a zreteľne, hlásku L mierne pretiahnite: llllopta. Dieťa slovo zopakuje po vás. Ak L nepočuť, pripomeňte: „Jazýček vyskočí hore za horné zúbky — a spustí sa, keď povieš L.“ Ťažšie slovo pokojne rozdeľte na slabiky a skladajte ho spolu po častiach.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Jazýček vyskočí za horné zúbky a povie L. Skús to v každom slove!",
+      "items": [
+        {
+          "text": "lopta",
+          "emoji": "⚽",
+          "tip": "Pred prvým slovom si spolu precvičte samotné „lll“ — špička jazyka sa opiera za horné zuby."
+        },
+        { "text": "lampa", "emoji": "💡" },
+        { "text": "lyžica", "emoji": "🥄" },
+        {
+          "text": "lietadlo",
+          "emoji": "✈️",
+          "tip": "Slovo má L dvakrát — pomôže rozdelenie na slabiky: lie-ta-dlo."
+        },
+        { "text": "včela", "emoji": "🐝" },
+        { "text": "škola", "emoji": "🏫" },
+        { "text": "balón", "emoji": "🎈" },
+        {
+          "text": "mlieko",
+          "emoji": "🥛",
+          "tip": "L je hneď za M — skúste najprv pomaly: m-lie-ko."
+        },
+        {
+          "text": "stôl",
+          "tip": "L na konci slova býva ťažšie. Nech dieťa slovo dopovie pomaly a jazýček nechá hore: stôôôl."
+        },
+        { "text": "anjel", "emoji": "😇" }
+      ]
+    }
+  },
+  {
+    "slug": "ar-hlaska-r-2",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Slová s hláskou R",
+    "summary": "Fixácia vibrantu R v slovách s postupnosťou od najľahšej pozície po spoluhláskach T a D cez mediálnu pozíciu až po iniciálnu a finálnu; opora o prípravné „trrr“.",
+    "parent_guide": "Najprv si spolu naštartujte motorček: „trrr — drrr“. Potom predveďte slovo a v R mierne zavrčte: trrráva. Dieťa opakuje po vás. Ak R nejde, vráťte sa k motorčeku a slovo rozdeľte na slabiky: trá-va. Nevyžadujte dokonalé R — pochváľte každé zavrčanie a pokus.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Naštartuj motorček — trrr! — a rozbehni ho v slovách.",
+      "items": [
+        {
+          "text": "drevo",
+          "emoji": "🪵",
+          "tip": "R po D je najľahšie. Začnite motorčekom „drrr“ a pridajte zvyšok slova: drrr-evo."
+        },
+        {
+          "text": "tráva",
+          "emoji": "🌿",
+          "tip": "Po T ide R takmer samo: trrr-áva."
+        },
+        {
+          "text": "traktor",
+          "emoji": "🚜",
+          "tip": "Slovo má R dvakrát — najprv pomaly po slabikách: trak-tor."
+        },
+        { "text": "trúbka", "emoji": "🎺" },
+        { "text": "mrkva", "emoji": "🥕" },
+        { "text": "more", "emoji": "🌊" },
+        { "text": "hora", "emoji": "⛰️" },
+        { "text": "koruna", "emoji": "👑" },
+        {
+          "text": "ryba",
+          "emoji": "🐟",
+          "tip": "R na začiatku slova je najťažšie — pomôže najprv samostatné zavrčanie: rrr-yba."
+        },
+        {
+          "text": "syr",
+          "emoji": "🧀",
+          "tip": "R na konci nechajte doznieť: syrrr."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-sykavky-s-c-z-1",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Hadík syčí — S, C, Z",
+    "summary": "Fixácia ostrej sykavkovej rady S, C, Z v slovách; kontrola úsmevového postavenia pier a opory jazyka pri dolných rezákoch ako prevencia zámeny s tupou radou.",
+    "parent_guide": "Predveďte slovo so zreteľnou sykavkou: ssssyr. Pripomínajte dieťaťu kúzelné pravidlo: „Usmej sa a jazýček schovaj dole za spodné zúbky.“ Ak sykavka znie tupo ako š, ukážte si spolu v zrkadle široký úsmev a slovo skúste znova.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Usmej sa ako hadík — sss! — a jazýček schovaj za spodné zúbky.",
+      "items": [
+        {
+          "text": "syr",
+          "emoji": "🧀",
+          "tip": "Skontrolujte úsmev a jazyk dole za spodnými zubami: ssss-yr."
+        },
+        { "text": "sova", "emoji": "🦉" },
+        { "text": "slon", "emoji": "🐘" },
+        {
+          "text": "mesiac",
+          "emoji": "🌙",
+          "tip": "Slovo končí na C — krátke a ostré ako lusknutie prstami."
+        },
+        {
+          "text": "cibuľa",
+          "emoji": "🧅",
+          "tip": "C na začiatku je krátke ako tikanie hodín: c-c-c — cibuľa."
+        },
+        { "text": "citrón", "emoji": "🍋" },
+        { "text": "ovca", "emoji": "🐑" },
+        {
+          "text": "zajac",
+          "emoji": "🐇",
+          "tip": "Z bzučí ako mucha: zzz-ajac. A na konci pozor na krátke C."
+        },
+        { "text": "zebra", "emoji": "🦓" },
+        { "text": "koza", "emoji": "🐐" }
+      ]
+    }
+  },
+  {
+    "slug": "ar-sykavky-s-z-c-2",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Vláčik šuští — Š, Ž, Č",
+    "summary": "Fixácia tupej sykavkovej rady Š, Ž, Č v slovách; nácvik labializácie (pery vysunuté vpred) a mierneho stiahnutia jazyka dozadu.",
+    "parent_guide": "Predveďte slovo so zreteľnou sykavkou: šššál. Pripomeňte dieťaťu: „Pery vystrč dopredu ako komín — šššš ako vláčik.“ Rozdiel medzi s a š si ukážte v zrkadle: pri s je úsmev, pri š komín. Ak slovo znie ostro, vráťte sa ku komínu a skúste znova.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 5,
+    "content": {
+      "type": "speech_items",
+      "intro": "Vystrč pery dopredu ako komín a šušti ako vláčik — šš, šš!",
+      "items": [
+        {
+          "text": "šál",
+          "emoji": "🧣",
+          "tip": "Pery dopredu ako komín: šššš-ál."
+        },
+        { "text": "šaty", "emoji": "👗" },
+        {
+          "text": "myš",
+          "emoji": "🐭",
+          "tip": "Š na konci nechajte doznieť: myšššš."
+        },
+        {
+          "text": "žaba",
+          "emoji": "🐸",
+          "tip": "Ž bzučí a pery ostávajú dopredu: žžž-aba."
+        },
+        { "text": "žirafa", "emoji": "🦒" },
+        { "text": "ruža", "emoji": "🌹" },
+        {
+          "text": "čiapka",
+          "emoji": "🧢",
+          "tip": "Č je krátke a razantné — ako keď sa vláčik rozbieha: č-č-č."
+        },
+        { "text": "čaj", "emoji": "🍵" },
+        { "text": "mačka", "emoji": "🐱" },
+        {
+          "text": "kľúč",
+          "emoji": "🔑",
+          "tip": "Č na konci sa nesmie stratiť — nech dieťa slovo dopovie celé a č zaznie krátko a zreteľne."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-miesanie-sykaviek-3",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Popletené sykavky",
+    "summary": "Diferenciácia ostrých a tupých sykaviek (s/š, c/č, z/ž) v slovách a krátkych vetách — záverečný krok fixácie pred automatizáciou v spontánnej reči.",
+    "parent_guide": "Čítajte pomaly a zreteľne, sykavky mierne pretiahnite. Pri chybe nehovorte hneď správne znenie — spýtajte sa: „Bol tam hadík (s) alebo vláčik (š)?“ a nechajte dieťa opraviť sa samo. Dlhšiu vetu rozdeľte na časti a skladajte ju po slovách.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "speech_items",
+      "intro": "Pozor, hadík a vláčik sa pomiešali! Rozoznáš, kedy syčíš a kedy šuštíš?",
+      "items": [
+        {
+          "text": "suší",
+          "tip": "Jedno slovo, obe sykavky: najprv úsmev (s), potom komín (š) — su-ší."
+        },
+        {
+          "text": "šesť",
+          "emoji": "6️⃣",
+          "tip": "Najprv komín (š), potom úsmev (s) a na konci mäkké ť: šesť."
+        },
+        {
+          "text": "slnečnica",
+          "emoji": "🌻",
+          "tip": "Pomaly po slabikách: sl-neč-ni-ca."
+        },
+        { "text": "časopis", "emoji": "📰" },
+        {
+          "text": "žiacka taška",
+          "emoji": "🎒",
+          "tip": "Dve slová, tri sykavky — pomaly: žiac-ka taš-ka."
+        },
+        { "text": "čerstvý syr", "emoji": "🧀" },
+        {
+          "text": "Saša suší šaty.",
+          "tip": "Vetu najprv po slovách: Sa-ša — su-ší — ša-ty."
+        },
+        { "text": "Zuzka číta časopis." },
+        { "text": "Mačka sedí na streche." },
+        {
+          "text": "Šesť sivých myšiek sa smeje.",
+          "tip": "Najťažšia veta — pokojne dvakrát pomaly a až tretí raz normálnym tempom."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-dlhe-kratke-2",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Krátke a dlhé — sud či súd?",
+    "summary": "Diferenciácia vokalickej kvantity na minimálnych pároch; dieťa produkuje oba členy páru a uvedomuje si dištinktívnu funkciu dĺžky samohlásky.",
+    "parent_guide": "Prečítajte obe slová a dĺžku výrazne pretiahnite: sud — súúúd. Porozprávajte sa, čo ktoré slovo znamená. Potom dieťa povie oba tvary — pri dlhej slabike môžete spolu roztiahnuť ruky ako harmoniku. Spýtajte sa: „Počuješ, ktoré slovo je dlhšie?“",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 6,
+    "content": {
+      "type": "speech_items",
+      "intro": "Niektoré slová sa natiahnu ako guma — a hneď znamenajú niečo úplne iné!",
+      "items": [
+        {
+          "text": "sud → súd",
+          "emoji": "🛢️",
+          "tip": "Sud je drevená nádoba, súd je budova, kde pracuje sudca. Dĺžka mení význam!"
+        },
+        {
+          "text": "latka → látka",
+          "emoji": "🧵",
+          "tip": "Latka je drevená tyčka, látka je textil, z ktorého sa šijú šaty."
+        },
+        {
+          "text": "pas → pás",
+          "emoji": "🛂",
+          "tip": "Pas potrebujeme na cestovanie, pás máme okolo brucha."
+        },
+        {
+          "text": "vila → víla",
+          "emoji": "🧚",
+          "tip": "Vila je veľký dom, víla je rozprávková bytosť s krídelkami."
+        },
+        {
+          "text": "rad → rád",
+          "emoji": "🚶",
+          "tip": "Rad je, keď ľudia stoja za sebou. Rád znamená, že sa nám niečo páči: mám ťa rád."
+        },
+        {
+          "text": "krik → krík",
+          "emoji": "🌿",
+          "tip": "Krik je hlasné volanie, krík je malý ker na záhrade."
+        },
+        {
+          "text": "pila → píla",
+          "emoji": "🪚",
+          "tip": "Pila povieme o niekom, kto pil: Ema pila vodu. Píla je nástroj na rezanie dreva."
+        },
+        {
+          "text": "kura → kúra",
+          "emoji": "🐔",
+          "tip": "Kura behá po dvore, kúra je liečenie — napríklad vitamínová kúra."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-jazykolamy-3",
+    "domain": "articulation",
+    "modality": "speech",
+    "title": "Jazykolamy pre šikovné jazýčky",
+    "summary": "Automatizácia artikulácie v náročných hláskových sekvenciách; jazykolamy precvičujú presnosť, tempo a koartikuláciu pri plnej záťaži rečovej motoriky.",
+    "parent_guide": "Každý jazykolam najprv prečítajte pomaly po slabikách a dieťa ho opakuje po častiach. Až potom skúste celý naraz — najprv pomaly, potom o kúsok rýchlejšie. Zamotanie jazyka je súčasť hry: pomýľte sa občas aj vy a spolu sa na tom zasmejte.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 7,
+    "content": {
+      "type": "speech_items",
+      "intro": "Pozor, tieto vety radi zamotávajú jazyk! Najprv pomaličky, potom rýchlo.",
+      "items": [
+        {
+          "text": "Mama má Emu, Ema má mamu.",
+          "emoji": "👩",
+          "tip": "Na rozohriatie — tento zvládne dieťa aj naozaj rýchlo."
+        },
+        {
+          "text": "Guľôčka v jamôčke, v jamôčke guľôčka.",
+          "emoji": "⚪",
+          "tip": "Mäkké ľ a vokáň ô — pomaly: gu-ľôč-ka v ja-môč-ke."
+        },
+        {
+          "text": "Šašo suší osušku.",
+          "emoji": "🤡",
+          "tip": "Striedajú sa š a s — komín a úsmev."
+        },
+        {
+          "text": "Ryba, rak, rebrík, rúra, robot.",
+          "emoji": "🐟",
+          "tip": "Prehliadka slov s R — pred štartom naštartujte motorček: trrr."
+        },
+        {
+          "text": "Pán kaplán v kaplnke plakal.",
+          "emoji": "⛪",
+          "tip": "Skupiny pl a kl chcú pomalý štart — najprv po slabikách."
+        },
+        {
+          "text": "V našej peci myši pištia, v našej peci psík spí.",
+          "emoji": "🐭",
+          "tip": "Dlhá veta — rozdeľte ju na dve polovice a potom spojte."
+        },
+        {
+          "text": "Strýc Šusták šuštal šušťákom.",
+          "emoji": "🧥",
+          "tip": "Samé š — pery držte celý čas dopredu ako komín."
+        },
+        {
+          "text": "Tristo strieborných striekačiek striekalo cez tristo strieborných striech.",
+          "emoji": "💦",
+          "tip": "Kráľ jazykolamov! Stačí povedať raz pomaly a čisto — rýchlosť nie je cieľ."
+        }
+      ]
+    }
+  }
+]

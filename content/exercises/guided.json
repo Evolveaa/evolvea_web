@@ -1,0 +1,477 @@
+[
+  {
+    "slug": "gu-zaseknuta-skladacka-2",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Zaseknutá skladačka",
+    "summary": "Kľúčové metakognitívne cvičenie (podľa Mikulajovej): dieťa pri náročnej skladačke prechádza cyklom identifikácia emócie → plánovanie → monitorovanie → hodnotenie. Rozvíja exekutívne funkcie, frustračnú toleranciu a vnútornú reč pri riešení problému.",
+    "parent_guide": "Pripravte na stôl skladačku s 10 – 20 dielikmi, ktorú dieťa ešte neskladalo. Sadnite si vedľa neho a povedzte: „Toto je hlavolam pre teba. Ja budem pri tebe, ale skladať budeš ty.“ Keď sa dieťa zasekne, nesiahajte na dieliky — pýtajte sa: „Čo by si mohol skúsiť ďalej?“, „Ktorý dielik má rovnú hranu?“ Ak rastie frustrácia, pokojne ju pomenujte: „Vidím, že ťa to hnevá. To je v poriadku, zaseknutie patrí k skladaniu.“ Premýšľajte nahlas len ako vzor, nikdy nie ako hotové riešenie.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes ťa čaká hlavolam. Nie je ľahký — a práve preto je super! Zaseknúť sa nie je chyba: je to znamenie, že sa práve učíš.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Pripravte scénu",
+          "body": "Položte pred dieťa skladačku s 10 – 20 dielikmi, ktorú ešte neskladalo. Dieliky vysypte a pootáčajte obrázkom nahor. Povedzte: „Toto je úloha pre teba. Ja ti budem robiť spoločnosť, ale ruky do toho dám, len keď si to sám vypýtaš.“",
+          "tip": "Odolajte chuti ukázať prvý ťah. Nikdy neriešte úlohu za dieťa — vaša práca je pýtať sa, nie skladať."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cítiš?",
+          "body": "Skôr než dieťa začne, spýtajte sa: „Pozri sa na tie dieliky. Ako sa pri nich cítiš?“ Nechajte dieťa vybrať pocit — pokojne aj viac naraz. Každý pocit je v poriadku.",
+          "choices": ["Pokoj", "Zmätok", "Nervozita", "Hnev", "Zvedavosť", "Odhodlanie"],
+          "tip": "Pocit neopravujte ani nezľahčujte („netreba sa báť“). Len ho zopakujte: „Aha, cítiš zmätok. Ďakujem, že si mi to povedal.“"
+        },
+        {
+          "kicker": "Krok 3 · Plán",
+          "title": "Urobme si plán",
+          "body": "Povedzte: „Skôr než začneš, chvíľku spolu porozmýšľame.“ Položte dieťaťu tri otázky a odpovede zapíšte jeho vlastnými slovami.",
+          "fields": [
+            { "label": "Čo od teba úloha žiada?", "placeholder": "napr. poskladať celý obrázok z dielikov" },
+            { "label": "Čo už vieš?", "placeholder": "napr. rohové dieliky majú dve rovné hrany" },
+            { "label": "Aký je prvý malý krok?", "placeholder": "napr. nájdem všetky dieliky s rovnou hranou" }
+          ],
+          "tip": "Ak dieťa mlčí, nenapovedajte plán za neho. Len zúžte otázku: „Čo vidíš na obrázku na krabici?“"
+        },
+        {
+          "kicker": "Krok 4 · Riešenie",
+          "title": "Teraz skladáš ty",
+          "body": "Dieťa pracuje samo podľa svojho plánu a vy sa držíte späť. Keď sa zasekne, nesiahajte na dieliky — navádzajte otázkami: „Čo by si mohol skúsiť ďalej?“, „Ktorá farba je na obrázku hore?“, „Pomohol by ti teraz tvoj plán?“ Priebežne si značte, čo dieťa skúšalo.",
+          "fields": [
+            { "label": "Čo dieťa skúšalo?", "placeholder": "napr. triedilo dieliky podľa farby, začalo od rohov" }
+          ],
+          "tip": "Najťažší krok pre vás: mlčte a čakajte. Dobre položené ticho naučí viac než hotové riešenie — nikdy neskladajte za dieťa."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Pozrime sa späť",
+          "body": "Po dokončení (alebo po dohodnutom čase) sa spolu pozrite na prácu. Spýtajte sa: „Čo sa ti darilo?“ a „Čo bolo ťažké?“ Odpovede dieťaťa zapíšte.",
+          "fields": [
+            { "label": "Čo sa darilo?", "placeholder": "napr. našiel všetky rohy sám" },
+            { "label": "Čo bolo ťažké?", "placeholder": "napr. dieliky oblohy vyzerali rovnako" }
+          ],
+          "tip": "Aj nedokončená skladačka je úspech, ak dieťa skúšalo vlastné cesty. Hodnotíme cestu, nie obrázok."
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“ Pokojne aj viackrát, ako zaklínadlo.",
+          "choices": ["Zvládnem to krok za krokom.", "Zaseknutie mi pomáha učiť sa.", "Môžem to skúsiť inak."],
+          "tip": "Vetu nevyberajte za dieťa. Ukotvenie posilní sebadôveru, len keď si ho dieťa zvolí samo."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-citanie-spolu-2",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Čítame spolu: pred, počas, po",
+    "summary": "Dialogické čítanie so stratégiami pred čítaním (predikcia z obálky), počas čítania (monitorovanie porozumenia, prepájanie s vlastnou skúsenosťou) a po čítaní (sumarizácia vlastnými slovami). Rozvíja čitateľské porozumenie, naratívne schopnosti a metakognitívnu kontrolu porozumenia.",
+    "parent_guide": "Vyberte s dieťaťom krátku knižku alebo príbeh, ktorý ešte nepozná. Pred čítaním ukážte obálku a spýtajte sa: „O čom asi bude tento príbeh? Podľa čoho to vieš?“ Počas čítania sa dva-trikrát zastavte a pýtajte sa: „Čo myslíš, čo sa stane teraz?“ a „Stalo sa niečo podobné aj tebe?“ Po dočítaní poproste: „Porozprávaj mi príbeh vlastnými slovami — predstav si, že ho vôbec nepoznám.“ Ak sa dieťa zasekne, pomôžte otázkou „Ako sa to začalo?“, nie prerozprávaním.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes budeme čítať ako detektívi: najprv budeme hádať, potom sa pýtať a nakoniec mi celý príbeh porozprávaš ty.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vyberte knižku",
+          "body": "Nechajte dieťa vybrať krátku knižku alebo príbeh, ktorý ešte nepozná. Sadnite si vedľa seba tak, aby ste obaja videli na obrázky. Povedzte: „Dnes budeme čítať ako detektívi — budeme hádať, pýtať sa a skúmať.“",
+          "tip": "Počas celého čítania platí: otázky kladiete vy, odpovede patria dieťaťu. Nikdy neodpovedajte za neho."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cítiš pred čítaním?",
+          "body": "Spýtajte sa: „Ako sa cítiš, keď držíš novú knižku?“ Nechajte dieťa vybrať pocit — aj viac naraz.",
+          "choices": ["Zvedavosť", "Radosť", "Pokoj", "Únava", "Neistota"],
+          "tip": "Aj únava či nechuť sú v poriadku. Pocit prijmite bez presviedčania — nerozprávajte dieťaťu, čo „má“ cítiť."
+        },
+        {
+          "kicker": "Krok 3 · Pred čítaním",
+          "title": "Hádaj z obálky",
+          "body": "Prezrite si spolu obálku. Spýtajte sa: „O čom asi bude príbeh? Podľa čoho to vieš?“ Predpoveď zapíšte vlastnými slovami dieťaťa — na konci sa k nej vrátime.",
+          "fields": [
+            { "label": "Čo dieťa predpovedalo?", "placeholder": "napr. bude to o stratenom psíkovi, lebo na obálke je smutný pes" }
+          ],
+          "tip": "Žiadna predpoveď nie je zlá. Neopravujte ju, ani keď dej poznáte — predpoveď patrí dieťaťu, nie vám."
+        },
+        {
+          "kicker": "Krok 4 · Počas čítania",
+          "title": "Zastav sa a pýtaj sa",
+          "body": "Čítajte a na napínavých miestach sa dva-trikrát zastavte. Pýtajte sa: „Čo myslíš, čo sa stane teraz?“ a „Zažil si niečo podobné?“ Nechajte dieťa hovoriť, aj keby odbočilo od deja.",
+          "fields": [
+            { "label": "Aké prepojenie na vlastnú skúsenosť dieťa našlo?", "placeholder": "napr. aj ja som sa raz stratil v obchode" }
+          ],
+          "tip": "Neodpovedajte na svoje otázky sami. Ticho po otázke je priestor pre dieťa, nie chyba."
+        },
+        {
+          "kicker": "Krok 5 · Po čítaní",
+          "title": "Prerozprávaj vlastnými slovami",
+          "body": "Po dočítaní povedzte: „Porozprávaj mi príbeh vlastnými slovami — predstav si, že ho vôbec nepoznám.“ Toto je chvíľa dieťaťa — nechajte ho rozprávať bez prerušovania. Ak sa zasekne, pomôžte len otázkou: „Ako sa to začalo?“",
+          "fields": [
+            { "label": "Ako dieťa zhrnulo príbeh?", "placeholder": "napr. začiatok — problém — koniec vlastnými slovami" }
+          ],
+          "tip": "Nedopĺňajte dej za dieťa. Jeho neúplné zhrnutie je cennejšie než vaše dokonalé."
+        },
+        {
+          "kicker": "Krok 6 · Reflexia",
+          "title": "Sedela tvoja predpoveď?",
+          "body": "Vráťte sa k predpovedi z obálky. Spýtajte sa: „Uhádol si niečo? Čo ťa v príbehu prekvapilo?“ a „Čo ti dnes pomohlo príbehu rozumieť?“",
+          "fields": [
+            { "label": "Čo sa z predpovede splnilo?", "placeholder": "napr. psík sa naozaj stratil, ale koniec bol iný" },
+            { "label": "Čo dieťa prekvapilo?", "placeholder": "napr. že psíkovi pomohla mačka" }
+          ],
+          "tip": "Nesplnená predpoveď nie je prehra — povedzte: „Detektív háda a potom overuje. Presne to si urobil.“"
+        },
+        {
+          "kicker": "Krok 7 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Keď sa pýtam, príbehu rozumiem.", "Moje predpovede mi pomáhajú čítať.", "Viem prerozprávať príbeh vlastnými slovami."],
+          "tip": "Vetu nechajte vybrať dieťa — ukotvenie funguje, len keď je jeho vlastné."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-pocitova-mapa-1",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Pocitová mapa dňa",
+    "summary": "Identifikácia a pomenúvanie emócií z priebehu dňa spolu s hľadaním funkčných regulačných stratégií. Buduje emočnú slovnú zásobu, sebauvedomovanie a základy sebaregulácie ako predpoklad metakognitívneho učenia.",
+    "parent_guide": "Vyberte pokojnú chvíľu, napríklad večer pred spaním. Povedzte: „Poď, prejdeme si tvoj deň ako mapu so zastávkami.“ Dieťa si samo vyberie tri momenty dňa a pri každom sa spýtajte: „Aký pocit tam bol?“ Ak pocit nevie pomenovať, ponúknite dva na výber: „Bola to skôr radosť, alebo skôr hnev?“ Pri ťažkých pocitoch sa spýtajte: „A čo ti vtedy pomohlo?“ Pocity nikdy nezľahčujte („veď o nič nešlo“) — pre dieťa boli skutočné.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 8,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Tvoj deň je ako cesta so zastávkami. Poď, prejdeme si ju spolu a pri každej zastávke sa pozrieme, aké pocity tam boli.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Nájdite pokojnú chvíľu",
+          "body": "Sadnite si spolu bez obrazoviek — napríklad večer pred spaním. Môžete si vziať papier a nakresliť cestu so zastávkami. Povedzte: „Poď, pozrieme sa spolu na tvoj deň ako na mapu.“",
+          "tip": "Toto nie je výsluch, ale spoločná prechádzka. Nepredbiehajte dieťa vlastnými spomienkami na jeho deň."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cítiš práve teraz?",
+          "body": "Začnite prítomnosťou: „Ako sa cítiš práve teraz, keď tu spolu sedíme?“ Nechajte dieťa vybrať — pokojne aj viac pocitov naraz.",
+          "choices": ["Radosť", "Pokoj", "Smútok", "Hnev", "Strach", "Únava"],
+          "tip": "Každý pocit prijmite bez opravovania. Nehovorte dieťaťu, čo by „malo“ cítiť."
+        },
+        {
+          "kicker": "Krok 3 · Plán",
+          "title": "Naplánuj si zastávky",
+          "body": "Povedzte: „Tvoj deň je ako cesta. Vyber si tri zastávky, o ktorých mi porozprávaš.“ Momenty dňa si volí dieťa samo — do výberu mu nevstupujte.",
+          "fields": [
+            { "label": "Ktoré tri zastávky dňa si dieťa vybralo?", "placeholder": "napr. raňajky, telocvik, cesta domov" }
+          ],
+          "tip": "Nevyberajte zastávky za dieťa, ani keď viete o dôležitej udalosti. Príde na ňu, keď bude pripravené."
+        },
+        {
+          "kicker": "Krok 4 · Rozprávanie",
+          "title": "Prejdi svoju mapu",
+          "body": "Dieťa pri každej zastávke samo rozpráva: čo sa tam dialo a ako sa cítilo. Vy len počúvate a prikyvujete. Pri ťažkom pocite sa spýtajte: „A čo ti vtedy pomohlo?“",
+          "fields": [
+            { "label": "Čo dieťaťu pomohlo pri ťažkom pocite?", "placeholder": "napr. objatie, hlboký nádych, kamarát" }
+          ],
+          "tip": "Nenavrhujte riešenia za dieťa. Otázka „Čo ti pomohlo?“ hľadá jeho vlastné stratégie — tie si zapamätá najlepšie."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Pozri sa na celú mapu",
+          "body": "Pozrite sa spolu na celý deň. Spýtajte sa: „Ktorý pocit bol dnes najväčší?“ a „Bolo ľahké o pocitoch rozprávať?“",
+          "fields": [
+            { "label": "Ktorý pocit bol dnes najväčší?", "placeholder": "napr. radosť z telocviku" },
+            { "label": "Čo bolo ľahké a čo ťažké pomenovať?", "placeholder": "napr. hnev sa hľadal ťažko" }
+          ],
+          "tip": "Oceňte samotné rozprávanie, nie „pekné“ pocity: „Ďakujem, že si mi o tom povedal.“"
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Svoje pocity smiem povedať nahlas.", "Každý pocit raz prejde.", "Viem, čo mi pomáha."],
+          "tip": "Nechajte vetu vybrať dieťa. Vaša úloha je len svedok — nie sudca ani poradca."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-chyba-je-kamarat-2",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Chyba je kamarát",
+    "summary": "Kognitívne prerámcovanie chyby: dieťa analyzuje vlastnú nedávnu chybu, extrahuje z nej poučenie a preformuluje ju na skúsenosť. Podporuje rastové nastavenie mysle, frustračnú toleranciu a sebahodnotenie oddelené od sebaobviňovania.",
+    "parent_guide": "Začnite vlastnou drobnou chybou z posledných dní a povedzte aj to, čo vás naučila. Potom nechajte dieťa vybrať si jeho chybu. Skúmajte ju spolu ako detektívi tromi otázkami: Čo sa stalo? Prečo sa to mohlo stať? Čo mi to prezradilo? Na záver pomôžte dieťaťu chybu preformulovať: „Pomýlil som sa v… a naučilo ma to…“ Ak dieťa povie „som hlúpy“, jemne vráťte reč k činu: „Nepodarila sa úloha. Ty si v poriadku.“",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 10,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Chyba môže byť kamarát — dnes jednu spolu preskúmame ako detektívi a zistíme, čo ťa naučila.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Začnite vlastnou chybou",
+          "body": "Povedzte: „Dnes sa budeme rozprávať o chybách. Začnem ja.“ Podeľte sa o svoju drobnú nedávnu chybu a o to, čo vás naučila. Ukážete tak, že o chybách sa dá hovoriť bezpečne.",
+          "tip": "Vyberte naozaj drobnú vlastnú chybu a hovorte o nej ľahko, s úsmevom. Nevyberajte však chybu za dieťa — jeho výber príde v ďalšom kroku."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa pri spomienke cítiš?",
+          "body": "Povedzte: „Spomeň si na jednu svoju nedávnu chybu alebo na niečo, čo sa ti nepodarilo. Ako sa pri tej spomienke cítiš?“",
+          "choices": ["Hanba", "Smútok", "Hnev", "Neistota", "Pokoj", "Pobavenie"],
+          "tip": "Prijmite každý pocit bez opravovania. Veta „netreba sa hanbiť“ pocit nezruší, len ho umlčí."
+        },
+        {
+          "kicker": "Krok 3 · Plán",
+          "title": "Plán detektíva",
+          "body": "Povedzte: „Budeme detektívi a tvoju chybu preskúmame. Detektív sa pýta: Čo sa stalo? Prečo sa to mohlo stať? Čo mi to prezradilo?“ Zapíšte, ktorú chybu si dieťa vybralo.",
+          "fields": [
+            { "label": "Akú chybu si dieťa vybralo?", "placeholder": "napr. zabudol som si úbor na telocvik" }
+          ],
+          "tip": "Chybu nevyberajte za dieťa a nezľahčujte ju („to nič nebolo“). Pre dieťa je skutočná."
+        },
+        {
+          "kicker": "Krok 4 · Skúmanie",
+          "title": "Detektív pracuje sám",
+          "body": "Dieťa samo odpovedá na tri detektívne otázky a vy len zapisujete jeho slová. Ak sa zasekne, zopakujte otázku pomalšie alebo sa spýtajte: „Čo by si poradil kamarátovi, keby sa mu to stalo?“",
+          "fields": [
+            { "label": "Čo sa dieťa z chyby naučilo?", "placeholder": "napr. večer si nachystám veci podľa rozvrhu" }
+          ],
+          "tip": "Neponúkajte vlastné ponaučenie a neriešte skúmanie za dieťa. Objav má hodnotu, len keď ho urobí samo."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Povedz to novou vetou",
+          "body": "Pomôžte dieťaťu zložiť novú vetu: „Pomýlil som sa v… a naučilo ma to…“ Nechajte ho vetu povedať nahlas. Potom sa spýtajte: „Čo bolo na dnešnom skúmaní ťažké?“",
+          "fields": [
+            { "label": "Ako znie nová veta dieťaťa?", "placeholder": "napr. zabudol som úbor a naučilo ma to chystať si veci večer" },
+            { "label": "Čo bolo pri skúmaní ťažké?", "placeholder": "napr. hovoriť o hanbe" }
+          ],
+          "tip": "Novú vetu skladá dieťa, vy len držíte jej začiatok. Nedokončujte ju za neho."
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Chyby ma učia.", "Pomýliť sa je ľudské.", "Nabudúce to skúsim inak."],
+          "tip": "Vetu si volí dieťa samo — práve tým sa ukotvuje jeho sebadôvera, nie vaša pochvala."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-stavanie-podla-planu-1",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Staviame podľa plánu",
+    "summary": "Prechod od konkrétnej manipulácie k symbolickej reprezentácii: dieťa najprv vytvorí grafický plán stavby a následne ho realizuje z kociek. Rozvíja plánovanie, vizuálno-priestorové funkcie a porovnávanie zámeru s výsledkom (monitorovanie a hodnotenie).",
+    "parent_guide": "Pripravte kocky alebo stavebnicu, papier a ceruzku. Povedzte: „Stavitelia si najprv kreslia plán. Nakresli mi, čo postavíš.“ Prijmite akýkoľvek nákres — aj tri čiarky sú plán. Počas stavania sa nedotýkajte kociek. Keď sa dieťa zasekne, pýtajte sa: „Pozri do plánu — čo tam máš nakreslené?“ Na konci položte stavbu vedľa nákresu a porovnajte ich spolu: „Čo sedí? Čo je inak?“ Rozdiel medzi plánom a stavbou nie je chyba — je to objav.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 10,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes budeš staviteľ! Najprv si nakreslíš plán a potom podľa neho postavíš vlastnú stavbu.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Pripravte stavenisko",
+          "body": "Položte na stôl kocky alebo stavebnicu, papier a ceruzku. Povedzte: „Dnes budeš staviteľ. A správny staviteľ si najprv nakreslí plán.“",
+          "tip": "Pripravte len materiál. Čo a ako sa postaví, je odteraz v rukách dieťaťa — nestavajte za neho ani kúsok."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cíti staviteľ?",
+          "body": "Spýtajte sa: „Ako sa cítiš, keď máš byť staviteľom?“ Nechajte dieťa vybrať pocit.",
+          "choices": ["Radosť", "Zvedavosť", "Neistota", "Odhodlanie"],
+          "tip": "Pocit len prijmite a zopakujte. Neistota pred novou úlohou je úplne v poriadku."
+        },
+        {
+          "kicker": "Krok 3 · Plán",
+          "title": "Nakresli plán",
+          "body": "Dieťa nakreslí jednoduchý plán stavby — stačí pár čiar. Pýtajte sa: „Čo postavíš? Koľko kociek asi budeš potrebovať?“ Zapíšte, čo si dieťa naplánovalo.",
+          "fields": [
+            { "label": "Čo chce dieťa postaviť?", "placeholder": "napr. vežu pre draka, most, garáž" }
+          ],
+          "tip": "Nekreslite plán za dieťa a neopravujte ho. Krivý nákres je stále plán."
+        },
+        {
+          "kicker": "Krok 4 · Stavanie",
+          "title": "Teraz stavia staviteľ",
+          "body": "Dieťa stavia samo podľa vlastného nákresu a vy sa kociek nedotýkate. Keď sa zasekne, pýtajte sa: „Pozri do plánu — čo tam máš nakreslené?“ alebo „Čo by si mohol skúsiť inak?“",
+          "tip": "Najťažšia časť pre rodiča: ruky za chrbtom. Padnutá veža naučí viac než veža postavená vami."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Sedí stavba s plánom?",
+          "body": "Položte hotovú stavbu vedľa nákresu. Spýtajte sa: „Sedí stavba s plánom? Čo je rovnaké a čo je inak?“",
+          "fields": [
+            { "label": "Sedela stavba s plánom? Čo bolo inak?", "placeholder": "napr. veža je nižšia, lebo kocky padali" },
+            { "label": "Čo by dieťa nabudúce nakreslilo inak?", "placeholder": "napr. širší základ veže" }
+          ],
+          "tip": "Rozdiely nekomentujte ako chyby. Otázka „Čo je inak?“ je objavovanie, nie známkovanie."
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Najprv rozmýšľam, potom staviam.", "Môj plán mi pomáha.", "Keď plán nesedí, môžem ho zmeniť."],
+          "tip": "Vetu si vyberá dieťa samo — tak sa plánovanie prepojí s jeho sebadôverou."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-spolocna-hra-1",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Spoločná hra: vyhrávam aj prehrávam",
+    "summary": "Spoločenská hra ako tréning emočnej regulácie: dieťa si vopred pripraví stratégiu zvládania prehry a po hre reflektuje emócie z výhry i prehry. Posilňuje frustračnú toleranciu, sebareguláciu a rešpektovanie pravidiel.",
+    "parent_guide": "Vyberte krátku spoločenskú hru, v ktorej rozhoduje aj šťastie, aby mohol vyhrať ktokoľvek — napríklad kartovú alebo kockovú. Pred hrou sa spýtajte: „Čo urobíš, keď budeš prehrávať?“ a plán spolu nahlas zopakujte. Hrajte naozaj — nenechávajte dieťa zámerne vyhrať zakaždým. Keď príde ťažká chvíľa, nepreberajte riadenie: pokojne pripomeňte otázkou „Aký bol tvoj plán?“ Po hre sa rozprávajte o pocitoch z výhry aj prehry a oceňte, keď dieťa svoj plán použilo.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Zahráme si spolu hru! Niekedy sa vyhráva, niekedy prehráva — a ty budeš mať pripravený svoj tajný plán.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vyberte hru",
+          "body": "Nechajte dieťa vybrať krátku hru, v ktorej rozhoduje aj šťastie — napríklad kartovú alebo kockovú. Povedzte: „Zahráme si naozaj. Niekedy vyhráš ty, niekedy ja — a oboje patrí k hre.“",
+          "tip": "Nenechávajte dieťa zámerne vyhrávať zakaždým. Bezpečná skúsenosť s prehrou pri vás je cieľom cvičenia."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cítiš pred hrou?",
+          "body": "Spýtajte sa: „Ako sa cítiš, keď vieš, že budeme súperiť?“ Nechajte dieťa vybrať pocit.",
+          "choices": ["Radosť", "Napätie", "Zvedavosť", "Obava", "Pokoj"],
+          "tip": "Aj napätie a obava sú v poriadku. Pomenovaný pocit sa počas hry zvláda ľahšie."
+        },
+        {
+          "kicker": "Krok 3 · Plán",
+          "title": "Čo urobím, keď budem prehrávať?",
+          "body": "Spýtajte sa: „Čo urobíš, keď budeš prehrávať?“ Dieťa si vymyslí malý plán — napríklad urobiť hlboký nádych, napiť sa vody alebo si povedať „je to len hra“. Spýtajte sa aj: „A čo urobíš, keď vyhráš?“",
+          "fields": [
+            { "label": "Plán dieťaťa na prehrávanie", "placeholder": "napr. tri hlboké nádychy a hrám ďalej" },
+            { "label": "Plán dieťaťa na výhru", "placeholder": "napr. poviem súperovi „dobrá hra“" }
+          ],
+          "tip": "Plán nevymýšľajte za dieťa. Príklad ponúknite, len keď si samo nevie poradiť — a nechajte ho vybrať."
+        },
+        {
+          "kicker": "Krok 4 · Hra",
+          "title": "Hráme naozaj",
+          "body": "Hrajte podľa pravidiel. Keď dieťa začne prehrávať a rastú emócie, nezasahujte do jeho prežívania — len pokojne pripomeňte otázkou: „Aký bol tvoj plán?“",
+          "tip": "Nezachraňujte dieťa pred prehrou úpravou pravidiel a neriešte ťažkú chvíľu za neho. Zvládnutá emócia je väčšia výhra než bod v hre."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Ako ti bolo pri hre?",
+          "body": "Po hre sa spýtajte: „Ako ti bolo, keď si vyhrával? A keď si prehrával? Pomohol ti tvoj plán?“ Odpovede zapíšte.",
+          "fields": [
+            { "label": "Ako dieťa opísalo pocity z výhry a prehry?", "placeholder": "napr. pri prehre hnev, potom to prešlo" },
+            { "label": "Použilo dieťa svoj plán? Čo pomohlo?", "placeholder": "napr. nádychy pomohli, chcelo hrať odvetu" }
+          ],
+          "tip": "Oceňte použitie plánu, nie výsledok hry: „Páčilo sa mi, ako si sa nadýchol a hral ďalej. To bolo silné.“"
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Prehra nie je koniec sveta.", "Hrám pre radosť z hry.", "Mám plán a viem ho použiť."],
+          "tip": "Vetu si volí dieťa samo. Ak žiadna nesedí, nechajte ho vymyslieť vlastnú."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gu-planovanie-ulohy-3",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Môj vlastný plán",
+    "summary": "Samostatné plánovanie viackrokovej činnosti (kroky, odhad času, pomôcky) s rodičom v role zapisovateľa a následné porovnanie plánu so skutočnosťou. Rozvíja exekutívne funkcie — plánovanie, odhad času, monitorovanie a hodnotenie — pri minimálnej opore dospelého.",
+    "parent_guide": "Vyberte s dieťaťom skutočnú väčšiu činnosť — domácu úlohu, upratanie izby alebo prípravu desiatej. Vaša rola je zapisovateľ: povedzte „Ty si šéf plánu, ja len píšem.“ Zapisujte kroky presne tak, ako ich dieťa diktuje, aj keď vidíte medzeru. Ak je plán deravý, spýtajte sa nanajvýš: „Netreba ti k tomu ešte niečo?“ Počas práce mlčte; na požiadanie plán prečítajte. Po dokončení porovnajte plán so skutočnosťou bez hodnotenia — rozdiely sú materiál na učenie, nie chyby.",
+    "difficulty": 3,
+    "age_min": 8,
+    "age_max": 10,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes si šéfom ty! Naplánuješ si kroky, čas aj pomôcky — a ja budem len zapisovať.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vyberte činnosť a role",
+          "body": "Vyberte spolu skutočnú činnosť — domácu úlohu, upratanie izby či prípravu desiatej. Povedzte: „Dnes plánuješ ty. Ja som len tvoj zapisovateľ.“ Vezmite si papier a pero.",
+          "tip": "Naozaj len zapisujte. Ani jeden krok plánu nesmie byť váš — neplánujte za dieťa."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cíti šéf plánu?",
+          "body": "Spýtajte sa: „Ako sa cítiš, keď máš byť šéfom celého plánu?“ Nechajte dieťa vybrať pocit.",
+          "choices": ["Odhodlanie", "Pokoj", "Nechuť", "Nervozita", "Zvedavosť"],
+          "tip": "Aj nechuť je informácia, nie problém. Prijmite ju: „Rozumiem, veľká úloha. Uvidíme, čo s ňou plán urobí.“"
+        },
+        {
+          "kicker": "Krok 3 · Plán krokov",
+          "title": "Diktuj mi kroky",
+          "body": "Dieťa diktuje kroky a vy ich číslujete a zapisujete jeho slovami. Ak vidíte medzeru, nedopĺňajte ju — nanajvýš sa spýtajte: „Netreba ti k tomu ešte niečo?“",
+          "fields": [
+            { "label": "Aké kroky si dieťa naplánovalo?", "placeholder": "napr. 1. nachystám si zošit, 2. prečítam zadanie…" }
+          ],
+          "tip": "Deravý plán nechajte deravý. Dieťa sa z medzery naučí viac než z vášho doplnenia."
+        },
+        {
+          "kicker": "Krok 4 · Čas a pomôcky",
+          "title": "Koľko času? Čo budeš potrebovať?",
+          "body": "Spýtajte sa: „Koľko času ti to asi zaberie?“ a „Čo všetko budeš potrebovať?“ Odhady zapíšte — po skončení sa k nim vrátite.",
+          "fields": [
+            { "label": "Odhad času dieťaťa", "placeholder": "napr. 20 minút" },
+            { "label": "Naplánované pomôcky", "placeholder": "napr. zošit, pero, pravítko" }
+          ],
+          "tip": "Nereálny odhad neopravujte. Porovnanie so skutočnosťou ho opraví lepšie než vy."
+        },
+        {
+          "kicker": "Krok 5 · Realizácia",
+          "title": "Šéf pracuje, zapisovateľ mlčí",
+          "body": "Dieťa pracuje podľa svojho plánu. Vy nezasahujete — na požiadanie iba prečítate plán. Ak dieťa od plánu odbočí, nekomentujte to; všimnete si to spolu pri porovnaní.",
+          "tip": "Mlčať pri odbočke od plánu je súčasť metódy. Porovnanie na konci povie viac než napomenutie uprostred — nerobte prácu za dieťa."
+        },
+        {
+          "kicker": "Krok 6 · Porovnanie",
+          "title": "Plán verzus skutočnosť",
+          "body": "Po dokončení si spolu prečítajte plán. Pýtajte sa: „Čo išlo presne podľa plánu? Čo trvalo dlhšie? Čo ti chýbalo, hoci to v pláne nebolo?“",
+          "fields": [
+            { "label": "Čo išlo podľa plánu?", "placeholder": "napr. kroky sedeli, poradie fungovalo" },
+            { "label": "Čo bolo v skutočnosti inak (čas, kroky, pomôcky)?", "placeholder": "napr. trvalo to 35 minút, chýbala guma" }
+          ],
+          "tip": "Rozdiely čítajte zvedavo, nie vyčítavo: „Zaujímavé, tu sa plán a skutočnosť rozišli. Čo myslíš, prečo?“"
+        },
+        {
+          "kicker": "Krok 7 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Dobrý plán mi šetrí sily.", "Viem si prácu rozdeliť na kroky.", "Odhadovať čas sa učím tréningom."],
+          "tip": "Vetu si vyberá dieťa samo — šéfom plánu zostáva až do poslednej vety."
+        }
+      ]
+    }
+  }
+]

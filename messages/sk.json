@@ -4,7 +4,8 @@
     "description": "Evolvea — digitálny spoločník k logopedickej a kognitívnej terapii. Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa. Denné cvičenie vedené logopédom a sprevádzané rodičom. Už čoskoro."
   },
   "header": {
-    "comingSoon": "Už čoskoro"
+    "comingSoon": "Už čoskoro",
+    "signIn": "Prihlásiť sa"
   },
   "hero": {
     "eyebrow": "Metakognitívne učenie · Vek 6 – 14 rokov",
@@ -162,5 +163,273 @@
   },
   "lang": {
     "label": "Jazyk"
+  },
+  "auth": {
+    "loginTitle": "Prihlásenie",
+    "loginLead": "Pokračujte tam, kde ste skončili.",
+    "email": "E-mail",
+    "password": "Heslo",
+    "passwordHint": "Aspoň 8 znakov.",
+    "signIn": "Prihlásiť sa",
+    "signingIn": "Prihlasujem…",
+    "noAccount": "Ešte nemáte účet?",
+    "goRegister": "Zaregistrujte sa",
+    "registerTitle": "Registrácia",
+    "registerLead": "Vytvorte si účet. Rodičia sa po registrácii prepoja so svojím logopédom pomocou kódu z pozvánky.",
+    "roleLabel": "Kto ste?",
+    "roleParent": "Rodič",
+    "roleParentHint": "Budem cvičiť s dieťaťom doma.",
+    "roleTherapist": "Logopéd",
+    "roleTherapistHint": "Vediem terapie a odporúčam rodinám cvičenia.",
+    "fullName": "Meno a priezvisko",
+    "consent": "Súhlasím so spracúvaním údajov na účely poskytovania služby Evolvea. Údaje uchovávame v EÚ, v nevyhnutnom rozsahu a nikdy ich neposkytujeme tretím stranám.",
+    "createAccount": "Vytvoriť účet",
+    "creating": "Vytváram…",
+    "haveAccount": "Už máte účet?",
+    "goLogin": "Prihláste sa",
+    "checkEmailTitle": "Skontrolujte si e-mail",
+    "checkEmailLead": "Na {email} sme poslali potvrdzovací odkaz. Kliknite naň a účet bude pripravený.",
+    "backToLogin": "Späť na prihlásenie",
+    "resend": "Poslať potvrdenie znova",
+    "resent": "Odoslané. Skontrolujte si schránku (aj spam).",
+    "sending": "Posielam…",
+    "errors": {
+      "fields": "Vyplňte všetky polia.",
+      "invalid": "Nesprávny e-mail alebo heslo.",
+      "unconfirmed": "Účet ešte nie je potvrdený. Skontrolujte si e-mail alebo si nechajte poslať potvrdenie znova.",
+      "exists": "Účet s týmto e-mailom už existuje. Skúste sa prihlásiť.",
+      "weak_password": "Heslo musí mať aspoň 8 znakov.",
+      "rate_limit": "Priveľa pokusov. Skúste to o chvíľu.",
+      "unknown": "Niečo sa pokazilo. Skúste to znova.",
+      "callback": "Odkaz už nie je platný. Prihláste sa alebo si nechajte poslať nový."
+    }
+  },
+  "shell": {
+    "navLabel": "Hlavná navigácia",
+    "signOut": "Odhlásiť sa",
+    "tabs": {
+      "today": "Dnes",
+      "plan": "Plán",
+      "progress": "Pokrok",
+      "messages": "Správy",
+      "families": "Rodiny",
+      "library": "Knižnica",
+      "invites": "Pozvánky",
+      "referrals": "Provízie"
+    }
+  },
+  "common": {
+    "minutes": "{count} min",
+    "days": {
+      "mon": "Po",
+      "tue": "Ut",
+      "wed": "St",
+      "thu": "Št",
+      "fri": "Pi",
+      "sat": "So",
+      "sun": "Ne"
+    }
+  },
+  "domains": {
+    "phonemic_awareness": "Hlásky a zvuky",
+    "working_memory": "Pamäť",
+    "attention": "Pozornosť",
+    "narrative": "Rozprávanie",
+    "vocabulary": "Slovná zásoba",
+    "articulation": "Výslovnosť",
+    "guided": "Spoločné aktivity"
+  },
+  "parent": {
+    "welcomeTitle": "Vitajte v Evolvei 👋",
+    "welcomeLead": "Prepojte svoje dieťa s logopédom pomocou kódu z pozvánky a môžete začať cvičiť.",
+    "homeTitle": "Dnes s {name}",
+    "childSettings": "Profil dieťaťa",
+    "childSettingsLead": "Meno, rok narodenia a avatar — nič viac o dieťati neukladáme.",
+    "switchChild": "Prepnúť dieťa",
+    "streak": "{count, plural, =0 {Začnite dnes} one {# deň v rade} few {# dni v rade} other {# dní v rade}}",
+    "streakHint": "Krátke cvičenie každý deň znamená viac než dlhé raz za týždeň.",
+    "weekDaysLabel": "Prehľad týždňa",
+    "todaySection": "Dnešná dávka",
+    "noPlanTitle": "Plán je na ceste",
+    "noPlanLead": "Váš logopéd vám čoskoro pripraví plán cvičení. Zatiaľ si môžete písať v Správach.",
+    "allDoneTitle": "Dnes máte hotovo!",
+    "allDoneLead": "Skvelá práca. Doprajte si voľný večer — alebo si otvorte Plán, ak chcete pridať niečo navyše.",
+    "weekSection": "Tento týždeň",
+    "weekProgress": "{done} z {target} cvičení",
+    "therapistNote": "Odkaz od logopéda",
+    "doneToday": "dnes",
+    "weeklyProgress": "{done} z {target} tento týždeň",
+    "planTitle": "Plán cvičení",
+    "planMeta": "{title} · od {date}",
+    "progressTitle": "Pokrok",
+    "progressLead": "Ako sa darí {name} za posledných 90 dní.",
+    "statSessions": "cvičení spolu",
+    "statMinutes": "minút cvičenia",
+    "statStreak": "dní v rade",
+    "domainsSection": "Oblasti rozvoja",
+    "domainMeta": "{count, plural, one {# cvičenie} few {# cvičenia} other {# cvičení}}",
+    "historySection": "História",
+    "noSessionsTitle": "Zatiaľ žiadne cvičenia",
+    "noSessionsLead": "Po prvom dokončenom cvičení tu uvidíte históriu aj pokrok.",
+    "messagesTitle": "Správy",
+    "messagesLead": "Píšete si s {name}. Odpovede prichádzajú zvyčajne do 24 hodín.",
+    "messagesLeadNoTherapist": "Správy pre vášho logopéda.",
+    "yourTherapist": "Váš logopéd",
+    "addAnotherChild": "Pridať ďalšie dieťa",
+    "redeem": {
+      "title": "Zadajte kód od logopéda",
+      "lead": "Kód ste dostali od svojho logopéda. Prepojí vaše dieťa s jeho terapiou.",
+      "codeLabel": "Kód pozvánky",
+      "codeHint": "8 znakov, napríklad ABCD2345.",
+      "link": "Prepojiť dieťa",
+      "linking": "Prepájam…",
+      "errors": {
+        "fields": "Zadajte kód.",
+        "invalid_code": "Tento kód neplatí alebo už bol použitý. Skontrolujte ho, prípadne požiadajte logopéda o nový.",
+        "only_parent": "Kód môže použiť iba rodičovský účet.",
+        "unknown": "Niečo sa pokazilo. Skúste to znova."
+      }
+    },
+    "childForm": {
+      "saved": "Uložené.",
+      "saveError": "Uloženie zlyhalo. Skúste to znova.",
+      "avatar": "Avatar",
+      "firstName": "Krstné meno dieťaťa",
+      "firstNameHint": "Stačí krstné meno alebo prezývka.",
+      "birthYear": "Rok narodenia",
+      "birthYearUnset": "Neuvedené",
+      "save": "Uložiť",
+      "saving": "Ukladám…",
+      "dangerTitle": "Vymazať údaje dieťaťa",
+      "dangerLead": "Natrvalo odstráni profil dieťaťa aj všetky cvičenia, výsledky a správy. Toto sa nedá vrátiť späť.",
+      "deleteBtn": "Vymazať všetky údaje",
+      "deleteConfirm": "Naozaj vymazať všetky údaje dieťaťa {name}? Toto sa nedá vrátiť späť."
+    }
+  },
+  "messagesUi": {
+    "emptyTitle": "Zatiaľ žiadne správy",
+    "emptyLead": "Napíšte prvú správu — logopéd odpovedá zvyčajne do 24 hodín.",
+    "planAssigned": "📋 Nový plán: {title}",
+    "welcome": "🎉 Rodina prepojená s logopédom",
+    "systemGeneric": "Systémová udalosť",
+    "sendError": "Správu sa nepodarilo odoslať. Skúste to znova.",
+    "composerLabel": "Nová správa",
+    "composerPlaceholder": "Napíšte správu…",
+    "sendBtn": "Odoslať",
+    "sendingBtn": "Odosielam…"
+  },
+  "player": {
+    "sayIt": "Vypočuť",
+    "hint": "Pomôcka",
+    "back": "Späť",
+    "next": "Ďalej",
+    "start": "Začať",
+    "close": "Zavrieť",
+    "quitConfirm": "Naozaj chcete cvičenie ukončiť? Postup sa neuloží.",
+    "aboutMinutes": "asi {count} min",
+    "parentGuide": "Sprievodca pre rodiča",
+    "progressLabel": "Postup cvičením",
+    "support": {
+      "3": {
+        "label": "S plnou oporou",
+        "hint": "Dnes vediete vy: predčítajte zadanie, ukážte prvý krok a nechajte dieťa dokončiť."
+      },
+      "2": {
+        "label": "S malou pomocou",
+        "hint": "Dieťa pracuje samo, vy ste nablízku. Pomôcku použite, len keď sa zasekne."
+      },
+      "1": {
+        "label": "Samostatne",
+        "hint": "Dieťa to zvládne samo — vy len sledujte a na konci oceňte snahu."
+      }
+    },
+    "praise": {
+      "0": "Výborne!",
+      "1": "Presne tak!",
+      "2": "Super práca!",
+      "3": "Paráda!",
+      "4": "To bolo skvelé!",
+      "5": "Ide ti to!"
+    },
+    "encourage": {
+      "0": "Skús to ešte raz.",
+      "1": "Skoro! Skús znova.",
+      "2": "Nevadí, skús inú možnosť.",
+      "3": "Ešte jeden pokus!"
+    },
+    "soundBoxes": {
+      "countPrompt": "Koľko hlások počuješ?",
+      "colorsPrompt": "Aká je to hláska?",
+      "sayWord": "Vypočuť slovo",
+      "addToken": "Pridaj žetón",
+      "removeToken": "Uber",
+      "check": "Hotovo",
+      "tryAgain": "Povedzte slovo ešte raz pomaly — hláska po hláske.",
+      "showSolution": "Pozri, slovo má {count} hlások.",
+      "tokensSoFar": "{count} žetónov",
+      "countHint": "Povedzte slovo pomaličky a pri každej hláske ťuknite žetón.",
+      "colorsHint": "Táto hláska je {kind}.",
+      "kinds": {
+        "vowel": "krátka samohláska",
+        "long_vowel": "dlhá samohláska",
+        "diphthong": "dvojhláska",
+        "consonant": "spoluhláska"
+      },
+      "paletteLabel": "Vyber druh hlásky"
+    },
+    "memory": {
+      "watchPrompt": "Dobre si zapamätaj poradie…",
+      "recallPrompt": "Ťukni obrázky v správnom poradí!",
+      "hideNow": "Už si pamätám",
+      "again": "Nevadí — pozri sa ešte raz.",
+      "solution": "Takto to bolo správne.",
+      "paletteLabel": "Vyber obrázok"
+    },
+    "pairs": {
+      "prompt": "Nájdi dvojice!",
+      "moves": "{count, plural, =0 {Otoč prvú kartu} one {# ťah} few {# ťahy} other {# ťahov}}",
+      "hiddenCard": "Skrytá karta"
+    },
+    "numberTrack": {
+      "prompt": "Ťukaj čísla po poradí od {from} do {to}.",
+      "promptReverse": "Ťukaj čísla odzadu: od {from} po {to}.",
+      "lookFor": "Hľadaj číslo {n}."
+    },
+    "story": {
+      "orderPrompt": "Usporiadaj príbeh: {title}",
+      "retellHelp": "Nechajte dieťa rozprávať vlastnými slovami. Nedopĺňajte — len počúvajte a prikyvujte.",
+      "retold": "Prerozprávané ✓"
+    },
+    "speech": {
+      "parentHint": "Dieťa hovorí nahlas. Vy ohodnotíte, ako sa mu darilo.",
+      "scoreLabel": "Hodnotenie rodiča",
+      "great": "Výborne",
+      "almost": "Takmer",
+      "practice": "Ešte trénujeme"
+    },
+    "guided": {
+      "choicesLabel": "Možnosti",
+      "fieldPlaceholder": "Zapíšte odpoveď dieťaťa…",
+      "tipLabel": "Tip",
+      "finish": "Dokončiť"
+    },
+    "doneTitle": "Hotovo!",
+    "doneLead": "Skvelá práca. Pridajte krátku poznámku pre logopéda a uložte.",
+    "savedTitle": "Uložené a odoslané",
+    "savedLead": "Logopéd uvidí výsledok aj vašu poznámku pri najbližšej kontrole.",
+    "previewDoneLead": "Toto bol náhľad cvičenia — nič sa neukladá.",
+    "statFirstTry": "na prvý pokus",
+    "statSteps": "krokov",
+    "statSuccess": "úspešnosť",
+    "statHints": "pomôcky",
+    "noteLabel": "Poznámka pre logopéda (nepovinné)",
+    "notePlaceholder": "Ako to dnes išlo? Čo bolo ťažké?",
+    "saveAndSend": "Uložiť a odoslať",
+    "saving": "Ukladám…",
+    "saveError": "Uloženie zlyhalo. Skúste to znova.",
+    "backHome": "Späť na Dnes",
+    "closePreview": "Zavrieť náhľad",
+    "brokenTitle": "Cvičenie sa nedá načítať",
+    "brokenLead": "Obsah cvičenia je poškodený. Dajte vedieť svojmu logopédovi."
   }
 }
