@@ -4,7 +4,8 @@
     "description": "Evolvea — ein digitaler Begleiter zur Sprach- und kognitiven Therapie. Zehn Minuten am Abend, die verändern, wie Ihr Kind denkt. Eine tägliche Übung, angeleitet von einer Logopädin und begleitet von den Eltern. Bald verfügbar."
   },
   "header": {
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "homeAria": "Evolvea — Startseite"
   },
   "hero": {
     "eyebrow": "Metakognitives Lernen · Alter 6–14 Jahre",
@@ -124,7 +125,8 @@
       "text": "Die heutige Sitzung und Ihre Notizen wurden zur Auswertung mit Leos Logopädin geteilt. Sie sieht die Antworten durch und passt die morgige Übung an.",
       "noteLabel": "Status",
       "noteBody": "Wartet auf Prüfung · in der Regel innerhalb von <b>24 Stunden</b>"
-    }
+    },
+    "demoAria": "Interaktive Demo der Evolvea-App"
   },
   "project": {
     "eyebrow": "Das Projekt",
@@ -234,7 +236,9 @@
       "fri": "Fr",
       "sat": "Sa",
       "sun": "So"
-    }
+    },
+    "ageYears": "{age} J.",
+    "ageRange": "{min}–{max} J."
   },
   "domains": {
     "phonemic_awareness": "Laute & Klänge",
@@ -322,7 +326,7 @@
     "statCommission": "Provision pro Monat",
     "noFamiliesTitle": "Noch keine Familien",
     "noFamiliesLead": "Erstellen Sie eine Einladung und geben Sie den Code an die Eltern weiter — nach der Registrierung erscheint die Familie hier mit dem gesamten Übungsverlauf.",
-    "lastActivity": "zuletzt geübt am {date}",
+    "lastActivity": "zuletzt geübt {date}",
     "noActivityYet": "noch nicht geübt",
     "weekSessions": "{count, plural, =0 {0 Übungen/Woche} one {# Übung/Woche} other {# Übungen/Woche}}",
     "subState": {
@@ -463,7 +467,7 @@
       "saving": "Wird gespeichert…",
       "saveChanges": "Änderungen speichern",
       "createExercise": "Übung erstellen",
-      "contentError": "Der Inhalt ist unvollständig: {detail}",
+      "contentError": "Der Inhalt ist unvollständig — prüfen Sie, ob jede Aufgabe Text, Antwortmöglichkeiten und genau eine richtige Antwort hat.",
       "errors": {
         "fields": "Bitte prüfen Sie die ausgefüllten Felder (Titel, Zusammenfassung, Alter, Dauer).",
         "unknown": "Speichern fehlgeschlagen. Bitte versuchen Sie es erneut."
@@ -619,8 +623,8 @@
       "removeToken": "Nimm einen weg",
       "check": "Fertig",
       "tryAgain": "Sprechen Sie das Wort noch einmal langsam vor — Laut für Laut.",
-      "showSolution": "Schau, das Wort hat {count} Laute.",
-      "tokensSoFar": "{count} Chips",
+      "showSolution": "Schau — das Wort hat {count, plural, one {# Laut} other {# Laute}}.",
+      "tokensSoFar": "{count, plural, one {# Chip} other {# Chips}}",
       "countHint": "Sprechen Sie das slowakische Wort ganz langsam vor und tippen Sie bei jedem Laut einen Chip an.",
       "colorsHint": "Dieser Laut ist ein {kind}.",
       "kinds": {

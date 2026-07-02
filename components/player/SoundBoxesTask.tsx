@@ -33,7 +33,8 @@ export default function SoundBoxesTask({
   const [feedback, setFeedback] = useState<{ kind: "good" | "bad"; text: string } | null>(null);
   const [hintOpen, setHintOpen] = useState(false);
 
-  const results = useRef<{ firstTry: boolean }[]>([]);
+  const results = useRef<{ firstTry: boolean; hinted: boolean }[]>([]);
+  const hinted = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const item = content.items[index];
@@ -51,7 +52,7 @@ export default function SoundBoxesTask({
     setSolved(true);
     setRevealed(true);
     setFeedback({ kind: "good", text: praise() });
-    results.current.push({ firstTry });
+    results.current.push({ firstTry, hinted: hinted.current });
     timer.current = setTimeout(advance, 1600);
   }
 
@@ -61,17 +62,19 @@ export default function SoundBoxesTask({
       onFinish({
         correct: results.current.filter((r) => r.firstTry).length,
         total: content.items.length,
-        hintsUsed: 0,
+        hintsUsed: results.current.filter((r) => r.hinted).length,
         detail: {
           mode: content.mode,
           items: results.current.map((r, i) => ({
             word: content.items[i].word,
             firstTry: r.firstTry,
+            hinted: r.hinted,
           })),
         },
       });
       return;
     }
+    hinted.current = false;
     setIndex(next);
     setTokens(0);
     setPos(0);
@@ -96,7 +99,7 @@ export default function SoundBoxesTask({
         setTokens(phonemes.length);
         setSolved(true);
         setRevealed(true);
-        results.current.push({ firstTry: false });
+        results.current.push({ firstTry: false, hinted: hinted.current });
         timer.current = setTimeout(advance, 2600);
       } else {
         setFeedback({ kind: "bad", text: t("soundBoxes.tryAgain") });
@@ -228,7 +231,14 @@ export default function SoundBoxesTask({
 
       {hintsEnabled && !solved && (
         <div className="hint-row">
-          <button type="button" className="hint-btn" onClick={() => setHintOpen((v) => !v)}>
+          <button
+            type="button"
+            className="hint-btn"
+            onClick={() => {
+              hinted.current = true;
+              setHintOpen((v) => !v);
+            }}
+          >
             💡 {t("hint")}
           </button>
         </div>

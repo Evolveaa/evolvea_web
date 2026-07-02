@@ -45,7 +45,12 @@ export async function getActiveChild(): Promise<{ child: Child | null; children:
 export type PlanItemWithExercise = PlanItemRow & { exercises: ExerciseRow };
 export type PlanWithItems = PlanRow & { plan_items: PlanItemWithExercise[] };
 
-/** Active plan incl. items + exercises, newest first. */
+/**
+ * Active plan incl. items + exercises, newest first.
+ * Items whose exercise is hidden by RLS (e.g. a deactivated custom exercise)
+ * come back with `exercises: null` from the embed — drop them instead of
+ * letting the UI crash on a missing row.
+ */
 export const getActivePlan = cache(async (childId: string): Promise<PlanWithItems | null> => {
   const supabase = await createClient();
   const { data } = await supabase
@@ -57,8 +62,10 @@ export const getActivePlan = cache(async (childId: string): Promise<PlanWithItem
     .limit(1)
     .maybeSingle();
   if (!data) return null;
-  data.plan_items.sort((a, b) => a.sort_order - b.sort_order);
-  return data as PlanWithItems;
+  const items = (data.plan_items as (PlanItemRow & { exercises: ExerciseRow | null })[])
+    .filter((item): item is PlanItemWithExercise => item.exercises !== null)
+    .sort((a, b) => a.sort_order - b.sort_order);
+  return { ...data, plan_items: items };
 });
 
 /** Completed sessions for the child within the last `days`. */
@@ -80,18 +87,29 @@ export const getRecentSessions = cache(
 
 /* ---------------- derived, pure helpers ---------------- */
 
-/** Monday 00:00 local time of the week containing `d`. */
-export function startOfWeekMonday(d: Date): Date {
-  const x = new Date(d);
-  const day = (x.getDay() + 6) % 7;
-  x.setHours(0, 0, 0, 0);
-  x.setDate(x.getDate() - day);
-  return x;
+/**
+ * Day/week bucketing runs in a fixed app timezone, not the server's —
+ * otherwise an evening session recorded on a UTC host lands on the next
+ * day and breaks streaks. Slovak-first product → Europe/Bratislava.
+ */
+const APP_TZ = "Europe/Bratislava";
+
+/** YYYY-MM-DD of the instant in the app timezone. */
+function localDayKey(date: string | Date): string {
+  return new Date(date).toLocaleDateString("en-CA", { timeZone: APP_TZ });
 }
 
-function localDayKey(iso: string): string {
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+/** ISO weekday index 0 (Mon) … 6 (Sun) in the app timezone. */
+function localWeekdayIndex(date: Date): number {
+  const name = date.toLocaleDateString("en-US", { timeZone: APP_TZ, weekday: "short" });
+  return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].indexOf(name);
+}
+
+/** Day key shifted by n days relative to the given instant. */
+function shiftedDayKey(from: Date, days: number): string {
+  const d = new Date(from);
+  d.setDate(d.getDate() + days);
+  return localDayKey(d);
 }
 
 export interface TodayEntry {
@@ -118,12 +136,17 @@ export function buildWeekOverview(
 ): WeekOverview {
   if (!plan) return { today: [], all: [], doneTotal: 0, targetTotal: 0 };
 
-  const weekStart = startOfWeekMonday(now);
-  const todayKey = localDayKey(now.toISOString());
-  const thisWeek = sessions.filter((s) => new Date(s.started_at) >= weekStart);
+  const weekday = localWeekdayIndex(now);
+  const weekKeys = new Set(
+    Array.from({ length: 7 }, (_, i) => shiftedDayKey(now, i - weekday)),
+  );
+  const todayKey = localDayKey(now);
+  const thisWeek = sessions.filter((s) => weekKeys.has(localDayKey(s.started_at)));
 
   const all: TodayEntry[] = plan.plan_items.map((item) => {
-    const mine = thisWeek.filter((s) => s.plan_item_id === item.id);
+    // match by exercise, not plan_item id — republishing a plan creates new
+    // item ids and must not wipe the family's weekly progress
+    const mine = thisWeek.filter((s) => s.exercise_id === item.exercise_id);
     return {
       item,
       doneThisWeek: mine.length,
@@ -152,27 +175,27 @@ export function buildWeekOverview(
 /** Consecutive practice days ending today or yesterday. */
 export function computeStreak(sessions: SessionRow[], now = new Date()): number {
   const days = new Set(sessions.map((s) => localDayKey(s.started_at)));
+  let offset = days.has(localDayKey(now)) ? 0 : -1;
   let streak = 0;
-  const cursor = new Date(now);
-  if (!days.has(localDayKey(cursor.toISOString()))) cursor.setDate(cursor.getDate() - 1);
-  while (days.has(localDayKey(cursor.toISOString()))) {
+  while (days.has(shiftedDayKey(now, offset))) {
     streak += 1;
-    cursor.setDate(cursor.getDate() - 1);
+    offset -= 1;
   }
   return streak;
 }
 
 /** Which of the current week's days (Mon..Sun) saw practice. */
 export function weekDays(sessions: SessionRow[], now = new Date()): boolean[] {
-  const start = startOfWeekMonday(now);
-  const done: boolean[] = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(start);
-    d.setDate(start.getDate() + i);
-    const key = localDayKey(d.toISOString());
-    done.push(sessions.some((s) => localDayKey(s.started_at) === key));
-  }
-  return done;
+  const weekday = localWeekdayIndex(now);
+  const done = sessions.map((s) => localDayKey(s.started_at));
+  return Array.from({ length: 7 }, (_, i) =>
+    done.includes(shiftedDayKey(now, i - weekday)),
+  );
+}
+
+/** Today's Mon-based weekday index in the app timezone (for UI highlighting). */
+export function appWeekdayIndex(now = new Date()): number {
+  return localWeekdayIndex(now);
 }
 
 export interface DomainStat {

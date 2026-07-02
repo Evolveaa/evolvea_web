@@ -14,6 +14,7 @@ const STATE_HUE: Record<string, string> = {
 
 export default async function TherapistDashboard() {
   const t = await getTranslations("therapist");
+  const tc = await getTranslations("common");
   const format = await getFormatter();
   const session = await getSessionProfile();
   if (!session) return null;
@@ -22,7 +23,10 @@ export default async function TherapistDashboard() {
   const activeWeek = families.filter((f) => f.sessionsWeek > 0).length;
   const unreadTotal = families.reduce((n, f) => n + f.unread, 0);
   const paying = families.filter((f) => accessState(f.subscription) === "active").length;
-  const commission = (paying * COMMISSION_PER_FAMILY_EUR).toFixed(2).replace(".", ",");
+  const commission = format.number(paying * COMMISSION_PER_FAMILY_EUR, {
+    style: "currency",
+    currency: "EUR",
+  });
 
   return (
     <>
@@ -50,7 +54,7 @@ export default async function TherapistDashboard() {
           <span>{t("statUnread")}</span>
         </div>
         <div className="stat">
-          <b>{commission} €</b>
+          <b>{commission}</b>
           <span>{t("statCommission")}</span>
         </div>
       </div>
@@ -79,7 +83,9 @@ export default async function TherapistDashboard() {
                   <span className="row-body">
                     <span className="row-title">
                       {f.child.first_name}
-                      {f.child.birth_year ? ` · ${new Date().getFullYear() - f.child.birth_year} r.` : ""}
+                      {f.child.birth_year
+                        ? ` · ${tc("ageYears", { age: new Date().getFullYear() - f.child.birth_year })}`
+                        : ""}
                       {f.unread > 0 && (
                         <span className="badge-count" style={{ marginLeft: "0.5rem" }}>
                           {f.unread}

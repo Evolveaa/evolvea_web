@@ -170,9 +170,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
 
       {state?.error && (
         <p className="form-error" role="alert">
-          {state.error === "content"
-            ? t("contentError", { detail: state.contentError ?? "" })
-            : t(`errors.${state.error}`)}
+          {state.error === "content" ? t("contentError") : t(`errors.${state.error}`)}
         </p>
       )}
 
@@ -263,6 +261,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                   className="input"
                   value={item.prompt}
                   maxLength={300}
+                  required
                   onChange={(e) =>
                     setChoice((prev) => prev.map((p, j) => (j === i ? { ...p, prompt: e.target.value } : p)))
                   }
@@ -294,6 +293,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                     aria-label={t("optionLabel")}
                     value={o.label}
                     maxLength={60}
+                    required={o.correct || k < 2}
                     onChange={(e) =>
                       setChoice((prev) =>
                         prev.map((p, j) =>
@@ -385,6 +385,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                 aria-label={t("speechText")}
                 value={item.text}
                 maxLength={300}
+                required
                 onChange={(e) => setSpeech((prev) => prev.map((p, j) => (j === i ? { ...p, text: e.target.value } : p)))}
               />
               <input
@@ -418,11 +419,11 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
               </legend>
               <div className="field">
                 <label className="label">{t("stepTitle")}</label>
-                <input className="input" value={step.title} maxLength={120} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, title: e.target.value } : p)))} />
+                <input className="input" value={step.title} maxLength={120} required onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, title: e.target.value } : p)))} />
               </div>
               <div className="field">
                 <label className="label">{t("stepBody")}</label>
-                <textarea className="textarea" rows={3} maxLength={1200} value={step.body} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, body: e.target.value } : p)))} />
+                <textarea className="textarea" rows={3} maxLength={1200} required value={step.body} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, body: e.target.value } : p)))} />
               </div>
               <div className="field">
                 <label className="label">{t("stepChoices")}</label>

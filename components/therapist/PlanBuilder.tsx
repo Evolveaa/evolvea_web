@@ -38,6 +38,7 @@ export default function PlanBuilder({
   initialItems: PlanItemInput[];
 }) {
   const t = useTranslations("therapist.builder");
+  const tc = useTranslations("common");
   const td = useTranslations("domains");
   const tt = useTranslations("therapist");
 
@@ -157,7 +158,8 @@ export default function PlanBuilder({
                     {!e.is_builtin && <span className="chip" style={{ marginLeft: 6, fontSize: "0.64rem" }}>{t("custom")}</span>}
                   </span>
                   <span className="row-sub">
-                    {"★".repeat(e.difficulty)} · {e.age_min}–{e.age_max} r. · {e.duration_minutes} min
+                    {"★".repeat(e.difficulty)} · {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
+                    {tc("minutes", { count: e.duration_minutes })}
                   </span>
                 </span>
                 <button

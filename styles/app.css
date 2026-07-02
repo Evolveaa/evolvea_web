@@ -1286,6 +1286,9 @@ a.row-item:hover {
   padding: 0.75rem 1rem;
   font-size: 0.92rem;
   line-height: 1.5;
+  /* keep the writer's line breaks and never overflow the bubble */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .msg-mine {
   align-self: flex-end;

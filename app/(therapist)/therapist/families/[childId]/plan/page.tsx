@@ -54,11 +54,15 @@ export default async function PlanBuilderPage({
         initialTitle={plan?.title ?? t("defaultTitle", { name: family.child.first_name })}
         initialNote={plan?.note ?? ""}
         initialItems={
-          plan?.plan_items.map((item) => ({
-            exerciseId: item.exercise_id,
-            timesPerWeek: item.times_per_week,
-            supportLevel: item.support_level,
-          })) ?? []
+          // items whose exercise left the active library would be invisible
+          // yet still counted and re-published — drop them from the draft
+          plan?.plan_items
+            .filter((item) => slim.some((e) => e.id === item.exercise_id))
+            .map((item) => ({
+              exerciseId: item.exercise_id,
+              timesPerWeek: item.times_per_week,
+              supportLevel: item.support_level,
+            })) ?? []
         }
       />
     </>

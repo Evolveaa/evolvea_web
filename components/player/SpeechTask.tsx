@@ -18,6 +18,10 @@ export default function SpeechTask({ content, onProgress, onFinish }: TaskProps<
 
   const [index, setIndex] = useState(0);
   const results = useRef<Score[]>([]);
+  // double-tap guard: without it a fast second tap scores the next,
+  // never-shown item through the same button position
+  const lock = useRef(false);
+  const unlockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const item = content.items[index];
 
@@ -25,7 +29,13 @@ export default function SpeechTask({ content, onProgress, onFinish }: TaskProps<
     onProgress(index, content.items.length);
   }, [index, content.items.length, onProgress]);
 
+  useEffect(() => () => {
+    if (unlockTimer.current) clearTimeout(unlockTimer.current);
+  }, []);
+
   function score(s: Score) {
+    if (lock.current) return;
+    lock.current = true;
     results.current.push(s);
     const next = index + 1;
     if (next >= content.items.length) {
@@ -40,9 +50,12 @@ export default function SpeechTask({ content, onProgress, onFinish }: TaskProps<
           })),
         },
       });
-      return;
+      return; // stay locked — task finished
     }
     setIndex(next);
+    unlockTimer.current = setTimeout(() => {
+      lock.current = false;
+    }, 350);
   }
 
   return (

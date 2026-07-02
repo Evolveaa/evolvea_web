@@ -10,6 +10,7 @@ type Phase = "watch" | "recall";
 /** Watch the emoji sequence, then rebuild it from the palette. */
 export default function MemorySequenceTask({
   content,
+  hintsEnabled,
   onProgress,
   onFinish,
 }: TaskProps<MemorySequenceContent>) {
@@ -23,8 +24,10 @@ export default function MemorySequenceTask({
   const [solved, setSolved] = useState(false);
   const [failed, setFailed] = useState(false);
   const [feedback, setFeedback] = useState<{ kind: "good" | "bad"; text: string } | null>(null);
+  const [hintOpen, setHintOpen] = useState(false);
 
-  const results = useRef<{ firstTry: boolean }[]>([]);
+  const results = useRef<{ firstTry: boolean; hinted: boolean }[]>([]);
+  const hinted = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const item = content.items[index];
@@ -55,16 +58,18 @@ export default function MemorySequenceTask({
       onFinish({
         correct: results.current.filter((r) => r.firstTry).length,
         total: content.items.length,
-        hintsUsed: 0,
+        hintsUsed: results.current.filter((r) => r.hinted).length,
         detail: {
           items: results.current.map((r, i) => ({
             length: content.items[i].sequence.length,
             firstTry: r.firstTry,
+            hinted: r.hinted,
           })),
         },
       });
       return;
     }
+    hinted.current = false;
     setIndex(next);
     setPhase("watch");
     setPicked([]);
@@ -72,6 +77,7 @@ export default function MemorySequenceTask({
     setSolved(false);
     setFailed(false);
     setFeedback(null);
+    setHintOpen(false);
   }
 
   function pick(emoji: string) {
@@ -84,7 +90,7 @@ export default function MemorySequenceTask({
       if (next.length === item.sequence.length) {
         setSolved(true);
         setFeedback({ kind: "good", text: praise() });
-        results.current.push({ firstTry: attempts === 0 });
+        results.current.push({ firstTry: attempts === 0, hinted: hinted.current });
         timer.current = setTimeout(advance, 1300);
       }
     } else {
@@ -95,7 +101,7 @@ export default function MemorySequenceTask({
         setFailed(true);
         setPicked([...item.sequence]);
         setFeedback({ kind: "bad", text: t("memory.solution") });
-        results.current.push({ firstTry: false });
+        results.current.push({ firstTry: false, hinted: hinted.current });
         timer.current = setTimeout(advance, 2600);
       } else {
         setFeedback({ kind: "bad", text: t("memory.again") });
@@ -157,6 +163,24 @@ export default function MemorySequenceTask({
       <p className="play-feedback" data-kind={feedback?.kind} role="status">
         {feedback?.text}
       </p>
+
+      {hintsEnabled && item.hint && phase === "recall" && !solved && !failed && (
+        <div className="hint-row">
+          <button
+            type="button"
+            className="hint-btn"
+            onClick={() => {
+              hinted.current = true;
+              setHintOpen((v) => !v);
+            }}
+          >
+            💡 {t("hint")}
+          </button>
+        </div>
+      )}
+      {hintOpen && item.hint && phase === "recall" && !solved && !failed && (
+        <p className="hint-bubble">{item.hint}</p>
+      )}
     </>
   );
 }

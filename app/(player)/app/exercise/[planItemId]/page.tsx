@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import ExercisePlayer from "@/components/player/ExercisePlayer";
@@ -38,6 +39,9 @@ export default async function ExercisePage({
         <div className="auth-card">
           <h1 className="auth-title">{t("brokenTitle")}</h1>
           <p className="auth-lead">{t("brokenLead")}</p>
+          <Link href="/app" className="btn btn-primary btn-block">
+            {t("backHome")}
+          </Link>
         </div>
       </div>
     );

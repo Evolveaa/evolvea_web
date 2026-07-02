@@ -4,7 +4,8 @@
     "description": "Evolvea — a digital companion to speech and cognitive therapy. Ten minutes a night to rebuild how your child thinks. A logopedist-guided, parent-led daily exercise. Coming soon."
   },
   "header": {
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "homeAria": "Evolvea — home"
   },
   "hero": {
     "eyebrow": "Metacognitive learning · Ages 6–14",
@@ -124,7 +125,8 @@
       "text": "Tonight's session and your notes have been shared with Leo's logopedist for evaluation. They'll review the answers and adapt tomorrow's exercise.",
       "noteLabel": "Status",
       "noteBody": "Awaiting review · usually within <b>24 hours</b>"
-    }
+    },
+    "demoAria": "Interactive Evolvea app demo"
   },
   "project": {
     "eyebrow": "The project",
@@ -234,7 +236,9 @@
       "fri": "Fri",
       "sat": "Sat",
       "sun": "Sun"
-    }
+    },
+    "ageYears": "{age} yrs",
+    "ageRange": "{min}–{max} yrs"
   },
   "domains": {
     "phonemic_awareness": "Sounds in words",
@@ -463,7 +467,7 @@
       "saving": "Saving…",
       "saveChanges": "Save changes",
       "createExercise": "Create exercise",
-      "contentError": "The content isn't complete: {detail}",
+      "contentError": "The content is incomplete — check that every item has text, options and exactly one correct answer.",
       "errors": {
         "fields": "Please check the fields (name, summary, age, duration).",
         "unknown": "Saving failed. Please try again."
@@ -619,8 +623,8 @@
       "removeToken": "Take one away",
       "check": "Done",
       "tryAgain": "Say the word again slowly — one sound at a time.",
-      "showSolution": "Look — the word has {count} sounds.",
-      "tokensSoFar": "{count} tokens",
+      "showSolution": "Look — the word has {count, plural, one {# sound} other {# sounds}}.",
+      "tokensSoFar": "{count, plural, one {# token} other {# tokens}}",
       "countHint": "Say the word very slowly (the words are in Slovak — that's the language being practiced) and tap a token for each sound.",
       "colorsHint": "This sound is a {kind}.",
       "kinds": {

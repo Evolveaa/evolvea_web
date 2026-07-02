@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { getSessionProfile } from "@/lib/data/user";
 import { getFamilies } from "@/lib/data/therapist";
 import {
@@ -8,10 +8,10 @@ import {
   MONTHLY_PRICE_EUR,
 } from "@/lib/billing";
 
-const eur = (n: number) => `${n.toFixed(2).replace(".", ",")} €`;
-
 export default async function ReferralsPage() {
   const t = await getTranslations("therapist.referrals");
+  const format = await getFormatter();
+  const eur = (n: number) => format.number(n, { style: "currency", currency: "EUR" });
   const session = await getSessionProfile();
   if (!session) return null;
 

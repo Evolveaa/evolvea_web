@@ -29,6 +29,7 @@ const MODALITY_ICON: Record<ExerciseModality, string> = {
 
 export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] }) {
   const t = useTranslations("therapist.library");
+  const tc = useTranslations("common");
   const td = useTranslations("domains");
 
   const [domain, setDomain] = useState<ExerciseDomain | "all">("all");
@@ -122,7 +123,9 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
                 {!e.is_active && <span className="chip" style={{ marginLeft: 6, fontSize: "0.64rem" }}>{t("inactive")}</span>}
               </span>
               <span className="row-sub">
-                {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} · {e.age_min}–{e.age_max} r. · {e.duration_minutes} min — {e.summary}
+                {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
+                {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
+                {tc("minutes", { count: e.duration_minutes })} — {e.summary}
               </span>
             </span>
             <span style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", justifyContent: "flex-end" }}>

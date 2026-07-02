@@ -4,7 +4,8 @@
     "description": "Evolvea — digitálny spoločník k logopedickej a kognitívnej terapii. Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa. Denné cvičenie vedené logopédom a sprevádzané rodičom. Už čoskoro."
   },
   "header": {
-    "signIn": "Prihlásiť sa"
+    "signIn": "Prihlásiť sa",
+    "homeAria": "Evolvea — domovská stránka"
   },
   "hero": {
     "eyebrow": "Metakognitívne učenie · Vek 6 – 14 rokov",
@@ -124,7 +125,8 @@
       "text": "Dnešné sedenie a vaše poznámky sme poslali Leovmu logopédovi na vyhodnotenie. Prezrie si odpovede a prispôsobí zajtrajšie cvičenie.",
       "noteLabel": "Stav",
       "noteBody": "Čaká na posúdenie · zvyčajne do <b>24 hodín</b>"
-    }
+    },
+    "demoAria": "Interaktívna ukážka aplikácie Evolvea"
   },
   "project": {
     "eyebrow": "Projekt",
@@ -234,7 +236,9 @@
       "fri": "Pi",
       "sat": "So",
       "sun": "Ne"
-    }
+    },
+    "ageYears": "{age} r.",
+    "ageRange": "{min}–{max} r."
   },
   "domains": {
     "phonemic_awareness": "Hlásky a zvuky",
@@ -463,7 +467,7 @@
       "saving": "Ukladám…",
       "saveChanges": "Uložiť zmeny",
       "createExercise": "Vytvoriť cvičenie",
-      "contentError": "Obsah nie je úplný: {detail}",
+      "contentError": "Obsah nie je úplný — skontrolujte, či má každá položka text, možnosti a práve jednu správnu odpoveď.",
       "errors": {
         "fields": "Skontrolujte vyplnené polia (názov, zhrnutie, vek, trvanie).",
         "unknown": "Uloženie zlyhalo. Skúste to znova."
@@ -619,8 +623,8 @@
       "removeToken": "Uber",
       "check": "Hotovo",
       "tryAgain": "Povedzte slovo ešte raz pomaly — hláska po hláske.",
-      "showSolution": "Pozri, slovo má {count} hlások.",
-      "tokensSoFar": "{count} žetónov",
+      "showSolution": "Pozri, slovo má {count, plural, one {# hlásku} few {# hlásky} other {# hlások}}.",
+      "tokensSoFar": "{count, plural, one {# žetón} few {# žetóny} other {# žetónov}}",
       "countHint": "Povedzte slovo pomaličky a pri každej hláske ťuknite žetón.",
       "colorsHint": "Táto hláska je {kind}.",
       "kinds": {

@@ -6,6 +6,7 @@ import RedeemInviteForm from "@/components/app/RedeemInviteForm";
 import SubscriptionBanner from "@/components/app/SubscriptionBanner";
 import { accessState, trialDaysLeft } from "@/lib/billing";
 import {
+  appWeekdayIndex,
   buildWeekOverview,
   computeStreak,
   getActiveChild,
@@ -50,7 +51,7 @@ export default async function ParentHomePage() {
     tc("days.sat"),
     tc("days.sun"),
   ];
-  const todayIdx = (new Date().getDay() + 6) % 7;
+  const todayIdx = appWeekdayIndex();
 
   return (
     <>

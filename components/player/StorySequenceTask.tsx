@@ -25,7 +25,8 @@ export default function StorySequenceTask({
   const [feedback, setFeedback] = useState<{ kind: "good" | "bad"; text: string } | null>(null);
   const [hintOpen, setHintOpen] = useState(false);
 
-  const results = useRef<{ errors: number }[]>([]);
+  const results = useRef<{ errors: number; hinted: boolean }[]>([]);
+  const hinted = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const item = content.items[index];
@@ -65,22 +66,24 @@ export default function StorySequenceTask({
   }
 
   function nextStory() {
-    results.current.push({ errors });
+    results.current.push({ errors, hinted: hinted.current });
     const next = index + 1;
     if (next >= content.items.length) {
       onFinish({
         correct: results.current.filter((r) => r.errors === 0).length,
         total: content.items.length,
-        hintsUsed: 0,
+        hintsUsed: results.current.filter((r) => r.hinted).length,
         detail: {
           items: results.current.map((r, i) => ({
             title: content.items[i].title,
             errors: r.errors,
+            hinted: r.hinted,
           })),
         },
       });
       return;
     }
+    hinted.current = false;
     setIndex(next);
     setPlaced(0);
     setErrors(0);
@@ -149,7 +152,14 @@ export default function StorySequenceTask({
 
       {hintsEnabled && item.hint && phase === "order" && (
         <div className="hint-row">
-          <button type="button" className="hint-btn" onClick={() => setHintOpen((v) => !v)}>
+          <button
+            type="button"
+            className="hint-btn"
+            onClick={() => {
+              hinted.current = true;
+              setHintOpen((v) => !v);
+            }}
+          >
             💡 {t("hint")}
           </button>
         </div>

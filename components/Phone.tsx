@@ -80,7 +80,7 @@ export default function Phone() {
   };
 
   return (
-    <div className="phone" role="group" aria-label="Evolvea app live demo">
+    <div className="phone" role="group" aria-label={t("demoAria")}>
       <div className="phone-screen">
         {/* Status bar */}
         <div className="ph-status">

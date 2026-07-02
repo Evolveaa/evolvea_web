@@ -48,7 +48,7 @@ export default function SiteHeader() {
   return (
     <header className={className} id="top">
       <div className="container header-inner">
-        <a href="#top" className="brand" aria-label="Evolvea home">
+        <a href="#top" className="brand" aria-label={t("homeAria")}>
           <span className="brand-dot" aria-hidden="true" />
           <span className="brand-name">Evolvea</span>
         </a>

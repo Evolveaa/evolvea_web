@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import CheckoutForm from "@/components/app/CheckoutForm";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
 import { getActiveChild, getSubscription } from "@/lib/data/parent";
@@ -7,6 +7,7 @@ import { accessState, MONTHLY_PRICE_EUR, trialDaysLeft } from "@/lib/billing";
 
 export default async function CheckoutPage() {
   const t = await getTranslations("billing");
+  const format = await getFormatter();
   const { child } = await getActiveChild();
 
   if (!child) {
@@ -51,7 +52,8 @@ export default async function CheckoutPage() {
             <p className="card-sub">{t("planFor", { name: child.first_name })}</p>
           </div>
           <b style={{ fontSize: "1.5rem", whiteSpace: "nowrap" }}>
-            {MONTHLY_PRICE_EUR.toFixed(2).replace(".", ",")} € <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--ink-soft)" }}>{t("perMonth")}</span>
+            {format.number(MONTHLY_PRICE_EUR, { style: "currency", currency: "EUR" })}{" "}
+            <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--ink-soft)" }}>{t("perMonth")}</span>
           </b>
         </div>
         <ul style={{ listStyle: "none", marginTop: "0.9rem", display: "flex", flexDirection: "column", gap: "0.45rem", fontSize: "0.9rem", color: "var(--ink-soft)" }}>

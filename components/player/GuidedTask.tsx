@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { GuidedStepsContent } from "@/lib/exercises/types";
 import type { TaskProps } from "./shared";
@@ -20,6 +20,7 @@ export default function GuidedTask({ content, onProgress, onFinish }: TaskProps<
   const [answers, setAnswers] = useState<StepAnswer[]>(
     content.steps.map(() => ({ choices: [], fields: {} })),
   );
+  const lastNav = useRef(0);
 
   const step = content.steps[index];
   const answer = answers[index];
@@ -51,6 +52,11 @@ export default function GuidedTask({ content, onProgress, onFinish }: TaskProps<
   }
 
   function next() {
+    // double-click guard: a fast second click must not skip a step
+    // or finish with the last step unseen
+    const nowTs = Date.now();
+    if (nowTs - lastNav.current < 350) return;
+    lastNav.current = nowTs;
     if (!last) {
       setIndex(index + 1);
       return;

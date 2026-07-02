@@ -31,6 +31,7 @@ export default async function FamilyDetailPage({
 }) {
   const { childId } = await params;
   const t = await getTranslations("therapist");
+  const tc = await getTranslations("common");
   const td = await getTranslations("domains");
   const tp = await getTranslations("parent");
   const format = await getFormatter();
@@ -72,7 +73,9 @@ export default async function FamilyDetailPage({
         <div>
           <h1 className="page-h">
             <span aria-hidden="true">{child.avatar}</span> {child.first_name}
-            {child.birth_year ? ` · ${new Date().getFullYear() - child.birth_year} r.` : ""}
+            {child.birth_year
+              ? ` · ${tc("ageYears", { age: new Date().getFullYear() - child.birth_year })}`
+              : ""}
           </h1>
           <p className="page-sub" style={{ marginBottom: 0 }}>
             {t("parentLabel")}: {parentName} ·{" "}
