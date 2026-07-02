@@ -1,75 +1,114 @@
-# Evolvea — Landing Page
+# Evolvea
 
-Marketing landing page for **Evolvea** — *ten minutes a night to rebuild how your
-child thinks.* Evolvea is a daily **metacognitive exercise** parents and children do
-together (ages 6–14): each prompt adapts to the child's last answer so reasoning,
-reflection, and curiosity grow one conversation at a time.
+**Digitálny spoločník k logopedickej a kognitívnej terapii detí (5 – 10 r.).**
+B2B2C platforma: logopéd odporúča, rodič vedie krátke denné cvičenia doma,
+dieťa rastie — a všetko sa vracia logopédovi. Netechnický popis fungovania je
+v [AKO-TO-FUNGUJE.md](./AKO-TO-FUNGUJE.md).
 
-The page has two focal parts:
+Metodický základ: jazykovo-kognitívne spracovanie (fonematické uvedomovanie
+podľa Eľkonina–Mikulajovej, pracovná pamäť, pozornosť podľa Achutinovej–Pylajevovej,
+naratívne schopnosti podľa Ďjačenko–Stanislavovej, slovná zásoba, artikulácia),
+Vygotského zóna najbližšieho vývinu (odstupňovaná opora 3→1) a metakognícia
+podľa Mikulajovej — pozri `zamer_projektu.md`.
 
-1. **Hero (light)** — the core promise, with *Try the live demo* / *About the project*.
-2. **Live demo (dark)** — an **interactive phone mockup** you can tap through, mirroring
-   the steps a parent follows in the app for tonight's exercise, *The Stuck Puzzle*.
+## Stack
 
-## Tech stack
+- **Next.js 16** (App Router, `proxy.ts`) + **React 19** + **TypeScript strict**
+- **Supabase** — Postgres + Auth + RLS (EU región); klient `@supabase/ssr`,
+  v prehliadači len publishable key, žiadne tajné kľúče
+- **next-intl** — SK-first, plné EN/DE preklady (cvičebný obsah je zámerne
+  slovenský — trénuje sa slovenský jazyk)
+- Ručne písaný CSS design systém (`app/globals.css` landing, `styles/app.css` aplikácia),
+  WCAG 2.1 AA: kontrasty, focus ringy, 44px+ ciele, reduced motion
+- **Playwright** — e2e smoke preklik oboch rolí
 
-- **[Next.js 16](https://nextjs.org)** (App Router) + **React 19**
-- **TypeScript** (strict mode)
-- **[next/font](https://nextjs.org/docs/app/getting-started/fonts)** — self-hosted *Inter*, no layout shift
-- Plain, hand-authored CSS design system (`app/globals.css`) — no CSS framework
-- Deploys to **Vercel** with zero config
-
-## Project structure
-
-```
-app/
-  layout.tsx        Root layout — <html>, Inter font, metadata, viewport
-  page.tsx          Page composition
-  globals.css       The full design system (tokens, sections, phone, responsive)
-components/
-  SiteHeader.tsx    Sticky header — scroll-adaptive light/dark (client)
-  Hero.tsx          Hero section
-  DemoSection.tsx   Dark demo section (copy + phone)
-  Phone.tsx         Interactive 7-step phone state machine (client)
-  Project.tsx       "About the project" section
-  Info.tsx          "Why it works" section
-  SiteFooter.tsx    Footer
-lib/
-  phone-content.ts  Typed content for the phone demo
-legacy/             The original static HTML/CSS/JS prototype (kept for reference)
-```
-
-## The interactive demo
-
-The phone is a typed state machine — tap the tabs or the buttons to walk through it:
-
-| Step | What it shows |
-| --- | --- |
-| Intro | Why this exercise was chosen tonight |
-| Feel | Tappable emotion chips + a live counter |
-| Plan | Metacognitive planning questions |
-| Engage | Facilitator prompts + an optional note |
-| Reflect | Reflective evaluation questions |
-| Anchor | A selectable self-efficacy statement |
-| Sent | Session summary, then *Replay demo* |
-
-## Run it
+## Spustenie
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+cp .env.example .env.local   # doplňte URL + publishable key projektu
+npm run dev                  # http://localhost:3000
 ```
 
-Other scripts:
+Demo účty (heslo pre všetky: `EvolveaDemo2026`):
+
+| Rola | E-mail |
+|---|---|
+| Logopéd | `stuodstrelovaci+logoped@gmail.com` |
+| Rodič — aktívne predplatné, 3 týždne dát | `stuodstrelovaci+rodic1@gmail.com` |
+| Rodič — čerstvý trial | `stuodstrelovaci+rodic2@gmail.com` |
+
+## Architektúra
+
+```
+app/
+  (auth)/         /login, /register — e-mail + heslo, potvrdenie e-mailom
+  (parent)/app    Dnes (denná dávka + séria) · Plán · Pokrok · Správy ·
+                  Profil dieťaťa · /app/checkout (mock platobná brána)
+  (player)/       full-screen prehrávač cvičení (/app/exercise/[planItemId],
+                  /therapist/preview/[exerciseId])
+  (therapist)/    Rodiny · detail dieťaťa (výsledky, reflexie, správy) ·
+                  plán builder · knižnica + builder vlastných cvičení ·
+                  pozvánky · provízie
+components/       auth/ app/ player/ therapist/ + landing komponenty
+lib/
+  supabase/       browser/server klienti (SSR cookies)
+  exercises/      typový model obsahu + runtime validácia
+  data/           dotazy + čisté odvodené funkcie (odporúčania, séria, štatistiky)
+  auth|parent|therapist/actions.ts   server actions (mutácie len na serveri)
+content/exercises/  zdrojové JSON knižnice (51 cvičení, 7 domén) + SPEC.md
+supabase/
+  migrations/     schéma + RLS (aplikované cez Supabase MCP)
+  seed/           generovaný SQL seed knižnice
+scripts/          validate-exercises · build-seed-sql · check-messages · e2e-smoke
+proxy.ts          session refresh + gating /app a /therapist (Next 16 proxy)
+```
+
+### Dátovo riadené cvičenia
+
+`exercises.content` (jsonb) je diskriminovaná únia 8 typov úloh
+(`lib/exercises/types.ts`): `choice`, `sound_boxes` (Eľkoninove žetóny),
+`memory_sequence`, `pairs`, `number_track` (Škola pozornosti),
+`story_sequence`, `speech_items` (hodnotí rodič — nič sa nenahráva),
+`guided_steps` (metakognitívny oblúk pocit → plán → pokus → reflexia →
+ukotvenie). Prehrávač renderuje čisto z dát; nové cvičenia nevyžadujú kód.
+
+Scaffolding: každá položka plánu má `support_level` 3 → 1 (plná opora →
+samostatnosť) — mení správanie prehrávača (sprievodca pre rodiča, dostupnosť
+pomôcok) podľa Vygotského princípu interiorizácie.
+
+### Bezpečnosť a GDPR
+
+- Multi-tenant **RLS na každej tabuľke**: rodič vidí len svoje deti, logopéd
+  len svoje rodiny; prepojenie výhradne cez security-definer RPC
+  `redeem_invite`. Triggery chránia nemenné polia (rola, väzby rodiny,
+  read-receipty, prechody predplatného).
+- Dátová minimalizácia: o dieťati len krstné meno, rok narodenia, avatar;
+  žiadne nahrávky reči; právo na výmaz jedným tlačidlom (kaskáda).
+- Negatívne RLS testy (eskalácia roly, cross-tenant čítanie/zápis) prešli;
+  Supabase advisors čisté okrem zámerných helperov pre RLS.
+- Odporúčanie pre produkciu (nastavenie v Supabase dashboarde): zapnúť
+  leaked-password protection (HaveIBeenPwned) a vlastné SMTP.
+
+### Predplatné (mock)
+
+Uplatnenie pozvánky otvára 14-dňový trial (`subscriptions`). `/app/checkout`
+je **priznaná testovacia brána** — nič sa neúčtuje; aktivácia prepne stav,
+DB trigger stráži povolené prechody. Provízie logopéda (30 %, 2,97 €/rodina/mes.)
+sa počítajú z aktívnych predplatných.
+
+## Skripty
 
 ```bash
-npm run build      # production build
-npm run start      # serve the production build
-npm run lint       # ESLint (next/core-web-vitals + next/typescript)
+npm run build / lint
+node scripts/validate-exercises.mjs   # kontrakt knižnice + slovenská fonematika
+node scripts/build-seed-sql.mjs       # content/exercises → supabase/seed/exercises.sql
+node scripts/check-messages.mjs       # parita kľúčov a ICU premenných SK/EN/DE
+BASE_URL=http://localhost:3000 node scripts/e2e-smoke.mjs   # 15-krokový preklik
 ```
 
-## Notes
+## Landing
 
-- Responsive (desktop two-column → stacked on mobile), `prefers-reduced-motion` aware.
-- The design is a faithful 1:1 port of the original static prototype, now preserved in
-  `legacy/` for reference.
+Pôvodná lokalizovaná landing page (SK/EN/DE) zostáva na `/` vrátane
+interaktívnej ukážky „Zaseknutá skladačka“ — tá istá aktivita je dnes plnou
+súčasťou knižnice (`gu-zaseknuta-skladacka-2`).
