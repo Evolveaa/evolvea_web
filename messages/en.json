@@ -315,7 +315,13 @@
       "dangerLead": "Permanently removes the child's profile along with all exercises, results, and messages. This cannot be undone.",
       "deleteBtn": "Delete all data",
       "deleteConfirm": "Really delete all data for {name}? This cannot be undone."
-    }
+    },
+    "planRhythmTitle": "Suggested weekly rhythm",
+    "planRhythmLead": "Each evening the app picks a few different exercises. Here's how a week could look — today's set is in the Today tab.",
+    "planGroupsTitle": "Plan by area",
+    "planGroupProgress": "{done}/{target} this week",
+    "planFree": "free",
+    "planTodayPill": "Today"
   },
   "therapist": {
     "dashTitle": "Your families",

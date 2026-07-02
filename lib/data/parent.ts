@@ -2,7 +2,7 @@ import { cache } from "react";
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/database.types";
-import type { ExerciseRow } from "@/lib/exercises/types";
+import { DOMAINS, type ExerciseDomain, type ExerciseRow } from "@/lib/exercises/types";
 
 export type Child = Database["public"]["Tables"]["children"]["Row"];
 export type PlanRow = Database["public"]["Tables"]["plans"]["Row"];
@@ -170,6 +170,65 @@ export function buildWeekOverview(
     doneTotal: all.reduce((n, e) => n + Math.min(e.doneThisWeek, e.target), 0),
     targetTotal: all.reduce((n, e) => n + e.target, 0),
   };
+}
+
+/**
+ * Recommended weekly rhythm: spreads the plan across Mon–Sun so each day is a
+ * short, varied batch instead of one big pile. Purely illustrative — the daily
+ * "today" queue stays adaptive so a missed day never loses exercises.
+ *
+ * Frequent exercises claim their days first; each occurrence lands on the
+ * least-loaded day, preferring days that don't yet cover its domain (variety).
+ * Deterministic (stable tie-breaks, no randomness).
+ */
+export function buildWeeklyRhythm(entries: TodayEntry[]): PlanItemWithExercise[][] {
+  const days: PlanItemWithExercise[][] = Array.from({ length: 7 }, () => []);
+  const dayDomains: Set<string>[] = Array.from({ length: 7 }, () => new Set());
+
+  const ordered = [...entries].sort(
+    (a, b) =>
+      b.target - a.target ||
+      a.item.exercises.domain.localeCompare(b.item.exercises.domain) ||
+      a.item.exercises.title.localeCompare(b.item.exercises.title),
+  );
+
+  for (const entry of ordered) {
+    const domain = entry.item.exercises.domain;
+    const times = Math.min(Math.max(entry.target, 1), 7);
+    const chosen = [0, 1, 2, 3, 4, 5, 6]
+      .sort(
+        (d1, d2) =>
+          days[d1].length - days[d2].length ||
+          Number(dayDomains[d1].has(domain)) - Number(dayDomains[d2].has(domain)) ||
+          d1 - d2,
+      )
+      .slice(0, times);
+    for (const day of chosen) {
+      days[day].push(entry.item);
+      dayDomains[day].add(domain);
+    }
+  }
+  return days;
+}
+
+export interface DomainGroup {
+  domain: ExerciseDomain;
+  entries: TodayEntry[];
+  done: number;
+  target: number;
+}
+
+/** Plan entries bucketed by therapy domain, in the canonical domain order. */
+export function groupEntriesByDomain(entries: TodayEntry[]): DomainGroup[] {
+  return DOMAINS.map((domain) => {
+    const group = entries.filter((e) => e.item.exercises.domain === domain);
+    return {
+      domain,
+      entries: group,
+      done: group.reduce((n, e) => n + Math.min(e.doneThisWeek, e.target), 0),
+      target: group.reduce((n, e) => n + e.target, 0),
+    };
+  }).filter((g) => g.entries.length > 0);
 }
 
 /** Consecutive practice days ending today or yesterday. */

@@ -315,7 +315,13 @@
       "dangerLead": "Natrvalo odstráni profil dieťaťa aj všetky cvičenia, výsledky a správy. Toto sa nedá vrátiť späť.",
       "deleteBtn": "Vymazať všetky údaje",
       "deleteConfirm": "Naozaj vymazať všetky údaje dieťaťa {name}? Toto sa nedá vrátiť späť."
-    }
+    },
+    "planRhythmTitle": "Odporúčaný rytmus týždňa",
+    "planRhythmLead": "Appka ti každý večer vyberie pár rozličných cvičení. Takto by mohol vyzerať týždeň — dnešnú dávku nájdeš v záložke Dnes.",
+    "planGroupsTitle": "Plán podľa oblastí",
+    "planGroupProgress": "{done}/{target} tento týždeň",
+    "planFree": "voľno",
+    "planTodayPill": "Dnes"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",

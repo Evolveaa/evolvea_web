@@ -315,7 +315,13 @@
       "dangerLead": "Entfernt das Profil des Kindes sowie alle Übungen, Ergebnisse und Nachrichten dauerhaft. Das lässt sich nicht rückgängig machen.",
       "deleteBtn": "Alle Daten löschen",
       "deleteConfirm": "Wirklich alle Daten von {name} löschen? Das lässt sich nicht rückgängig machen."
-    }
+    },
+    "planRhythmTitle": "Empfohlener Wochenrhythmus",
+    "planRhythmLead": "Jeden Abend wählt die App ein paar verschiedene Übungen aus. So könnte eine Woche aussehen — das heutige Set finden Sie im Tab Heute.",
+    "planGroupsTitle": "Plan nach Bereichen",
+    "planGroupProgress": "{done}/{target} diese Woche",
+    "planFree": "frei",
+    "planTodayPill": "Heute"
   },
   "therapist": {
     "dashTitle": "Ihre Familien",

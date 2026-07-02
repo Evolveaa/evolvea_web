@@ -598,6 +598,129 @@ a.row-item:hover {
   transition: width 0.5s var(--ease);
 }
 
+/* ===== Plan: weekly rhythm ===== */
+.rhythm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.rhythm-day {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 14px;
+  border: 1px solid var(--ink-line);
+  background: var(--cream-hi);
+  min-height: 48px;
+}
+.rhythm-day[data-today] {
+  border-color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+.rhythm-dow {
+  flex: none;
+  width: 2.2rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.rhythm-day[data-today] .rhythm-dow {
+  color: var(--accent-ink);
+}
+.rhythm-items {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+.rhythm-chip {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 0.95rem;
+  background: var(--chip-bg, var(--accent-soft));
+}
+.rhythm-empty {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+/* ===== Plan: domain groups ===== */
+.domain-group {
+  background: var(--cream-hi);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  margin-bottom: 0.7rem;
+  overflow: hidden;
+}
+.domain-group > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  min-height: 56px;
+}
+.domain-group > summary::-webkit-details-marker {
+  display: none;
+}
+.dg-ico {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  background: var(--chip-bg, var(--accent-soft));
+}
+.dg-body {
+  flex: 1;
+  min-width: 0;
+}
+.dg-title {
+  display: block;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+.dg-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.1rem;
+}
+.dg-body .pbar {
+  max-width: 220px;
+}
+.dg-chev {
+  flex: none;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  transition: transform 0.2s var(--ease);
+}
+.domain-group[open] .dg-chev {
+  transform: rotate(180deg);
+}
+.dg-content {
+  padding: 0 0.7rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-chev {
+    transition: none;
+  }
+}
+
 /* empty state */
 .empty {
   text-align: center;
