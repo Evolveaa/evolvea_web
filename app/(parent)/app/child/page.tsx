@@ -45,7 +45,7 @@ export default async function ChildSettingsPage() {
           <span className="section-label" style={{ margin: 0 }}>
             {t("yourTherapist")}
           </span>
-          <p style={{ marginTop: "0.35rem", fontWeight: 600 }}>🩺 {therapist.full_name}</p>
+          <p style={{ marginTop: "0.35rem", fontWeight: 600 }}>{therapist.full_name}</p>
         </div>
       )}
 

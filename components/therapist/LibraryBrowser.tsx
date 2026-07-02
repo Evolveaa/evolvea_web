@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toggleExerciseActiveAction } from "@/lib/therapist/actions";
-import { DOMAIN_META, DOMAINS, type ExerciseDomain, type ExerciseModality } from "@/lib/exercises/types";
+import { DomainGlyph, DomainTile } from "@/components/icons";
+import { DOMAINS, type ExerciseDomain, type ExerciseModality } from "@/lib/exercises/types";
 
 export interface LibraryRow {
   id: string;
@@ -69,7 +70,7 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
             style={domain === d ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
             onClick={() => setDomain(d)}
           >
-            <span aria-hidden="true">{DOMAIN_META[d].emoji}</span> {td(d)}
+            <DomainGlyph domain={d} size={14} /> {td(d)}
           </button>
         ))}
       </div>
@@ -113,9 +114,7 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
       <ul className="row-list">
         {filtered.map((e) => (
           <li key={e.id} className="row-item" style={{ opacity: e.is_active ? 1 : 0.55 }}>
-            <span className={`row-ico hue-${DOMAIN_META[e.domain].hue}`} style={{ background: "var(--chip-bg)" }} aria-hidden="true">
-              {DOMAIN_META[e.domain].emoji}
-            </span>
+            <DomainTile domain={e.domain} size={44} />
             <span className="row-body">
               <span className="row-title">
                 {e.title}

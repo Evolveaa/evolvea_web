@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { IconClock } from "@/components/icons";
 import type { AccessState } from "@/lib/billing";
 
 /** Trial/expiry callout on the parent home. Renders nothing while active. */
@@ -20,7 +21,9 @@ export default function SubscriptionBanner({
         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.9rem", flexWrap: "wrap", marginBottom: "1.1rem" }}
       >
         <div>
-          <b>⏳ {t("trialTitle", { count: daysLeft })}</b>
+          <b style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+            <IconClock size={16} /> {t("trialTitle", { count: daysLeft })}
+          </b>
           <p className="card-sub">{t("trialLead")}</p>
         </div>
         <Link href="/app/checkout" className="btn btn-sm btn-primary">

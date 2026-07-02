@@ -2,11 +2,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  IconCalendar,
+  IconChart,
+  IconChat,
+  IconHandshake,
+  IconHome,
+  IconLibrary,
+  IconMail,
+  IconUsers,
+} from "@/components/icons";
+
+const TAB_ICONS = {
+  home: IconHome,
+  plan: IconCalendar,
+  progress: IconChart,
+  messages: IconChat,
+  families: IconUsers,
+  library: IconLibrary,
+  invites: IconMail,
+  referrals: IconHandshake,
+} as const;
 
 export interface TabItem {
   href: string;
   label: string;
-  icon: string;
+  icon: keyof typeof TAB_ICONS;
   /** Extra path prefixes that keep this tab highlighted. */
   also?: string[];
   badge?: number;
@@ -26,22 +47,25 @@ export default function AppTabs({ tabs, label }: { tabs: TabItem[]; label: strin
 
   return (
     <nav className="app-tabs" aria-label={label}>
-      {tabs.map((tab) => (
-        <Link
-          key={tab.href}
-          href={tab.href}
-          className="app-tab"
-          aria-current={isActive(tab) ? "page" : undefined}
-        >
-          <span className="tab-ico" aria-hidden="true">
-            {tab.icon}
-          </span>
-          <span>{tab.label}</span>
-          {tab.badge ? (
-            <span className="tab-dot" aria-label={`${tab.badge}`} />
-          ) : null}
-        </Link>
-      ))}
+      {tabs.map((tab) => {
+        const Icon = TAB_ICONS[tab.icon];
+        return (
+          <Link
+            key={tab.href}
+            href={tab.href}
+            className="app-tab"
+            aria-current={isActive(tab) ? "page" : undefined}
+          >
+            <span className="tab-ico" aria-hidden="true">
+              <Icon size={22} />
+            </span>
+            <span>{tab.label}</span>
+            {tab.badge ? (
+              <span className="tab-dot" aria-label={`${tab.badge}`} />
+            ) : null}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

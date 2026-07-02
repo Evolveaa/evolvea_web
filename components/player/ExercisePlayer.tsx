@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { DomainTile } from "@/components/icons";
 import { completeSessionAction } from "@/lib/parent/actions";
 import {
   contentItemCount,
@@ -196,13 +197,11 @@ export default function ExercisePlayer({
         </div>
         <div className="player-main" style={{ justifyContent: "center" }}>
           <div style={{ textAlign: "center", marginBottom: "1.4rem" }}>
-            <span
-              className={`row-ico hue-${meta.hue}`}
-              style={{ width: 72, height: 72, fontSize: "2.3rem", background: "var(--chip-bg)", margin: "0 auto 0.9rem", display: "grid", borderRadius: 22 }}
-              aria-hidden="true"
-            >
-              {meta.emoji}
-            </span>
+            <DomainTile
+              domain={exercise.domain}
+              size={72}
+              className="intro-tile"
+            />
             <span className={`chip chip-hue hue-${meta.hue}`}>{td(exercise.domain)}</span>
             <h1 className="page-h" style={{ marginTop: "0.7rem" }}>
               {exercise.title}

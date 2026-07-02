@@ -260,7 +260,7 @@
     "streak": "{count, plural, =0 {Start today} one {# day in a row} other {# days in a row}}",
     "streakHint": "A short exercise every day beats a long one once a week — research shows parent-led home practice can be as effective as a session with the therapist.",
     "weekDaysLabel": "Week overview",
-    "todaySection": "Today's dose",
+    "todaySection": "Today's path",
     "noPlanTitle": "Your plan is on its way",
     "noPlanLead": "Your speech therapist will prepare an exercise plan for you soon. In the meantime, you can chat in Messages.",
     "allDoneTitle": "All done for today!",
@@ -321,7 +321,16 @@
     "planGroupsTitle": "Plan by area",
     "planGroupProgress": "{done}/{target} this week",
     "planFree": "free",
-    "planTodayPill": "Today"
+    "planTodayPill": "Today",
+    "heroTitle": "Today's set",
+    "heroLeft": "{count, plural, one {# exercise left} other {# exercises left}} · about {min} min",
+    "heroAllDone": "All done. Great work!",
+    "todayRingSub": "today",
+    "weekRingSub": "week",
+    "pathDone": "Done",
+    "pathStart": "Start",
+    "pathLater": "Later",
+    "seeWholePlan": "See the whole plan"
   },
   "therapist": {
     "dashTitle": "Your families",

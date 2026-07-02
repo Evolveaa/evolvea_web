@@ -16,10 +16,10 @@ export default async function ParentLayout({
       home="/app"
       tabsLabel={t("navLabel")}
       tabs={[
-        { href: "/app", label: t("tabs.today"), icon: "🏠" },
-        { href: "/app/plan", label: t("tabs.plan"), icon: "🗺️" },
-        { href: "/app/progress", label: t("tabs.progress"), icon: "📈" },
-        { href: "/app/messages", label: t("tabs.messages"), icon: "💬", badge: unread },
+        { href: "/app", label: t("tabs.today"), icon: "home" },
+        { href: "/app/plan", label: t("tabs.plan"), icon: "plan" },
+        { href: "/app/progress", label: t("tabs.progress"), icon: "progress" },
+        { href: "/app/messages", label: t("tabs.messages"), icon: "messages", badge: unread },
       ]}
     >
       {children}

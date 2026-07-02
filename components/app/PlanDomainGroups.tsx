@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import ExerciseCard from "@/components/app/ExerciseCard";
-import { DOMAIN_META } from "@/lib/exercises/types";
+import { DomainTile, IconCheck } from "@/components/icons";
 import type { DomainGroup } from "@/lib/data/parent";
 
 /**
@@ -15,24 +15,26 @@ export default function PlanDomainGroups({ groups }: { groups: DomainGroup[] }) 
   return (
     <div>
       {groups.map((group) => {
-        const meta = DOMAIN_META[group.domain];
         const pct = group.target > 0 ? Math.round((100 * group.done) / group.target) : 0;
         const complete = group.done >= group.target;
         return (
           <details key={group.domain} className="domain-group" open={!complete}>
             <summary>
-              <span className={`dg-ico hue-${meta.hue}`} aria-hidden="true">
-                {meta.emoji}
-              </span>
+              <DomainTile domain={group.domain} size={42} />
               <span className="dg-body">
                 <span className="dg-title">
-                  {td(group.domain)} {complete && <span aria-hidden="true">✓</span>}
+                  {td(group.domain)}{" "}
+                  {complete && (
+                    <span style={{ color: "#2f9d63", verticalAlign: "-2px" }} aria-hidden="true">
+                      <IconCheck size={15} />
+                    </span>
+                  )}
                 </span>
                 <span className="dg-sub">
                   {t("planGroupProgress", { done: group.done, target: group.target })} ·{" "}
                   {t("domainMeta", { count: group.entries.length })}
                 </span>
-                <span className="pbar" style={{ marginTop: "0.4rem" }} aria-hidden="true">
+                <span className={`pbar bar-${group.domain}`} style={{ marginTop: "0.4rem" }} aria-hidden="true">
                   <i style={{ width: `${pct}%` }} />
                 </span>
               </span>

@@ -260,7 +260,7 @@
     "streak": "{count, plural, =0 {Starten Sie heute} one {# Tag in Folge} other {# Tage in Folge}}",
     "streakHint": "Eine kurze Übung jeden Tag bringt mehr als eine lange pro Woche — Studien zeigen, dass elterngeleitetes Üben zu Hause genauso wirksam sein kann wie eine Sitzung beim Logopäden.",
     "weekDaysLabel": "Wochenübersicht",
-    "todaySection": "Die heutige Portion",
+    "todaySection": "Heutiger Weg",
     "noPlanTitle": "Der Plan ist unterwegs",
     "noPlanLead": "Ihr Logopäde stellt Ihnen bald einen Übungsplan zusammen. In der Zwischenzeit können Sie ihm unter Nachrichten schreiben.",
     "allDoneTitle": "Für heute geschafft!",
@@ -321,7 +321,16 @@
     "planGroupsTitle": "Plan nach Bereichen",
     "planGroupProgress": "{done}/{target} diese Woche",
     "planFree": "frei",
-    "planTodayPill": "Heute"
+    "planTodayPill": "Heute",
+    "heroTitle": "Heutiges Set",
+    "heroLeft": "{count, plural, one {Noch # Übung} other {Noch # Übungen}} · ca. {min} Min.",
+    "heroAllDone": "Alles geschafft. Tolle Arbeit!",
+    "todayRingSub": "heute",
+    "weekRingSub": "Woche",
+    "pathDone": "Fertig",
+    "pathStart": "Starten",
+    "pathLater": "Danach",
+    "seeWholePlan": "Ganzen Plan ansehen"
   },
   "therapist": {
     "dashTitle": "Ihre Familien",

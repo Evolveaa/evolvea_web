@@ -3,7 +3,8 @@
 import { useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { publishPlanAction, type PlanItemInput } from "@/lib/therapist/actions";
-import { DOMAIN_META, DOMAINS, type ExerciseDomain } from "@/lib/exercises/types";
+import { DomainGlyph, DomainTile } from "@/components/icons";
+import { DOMAINS, type ExerciseDomain } from "@/lib/exercises/types";
 
 /** Trimmed exercise row — the builder never needs the content payload. */
 export interface LibraryItem {
@@ -131,7 +132,7 @@ export default function PlanBuilder({
               style={domain === d ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
               onClick={() => setDomain(d)}
             >
-              <span aria-hidden="true">{DOMAIN_META[d].emoji}</span> {td(d)}
+              <DomainGlyph domain={d} size={14} /> {td(d)}
             </button>
           ))}
         </div>
@@ -149,9 +150,7 @@ export default function PlanBuilder({
             const added = items.some((i) => i.exerciseId === e.id);
             return (
               <li key={e.id} className="row-item" style={{ padding: "0.7rem 0.9rem" }}>
-                <span className={`row-ico hue-${DOMAIN_META[e.domain].hue}`} style={{ background: "var(--chip-bg)", width: 36, height: 36, fontSize: "1.05rem" }} aria-hidden="true">
-                  {DOMAIN_META[e.domain].emoji}
-                </span>
+                <DomainTile domain={e.domain} size={36} />
                 <span className="row-body">
                   <span className="row-title" style={{ fontSize: "0.9rem" }}>
                     {e.title}
@@ -213,7 +212,7 @@ export default function PlanBuilder({
                 return (
                   <li key={item.key} style={{ border: "1px solid var(--ink-line)", borderRadius: 12, padding: "0.6rem 0.7rem" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                      <span aria-hidden="true">{DOMAIN_META[ex.domain].emoji}</span>
+                      <DomainTile domain={ex.domain} size={24} />
                       <b style={{ flex: 1, fontSize: "0.88rem" }}>{ex.title}</b>
                       <button type="button" className="icon-btn" style={{ width: 32, height: 32 }} aria-label={t("moveUp")} disabled={i === 0} onClick={() => move(i, -1)}>↑</button>
                       <button type="button" className="icon-btn" style={{ width: 32, height: 32 }} aria-label={t("moveDown")} disabled={i === items.length - 1} onClick={() => move(i, 1)}>↓</button>

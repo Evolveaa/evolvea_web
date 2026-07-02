@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { DOMAIN_META, type ExerciseRow } from "@/lib/exercises/types";
+import { DomainTile, IconCheck } from "@/components/icons";
+import type { ExerciseRow } from "@/lib/exercises/types";
 
 /**
- * One assigned exercise in a list (today queue / plan overview).
- * Weekly progress renders as dots when target > 1.
+ * One assigned exercise in a list (plan groups). The right side shows this
+ * week's coverage as a filling mini-bar (`2/3`), green when complete.
  */
 export default function ExerciseCard({
   exercise,
@@ -20,13 +21,12 @@ export default function ExerciseCard({
   doneToday?: boolean;
 }) {
   const t = useTranslations();
-  const meta = DOMAIN_META[exercise.domain];
+  const hasWeekly = typeof done === "number" && typeof target === "number" && target > 0;
+  const full = hasWeekly && done! >= target!;
 
   return (
     <Link href={href} className="row-item">
-      <span className={`row-ico hue-${meta.hue}`} style={{ background: "var(--chip-bg)" }} aria-hidden="true">
-        {meta.emoji}
-      </span>
+      <DomainTile domain={exercise.domain} size={44} />
       <span className="row-body">
         <span className="row-title">{exercise.title}</span>
         <span className="row-sub">
@@ -34,21 +34,25 @@ export default function ExerciseCard({
           {t("common.minutes", { count: exercise.duration_minutes })}
         </span>
       </span>
-      <span className="row-end">
-        {typeof done === "number" && typeof target === "number" ? (
-          <span aria-label={t("parent.weeklyProgress", { done, target })}>
-            {Array.from({ length: target }, (_, i) => (i < done ? "●" : "○")).join(" ")}
+      {doneToday ? (
+        <span className="score-pill" data-tone="good">
+          <IconCheck size={12} /> {t("parent.doneToday")}
+        </span>
+      ) : null}
+      {hasWeekly && (
+        <span
+          className="wk-pill"
+          data-full={full ? "" : undefined}
+          aria-label={t("parent.weeklyProgress", { done: done!, target: target! })}
+        >
+          <small>
+            {Math.min(done!, target!)}/{target}
+          </small>
+          <span className="wk-bar" aria-hidden="true">
+            <i style={{ width: `${Math.min(100, (100 * done!) / target!)}%` }} />
           </span>
-        ) : null}
-        {doneToday ? (
-          <span
-            className="chip hue-green chip-hue"
-            style={{ display: "inline-flex", marginTop: 4 }}
-          >
-            ✓ {t("parent.doneToday")}
-          </span>
-        ) : null}
-      </span>
+        </span>
+      )}
     </Link>
   );
 }

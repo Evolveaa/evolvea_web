@@ -85,7 +85,7 @@ async function login(page, who) {
 
   await step("player intro → strategy → play → quit", async () => {
     await page.goto(`${BASE}/app`);
-    await page.click(".row-list a.row-item");
+    await page.click('a.path-row[data-state="next"]');
     await page.waitForSelector("text=Sprievodca pre rodiča");
     await page.screenshot({ path: `${SHOTS}/14-player-intro.png`, fullPage: true });
     await page.click("text=Začať");

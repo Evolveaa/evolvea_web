@@ -260,7 +260,7 @@
     "streak": "{count, plural, =0 {Začnite dnes} one {# deň v rade} few {# dni v rade} other {# dní v rade}}",
     "streakHint": "Krátke cvičenie každý deň znamená viac než dlhé raz za týždeň — výskum ukazuje, že domáce cvičenie s rodičom môže byť rovnako účinné ako sedenie u logopéda.",
     "weekDaysLabel": "Prehľad týždňa",
-    "todaySection": "Dnešná dávka",
+    "todaySection": "Dnešná cesta",
     "noPlanTitle": "Plán je na ceste",
     "noPlanLead": "Váš logopéd vám čoskoro pripraví plán cvičení. Zatiaľ si môžete písať v Správach.",
     "allDoneTitle": "Dnes máte hotovo!",
@@ -321,7 +321,16 @@
     "planGroupsTitle": "Plán podľa oblastí",
     "planGroupProgress": "{done}/{target} tento týždeň",
     "planFree": "voľno",
-    "planTodayPill": "Dnes"
+    "planTodayPill": "Dnes",
+    "heroTitle": "Dnešná dávka",
+    "heroLeft": "{count, plural, one {Ešte # cvičenie} few {Ešte # cvičenia} other {Ešte # cvičení}} · asi {min} min",
+    "heroAllDone": "Všetko splnené. Skvelá práca!",
+    "todayRingSub": "dnes",
+    "weekRingSub": "týždeň",
+    "pathDone": "Hotovo",
+    "pathStart": "Začať",
+    "pathLater": "Potom",
+    "seeWholePlan": "Pozrieť celý plán"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",

@@ -20,13 +20,13 @@ export default async function TherapistLayout({
         {
           href: "/therapist",
           label: t("tabs.families"),
-          icon: "👪",
+          icon: "families",
           also: ["/therapist/families"],
           badge: unread,
         },
-        { href: "/therapist/library", label: t("tabs.library"), icon: "📚" },
-        { href: "/therapist/invites", label: t("tabs.invites"), icon: "✉️" },
-        { href: "/therapist/referrals", label: t("tabs.referrals"), icon: "🤝" },
+        { href: "/therapist/library", label: t("tabs.library"), icon: "library" },
+        { href: "/therapist/invites", label: t("tabs.invites"), icon: "invites" },
+        { href: "/therapist/referrals", label: t("tabs.referrals"), icon: "referrals" },
       ]}
     >
       {children}

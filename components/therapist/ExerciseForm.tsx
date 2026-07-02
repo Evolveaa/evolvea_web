@@ -4,7 +4,6 @@ import { useActionState, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { saveExerciseAction, type ExerciseFormState } from "@/lib/therapist/actions";
 import {
-  DOMAIN_META,
   DOMAINS,
   type ExerciseContent,
   type ExerciseDomain,
@@ -188,7 +187,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
             <select className="select" id="ex-domain" name="domain" defaultValue={exercise?.domain ?? "vocabulary"}>
               {DOMAINS.map((d: ExerciseDomain) => (
                 <option key={d} value={d}>
-                  {DOMAIN_META[d].emoji} {td(d)}
+                  {td(d)}
                 </option>
               ))}
             </select>

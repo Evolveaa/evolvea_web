@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { getFormatter, getTranslations } from "next-intl/server";
 import ChildSwitcher from "@/components/app/ChildSwitcher";
-import ExerciseCard from "@/components/app/ExerciseCard";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
 import SubscriptionBanner from "@/components/app/SubscriptionBanner";
+import TodayPath from "@/components/app/TodayPath";
+import { IconCheck, IconFlame, IconSettings, ProgressRing } from "@/components/icons";
 import { accessState, trialDaysLeft } from "@/lib/billing";
 import {
   appWeekdayIndex,
@@ -53,6 +54,13 @@ export default async function ParentHomePage() {
   ];
   const todayIdx = appWeekdayIndex();
 
+  const doneToday = week.all.filter((e) => e.doneToday);
+  const todayTotal = doneToday.length + week.today.length;
+  const remainingMin = week.today.reduce(
+    (n, e) => n + e.item.exercises.duration_minutes,
+    0,
+  );
+
   return (
     <>
       <ChildSwitcher kids={children} activeId={child.id} />
@@ -68,89 +76,83 @@ export default async function ParentHomePage() {
             {t("homeTitle", { name: child.first_name })}{" "}
             <span aria-hidden="true">{child.avatar}</span>
           </h1>
-          <p className="page-sub">
+          <p className="page-sub" style={{ marginBottom: "1.1rem" }}>
             {format.dateTime(new Date(), { weekday: "long", day: "numeric", month: "long" })}
           </p>
         </div>
         <Link href="/app/child" className="icon-btn" aria-label={t("childSettings")}>
-          ⚙️
+          <IconSettings size={20} />
         </Link>
       </div>
 
-      <div className="card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-        <div>
-          <b style={{ fontSize: "1.15rem" }}>
-            🔥 {t("streak", { count: streak })}
-          </b>
-          <p className="card-sub">{t("streakHint")}</p>
-        </div>
-        <div className="streak-row" role="img" aria-label={t("weekDaysLabel")}>
-          {days.map((done, i) => (
-            <span
-              key={i}
-              className="streak-day"
-              data-done={done ? "" : undefined}
-              style={i === todayIdx ? { borderColor: "var(--accent-ink)" } : undefined}
-            >
-              {dayLabels[i]}
+      {plan && todayTotal > 0 && (
+        <section className="hero-day" aria-label={t("heroTitle")}>
+          <ProgressRing
+            value={doneToday.length}
+            max={todayTotal}
+            label={`${doneToday.length}/${todayTotal}`}
+            sub={t("todayRingSub")}
+          />
+          <div className="hero-day-body">
+            <p className="hero-day-title">{t("heroTitle")}</p>
+            <p className="hero-day-sub">
+              {week.today.length === 0
+                ? t("heroAllDone")
+                : t("heroLeft", { count: week.today.length, min: remainingMin })}
+            </p>
+            <span className="streak-chip">
+              <IconFlame size={14} />
+              {t("streak", { count: streak })}
             </span>
-          ))}
-        </div>
-      </div>
-
-      <h2 className="section-label">{t("todaySection")}</h2>
+            <div className="week-pills" role="img" aria-label={t("weekDaysLabel")}>
+              {days.map((done, i) => (
+                <span
+                  key={i}
+                  className="week-pill"
+                  data-done={done ? "" : undefined}
+                  data-today={i === todayIdx ? "" : undefined}
+                >
+                  <IconCheck size={12} />
+                  {dayLabels[i]}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {!plan ? (
         <div className="empty">
-          <span className="empty-emoji" aria-hidden="true">🌱</span>
           <b>{t("noPlanTitle")}</b>
           <p>{t("noPlanLead")}</p>
         </div>
-      ) : week.today.length === 0 ? (
-        <div className="empty">
-          <span className="empty-emoji" aria-hidden="true">🎉</span>
-          <b>{t("allDoneTitle")}</b>
-          <p>{t("allDoneLead")}</p>
-        </div>
       ) : (
-        <ul className="row-list">
-          {week.today.map((entry) => (
-            <li key={entry.item.id}>
-              <ExerciseCard
-                exercise={entry.item.exercises}
-                href={`/app/exercise/${entry.item.id}`}
-                done={entry.doneThisWeek}
-                target={entry.target}
-              />
-            </li>
-          ))}
-        </ul>
+        <>
+          <h2 className="section-label">{t("todaySection")}</h2>
+          <TodayPath done={doneToday} queue={week.today} />
+        </>
+      )}
+
+      {plan?.note && (
+        <>
+          <h2 className="section-label">{t("therapistNote")}</h2>
+          <div className="card" style={{ borderLeft: "4px solid var(--sky-deep)" }}>
+            <p className="card-sub" style={{ fontSize: "0.95rem", color: "var(--ink)" }}>
+              „{plan.note}“
+            </p>
+          </div>
+        </>
       )}
 
       {plan && (
-        <>
-          <h2 className="section-label">{t("weekSection")}</h2>
-          <div className="card">
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-              <span className="card-sub">{t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}</span>
-              <b>{week.targetTotal > 0 ? Math.round((100 * week.doneTotal) / week.targetTotal) : 0}%</b>
-            </div>
-            <div className="pbar" role="progressbar" aria-valuemin={0} aria-valuemax={week.targetTotal} aria-valuenow={week.doneTotal}>
-              <i style={{ width: `${week.targetTotal > 0 ? (100 * week.doneTotal) / week.targetTotal : 0}%` }} />
-            </div>
-          </div>
-
-          {plan.note && (
-            <>
-              <h2 className="section-label">{t("therapistNote")}</h2>
-              <div className="card">
-                <p className="card-sub" style={{ fontSize: "0.95rem", color: "var(--ink)" }}>
-                  „{plan.note}“
-                </p>
-              </div>
-            </>
-          )}
-        </>
+        <p style={{ marginTop: "1.2rem", textAlign: "center" }}>
+          <Link
+            href="/app/plan"
+            style={{ color: "var(--accent-ink)", fontWeight: 700, fontSize: "0.9rem" }}
+          >
+            {t("seeWholePlan")} →
+          </Link>
+        </p>
       )}
     </>
   );

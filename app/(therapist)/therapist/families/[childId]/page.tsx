@@ -14,7 +14,7 @@ import {
   getSubscription,
 } from "@/lib/data/parent";
 import { accessState } from "@/lib/billing";
-import { DOMAIN_META } from "@/lib/exercises/types";
+import { DomainTile, IconCheck } from "@/components/icons";
 
 const STATE_HUE: Record<string, string> = {
   active: "hue-green",
@@ -130,7 +130,7 @@ export default async function FamilyDetailPage({
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {plan.plan_items.map((item) => (
                   <li key={item.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.9rem" }}>
-                    <span aria-hidden="true">{DOMAIN_META[item.exercises.domain].emoji}</span>
+                    <DomainTile domain={item.exercises.domain} size={26} />
                     <span style={{ flex: 1 }}>{item.exercises.title}</span>
                     <span className="chip" style={{ fontSize: "0.7rem" }}>
                       {item.times_per_week}×/{t("week")}
@@ -153,15 +153,15 @@ export default async function FamilyDetailPage({
                 {stats.map((s) => (
                   <li key={s.domain}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem", gap: "0.6rem" }}>
-                      <span style={{ fontSize: "0.88rem", fontWeight: 600 }}>
-                        <span aria-hidden="true">{DOMAIN_META[s.domain].emoji}</span> {td(s.domain)}
+                      <span style={{ fontSize: "0.88rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.45rem" }}>
+                        <DomainTile domain={s.domain} size={22} /> {td(s.domain)}
                       </span>
                       <span className="card-sub">
                         {tp("domainMeta", { count: s.sessions })}
                         {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
                       </span>
                     </div>
-                    <div className="pbar" aria-hidden="true">
+                    <div className={`pbar bar-${s.domain}`} aria-hidden="true">
                       <i style={{ width: `${s.avgPct ?? 12}%` }} />
                     </div>
                   </li>
@@ -181,7 +181,11 @@ export default async function FamilyDetailPage({
                   <li key={s.id}>
                     <details className="card" style={{ padding: "0.85rem 1rem" }}>
                       <summary style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "0.7rem", listStyle: "none" }}>
-                        <span aria-hidden="true">{ex ? DOMAIN_META[ex.domain].emoji : "✅"}</span>
+                        {ex ? (
+                          <DomainTile domain={ex.domain} size={34} />
+                        ) : (
+                          <span aria-hidden="true"><IconCheck size={16} /></span>
+                        )}
                         <span style={{ flex: 1, minWidth: 0 }}>
                           <span className="row-title">{ex?.title ?? "—"}</span>
                           <span className="row-sub" style={{ display: "block" }}>

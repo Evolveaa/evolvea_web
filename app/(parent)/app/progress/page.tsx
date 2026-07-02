@@ -1,13 +1,29 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
 import {
+  DomainTile,
+  IconCheck,
+  IconClock,
+  IconFlame,
+  IconPlay,
+  ProgressRing,
+} from "@/components/icons";
+import {
+  buildWeekOverview,
   computeStreak,
   domainStats,
   getActiveChild,
+  getActivePlan,
   getExercisesByIds,
   getRecentSessions,
 } from "@/lib/data/parent";
-import { DOMAIN_META } from "@/lib/exercises/types";
+
+function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
+  if (pct === null) return "none";
+  if (pct >= 80) return "good";
+  if (pct >= 50) return "mid";
+  return "low";
+}
 
 export default async function ProgressPage() {
   const t = await getTranslations("parent");
@@ -25,10 +41,14 @@ export default async function ProgressPage() {
     );
   }
 
-  const sessions = await getRecentSessions(child.id, 90);
+  const [sessions, plan] = await Promise.all([
+    getRecentSessions(child.id, 90),
+    getActivePlan(child.id),
+  ]);
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
   const streak = computeStreak(sessions);
+  const week = buildWeekOverview(plan, sessions);
   const totalMinutes = Math.round(
     sessions.reduce((n, s) => n + (s.duration_seconds ?? 0), 0) / 60,
   );
@@ -38,41 +58,65 @@ export default async function ProgressPage() {
       <h1 className="page-h">{t("progressTitle")}</h1>
       <p className="page-sub">{t("progressLead", { name: child.first_name })}</p>
 
-      <div className="stat-grid">
-        <div className="stat">
-          <b>{sessions.length}</b>
-          <span>{t("statSessions")}</span>
+      {/* week hero: ring + key numbers */}
+      <section className="hero-day" aria-label={t("weekSection")}>
+        <ProgressRing
+          value={week.doneTotal}
+          max={week.targetTotal}
+          label={
+            week.targetTotal > 0
+              ? `${Math.round((100 * week.doneTotal) / week.targetTotal)}%`
+              : "—"
+          }
+          sub={t("weekRingSub")}
+        />
+        <div className="hero-day-body">
+          <p className="hero-day-title">
+            {t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}
+          </p>
+          <div className="mini-stats">
+            <span className="mini-stat">
+              <i className="mini-stat-ico ico-sky" aria-hidden="true">
+                <IconPlay size={14} />
+              </i>
+              <b>{sessions.length}</b> {t("statSessions")}
+            </span>
+            <span className="mini-stat">
+              <i className="mini-stat-ico ico-violet" aria-hidden="true">
+                <IconClock size={14} />
+              </i>
+              <b>{totalMinutes}</b> {t("statMinutes")}
+            </span>
+            <span className="mini-stat">
+              <i className="mini-stat-ico ico-coral" aria-hidden="true">
+                <IconFlame size={14} />
+              </i>
+              <b>{streak}</b> {t("statStreak")}
+            </span>
+          </div>
         </div>
-        <div className="stat">
-          <b>{totalMinutes}</b>
-          <span>{t("statMinutes")}</span>
-        </div>
-        <div className="stat">
-          <b>🔥 {streak}</b>
-          <span>{t("statStreak")}</span>
-        </div>
-      </div>
+      </section>
 
       {stats.length > 0 && (
         <>
           <h2 className="section-label">{t("domainsSection")}</h2>
           <div className="card">
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "1rem" }}>
               {stats.map((s) => (
-                <li key={s.domain}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.35rem", gap: "0.6rem" }}>
-                    <span style={{ fontSize: "0.9rem", fontWeight: 600 }}>
-                      <span aria-hidden="true">{DOMAIN_META[s.domain].emoji}</span>{" "}
-                      {td(s.domain)}
+                <li key={s.domain} style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+                  <DomainTile domain={s.domain} size={40} />
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <span style={{ display: "flex", justifyContent: "space-between", gap: "0.6rem", marginBottom: "0.35rem" }}>
+                      <span style={{ fontSize: "0.9rem", fontWeight: 700 }}>{td(s.domain)}</span>
+                      <span className="card-sub">
+                        {t("domainMeta", { count: s.sessions })}
+                        {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
+                      </span>
                     </span>
-                    <span className="card-sub">
-                      {t("domainMeta", { count: s.sessions })}
-                      {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
+                    <span className={`pbar bar-${s.domain}`} aria-hidden="true" style={{ display: "block" }}>
+                      <i style={{ width: `${s.avgPct ?? 12}%` }} />
                     </span>
-                  </div>
-                  <div className="pbar" aria-hidden="true">
-                    <i style={{ width: `${s.avgPct ?? 12}%` }} />
-                  </div>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -83,7 +127,6 @@ export default async function ProgressPage() {
       <h2 className="section-label">{t("historySection")}</h2>
       {sessions.length === 0 ? (
         <div className="empty">
-          <span className="empty-emoji" aria-hidden="true">📈</span>
           <b>{t("noSessionsTitle")}</b>
           <p>{t("noSessionsLead")}</p>
         </div>
@@ -91,16 +134,19 @@ export default async function ProgressPage() {
         <ul className="row-list">
           {sessions.slice(0, 25).map((s) => {
             const ex = exercises.get(s.exercise_id);
-            const meta = ex ? DOMAIN_META[ex.domain] : null;
+            const pct =
+              s.score_total && s.score_total > 0 && s.score_correct !== null
+                ? Math.round((100 * s.score_correct) / s.score_total)
+                : null;
             return (
               <li key={s.id} className="row-item">
-                <span
-                  className={`row-ico ${meta ? `hue-${meta.hue}` : ""}`}
-                  style={{ background: "var(--chip-bg)" }}
-                  aria-hidden="true"
-                >
-                  {meta?.emoji ?? "✅"}
-                </span>
+                {ex ? (
+                  <DomainTile domain={ex.domain} size={44} />
+                ) : (
+                  <span className="row-ico" aria-hidden="true">
+                    <IconCheck size={18} />
+                  </span>
+                )}
                 <span className="row-body">
                   <span className="row-title">{ex?.title ?? "—"}</span>
                   <span className="row-sub">
@@ -110,20 +156,20 @@ export default async function ProgressPage() {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
-                    {s.parent_note ? ` · 📝 ${s.parent_note}` : ""}
+                    {s.duration_seconds
+                      ? ` · ${tc("minutes", { count: Math.max(1, Math.round(s.duration_seconds / 60)) })}`
+                      : ""}
+                    {s.parent_note ? ` · „${s.parent_note}“` : ""}
                   </span>
                 </span>
-                <span className="row-end">
-                  {s.score_total ? (
-                    <b style={{ color: "var(--ink)" }}>
-                      {s.score_correct}/{s.score_total}
-                    </b>
+                <span className="score-pill" data-tone={scoreTone(pct)}>
+                  {pct !== null ? (
+                    `${s.score_correct}/${s.score_total}`
                   ) : (
-                    <span aria-hidden="true">✓</span>
+                    <>
+                      <IconCheck size={12} /> {t("pathDone")}
+                    </>
                   )}
-                  {s.duration_seconds ? (
-                    <div>{tc("minutes", { count: Math.max(1, Math.round(s.duration_seconds / 60)) })}</div>
-                  ) : null}
                 </span>
               </li>
             );
