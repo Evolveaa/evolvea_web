@@ -330,7 +330,8 @@
     "pathDone": "Hotovo",
     "pathStart": "Začať",
     "pathLater": "Potom",
-    "seeWholePlan": "Pozrieť celý plán"
+    "seeWholePlan": "Pozrieť celý plán",
+    "planRhythmFoldHint": "Ako rozložiť cvičenia počas týždňa"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",

@@ -330,7 +330,8 @@
     "pathDone": "Fertig",
     "pathStart": "Starten",
     "pathLater": "Danach",
-    "seeWholePlan": "Ganzen Plan ansehen"
+    "seeWholePlan": "Ganzen Plan ansehen",
+    "planRhythmFoldHint": "Wie Sie die Übungen über die Woche verteilen"
   },
   "therapist": {
     "dashTitle": "Ihre Familien",

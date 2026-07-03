@@ -145,6 +145,25 @@ export const IconArrowRight = (p: IconProps) => (
   </Svg>
 );
 
+export const IconChevronDown = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m6 9.5 6 6 6-6" />
+  </Svg>
+);
+
+export const IconChevronRight = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m9.5 6 6 6-6 6" />
+  </Svg>
+);
+
+export const IconSparkle = (p: IconProps) => (
+  <Svg {...p} filled>
+    <path d="M12 2.5c.5 3.7 1.3 4.5 5 5-3.7.5-4.5 1.3-5 5-.5-3.7-1.3-4.5-5-5 3.7-.5 4.5-1.3 5-5z" />
+    <path d="M19 13.5c.3 1.8.7 2.2 2.5 2.5-1.8.3-2.2.7-2.5 2.5-.3-1.8-.7-2.2-2.5-2.5 1.8-.3 2.2-.7 2.5-2.5z" />
+  </Svg>
+);
+
 /* ---------------- domain glyphs ---------------- */
 
 const DOMAIN_GLYPHS: Record<ExerciseDomain, React.ReactNode> = {

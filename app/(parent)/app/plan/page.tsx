@@ -2,6 +2,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import PlanDomainGroups from "@/components/app/PlanDomainGroups";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
 import WeekRhythm from "@/components/app/WeekRhythm";
+import { IconCalendar, IconChevronDown } from "@/components/icons";
 import {
   appWeekdayIndex,
   buildWeekOverview,
@@ -37,7 +38,6 @@ export default async function PlanPage() {
       <>
         <h1 className="page-h">{t("planTitle")}</h1>
         <div className="empty" style={{ marginTop: "1rem" }}>
-          <span className="empty-emoji" aria-hidden="true">🌱</span>
           <b>{t("noPlanTitle")}</b>
           <p>{t("noPlanLead")}</p>
         </div>
@@ -52,7 +52,7 @@ export default async function PlanPage() {
   return (
     <>
       <h1 className="page-h">{t("planTitle")}</h1>
-      <p className="page-sub">
+      <p className="page-sub" style={{ marginBottom: "1rem" }}>
         {t("planMeta", {
           title: plan.title,
           date: format.dateTime(new Date(plan.created_at), {
@@ -64,40 +64,41 @@ export default async function PlanPage() {
       </p>
 
       {plan.note && (
-        <div className="card" style={{ marginBottom: "1.2rem" }}>
-          <span className="section-label" style={{ margin: 0 }}>
-            {t("therapistNote")}
-          </span>
-          <p style={{ marginTop: "0.4rem", fontSize: "0.95rem", lineHeight: 1.55 }}>
-            „{plan.note}“
-          </p>
+        <div className="note-quote">
+          <span className="note-quote-label">{t("therapistNote")}</span>
+          <p>„{plan.note}“</p>
         </div>
       )}
 
-      {/* week summary */}
-      <div className="card" style={{ marginBottom: "1.4rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-          <span className="card-sub">
-            {t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}
-          </span>
-          <b>{pct}%</b>
-        </div>
-        <div
-          className="pbar"
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={week.targetTotal}
-          aria-valuenow={week.doneTotal}
-        >
+      {/* compact week status */}
+      <div className="plan-week">
+        <span className="plan-week-top">
+          <b>{t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}</b>
+          <span className="plan-week-pct">{pct}%</span>
+        </span>
+        <span className="pbar" role="progressbar" aria-valuemin={0} aria-valuemax={week.targetTotal} aria-valuenow={week.doneTotal}>
           <i style={{ width: `${pct}%` }} />
-        </div>
+        </span>
       </div>
 
-      <h2 className="section-label">{t("planRhythmTitle")}</h2>
-      <p className="card-sub" style={{ marginBottom: "0.9rem" }}>
-        {t("planRhythmLead")}
-      </p>
-      <WeekRhythm days={rhythm} todayIndex={appWeekdayIndex()} />
+      {/* recommended rhythm — tucked away, one tap to open */}
+      <details className="section-fold">
+        <summary>
+          <span className="fold-ico" aria-hidden="true">
+            <IconCalendar size={18} />
+          </span>
+          <span className="fold-body">
+            <span className="fold-title">{t("planRhythmTitle")}</span>
+            <span className="fold-sub">{t("planRhythmFoldHint")}</span>
+          </span>
+          <span className="fold-chev" aria-hidden="true">
+            <IconChevronDown size={18} />
+          </span>
+        </summary>
+        <div className="fold-content">
+          <WeekRhythm days={rhythm} todayIndex={appWeekdayIndex()} />
+        </div>
+      </details>
 
       <h2 className="section-label">{t("planGroupsTitle")}</h2>
       <PlanDomainGroups groups={groups} />

@@ -65,7 +65,10 @@ async function login(page, who) {
   await step("parent plan", async () => {
     await page.goto(`${BASE}/app/plan`);
     await page.waitForSelector("text=Hlásky a pozornosť — jarný blok");
-    await page.waitForSelector("text=Zaseknutá skladačka");
+    await page.waitForSelector("text=Plán podľa oblastí");
+    // areas are collapsed cards; expand one and check its exercises reveal
+    await page.locator(".area-card .area-head").first().click();
+    await page.waitForSelector(".area-card[open] .ex-row");
     await page.screenshot({ path: `${SHOTS}/11-parent-plan.png`, fullPage: true });
   });
 

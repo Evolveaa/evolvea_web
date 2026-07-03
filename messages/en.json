@@ -330,7 +330,8 @@
     "pathDone": "Done",
     "pathStart": "Start",
     "pathLater": "Later",
-    "seeWholePlan": "See the whole plan"
+    "seeWholePlan": "See the whole plan",
+    "planRhythmFoldHint": "How to spread exercises across the week"
   },
   "therapist": {
     "dashTitle": "Your families",
