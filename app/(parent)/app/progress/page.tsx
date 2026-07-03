@@ -101,19 +101,19 @@ export default async function ProgressPage() {
         <>
           <h2 className="section-label">{t("domainsSection")}</h2>
           <div className="card">
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <ul className="dstat-list">
               {stats.map((s) => (
-                <li key={s.domain} style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+                <li key={s.domain} className="dstat">
                   <DomainTile domain={s.domain} size={40} />
-                  <span style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ display: "flex", justifyContent: "space-between", gap: "0.6rem", marginBottom: "0.35rem" }}>
-                      <span style={{ fontSize: "0.9rem", fontWeight: 700 }}>{td(s.domain)}</span>
+                  <span className="dstat-body">
+                    <span className="dstat-top">
+                      <span className="dstat-name">{td(s.domain)}</span>
                       <span className="card-sub">
                         {t("domainMeta", { count: s.sessions })}
                         {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
                       </span>
                     </span>
-                    <span className={`pbar bar-${s.domain}`} aria-hidden="true" style={{ display: "block" }}>
+                    <span className={`pbar bar-${s.domain}`} aria-hidden="true">
                       <i style={{ width: `${s.avgPct ?? 12}%` }} />
                     </span>
                   </span>

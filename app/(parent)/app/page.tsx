@@ -70,13 +70,13 @@ export default async function ParentHomePage() {
         daysLeft={sub && subState === "trial" ? trialDaysLeft(sub) : 0}
       />
 
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
+      <div className="page-head" style={{ marginBottom: "var(--sp-4)" }}>
         <div>
           <h1 className="page-h">
             {t("homeTitle", { name: child.first_name })}{" "}
             <span aria-hidden="true">{child.avatar}</span>
           </h1>
-          <p className="page-sub" style={{ marginBottom: "1.1rem" }}>
+          <p className="page-sub" style={{ marginBottom: 0 }}>
             {format.dateTime(new Date(), { weekday: "long", day: "numeric", month: "long" })}
           </p>
         </div>
@@ -136,23 +136,16 @@ export default async function ParentHomePage() {
       {plan?.note && (
         <>
           <h2 className="section-label">{t("therapistNote")}</h2>
-          <div className="card" style={{ borderLeft: "4px solid var(--sky-deep)" }}>
-            <p className="card-sub" style={{ fontSize: "0.95rem", color: "var(--ink)" }}>
-              „{plan.note}“
-            </p>
+          <div className="note-quote">
+            <p>„{plan.note}“</p>
           </div>
         </>
       )}
 
       {plan && (
-        <p style={{ marginTop: "1.2rem", textAlign: "center" }}>
-          <Link
-            href="/app/plan"
-            style={{ color: "var(--accent-ink)", fontWeight: 700, fontSize: "0.9rem" }}
-          >
-            {t("seeWholePlan")} →
-          </Link>
-        </p>
+        <Link href="/app/plan" className="center-link">
+          {t("seeWholePlan")} →
+        </Link>
       )}
     </>
   );

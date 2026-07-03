@@ -25,9 +25,55 @@
   --hue-coral: #fbe7dd;   --hue-coral-ink: #a84f2e;
   --hue-navy: #e2e6f0;    --hue-navy-ink: #33415e;
 
-  --card-shadow: 0 1px 2px rgba(22, 31, 51, 0.05), 0 10px 30px -18px rgba(22, 31, 51, 0.18);
-  --radius-sm: 12px;
-  --radius-lg: 22px;
+  /* one consistent radius scale for the whole app */
+  --radius-sm: 12px;   /* chips, controls, tiles */
+  --radius-md: 16px;   /* compact cards, folds */
+  --radius-lg: 20px;   /* main cards */
+  --radius-hero: 24px; /* hero cards */
+
+  /* one soft elevation, one lifted state — used everywhere */
+  --card-shadow: 0 1px 2px rgba(22, 31, 51, 0.04), 0 14px 30px -20px rgba(22, 31, 51, 0.22);
+  --shadow-pop: 0 16px 34px -18px rgba(22, 31, 51, 0.32);
+  --hairline: 1px solid var(--ink-line);
+
+  /* vertical rhythm scale */
+  --sp-1: 0.4rem;
+  --sp-2: 0.7rem;
+  --sp-3: 1rem;
+  --sp-4: 1.4rem;
+  --sp-5: 2rem;
+}
+
+/* ===== shared layout utilities (kill scattered inline styles) ===== */
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+.page-head .page-h,
+.page-head .page-sub {
+  margin-bottom: 0;
+}
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+.stack-sm > * + * {
+  margin-top: var(--sp-2);
+}
+.center-link {
+  display: block;
+  text-align: center;
+  margin-top: var(--sp-4);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.center-link:hover {
+  text-decoration: underline;
 }
 
 /* ===== Focus (global for app + auth) ===== */
@@ -256,7 +302,11 @@
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: var(--cream);
+  /* one calm, warm backdrop tying every screen together */
+  background:
+    radial-gradient(120% 60% at 100% -5%, rgba(160, 142, 232, 0.06), transparent 60%),
+    radial-gradient(120% 55% at 0% -5%, rgba(140, 192, 234, 0.09), transparent 60%),
+    var(--cream);
   /* room for the mobile tab bar */
   padding-bottom: calc(74px + env(safe-area-inset-bottom));
 }
@@ -419,8 +469,8 @@
 }
 .card-title {
   font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  letter-spacing: -0.015em;
   margin-bottom: 0.25rem;
 }
 .card-sub {
@@ -439,26 +489,27 @@
 .section-label {
   display: block;
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin: 1.6rem 0 0.7rem;
+  margin: var(--sp-5) 0 var(--sp-2);
 }
 .section-label:first-child {
   margin-top: 0;
 }
 
 .page-h {
-  font-size: clamp(1.45rem, 4vw, 1.8rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(1.5rem, 4.4vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
   margin-bottom: 0.3rem;
 }
 .page-sub {
   font-size: 0.95rem;
   color: var(--ink-soft);
   line-height: 1.5;
-  margin-bottom: 1.4rem;
+  margin-bottom: var(--sp-4);
 }
 
 /* generic row list (sessions, families, messages…) */
@@ -474,7 +525,7 @@
   gap: 0.9rem;
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
   min-height: 56px;
 }
@@ -676,7 +727,7 @@ a.row-item:hover {
     radial-gradient(120% 160% at 0% 100%, rgba(140, 192, 234, 0.2), transparent 55%),
     var(--cream-hi);
   border: 1px solid var(--ink-line);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-hero);
   box-shadow: var(--card-shadow);
   padding: 1.2rem 1.25rem;
   margin-bottom: 1.4rem;
@@ -711,6 +762,37 @@ a.row-item:hover {
 }
 .streak-chip svg {
   color: #e0653a;
+}
+
+/* per-domain progress list (progress tab) */
+.dstat-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.dstat {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.dstat-body {
+  flex: 1;
+  min-width: 0;
+}
+.dstat-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.dstat-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.dstat .pbar {
+  display: block;
 }
 
 /* compact stat row inside hero cards */
@@ -854,7 +936,7 @@ a.row-item:hover {
   gap: 0.8rem;
   background: var(--cream-hi);
   border: 1.5px solid var(--ink-line);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: 0.85rem 1rem;
   transition: transform 0.16s var(--ease), border-color 0.16s, box-shadow 0.16s;
 }
@@ -1062,7 +1144,7 @@ a.path-row:hover .path-card {
   background: linear-gradient(135deg, rgba(140, 192, 234, 0.1), rgba(160, 142, 232, 0.07)), var(--cream-hi);
   border: 1px solid var(--ink-line);
   border-left: 4px solid var(--sky-deep);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 0.9rem 1.1rem;
   margin-bottom: 1rem;
 }
@@ -1085,7 +1167,7 @@ a.path-row:hover .path-card {
 .plan-week {
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
   margin-bottom: 0.7rem;
 }
@@ -1110,7 +1192,7 @@ a.path-row:hover .path-card {
 .section-fold {
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
   overflow: hidden;
 }
@@ -1173,7 +1255,7 @@ a.path-row:hover .path-card {
 .area-card {
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   transition: border-color 0.16s, box-shadow 0.16s;
 }
