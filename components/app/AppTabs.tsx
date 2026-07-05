@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link, { useLinkStatus } from "next/link";
 import { usePathname } from "next/navigation";
 import {
   IconCalendar,
@@ -33,6 +33,33 @@ export interface TabItem {
   badge?: number;
 }
 
+/**
+ * Inner content of one tab. Lives inside <Link> so it can read that link's
+ * navigation status: the moment the tab is tapped, `pending` flips true and
+ * we swap the icon for a spinner — instant "it's loading" feedback while the
+ * destination's loading.tsx skeleton streams in.
+ */
+function TabContent({
+  Icon,
+  label,
+  badge,
+}: {
+  Icon: (typeof TAB_ICONS)[keyof typeof TAB_ICONS];
+  label: string;
+  badge?: number;
+}) {
+  const { pending } = useLinkStatus();
+  return (
+    <>
+      <span className="tab-ico" aria-hidden="true">
+        {pending ? <span className="spinner" /> : <Icon size={22} />}
+      </span>
+      <span>{label}</span>
+      {badge ? <span className="tab-dot" aria-label={`${badge}`} /> : null}
+    </>
+  );
+}
+
 /** Bottom tab bar on mobile, top tab row on ≥720px. */
 export default function AppTabs({ tabs, label }: { tabs: TabItem[]; label: string }) {
   const pathname = usePathname();
@@ -47,25 +74,16 @@ export default function AppTabs({ tabs, label }: { tabs: TabItem[]; label: strin
 
   return (
     <nav className="app-tabs" aria-label={label}>
-      {tabs.map((tab) => {
-        const Icon = TAB_ICONS[tab.icon];
-        return (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className="app-tab"
-            aria-current={isActive(tab) ? "page" : undefined}
-          >
-            <span className="tab-ico" aria-hidden="true">
-              <Icon size={22} />
-            </span>
-            <span>{tab.label}</span>
-            {tab.badge ? (
-              <span className="tab-dot" aria-label={`${tab.badge}`} />
-            ) : null}
-          </Link>
-        );
-      })}
+      {tabs.map((tab) => (
+        <Link
+          key={tab.href}
+          href={tab.href}
+          className="app-tab"
+          aria-current={isActive(tab) ? "page" : undefined}
+        >
+          <TabContent Icon={TAB_ICONS[tab.icon]} label={tab.label} badge={tab.badge} />
+        </Link>
+      ))}
     </nav>
   );
 }

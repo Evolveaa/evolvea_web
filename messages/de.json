@@ -239,7 +239,8 @@
       "sun": "So"
     },
     "ageYears": "{age} J.",
-    "ageRange": "{min}–{max} J."
+    "ageRange": "{min}–{max} J.",
+    "loading": "Wird geladen…"
   },
   "domains": {
     "phonemic_awareness": "Laute & Klänge",

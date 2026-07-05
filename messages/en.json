@@ -239,7 +239,8 @@
       "sun": "Sun"
     },
     "ageYears": "{age} yrs",
-    "ageRange": "{min}–{max} yrs"
+    "ageRange": "{min}–{max} yrs",
+    "loading": "Loading…"
   },
   "domains": {
     "phonemic_awareness": "Sounds in words",

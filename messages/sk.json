@@ -239,7 +239,8 @@
       "sun": "Ne"
     },
     "ageYears": "{age} r.",
-    "ageRange": "{min}–{max} r."
+    "ageRange": "{min}–{max} r.",
+    "loading": "Načítava sa…"
   },
   "domains": {
     "phonemic_awareness": "Hlásky a zvuky",
