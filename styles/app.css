@@ -503,6 +503,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/* On phones the brand + language switcher + sign-out already fill the bar;
+   the user's own name is the least essential item, so drop it to keep the
+   header on one line and avoid horizontal page overflow. */
+@media (max-width: 600px) {
+  .app-user {
+    display: none;
+  }
+}
 
 .app-main {
   width: 100%;
@@ -2507,6 +2515,22 @@ a.path-row:hover .path-card {
 }
 .tbl tr:last-child td {
   border-bottom: none;
+}
+/* On phones the four columns don't fit at desktop padding, which pushed the
+   commission column (the whole point of this table) off-screen behind a scroll.
+   Tighten padding + type so every column, commission included, fits the card. */
+@media (max-width: 600px) {
+  .tbl {
+    font-size: 0.82rem;
+  }
+  .tbl th,
+  .tbl td {
+    padding-inline: 0.4rem;
+  }
+  .tbl th {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 /* inline icon-button */
