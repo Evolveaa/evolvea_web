@@ -16,7 +16,7 @@ import {
   getActivePlan,
   getExercisesByIds,
   getRecentSessions,
-  groupSessionsByDay,
+  summarizeByExercise,
   trickyItems,
 } from "@/lib/data/parent";
 
@@ -49,7 +49,9 @@ export default async function ProgressPage() {
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
   const tricky = trickyItems(sessions, exercises, 6);
-  const dayGroups = groupSessionsByDay(sessions.slice(0, 40));
+  const summaries = summarizeByExercise(sessions);
+  const exSummaries = summaries.filter((s) => exercises.get(s.exerciseId)?.modality !== "guided");
+  const sharedSummaries = summaries.filter((s) => exercises.get(s.exerciseId)?.modality === "guided");
   const streak = computeStreak(sessions);
   const week = buildWeekOverview(plan, sessions);
   const totalMinutes = Math.round(
@@ -161,66 +163,89 @@ export default async function ProgressPage() {
           </aside>
 
           <div className="dash-main">
-            <h2 className="section-label">{t("historySection")}</h2>
-            <div className="hist-groups">
-              {dayGroups.map((g) => (
-                <div key={g.dayKey}>
-                  <div className="hist-day-label">
-                    {g.isToday
-                      ? t("histToday")
-                      : g.isYesterday
-                        ? t("histYesterday")
-                        : format.dateTime(new Date(g.sessions[0].started_at), {
-                            weekday: "long",
-                            day: "numeric",
-                            month: "long",
-                          })}
-                    <span className="n">{t("histCount", { count: g.sessions.length })}</span>
-                  </div>
-                  <ul className="hist-list">
-                    {g.sessions.map((s) => {
-                      const ex = exercises.get(s.exercise_id);
-                      const scored =
-                        !!s.score_total && s.score_total > 0 && s.score_correct !== null;
-                      const shared = ex?.modality === "guided";
-                      const pct = scored
-                        ? Math.round((100 * (s.score_correct ?? 0)) / (s.score_total ?? 1))
-                        : null;
-                      const subnote = [
-                        shared ? t("histSharedActivity") : null,
-                        s.parent_note ? `„${s.parent_note}“` : null,
-                      ]
-                        .filter(Boolean)
-                        .join(" · ");
-                      return (
-                        <li key={s.id} className="hist-row" data-shared={shared ? "" : undefined}>
-                          {ex ? (
-                            <DomainTile domain={ex.domain} size={30} />
-                          ) : (
-                            <span className="row-ico" aria-hidden="true" style={{ width: 30, height: 30 }}>
-                              <IconCheck size={16} />
-                            </span>
-                          )}
-                          <span className="hist-main">
-                            <span className="hist-title">{ex?.title ?? "—"}</span>
-                            {subnote && <span className="hist-note">{subnote}</span>}
+            {exSummaries.length > 0 && (
+              <>
+                <h2 className="section-label">{t("exercisesSection")}</h2>
+                <ul className="hist-list">
+                  {exSummaries.map((sm) => {
+                    const ex = exercises.get(sm.exerciseId);
+                    const scored =
+                      !!sm.latestTotal && sm.latestTotal > 0 && sm.latestCorrect !== null;
+                    const pct = scored
+                      ? Math.round((100 * (sm.latestCorrect ?? 0)) / (sm.latestTotal ?? 1))
+                      : null;
+                    return (
+                      <li key={sm.exerciseId} className="hist-row">
+                        {ex ? (
+                          <DomainTile domain={ex.domain} size={34} />
+                        ) : (
+                          <span className="row-ico" aria-hidden="true" style={{ width: 34, height: 34 }}>
+                            <IconCheck size={16} />
                           </span>
-                          {scored ? (
-                            <span className="score-pill" data-tone={scoreTone(pct)}>
-                              {s.score_correct}/{s.score_total}
-                            </span>
-                          ) : (
-                            <span className="hist-done">
-                              <IconCheck size={13} /> {t("pathDone")}
-                            </span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))}
-            </div>
+                        )}
+                        <span className="hist-main">
+                          <span className="hist-title">{ex?.title ?? "—"}</span>
+                          <span className="hist-note">
+                            {t("exMeta", {
+                              count: sm.count,
+                              date: format.dateTime(new Date(sm.lastAt), { day: "numeric", month: "long" }),
+                            })}
+                          </span>
+                        </span>
+                        {sm.trend === "up" && (
+                          <span className="ex-trend" title={t("exImproving")} aria-label={t("exImproving")}>
+                            ↑
+                          </span>
+                        )}
+                        {scored ? (
+                          <span className="score-pill" data-tone={scoreTone(pct)}>
+                            {sm.latestCorrect}/{sm.latestTotal}
+                          </span>
+                        ) : (
+                          <span className="hist-done">
+                            <IconCheck size={13} /> {t("pathDone")}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
+
+            {sharedSummaries.length > 0 && (
+              <>
+                <h2 className="section-label">{t("sharedSection")}</h2>
+                <ul className="hist-list">
+                  {sharedSummaries.map((sm) => {
+                    const ex = exercises.get(sm.exerciseId);
+                    return (
+                      <li key={sm.exerciseId} className="hist-row" data-shared="">
+                        {ex ? (
+                          <DomainTile domain={ex.domain} size={34} />
+                        ) : (
+                          <span className="row-ico" aria-hidden="true" style={{ width: 34, height: 34 }}>
+                            <IconCheck size={16} />
+                          </span>
+                        )}
+                        <span className="hist-main">
+                          <span className="hist-title">{ex?.title ?? "—"}</span>
+                          <span className="hist-note">
+                            {t("exMeta", {
+                              count: sm.count,
+                              date: format.dateTime(new Date(sm.lastAt), { day: "numeric", month: "long" }),
+                            })}
+                          </span>
+                        </span>
+                        <span className="hist-done">
+                          <IconCheck size={13} /> {t("pathDone")}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       )}

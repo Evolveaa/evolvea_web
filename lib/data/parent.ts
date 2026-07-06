@@ -366,6 +366,60 @@ export function trickyItems(
     .slice(0, limit);
 }
 
+export interface ExerciseSummary {
+  exerciseId: string;
+  count: number;
+  lastAt: string;
+  latestCorrect: number | null;
+  latestTotal: number | null;
+  /** Improvement of the latest attempt vs the oldest one (null if <2 scored). */
+  trend: "up" | "down" | "flat" | null;
+}
+
+/**
+ * Roll the raw session log up per exercise — one entry each, with how many times
+ * it was practised, the latest score and whether the child is improving. This is
+ * what a parent actually tracks ("how is my child doing on each exercise"),
+ * instead of a chronological dump. Sessions must be newest-first.
+ */
+export function summarizeByExercise(
+  sessions: SessionRow[],
+  _exercisesById?: Map<string, ExerciseRow>,
+): ExerciseSummary[] {
+  const acc = new Map<string, { count: number; latest: SessionRow; oldest: SessionRow }>();
+  for (const s of sessions) {
+    const e = acc.get(s.exercise_id);
+    if (!e) acc.set(s.exercise_id, { count: 1, latest: s, oldest: s });
+    else {
+      e.count += 1;
+      e.oldest = s; // iterating newest→oldest, so the last write is the oldest
+    }
+  }
+  const pct = (s: SessionRow) =>
+    s.score_total && s.score_total > 0 && s.score_correct !== null
+      ? (100 * s.score_correct) / s.score_total
+      : null;
+  return [...acc.entries()]
+    .map(([exerciseId, e]) => {
+      const latestPct = pct(e.latest);
+      const oldestPct = pct(e.oldest);
+      let trend: ExerciseSummary["trend"] = null;
+      if (e.count >= 2 && latestPct !== null && oldestPct !== null) {
+        const d = latestPct - oldestPct;
+        trend = d > 8 ? "up" : d < -8 ? "down" : "flat";
+      }
+      return {
+        exerciseId,
+        count: e.count,
+        lastAt: e.latest.started_at,
+        latestCorrect: e.latest.score_correct,
+        latestTotal: e.latest.score_total,
+        trend,
+      };
+    })
+    .sort((a, b) => (a.lastAt < b.lastAt ? 1 : -1));
+}
+
 export interface DayGroup {
   dayKey: string;
   isToday: boolean;

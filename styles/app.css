@@ -662,6 +662,14 @@
   font-weight: 600;
   color: var(--ink-soft);
 }
+/* "improving" arrow next to the latest score */
+.ex-trend {
+  flex: none;
+  color: var(--success-ink);
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1;
+}
 
 /* ===== "What to practise" / "Čo robí problém" miss list (parent + therapist) ===== */
 .tricky-list {
