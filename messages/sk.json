@@ -486,6 +486,7 @@
       "removeItem": "Odstrániť",
       "addItem": "Pridať položku",
       "speechText": "Čo má dieťa povedať",
+      "speechAsk": "Otázka pre dieťa (nepovinné) — dieťa odpovie nahlas",
       "speechTip": "Tip pre rodiča (nepovinné)",
       "stepN": "Krok {n}",
       "stepTitle": "Nadpis kroku",
@@ -697,7 +698,8 @@
       "scoreLabel": "Hodnotenie rodiča",
       "great": "Výborne",
       "almost": "Takmer",
-      "practice": "Ešte trénujeme"
+      "practice": "Ešte trénujeme",
+      "expected": "Očakávaná odpoveď"
     },
     "guided": {
       "choicesLabel": "Možnosti",

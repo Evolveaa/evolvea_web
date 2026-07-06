@@ -68,13 +68,26 @@ export default function SpeechTask({ content, onProgress, onFinish }: TaskProps<
             {item.emoji}
           </span>
         )}
-        <p className="sp-text">{item.text}</p>
+        {item.ask ? (
+          <p className="sp-ask">{item.ask}</p>
+        ) : (
+          <p className="sp-text">{item.text}</p>
+        )}
         {supported && (
           <div style={{ display: "flex", justifyContent: "center", marginTop: "0.9rem" }}>
-            <button type="button" className="say-btn" onClick={() => speak(item.text, 0.75)}>
+            <button
+              type="button"
+              className="say-btn"
+              onClick={() => speak(item.ask ?? item.text, item.ask ? 0.9 : 0.75)}
+            >
               🔊 {t("sayIt")}
             </button>
           </div>
+        )}
+        {item.ask && (
+          <p className="sp-expect">
+            {t("speech.expected")}: <b>{item.text}</b>
+          </p>
         )}
         {item.tip && <p className="sp-tip">💡 {item.tip}</p>}
       </div>

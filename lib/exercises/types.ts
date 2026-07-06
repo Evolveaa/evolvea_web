@@ -141,6 +141,13 @@ export interface SpeechItem {
   /** What the child should say (word, phrase, tongue-twister, answer…). */
   text: string;
   emoji?: string;
+  /**
+   * Optional spoken question the parent asks aloud; the child answers by
+   * speaking. When set, this is a "speech question" — the prompt is read to the
+   * child and `text` is the expected answer (shown to the parent as a
+   * reference, not revealed as a label to the child).
+   */
+  ask?: string;
   /** Articulation or coaching tip shown to the parent. */
   tip?: string;
 }

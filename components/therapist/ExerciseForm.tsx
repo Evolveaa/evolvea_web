@@ -21,6 +21,7 @@ interface ChoiceDraft {
 interface SpeechDraft {
   text: string;
   emoji: string;
+  ask: string;
   tip: string;
 }
 interface StepDraft {
@@ -40,7 +41,7 @@ const EMPTY_CHOICE = (): ChoiceDraft => ({
     { label: "", emoji: "", correct: false },
   ],
 });
-const EMPTY_SPEECH = (): SpeechDraft => ({ text: "", emoji: "", tip: "" });
+const EMPTY_SPEECH = (): SpeechDraft => ({ text: "", emoji: "", ask: "", tip: "" });
 const EMPTY_STEP = (): StepDraft => ({ title: "", body: "", tip: "", choices: "", fields: [] });
 
 function draftsFromContent(content: ExerciseContent | null): {
@@ -79,7 +80,7 @@ function draftsFromContent(content: ExerciseContent | null): {
       ...base,
       type: "speech_items",
       intro: content.intro ?? "",
-      speech: content.items.map((i) => ({ text: i.text, emoji: i.emoji ?? "", tip: i.tip ?? "" })),
+      speech: content.items.map((i) => ({ text: i.text, emoji: i.emoji ?? "", ask: i.ask ?? "", tip: i.tip ?? "" })),
     };
   if (content.type === "guided_steps")
     return {
@@ -142,6 +143,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
         items: speech.map((i) => ({
           text: i.text.trim(),
           emoji: i.emoji.trim() || undefined,
+          ask: i.ask.trim() || undefined,
           tip: i.tip.trim() || undefined,
         })),
       };
@@ -369,6 +371,15 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
         {type === "speech_items" &&
           speech.map((item, i) => (
             <div key={i} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem", alignItems: "flex-start", flexWrap: "wrap" }}>
+              <input
+                className="input"
+                style={{ flex: "1 1 100%" }}
+                placeholder={t("speechAsk")}
+                aria-label={t("speechAsk")}
+                value={item.ask}
+                maxLength={300}
+                onChange={(e) => setSpeech((prev) => prev.map((p, j) => (j === i ? { ...p, ask: e.target.value } : p)))}
+              />
               <input
                 className="input"
                 style={{ width: 74, textAlign: "center" }}

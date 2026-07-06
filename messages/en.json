@@ -486,6 +486,7 @@
       "removeItem": "Remove",
       "addItem": "Add item",
       "speechText": "What the child should say",
+      "speechAsk": "Question for the child (optional) — child answers aloud",
       "speechTip": "Tip for the parent (optional)",
       "stepN": "Step {n}",
       "stepTitle": "Step heading",
@@ -697,7 +698,8 @@
       "scoreLabel": "Parent's rating",
       "great": "Great",
       "almost": "Almost",
-      "practice": "Still practicing"
+      "practice": "Still practicing",
+      "expected": "Expected answer"
     },
     "guided": {
       "choicesLabel": "Options",

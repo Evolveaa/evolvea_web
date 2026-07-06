@@ -2292,6 +2292,28 @@ a.path-row:hover .path-card {
   letter-spacing: -0.01em;
   line-height: 1.3;
 }
+/* speech-question prompt — a sentence the parent asks aloud */
+.sp-ask {
+  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+/* expected answer — a quiet reference for the parent, not a label for the child */
+.sp-expect {
+  margin-top: 0.8rem;
+  display: inline-block;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  background: rgba(22, 31, 51, 0.045);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+.sp-expect b {
+  color: var(--ink);
+  font-weight: 700;
+}
 .sp-tip {
   margin-top: 0.7rem;
   font-size: 0.85rem;

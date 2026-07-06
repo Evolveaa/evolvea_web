@@ -486,6 +486,7 @@
       "removeItem": "Entfernen",
       "addItem": "Element hinzufügen",
       "speechText": "Was das Kind sagen soll",
+      "speechAsk": "Frage an das Kind (optional) — das Kind antwortet laut",
       "speechTip": "Tipp für die Eltern (optional)",
       "stepN": "Schritt {n}",
       "stepTitle": "Titel des Schritts",
@@ -697,7 +698,8 @@
       "scoreLabel": "Bewertung der Eltern",
       "great": "Ausgezeichnet",
       "almost": "Fast",
-      "practice": "Wir üben noch"
+      "practice": "Wir üben noch",
+      "expected": "Erwartete Antwort"
     },
     "guided": {
       "choicesLabel": "Möglichkeiten",
