@@ -285,6 +285,7 @@
     "histYesterday": "Yesterday",
     "histCount": "{count, plural, one {# entry} other {# entries}}",
     "histSharedActivity": "shared activity",
+    "histMore": "+ {count} older entries",
     "exercisesSection": "Exercises",
     "sharedSection": "Shared activities",
     "exMeta": "practised {count}× · last {date}",

@@ -51,7 +51,9 @@ export default async function ProgressPage() {
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
   const tricky = trickyItems(sessions, exercises, 6);
-  const dayGroups = groupSessionsByDay(sessions);
+  const HISTORY_LIMIT = 15;
+  const dayGroups = groupSessionsByDay(sessions.slice(0, HISTORY_LIMIT));
+  const moreCount = Math.max(0, sessions.length - HISTORY_LIMIT);
   const streak = computeStreak(sessions);
   const week = buildWeekOverview(plan, sessions);
   const totalMinutes = Math.round(
@@ -117,18 +119,18 @@ export default async function ProgressPage() {
                   <ul className="dstat-list">
                     {stats.map((s) => (
                       <li key={s.domain} className="dstat">
-                        <DomainTile domain={s.domain} size={40} />
+                        <DomainTile domain={s.domain} size={38} />
                         <span className="dstat-body">
                           <span className="dstat-top">
                             <span className="dstat-name">{td(s.domain)}</span>
-                            <span className="card-sub">
-                              {t("domainMeta", { count: s.sessions })}
-                              {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
+                            <span className="dstat-pct" data-none={s.avgPct === null ? "" : undefined}>
+                              {s.avgPct !== null ? `${s.avgPct}%` : "—"}
                             </span>
                           </span>
                           <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                            <i style={{ width: `${s.avgPct ?? 12}%` }} />
+                            <i style={{ width: `${s.avgPct ?? 6}%` }} />
                           </span>
+                          <span className="dstat-sub">{t("domainMeta", { count: s.sessions })}</span>
                         </span>
                       </li>
                     ))}
@@ -236,6 +238,9 @@ export default async function ProgressPage() {
                 </div>
               ))}
             </div>
+            {moreCount > 0 && (
+              <p className="hist-more">{t("histMore", { count: moreCount })}</p>
+            )}
           </div>
         </div>
       )}

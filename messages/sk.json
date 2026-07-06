@@ -285,6 +285,7 @@
     "histYesterday": "Včera",
     "histCount": "{count, plural, one {# záznam} few {# záznamy} other {# záznamov}}",
     "histSharedActivity": "spoločná aktivita",
+    "histMore": "+ {count} starších záznamov",
     "exercisesSection": "Cvičenia",
     "sharedSection": "Spoločné aktivity",
     "exMeta": "cvičené {count}× · naposledy {date}",
