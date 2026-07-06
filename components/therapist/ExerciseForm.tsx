@@ -51,7 +51,8 @@ function draftsFromContent(content: ExerciseContent | null): {
   intro: string;
 } {
   const base = {
-    type: "choice" as BuilderType,
+    // speech is the primary mode: new exercises default to spoken items
+    type: "speech_items" as BuilderType,
     choice: [EMPTY_CHOICE()],
     speech: [EMPTY_SPEECH()],
     steps: [EMPTY_STEP()],
@@ -184,7 +185,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "0.8rem" }}>
           <div className="field">
             <label className="label" htmlFor="ex-domain">{t("domain")}</label>
-            <select className="select" id="ex-domain" name="domain" defaultValue={exercise?.domain ?? "vocabulary"}>
+            <select className="select" id="ex-domain" name="domain" defaultValue={exercise?.domain ?? "articulation"}>
               {DOMAINS.map((d: ExerciseDomain) => (
                 <option key={d} value={d}>
                   {td(d)}
@@ -238,7 +239,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
 
         {!exercise && (
           <div className="role-switch" style={{ gridTemplateColumns: "repeat(3, 1fr)" }} role="group" aria-label={t("typeLabel")}>
-            {(["choice", "speech_items", "guided_steps"] as const).map((tt) => (
+            {(["speech_items", "choice", "guided_steps"] as const).map((tt) => (
               <button key={tt} type="button" className="role-opt" aria-pressed={type === tt} onClick={() => setType(tt)}>
                 <b>{t(`types.${tt}.name`)}</b>
                 <span>{t(`types.${tt}.hint`)}</span>
