@@ -85,67 +85,68 @@ export default async function ParentHomePage() {
         </Link>
       </div>
 
-      {plan && todayTotal > 0 && (
-        <section className="hero-day" aria-label={t("heroTitle")}>
-          <ProgressRing
-            value={doneToday.length}
-            max={todayTotal}
-            label={`${doneToday.length}/${todayTotal}`}
-            sub={t("todayRingSub")}
-          />
-          <div className="hero-day-body">
-            <p className="hero-day-title">{t("heroTitle")}</p>
-            <p className="hero-day-sub">
-              {week.today.length === 0
-                ? t("heroAllDone")
-                : t("heroLeft", { count: week.today.length, min: remainingMin })}
-            </p>
-            <span className="streak-chip">
-              <IconFlame size={14} />
-              {t("streak", { count: streak })}
-            </span>
-            <div className="week-pills" role="img" aria-label={t("weekDaysLabel")}>
-              {days.map((done, i) => (
-                <span
-                  key={i}
-                  className="week-pill"
-                  data-done={done ? "" : undefined}
-                  data-today={i === todayIdx ? "" : undefined}
-                >
-                  <IconCheck size={12} />
-                  {dayLabels[i]}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {!plan ? (
         <div className="empty">
           <b>{t("noPlanTitle")}</b>
           <p>{t("noPlanLead")}</p>
         </div>
       ) : (
-        <>
-          <h2 className="section-label">{t("todaySection")}</h2>
-          <TodayPath done={doneToday} queue={week.today} />
-        </>
-      )}
+        <div className="dash">
+          <div className="dash-main">
+            {todayTotal > 0 && (
+              <section className="hero-day" aria-label={t("heroTitle")}>
+                <ProgressRing
+                  value={doneToday.length}
+                  max={todayTotal}
+                  label={`${doneToday.length}/${todayTotal}`}
+                  sub={t("todayRingSub")}
+                />
+                <div className="hero-day-body">
+                  <p className="hero-day-title">{t("heroTitle")}</p>
+                  <p className="hero-day-sub">
+                    {week.today.length === 0
+                      ? t("heroAllDone")
+                      : t("heroLeft", { count: week.today.length, min: remainingMin })}
+                  </p>
+                  <span className="streak-chip">
+                    <IconFlame size={14} />
+                    {t("streak", { count: streak })}
+                  </span>
+                  <div className="week-pills" role="img" aria-label={t("weekDaysLabel")}>
+                    {days.map((done, i) => (
+                      <span
+                        key={i}
+                        className="week-pill"
+                        data-done={done ? "" : undefined}
+                        data-today={i === todayIdx ? "" : undefined}
+                      >
+                        <IconCheck size={12} />
+                        {dayLabels[i]}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
 
-      {plan?.note && (
-        <>
-          <h2 className="section-label">{t("therapistNote")}</h2>
-          <div className="note-quote">
-            <p>„{plan.note}“</p>
+            <h2 className="section-label">{t("todaySection")}</h2>
+            <TodayPath done={doneToday} queue={week.today} />
           </div>
-        </>
-      )}
 
-      {plan && (
-        <Link href="/app/plan" className="center-link">
-          {t("seeWholePlan")} →
-        </Link>
+          <aside className="dash-side">
+            {plan.note && (
+              <div>
+                <h2 className="section-label">{t("therapistNote")}</h2>
+                <div className="note-quote">
+                  <p>„{plan.note}“</p>
+                </div>
+              </div>
+            )}
+            <Link href="/app/plan" className="center-link">
+              {t("seeWholePlan")} →
+            </Link>
+          </aside>
+        </div>
       )}
     </>
   );

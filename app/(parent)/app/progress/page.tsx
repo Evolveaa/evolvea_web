@@ -97,85 +97,89 @@ export default async function ProgressPage() {
         </div>
       </section>
 
-      {stats.length > 0 && (
-        <>
-          <h2 className="section-label">{t("domainsSection")}</h2>
-          <div className="card">
-            <ul className="dstat-list">
-              {stats.map((s) => (
-                <li key={s.domain} className="dstat">
-                  <DomainTile domain={s.domain} size={40} />
-                  <span className="dstat-body">
-                    <span className="dstat-top">
-                      <span className="dstat-name">{td(s.domain)}</span>
-                      <span className="card-sub">
-                        {t("domainMeta", { count: s.sessions })}
-                        {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
+      <div className="dash">
+        {stats.length > 0 && (
+          <aside className="dash-side">
+            <h2 className="section-label">{t("domainsSection")}</h2>
+            <div className="card">
+              <ul className="dstat-list">
+                {stats.map((s) => (
+                  <li key={s.domain} className="dstat">
+                    <DomainTile domain={s.domain} size={40} />
+                    <span className="dstat-body">
+                      <span className="dstat-top">
+                        <span className="dstat-name">{td(s.domain)}</span>
+                        <span className="card-sub">
+                          {t("domainMeta", { count: s.sessions })}
+                          {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
+                        </span>
+                      </span>
+                      <span className={`pbar bar-${s.domain}`} aria-hidden="true">
+                        <i style={{ width: `${s.avgPct ?? 12}%` }} />
                       </span>
                     </span>
-                    <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                      <i style={{ width: `${s.avgPct ?? 12}%` }} />
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        )}
 
-      <h2 className="section-label">{t("historySection")}</h2>
-      {sessions.length === 0 ? (
-        <div className="empty">
-          <b>{t("noSessionsTitle")}</b>
-          <p>{t("noSessionsLead")}</p>
+        <div className="dash-main">
+          <h2 className="section-label">{t("historySection")}</h2>
+          {sessions.length === 0 ? (
+            <div className="empty">
+              <b>{t("noSessionsTitle")}</b>
+              <p>{t("noSessionsLead")}</p>
+            </div>
+          ) : (
+            <ul className="row-list">
+              {sessions.slice(0, 25).map((s) => {
+                const ex = exercises.get(s.exercise_id);
+                const pct =
+                  s.score_total && s.score_total > 0 && s.score_correct !== null
+                    ? Math.round((100 * s.score_correct) / s.score_total)
+                    : null;
+                return (
+                  <li key={s.id} className="row-item">
+                    {ex ? (
+                      <DomainTile domain={ex.domain} size={44} />
+                    ) : (
+                      <span className="row-ico" aria-hidden="true">
+                        <IconCheck size={18} />
+                      </span>
+                    )}
+                    <span className="row-body">
+                      <span className="row-title">{ex?.title ?? "—"}</span>
+                      <span className="row-sub">
+                        {format.dateTime(new Date(s.started_at), {
+                          day: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                        {s.duration_seconds
+                          ? ` · ${tc("minutes", { count: Math.max(1, Math.round(s.duration_seconds / 60)) })}`
+                          : ""}
+                        {s.parent_note ? ` · „${s.parent_note}“` : ""}
+                      </span>
+                    </span>
+                    <span className="score-pill" data-tone={scoreTone(pct)}>
+                      {pct !== null ? (
+                        `${s.score_correct}/${s.score_total}`
+                      ) : (
+                        <>
+                          <IconCheck size={12} /> {t("pathDone")}
+                        </>
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
-      ) : (
-        <ul className="row-list">
-          {sessions.slice(0, 25).map((s) => {
-            const ex = exercises.get(s.exercise_id);
-            const pct =
-              s.score_total && s.score_total > 0 && s.score_correct !== null
-                ? Math.round((100 * s.score_correct) / s.score_total)
-                : null;
-            return (
-              <li key={s.id} className="row-item">
-                {ex ? (
-                  <DomainTile domain={ex.domain} size={44} />
-                ) : (
-                  <span className="row-ico" aria-hidden="true">
-                    <IconCheck size={18} />
-                  </span>
-                )}
-                <span className="row-body">
-                  <span className="row-title">{ex?.title ?? "—"}</span>
-                  <span className="row-sub">
-                    {format.dateTime(new Date(s.started_at), {
-                      day: "numeric",
-                      month: "short",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                    {s.duration_seconds
-                      ? ` · ${tc("minutes", { count: Math.max(1, Math.round(s.duration_seconds / 60)) })}`
-                      : ""}
-                    {s.parent_note ? ` · „${s.parent_note}“` : ""}
-                  </span>
-                </span>
-                <span className="score-pill" data-tone={scoreTone(pct)}>
-                  {pct !== null ? (
-                    `${s.score_correct}/${s.score_total}`
-                  ) : (
-                    <>
-                      <IconCheck size={12} /> {t("pathDone")}
-                    </>
-                  )}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      </div>
     </>
   );
 }

@@ -34,7 +34,7 @@ export default async function ChildSettingsPage() {
   const subState = accessState(sub);
 
   return (
-    <>
+    <div className="col-narrow">
       <h1 className="page-h">{t("childSettings")}</h1>
       <p className="page-sub">{t("childSettingsLead")}</p>
 
@@ -61,6 +61,6 @@ export default async function ChildSettingsPage() {
 
       <h2 className="section-label">{t("addAnotherChild")}</h2>
       <RedeemInviteForm />
-    </>
+    </div>
   );
 }

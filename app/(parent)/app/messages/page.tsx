@@ -35,7 +35,7 @@ export default async function MessagesPage() {
   const hasUnread = messages.some((m) => m.read_at === null && m.sender_id !== session.profile.id);
 
   return (
-    <>
+    <div className="col-narrow">
       <h1 className="page-h">{t("messagesTitle")}</h1>
       <p className="page-sub">
         {therapist?.full_name
@@ -48,6 +48,6 @@ export default async function MessagesPage() {
         messages={messages}
         hasUnread={hasUnread}
       />
-    </>
+    </div>
   );
 }

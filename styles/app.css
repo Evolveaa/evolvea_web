@@ -535,12 +535,50 @@
 
 .app-main {
   width: 100%;
-  max-width: 640px;
+  max-width: 1040px;
   margin-inline: auto;
   padding: clamp(1.1rem, 3.5vw, 1.8rem) clamp(1.1rem, 4vw, 1.6rem) 2.5rem;
 }
 .app-main-wide {
   max-width: 1140px;
+}
+
+/* ===== Desktop dashboard: use the wide canvas, collapse to one column on
+   phones. Main content + a narrower sticky side rail. ===== */
+.dash {
+  display: grid;
+  gap: 1.1rem;
+}
+.col-narrow {
+  max-width: 680px;
+  margin-inline: auto;
+}
+@media (min-width: 900px) {
+  .dash {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 1.6rem;
+    align-items: start;
+  }
+  /* main column left, side rail right — regardless of DOM order, so each page
+     can put its summary first in the DOM (mobile-first) yet keep the detail in
+     the wide column on desktop */
+  .dash-main {
+    order: 1;
+    min-width: 0;
+  }
+  .dash-side {
+    order: 2;
+    position: sticky;
+    top: 84px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  /* first section label in each dash column shouldn't add a big top gap */
+  .dash-main > .section-label:first-child,
+  .dash-side > .section-label:first-child {
+    margin-top: 0;
+  }
 }
 
 /* ===== Navigation tabs: bottom bar on mobile, top row on ≥720px ===== */
