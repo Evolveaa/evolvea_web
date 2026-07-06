@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { DomainTile } from "@/components/icons";
+import { DomainTile, IconCheck } from "@/components/icons";
 import { completeSessionAction } from "@/lib/parent/actions";
 import {
   contentItemCount,
@@ -36,16 +36,6 @@ type Phase = "intro" | "strategy" | "play" | "selfEval" | "done" | "saved";
 type SelfEval = "great" | "ok" | "hard";
 type Helped = "yes" | "some" | "no";
 
-/** Per-type emoji for the three strategy options (labels live in i18n). */
-const STRATEGY_EMOJI: Record<string, [string, string, string]> = {
-  choice: ["👂", "🗣️", "🐢"],
-  sound_boxes: ["🐢", "👆", "👂"],
-  memory_sequence: ["🗣️", "📖", "👀"],
-  pairs: ["🧠", "➡️", "🎯"],
-  number_track: ["🔢", "👆", "🎯"],
-  story_sequence: ["1️⃣", "👀", "🗣️"],
-  speech_items: ["👂", "🐢", "👄"],
-};
 
 const SELF_EVAL: { key: SelfEval; emoji: string }[] = [
   { key: "great", emoji: "🌟" },
@@ -90,6 +80,7 @@ export default function ExercisePlayer({
   const [selfEval, setSelfEval] = useState<SelfEval | null>(null);
   const [helped, setHelped] = useState<Helped | null>(null);
   const [note, setNote] = useState("");
+  const [confirmQuit, setConfirmQuit] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const startedAt = useRef<string>("");
@@ -143,11 +134,35 @@ export default function ExercisePlayer({
   }
 
   function quit() {
-    if ((phase === "play" || phase === "strategy" || phase === "selfEval") && !window.confirm(t("quitConfirm")))
+    if (phase === "play" || phase === "strategy" || phase === "selfEval") {
+      setConfirmQuit(true);
       return;
+    }
     if (timer.current) clearTimeout(timer.current);
     router.push(closeHref);
   }
+
+  function doQuit() {
+    setConfirmQuit(false);
+    if (timer.current) clearTimeout(timer.current);
+    router.push(closeHref);
+  }
+
+  const quitModal = confirmQuit ? (
+    <div className="pl-modal-overlay" role="dialog" aria-modal="true">
+      <div className="pl-modal">
+        <p className="pl-modal-title">{t("quitConfirm")}</p>
+        <div className="pl-modal-actions">
+          <button type="button" className="btn btn-outline btn-block" onClick={() => setConfirmQuit(false)}>
+            {t("quitStay")}
+          </button>
+          <button type="button" className="btn btn-primary btn-block" onClick={doQuit}>
+            {t("quitLeave")}
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null;
 
   async function save() {
     if (!summary || !childId) return;
@@ -242,7 +257,6 @@ export default function ExercisePlayer({
 
   /* ---------------- strategy (plan) ---------------- */
   if (phase === "strategy") {
-    const emojis = STRATEGY_EMOJI[content.type] ?? ["💡", "💡", "💡"];
     return (
       <div {...wrapProps}>
         <div className="player-top">
@@ -250,8 +264,9 @@ export default function ExercisePlayer({
             ✕
           </button>
         </div>
+        {quitModal}
         <div className="player-main" style={{ justifyContent: "center" }}>
-          <p className="player-kicker">🧭 {t("strategyKicker")}</p>
+          <p className="player-kicker">{t("strategyKicker")}</p>
           <p className="player-prompt">{t("strategyTitle")}</p>
           <p className="player-intro">{t("strategyLead")}</p>
           <div className="strategy-grid">
@@ -263,8 +278,8 @@ export default function ExercisePlayer({
                 data-state={strategyIdx === i ? "correct" : strategyIdx !== null ? "dim" : undefined}
                 onClick={() => pickStrategy(i)}
               >
-                <span className="opt-emoji" aria-hidden="true">
-                  {emojis[i]}
+                <span className="opt-radio" aria-hidden="true">
+                  {strategyIdx === i ? <IconCheck size={14} /> : null}
                 </span>
                 <span>{t(`strategy.${content.type}.${i}`)}</span>
               </button>
@@ -280,7 +295,7 @@ export default function ExercisePlayer({
     return (
       <div {...wrapProps}>
         <div className="player-main" style={{ justifyContent: "center" }}>
-          <p className="player-kicker">🪞 {t("selfEvalKicker")}</p>
+          <p className="player-kicker">{t("selfEvalKicker")}</p>
           <p className="player-prompt">{t("selfEvalTitle")}</p>
           <div className="strategy-grid">
             {SELF_EVAL.map((o) => (
@@ -430,6 +445,7 @@ export default function ExercisePlayer({
 
   return (
     <div {...wrapProps}>
+      {quitModal}
       <div className="player-top">
         <button type="button" className="player-quit" onClick={quit} aria-label={t("close")}>
           ✕
@@ -453,7 +469,7 @@ export default function ExercisePlayer({
 
       {strategyLabel && (
         <p className="myplan-chip">
-          🧭 {t("myPlan")}: <b>{strategyLabel}</b>
+          {t("myPlan")}: <b>{strategyLabel}</b>
         </p>
       )}
 

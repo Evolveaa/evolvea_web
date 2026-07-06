@@ -635,6 +635,8 @@
     "start": "Start",
     "close": "Close",
     "quitConfirm": "Really quit the exercise? Progress won't be saved.",
+    "quitStay": "Keep going",
+    "quitLeave": "Quit",
     "aboutMinutes": "about {count} min",
     "parentGuide": "Parent guide",
     "progressLabel": "Exercise progress",

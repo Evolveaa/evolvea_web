@@ -635,6 +635,8 @@
     "start": "Začať",
     "close": "Zavrieť",
     "quitConfirm": "Naozaj chcete cvičenie ukončiť? Postup sa neuloží.",
+    "quitStay": "Pokračovať",
+    "quitLeave": "Ukončiť",
     "aboutMinutes": "asi {count} min",
     "parentGuide": "Sprievodca pre rodiča",
     "progressLabel": "Postup cvičením",

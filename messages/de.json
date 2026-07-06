@@ -635,6 +635,8 @@
     "start": "Starten",
     "close": "Schließen",
     "quitConfirm": "Möchten Sie die Übung wirklich beenden? Der Fortschritt wird nicht gespeichert.",
+    "quitStay": "Weitermachen",
+    "quitLeave": "Beenden",
     "aboutMinutes": "ca. {count} Min.",
     "parentGuide": "Leitfaden für die Eltern",
     "progressLabel": "Fortschritt in der Übung",

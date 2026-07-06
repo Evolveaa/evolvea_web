@@ -1931,6 +1931,59 @@ a.path-row:hover .path-card {
 .opt-card.opt-strategy .opt-emoji {
   font-size: 1.9rem;
 }
+/* clean radio-style pick indicator — professional, no emoji */
+.opt-radio {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-line);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  transition: background 0.16s, border-color 0.16s;
+}
+.opt-strategy[data-state="correct"] .opt-radio {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+/* player confirmation modal (replaces the browser's default confirm dialog) */
+.pl-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: rgba(22, 31, 51, 0.42);
+  backdrop-filter: blur(3px);
+  animation: fade-in 0.18s var(--ease);
+}
+.pl-modal {
+  background: var(--cream-hi);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  padding: 1.5rem 1.4rem 1.3rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+.pl-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 1.2rem;
+}
+.pl-modal-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
 
 /* the chosen plan stays visible while playing (monitoring support) */
 .myplan-chip {
@@ -2334,20 +2387,40 @@ a.path-row:hover .path-card {
 }
 .px-card {
   aspect-ratio: 1;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   border: 2px solid var(--ink-line);
-  background: var(--hue-navy);
-  font-size: clamp(1.5rem, 6vw, 2.1rem);
+  background: linear-gradient(150deg, #e9f2fc, #cfe0f3);
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
   display: grid;
   place-items: center;
   color: transparent;
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  position: relative;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease), border-color 0.18s;
   min-height: 56px;
+  cursor: pointer;
+}
+/* face-down back — a calm emblem instead of an empty square */
+.px-card[data-state="down"]::after {
+  content: "";
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(35, 100, 159, 0.2);
+}
+.px-card[data-state="down"]:hover {
+  border-color: var(--accent-ink);
+  transform: translateY(-2px);
 }
 .px-card[data-state="up"],
 .px-card[data-state="done"] {
   background: var(--cream-hi);
   color: inherit;
+}
+.px-card[data-state="up"]::after,
+.px-card[data-state="done"]::after {
+  display: none;
 }
 .px-card[data-state="done"] {
   border-color: var(--success-ink);
