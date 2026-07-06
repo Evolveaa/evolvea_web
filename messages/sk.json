@@ -374,6 +374,10 @@
     "domainsSection": "Oblasti rozvoja",
     "noDataYet": "Zatiaľ žiadne dáta — po prvých cvičeniach sa tu objaví prehľad.",
     "sessionsSection": "Posledné cvičenia",
+    "trickySection": "Čo robí problém",
+    "trickyLead": "Položky, ktoré sa dieťaťu opakovane nedarili — dobré východisko pre ďalší plán.",
+    "trickyEmpty": "Zatiaľ žiadne opakované chyby — pekná práca!",
+    "trickyMisses": "{count}× sa nepodarilo",
     "messagesSection": "Správy s rodičom",
     "session": {
       "hinted": "s pomôckou",

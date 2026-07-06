@@ -291,6 +291,81 @@ export function domainStats(
   }));
 }
 
+export interface TrickyItem {
+  label: string;
+  domain: ExerciseRow["domain"] | null;
+  kind: "speech" | "interactive";
+  misses: number;
+  attempts: number;
+  lastMissedAt: string;
+}
+
+/**
+ * Cross-session "what's tricky": folds every session's per-item results into a
+ * ranked list of the items the child keeps missing — the artifact a therapist
+ * wants at the monthly review. Speech items count as missed when rated below
+ * "great"; interactive items when not solved on the first try. Pure aggregation
+ * over data already stored in `sessions.detail` — no new query, no recording
+ * change. Items without a text label (memory spans, number rounds, pairs) are
+ * skipped; guided reflections carry no correctness.
+ */
+export function trickyItems(
+  sessions: SessionRow[],
+  exercisesById: Map<string, ExerciseRow>,
+  limit = 8,
+): TrickyItem[] {
+  const acc = new Map<string, TrickyItem>();
+
+  for (const s of sessions) {
+    const detail = s.detail;
+    if (!detail || typeof detail !== "object" || Array.isArray(detail)) continue;
+    const items = (detail as Record<string, unknown>).items;
+    if (!Array.isArray(items)) continue;
+    const domain = exercisesById.get(s.exercise_id)?.domain ?? null;
+
+    for (const raw of items) {
+      if (!raw || typeof raw !== "object") continue;
+      const it = raw as Record<string, unknown>;
+      let label: string;
+      let kind: "speech" | "interactive";
+      let missed: boolean;
+
+      if (typeof it.score === "string" && typeof it.text === "string") {
+        label = it.text; // the spoken target / answer
+        kind = "speech";
+        missed = it.score !== "great";
+      } else if ("firstTry" in it) {
+        const l =
+          (typeof it.prompt === "string" && it.prompt) ||
+          (typeof it.word === "string" && it.word) ||
+          (typeof it.title === "string" && it.title) ||
+          "";
+        if (!l) continue; // no useful text label (e.g. memory spans)
+        label = l;
+        kind = "interactive";
+        missed = it.firstTry === false;
+      } else {
+        continue;
+      }
+
+      const key = `${kind}:${label}`;
+      const e =
+        acc.get(key) ?? { label, domain, kind, misses: 0, attempts: 0, lastMissedAt: "" };
+      e.attempts += 1;
+      if (missed) {
+        e.misses += 1;
+        if (s.started_at > e.lastMissedAt) e.lastMissedAt = s.started_at;
+      }
+      acc.set(key, e);
+    }
+  }
+
+  return [...acc.values()]
+    .filter((e) => e.misses > 0)
+    .sort((a, b) => b.misses - a.misses || (a.lastMissedAt < b.lastMissedAt ? 1 : -1))
+    .slice(0, limit);
+}
+
 /** Exercises referenced by sessions (for history rendering). */
 export async function getExercisesByIds(ids: string[]): Promise<Map<string, ExerciseRow>> {
   if (ids.length === 0) return new Map();

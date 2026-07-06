@@ -12,6 +12,7 @@ import {
   getActivePlan,
   getExercisesByIds,
   getSubscription,
+  trickyItems,
 } from "@/lib/data/parent";
 import { accessState } from "@/lib/billing";
 import { DomainTile, IconCheck } from "@/components/icons";
@@ -49,6 +50,7 @@ export default async function FamilyDetailPage({
 
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
+  const tricky = trickyItems(sessions, exercises);
   const streak = computeStreak(sessions);
   const subState = accessState(sub);
   const scored = sessions.filter((s) => s.score_total && s.score_total > 0);
@@ -227,6 +229,38 @@ export default async function FamilyDetailPage({
               hasUnread={hasUnread}
             />
           </div>
+
+          <h2 className="section-label" style={{ marginTop: "1.4rem" }}>{t("trickySection")}</h2>
+          {tricky.length === 0 ? (
+            <p className="card-sub">{t("trickyEmpty")}</p>
+          ) : (
+            <div className="card">
+              <p className="card-sub" style={{ marginBottom: "0.85rem" }}>{t("trickyLead")}</p>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+                {tricky.map((it) => (
+                  <li key={`${it.kind}:${it.label}`} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                    {it.domain ? (
+                      <DomainTile domain={it.domain} size={26} />
+                    ) : (
+                      <span style={{ width: 26 }} aria-hidden="true" />
+                    )}
+                    <span
+                      style={{ flex: 1, minWidth: 0, fontSize: "0.9rem", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                      title={it.label}
+                    >
+                      {it.label}
+                    </span>
+                    <span
+                      className="chip"
+                      style={{ fontSize: "0.72rem", background: "var(--danger-soft)", color: "var(--danger-ink)", borderColor: "transparent", flex: "none" }}
+                    >
+                      {t("trickyMisses", { count: it.misses })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </>

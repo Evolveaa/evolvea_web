@@ -374,6 +374,10 @@
     "domainsSection": "Entwicklungsbereiche",
     "noDataYet": "Noch keine Daten — nach den ersten Übungen erscheint hier eine Übersicht.",
     "sessionsSection": "Letzte Übungen",
+    "trickySection": "Was schwerfällt",
+    "trickyLead": "Aufgaben, die dem Kind wiederholt misslangen — ein guter Ausgangspunkt für den nächsten Plan.",
+    "trickyEmpty": "Noch keine wiederholten Fehler — gut gemacht!",
+    "trickyMisses": "{count}× nicht geschafft",
     "messagesSection": "Nachrichten mit den Eltern",
     "session": {
       "hinted": "mit Tipp",

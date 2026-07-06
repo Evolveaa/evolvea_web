@@ -374,6 +374,10 @@
     "domainsSection": "Development areas",
     "noDataYet": "No data yet — an overview will appear here after the first exercises.",
     "sessionsSection": "Recent exercises",
+    "trickySection": "What's tricky",
+    "trickyLead": "Items the child kept missing — a good starting point for the next plan.",
+    "trickyEmpty": "No repeated misses yet — nice work!",
+    "trickyMisses": "missed {count}×",
     "messagesSection": "Messages with the parent",
     "session": {
       "hinted": "with a hint",
