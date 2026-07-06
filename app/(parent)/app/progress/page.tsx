@@ -30,7 +30,6 @@ function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
 export default async function ProgressPage() {
   const t = await getTranslations("parent");
   const td = await getTranslations("domains");
-  const tc = await getTranslations("common");
   const format = await getFormatter();
   const { child } = await getActiveChild();
 
@@ -181,12 +180,20 @@ export default async function ProgressPage() {
                   <ul className="hist-list">
                     {g.sessions.map((s) => {
                       const ex = exercises.get(s.exercise_id);
-                      const pct =
-                        s.score_total && s.score_total > 0 && s.score_correct !== null
-                          ? Math.round((100 * s.score_correct) / s.score_total)
-                          : null;
+                      const scored =
+                        !!s.score_total && s.score_total > 0 && s.score_correct !== null;
+                      const shared = ex?.modality === "guided";
+                      const pct = scored
+                        ? Math.round((100 * (s.score_correct ?? 0)) / (s.score_total ?? 1))
+                        : null;
+                      const subnote = [
+                        shared ? t("histSharedActivity") : null,
+                        s.parent_note ? `„${s.parent_note}“` : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ");
                       return (
-                        <li key={s.id} className="hist-row">
+                        <li key={s.id} className="hist-row" data-shared={shared ? "" : undefined}>
                           {ex ? (
                             <DomainTile domain={ex.domain} size={30} />
                           ) : (
@@ -196,23 +203,17 @@ export default async function ProgressPage() {
                           )}
                           <span className="hist-main">
                             <span className="hist-title">{ex?.title ?? "—"}</span>
-                            <span className="hist-note">
-                              {format.dateTime(new Date(s.started_at), { hour: "2-digit", minute: "2-digit" })}
-                              {s.duration_seconds
-                                ? ` · ${tc("minutes", { count: Math.max(1, Math.round(s.duration_seconds / 60)) })}`
-                                : ""}
-                              {s.parent_note ? ` · „${s.parent_note}“` : ""}
+                            {subnote && <span className="hist-note">{subnote}</span>}
+                          </span>
+                          {scored ? (
+                            <span className="score-pill" data-tone={scoreTone(pct)}>
+                              {s.score_correct}/{s.score_total}
                             </span>
-                          </span>
-                          <span className="score-pill" data-tone={scoreTone(pct)}>
-                            {pct !== null ? (
-                              `${s.score_correct}/${s.score_total}`
-                            ) : (
-                              <>
-                                <IconCheck size={12} /> {t("pathDone")}
-                              </>
-                            )}
-                          </span>
+                          ) : (
+                            <span className="hist-done">
+                              <IconCheck size={13} /> {t("pathDone")}
+                            </span>
+                          )}
                         </li>
                       );
                     })}
