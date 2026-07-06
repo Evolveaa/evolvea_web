@@ -616,19 +616,52 @@
   flex-direction: column;
   gap: 0.3rem;
 }
-.hist-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
+/* each entry is a compact card that expands to the full per-item breakdown */
+.hist-item {
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
   border-radius: var(--radius-md);
-  padding: 0.45rem 0.65rem;
 }
 /* shared (guided) activities aren't scored drills — sit them apart quietly */
-.hist-row[data-shared] {
+.hist-item[data-shared] {
   background: transparent;
   border-style: dashed;
+}
+.hist-item > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius-md);
+}
+.hist-item > summary::-webkit-details-marker {
+  display: none;
+}
+.hist-item > summary:hover {
+  background: rgba(22, 31, 51, 0.02);
+}
+.hist-chev {
+  flex: none;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s var(--ease);
+}
+.hist-item[open] .hist-chev {
+  transform: rotate(180deg);
+}
+.hist-detail {
+  padding: 0.7rem 0.7rem 0.75rem;
+  border-top: 1px solid var(--ink-line);
+}
+.hist-item[data-shared] .hist-detail {
+  border-top-style: dashed;
+}
+.hist-parent-note {
+  font-size: var(--text-sm);
+  margin-bottom: 0.5rem;
 }
 .hist-main {
   flex: 1;
