@@ -423,6 +423,7 @@
     "library": {
       "pageTitle": "Knižnica cvičení",
       "pageLead": "Overené cvičenia zo všetkých oblastí metodiky + vaše vlastné.",
+      "methodNote": "Metóda vychádza z overených prístupov: Eľkonin–Mikulajová (fonematické uvedomovanie), Ďjačenko–Stanislavová (naratíva), Achutinová–Pylajeva (pozornosť), Vygotskij a Mikulajová (metakognícia, scaffolding), Borkowski (1992).",
       "create": "Vytvoriť cvičenie",
       "savedBanner": "Cvičenie je uložené.",
       "all": "Všetky",

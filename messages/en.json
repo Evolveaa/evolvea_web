@@ -423,6 +423,7 @@
     "library": {
       "pageTitle": "Exercise library",
       "pageLead": "Proven exercises across every area of the method, plus your own.",
+      "methodNote": "The method builds on validated approaches: Eľkonin–Mikulajová (phonemic awareness), Ďjačenko–Stanislavová (narrative), Achutinová–Pylajeva (attention), Vygotsky & Mikulajová (metacognition, scaffolding), Borkowski (1992).",
       "create": "Create exercise",
       "savedBanner": "Exercise saved.",
       "all": "All",

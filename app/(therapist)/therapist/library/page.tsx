@@ -55,6 +55,10 @@ export default async function LibraryPage({
       <div style={{ marginTop: "1rem" }}>
         <LibraryBrowser exercises={rows} />
       </div>
+
+      <p className="form-hint" style={{ marginTop: "1.4rem", maxWidth: "70ch" }}>
+        {t("methodNote")}
+      </p>
     </>
   );
 }

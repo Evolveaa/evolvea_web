@@ -423,6 +423,7 @@
     "library": {
       "pageTitle": "Übungsbibliothek",
       "pageLead": "Erprobte Übungen aus allen Bereichen der Methodik + Ihre eigenen.",
+      "methodNote": "Die Methode basiert auf bewährten Ansätzen: Eľkonin–Mikulajová (phonematisches Bewusstsein), Ďjačenko–Stanislavová (Narration), Achutinová–Pylajeva (Aufmerksamkeit), Vygotskij & Mikulajová (Metakognition, Scaffolding), Borkowski (1992).",
       "create": "Übung erstellen",
       "savedBanner": "Die Übung ist gespeichert.",
       "all": "Alle",
