@@ -705,6 +705,72 @@
 }
 
 /* ===== "What to practise" / "Čo robí problém" miss list (parent + therapist) ===== */
+/* "What to work on" — actionable per-exercise cards (parent) */
+.tricky-lead {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  margin: -0.1rem 0 0.9rem;
+  max-width: 62ch;
+}
+.tx-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.tx-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--cream-hi);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  padding: 0.8rem 0.95rem;
+  box-shadow: var(--card-shadow);
+}
+.tx-body {
+  flex: 1;
+  min-width: 0;
+}
+.tx-title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.tx-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+.tx-word {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--warn-ink);
+  background: var(--warn-soft);
+  border-radius: 999px;
+  padding: 0.18rem 0.62rem;
+}
+.tx-meta {
+  margin-top: 0.32rem;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+.tx-cta {
+  flex: none;
+}
+@media (max-width: 460px) {
+  /* stack the practise button under the exercise on very narrow phones */
+  .tx-card {
+    flex-wrap: wrap;
+  }
+  .tx-cta {
+    width: 100%;
+    margin-top: 0.2rem;
+  }
+}
+
 .tricky-list {
   list-style: none;
   display: flex;

@@ -18,9 +18,10 @@ import {
   getExercisesByIds,
   getRecentSessions,
   groupSessionsByDay,
-  trickyItems,
+  trickyByExercise,
 } from "@/lib/data/parent";
 import SessionDetail from "@/components/therapist/SessionDetail";
+import Link from "next/link";
 
 function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
   if (pct === null) return "none";
@@ -50,7 +51,10 @@ export default async function ProgressPage() {
   ]);
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
-  const tricky = trickyItems(sessions, exercises, 6);
+  const tricky = trickyByExercise(sessions, exercises, 6);
+  const planItemByExercise = new Map(
+    (plan?.plan_items ?? []).map((pi) => [pi.exercise_id, pi.id]),
+  );
   const HISTORY_LIMIT = 15;
   const dayGroups = groupSessionsByDay(sessions.slice(0, HISTORY_LIMIT));
   const moreCount = Math.max(0, sessions.length - HISTORY_LIMIT);
@@ -139,32 +143,50 @@ export default async function ProgressPage() {
               </div>
             )}
 
-            {tricky.length > 0 && (
-              <div>
-                <h2 className="section-label">{t("trickyTitle")}</h2>
-                <div className="card">
-                  <p className="card-sub" style={{ marginBottom: "0.85rem" }}>{t("trickyLead")}</p>
-                  <ul className="tricky-list">
-                    {tricky.map((it) => (
-                      <li key={`${it.kind}:${it.label}`} className="tricky-row">
-                        {it.domain ? (
-                          <DomainTile domain={it.domain} size={26} />
-                        ) : (
-                          <span style={{ width: 26 }} aria-hidden="true" />
-                        )}
-                        <span className="tricky-label" title={it.label}>
-                          {it.label}
-                        </span>
-                        <span className="tricky-count">{t("trickyMisses", { count: it.misses })}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
           </aside>
 
           <div className="dash-main">
+            {tricky.length > 0 && (
+              <>
+                <h2 className="section-label">{t("trickyTitle")}</h2>
+                <p className="tricky-lead">{t("trickyLead")}</p>
+                <ul className="tx-list">
+                  {tricky.map((te) => {
+                    const ex = exercises.get(te.exerciseId);
+                    if (!ex) return null;
+                    const planItemId = planItemByExercise.get(te.exerciseId);
+                    const words = te.labels.filter((l) => l.length <= 16).slice(0, 5);
+                    return (
+                      <li key={te.exerciseId} className="tx-card">
+                        <DomainTile domain={ex.domain} size={44} />
+                        <div className="tx-body">
+                          <div className="tx-title">{ex.title}</div>
+                          {words.length > 0 ? (
+                            <div className="tx-words">
+                              {words.map((w) => (
+                                <span key={w} className="tx-word">
+                                  {w}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="tx-meta">
+                              {td(ex.domain)} · {t("trickyHardCount", { count: te.misses })}
+                            </div>
+                          )}
+                        </div>
+                        {planItemId && (
+                          <Link href={`/app/exercise/${planItemId}`} className="btn btn-primary btn-sm tx-cta">
+                            {t("trickyPractise")}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
+
             <h2 className="section-label">{t("historySection")}</h2>
             <div className="hist-groups">
               {dayGroups.map((g) => (

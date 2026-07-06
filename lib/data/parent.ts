@@ -366,6 +366,67 @@ export function trickyItems(
     .slice(0, limit);
 }
 
+export interface TrickyExercise {
+  exerciseId: string;
+  misses: number;
+  /** Distinct labels of the missed items (short = words to show as chips). */
+  labels: string[];
+  lastAt: string;
+}
+
+/**
+ * "What to work on", rolled up per EXERCISE rather than per raw item — so a
+ * parent sees "Rýmovačky · 5 tricky · [practise]" instead of five long
+ * multiple-choice questions they can't act on. Missed = speech rated below
+ * "great", or an interactive item not solved first try.
+ */
+export function trickyByExercise(
+  sessions: SessionRow[],
+  _exercisesById?: Map<string, ExerciseRow>,
+  limit = 6,
+): TrickyExercise[] {
+  const acc = new Map<string, { misses: number; labels: Set<string>; lastAt: string }>();
+  for (const s of sessions) {
+    const detail = s.detail;
+    if (!detail || typeof detail !== "object" || Array.isArray(detail)) continue;
+    const items = (detail as Record<string, unknown>).items;
+    if (!Array.isArray(items)) continue;
+    for (const raw of items) {
+      if (!raw || typeof raw !== "object") continue;
+      const it = raw as Record<string, unknown>;
+      let label: string;
+      let missed: boolean;
+      if (typeof it.score === "string" && typeof it.text === "string") {
+        label = it.text;
+        missed = it.score !== "great";
+      } else if ("firstTry" in it) {
+        const l =
+          (typeof it.word === "string" && it.word) ||
+          (typeof it.text === "string" && it.text) ||
+          (typeof it.title === "string" && it.title) ||
+          (typeof it.prompt === "string" && it.prompt) ||
+          "";
+        if (!l) continue;
+        label = l;
+        missed = it.firstTry === false;
+      } else {
+        continue;
+      }
+      if (!missed) continue;
+      const e = acc.get(s.exercise_id) ?? { misses: 0, labels: new Set<string>(), lastAt: "" };
+      e.misses += 1;
+      e.labels.add(label);
+      if (s.started_at > e.lastAt) e.lastAt = s.started_at;
+      acc.set(s.exercise_id, e);
+    }
+  }
+  return [...acc.entries()]
+    .map(([exerciseId, e]) => ({ exerciseId, misses: e.misses, labels: [...e.labels], lastAt: e.lastAt }))
+    .filter((e) => e.misses > 0)
+    .sort((a, b) => b.misses - a.misses || (a.lastAt < b.lastAt ? 1 : -1))
+    .slice(0, limit);
+}
+
 export interface ExerciseSummary {
   exerciseId: string;
   count: number;
