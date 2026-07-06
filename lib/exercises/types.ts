@@ -353,6 +353,7 @@ export function parseExerciseContent(json: Json): ExerciseContent {
         return {
           text: str(raw.text, `items[${i}].text`),
           emoji: optStr(raw.emoji),
+          ask: optStr(raw.ask),
           tip: optStr(raw.tip),
         } satisfies SpeechItem;
       });

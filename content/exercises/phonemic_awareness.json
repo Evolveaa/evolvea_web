@@ -1143,174 +1143,70 @@
   }
  },
  {
-  "slug": "pa-skladanie-hlasok-2",
-  "domain": "phonemic_awareness",
-  "modality": "interactive",
-  "title": "Poskladaj slovo",
-  "summary": "Fonematická syntéza — spájanie izolovane prezentovaných hlások do slova; zručnosť priamo podporujúca dekódovanie pri čítaní.",
-  "parent_guide": "Hlásky vyslovujte ako zvuky (nie názvy písmen), pomaly a s krátkou pauzou: m… a… k. Ak dieťa slovo nezloží, pauzy postupne skracujte a hlásky spájajte: ma… k, mak. Nechajte dieťa slovo najprv povedať nahlas a až potom vybrať obrázok. Keď sa mu darí, pauzy medzi hláskami naopak predlžujte.",
-  "difficulty": 2,
-  "age_min": 6,
-  "age_max": 9,
-  "duration_minutes": 6,
-  "content": {
-   "type": "choice",
-   "intro": "Poviem ti slovo po jednotlivých hláskach. Poskladáš ho a nájdeš správny obrázok?",
-   "items": [
-    {
-     "prompt": "Aké slovo poviem? P — E — S",
-     "options": [
-      {
-       "label": "pes",
-       "emoji": "🐶",
-       "correct": true
-      },
-      {
-       "label": "mačka",
-       "emoji": "🐱"
-      },
-      {
-       "label": "dom",
-       "emoji": "🏠"
-      }
-     ],
-     "hint": "Povedz hlásky za sebou stále rýchlejšie. Aké slovo ti z nich vyskočí?"
-    },
-    {
-     "prompt": "Aké slovo poviem? M — A — K",
-     "options": [
-      {
-       "label": "mak",
-       "emoji": "🌸",
-       "correct": true
-      },
-      {
-       "label": "syr",
-       "emoji": "🧀"
-      },
-      {
-       "label": "vlak",
-       "emoji": "🚂"
-      }
-     ],
-     "hint": "Zopakuj hlásky so mnou a spájaj ich k sebe. Čo ti vyšlo?"
-    },
-    {
-     "prompt": "Aké slovo poviem? D — O — M",
-     "options": [
-      {
-       "label": "auto",
-       "emoji": "🚗"
-      },
-      {
-       "label": "dom",
-       "emoji": "🏠",
-       "correct": true
-      },
-      {
-       "label": "pes",
-       "emoji": "🐶"
-      }
-     ],
-     "hint": "Počúvaj prvú hlásku. Ktorý obrázok sa ňou začína?"
-    },
-    {
-     "prompt": "Aké slovo poviem? R — Y — B — A",
-     "options": [
-      {
-       "label": "žaba",
-       "emoji": "🐸"
-      },
-      {
-       "label": "sova",
-       "emoji": "🦉"
-      },
-      {
-       "label": "ryba",
-       "emoji": "🐟",
-       "correct": true
-      }
-     ],
-     "hint": "Povedz hlásky spolu ako jedno slovo. Ktorý obrázok tak voláme?"
-    },
-    {
-     "prompt": "Aké slovo poviem? O — K — O",
-     "options": [
-      {
-       "label": "oko",
-       "emoji": "👁️",
-       "correct": true
-      },
-      {
-       "label": "ucho",
-       "emoji": "👂"
-      },
-      {
-       "label": "noha",
-       "emoji": "🦵"
-      }
-     ],
-     "hint": "Slovo sa začína aj končí rovnakou hláskou. Ktoré to je?"
-    },
-    {
-     "prompt": "Aké slovo poviem? S — O — V — A",
-     "options": [
-      {
-       "label": "koza",
-       "emoji": "🐐"
-      },
-      {
-       "label": "sova",
-       "emoji": "🦉",
-       "correct": true
-      },
-      {
-       "label": "ryba",
-       "emoji": "🐟"
-      }
-     ],
-     "hint": "Počúvaj prvú hlásku. Ktoré zviera sa ňou začína?"
-    },
-    {
-     "prompt": "Aké slovo poviem? V — L — A — K",
-     "options": [
-      {
-       "label": "vlak",
-       "emoji": "🚂",
-       "correct": true
-      },
-      {
-       "label": "bicykel",
-       "emoji": "🚲"
-      },
-      {
-       "label": "lopta",
-       "emoji": "⚽"
-      }
-     ],
-     "hint": "Spoj hlásky do jedného slova. Čo z nich vzniklo?"
-    },
-    {
-     "prompt": "Aké slovo poviem? Ž — A — B — A",
-     "options": [
-      {
-       "label": "myš",
-       "emoji": "🐭"
-      },
-      {
-       "label": "slon",
-       "emoji": "🐘"
-      },
-      {
-       "label": "žaba",
-       "emoji": "🐸",
-       "correct": true
-      }
-     ],
-     "hint": "Povedz hlásky rýchlo za sebou. Ktoré zviera tak skáče z tvojich úst?"
-    }
-   ]
-  }
+   "slug": "pa-skladanie-hlasok-2",
+   "domain": "phonemic_awareness",
+   "modality": "speech",
+   "title": "Poskladaj slovo",
+   "summary": "Fonematická syntéza — spájanie izolovane prezentovaných hlások do slova; zručnosť priamo podporujúca dekódovanie pri čítaní.",
+   "parent_guide": "Hlásky vyslovujte ako zvuky (nie názvy písmen), pomaly a s krátkou pauzou: m… a… k. Ak dieťa slovo nezloží, pauzy postupne skracujte a hlásky spájajte: ma… k, mak. Nechajte dieťa slovo najprv povedať nahlas a až potom vybrať obrázok. Keď sa mu darí, pauzy medzi hláskami naopak predlžujte.",
+   "difficulty": 2,
+   "age_min": 6,
+   "age_max": 9,
+   "duration_minutes": 6,
+   "content": {
+     "type": "speech_items",
+     "intro": "Poviem ti slovo po jednotlivých hláskach. Poskladáš ho a povieš, aké slovo to je?",
+     "items": [
+       {
+         "ask": "Aké slovo poviem? P — E — S",
+         "text": "pes",
+         "emoji": "🐶",
+         "tip": "Povedz hlásky za sebou stále rýchlejšie. Aké slovo ti z nich vyskočí?"
+       },
+       {
+         "ask": "Aké slovo poviem? M — A — K",
+         "text": "mak",
+         "emoji": "🌸",
+         "tip": "Zopakuj hlásky so mnou a spájaj ich k sebe. Čo ti vyšlo?"
+       },
+       {
+         "ask": "Aké slovo poviem? D — O — M",
+         "text": "dom",
+         "emoji": "🏠",
+         "tip": "Povedz hlásky d – o – m rýchlo za sebou. Čo ti vyšlo?"
+       },
+       {
+         "ask": "Aké slovo poviem? R — Y — B — A",
+         "text": "ryba",
+         "emoji": "🐟",
+         "tip": "Povedz hlásky spolu ako jedno slovo. Čo ti vyšlo?"
+       },
+       {
+         "ask": "Aké slovo poviem? O — K — O",
+         "text": "oko",
+         "emoji": "👁️",
+         "tip": "Slovo sa začína aj končí rovnakou hláskou. Ktoré to je?"
+       },
+       {
+         "ask": "Aké slovo poviem? S — O — V — A",
+         "text": "sova",
+         "emoji": "🦉",
+         "tip": "Počúvaj prvú hlásku. Ktoré zviera sa ňou začína?"
+       },
+       {
+         "ask": "Aké slovo poviem? V — L — A — K",
+         "text": "vlak",
+         "emoji": "🚂",
+         "tip": "Spoj hlásky do jedného slova. Čo z nich vzniklo?"
+       },
+       {
+         "ask": "Aké slovo poviem? Ž — A — B — A",
+         "text": "žaba",
+         "emoji": "🐸",
+         "tip": "Povedz hlásky rýchlo za sebou. Ktoré zviera tak skáče z tvojich úst?"
+       }
+     ]
+   }
  },
  {
   "slug": "pa-vynechaj-hlasku-3",
