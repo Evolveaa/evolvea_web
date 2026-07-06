@@ -236,26 +236,18 @@ export default async function FamilyDetailPage({
           ) : (
             <div className="card">
               <p className="card-sub" style={{ marginBottom: "0.85rem" }}>{t("trickyLead")}</p>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+              <ul className="tricky-list">
                 {tricky.map((it) => (
-                  <li key={`${it.kind}:${it.label}`} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <li key={`${it.kind}:${it.label}`} className="tricky-row">
                     {it.domain ? (
                       <DomainTile domain={it.domain} size={26} />
                     ) : (
                       <span style={{ width: 26 }} aria-hidden="true" />
                     )}
-                    <span
-                      style={{ flex: 1, minWidth: 0, fontSize: "0.9rem", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-                      title={it.label}
-                    >
+                    <span className="tricky-label" title={it.label}>
                       {it.label}
                     </span>
-                    <span
-                      className="chip"
-                      style={{ fontSize: "0.72rem", background: "var(--danger-soft)", color: "var(--danger-ink)", borderColor: "transparent", flex: "none" }}
-                    >
-                      {t("trickyMisses", { count: it.misses })}
-                    </span>
+                    <span className="tricky-count">{t("trickyMisses", { count: it.misses })}</span>
                   </li>
                 ))}
               </ul>

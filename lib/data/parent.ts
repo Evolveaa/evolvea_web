@@ -366,6 +366,38 @@ export function trickyItems(
     .slice(0, limit);
 }
 
+export interface DayGroup {
+  dayKey: string;
+  isToday: boolean;
+  isYesterday: boolean;
+  sessions: SessionRow[];
+}
+
+/**
+ * Group already-sorted (newest-first) sessions into calendar days so the
+ * history reads as "Dnes / Včera / Pondelok 30. 6." instead of a flat dump.
+ */
+export function groupSessionsByDay(sessions: SessionRow[], now = new Date()): DayGroup[] {
+  const today = localDayKey(now);
+  const yesterday = shiftedDayKey(now, -1);
+  const groups: DayGroup[] = [];
+  for (const s of sessions) {
+    const dayKey = localDayKey(s.started_at);
+    const last = groups[groups.length - 1];
+    if (last && last.dayKey === dayKey) {
+      last.sessions.push(s);
+    } else {
+      groups.push({
+        dayKey,
+        isToday: dayKey === today,
+        isYesterday: dayKey === yesterday,
+        sessions: [s],
+      });
+    }
+  }
+  return groups;
+}
+
 /** Exercises referenced by sessions (for history rendering). */
 export async function getExercisesByIds(ids: string[]): Promise<Map<string, ExerciseRow>> {
   if (ids.length === 0) return new Map();

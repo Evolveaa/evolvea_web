@@ -549,6 +549,12 @@
   display: grid;
   gap: 1.1rem;
 }
+/* grid items default to min-width:auto, which lets nowrap/ellipsis content push
+   the track wider than the viewport — pin to 0 so columns can shrink */
+.dash-main,
+.dash-side {
+  min-width: 0;
+}
 .col-narrow {
   max-width: 680px;
   margin-inline: auto;
@@ -579,6 +585,106 @@
   .dash-side > .section-label:first-child {
     margin-top: 0;
   }
+}
+
+/* ===== History grouped by day — compact, scannable ===== */
+.hist-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.hist-day-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+.hist-day-label .n {
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.65;
+}
+.hist-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.hist-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--cream-hi);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.7rem;
+}
+.hist-time {
+  flex: none;
+  width: 42px;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.hist-main {
+  flex: 1;
+  min-width: 0;
+}
+.hist-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hist-note {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== "What to practise" / "Čo robí problém" miss list (parent + therapist) ===== */
+.tricky-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.tricky-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.tricky-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tricky-count {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--danger-soft);
+  color: var(--danger-ink);
+  border-radius: 999px;
+  padding: 0.28rem 0.6rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ===== Navigation tabs: bottom bar on mobile, top row on ≥720px ===== */
