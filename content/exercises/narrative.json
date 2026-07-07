@@ -17,9 +17,18 @@
         {
           "title": "Dobré ráno, Ema!",
           "cards": [
-            { "emoji": "😴", "label": "Ema spí" },
-            { "emoji": "⏰", "label": "Zazvoní budík" },
-            { "emoji": "🥣", "label": "Ema raňajkuje" }
+            {
+              "emoji": "😴",
+              "label": "Ema spí"
+            },
+            {
+              "emoji": "⏰",
+              "label": "Zazvoní budík"
+            },
+            {
+              "emoji": "🥣",
+              "label": "Ema raňajkuje"
+            }
           ],
           "retellPrompt": "Porozprávaj mi Emino ráno vlastnými slovami. Čo bolo najprv, čo potom a čo nakoniec?",
           "hint": "Čo robí Ema, kým ešte budík nezazvoní?"
@@ -27,9 +36,18 @@
         {
           "title": "Snehuliak",
           "cards": [
-            { "emoji": "❄️", "label": "Vonku sneží" },
-            { "emoji": "⛄", "label": "Deti postavia snehuliaka" },
-            { "emoji": "🥕", "label": "Dajú mu nos z mrkvy" }
+            {
+              "emoji": "❄️",
+              "label": "Vonku sneží"
+            },
+            {
+              "emoji": "⛄",
+              "label": "Deti postavia snehuliaka"
+            },
+            {
+              "emoji": "🥕",
+              "label": "Dajú mu nos z mrkvy"
+            }
           ],
           "retellPrompt": "Porozprávaj, ako deti stavali snehuliaka. Čím sa to celé začalo?",
           "hint": "Môžu deti stavať snehuliaka skôr, ako nasneží?"
@@ -37,9 +55,18 @@
         {
           "title": "Slnečnica",
           "cards": [
-            { "emoji": "🌱", "label": "Zasadíme semienko" },
-            { "emoji": "💧", "label": "Polievame ho" },
-            { "emoji": "🌻", "label": "Vyrastie slnečnica" }
+            {
+              "emoji": "🌱",
+              "label": "Zasadíme semienko"
+            },
+            {
+              "emoji": "💧",
+              "label": "Polievame ho"
+            },
+            {
+              "emoji": "🌻",
+              "label": "Vyrastie slnečnica"
+            }
           ],
           "retellPrompt": "Porozprávaj mi, ako zo semienka vyrástla veľká slnečnica.",
           "hint": "Čo potrebuje semienko, aby mohlo rásť?"
@@ -65,10 +92,22 @@
         {
           "title": "Narodeninová torta",
           "cards": [
-            { "emoji": "🥚", "label": "Prichystáme vajcia a múku" },
-            { "emoji": "🥣", "label": "Zamiešame cesto" },
-            { "emoji": "🎂", "label": "Torta sa upečie" },
-            { "emoji": "🎉", "label": "Oslávime narodeniny" }
+            {
+              "emoji": "🥚",
+              "label": "Prichystáme vajcia a múku"
+            },
+            {
+              "emoji": "🥣",
+              "label": "Zamiešame cesto"
+            },
+            {
+              "emoji": "🎂",
+              "label": "Torta sa upečie"
+            },
+            {
+              "emoji": "🎉",
+              "label": "Oslávime narodeniny"
+            }
           ],
           "retellPrompt": "Porozprávaj, ako vznikla narodeninová torta — od surovín až po oslavu.",
           "hint": "Dá sa miešať cesto, keď ešte nemáme suroviny?"
@@ -76,10 +115,22 @@
         {
           "title": "Dážď a dúha",
           "cards": [
-            { "emoji": "☁️", "label": "Na oblohe sa objavia tmavé mraky" },
-            { "emoji": "🌧️", "label": "Spustí sa dážď" },
-            { "emoji": "☀️", "label": "Vykukne slnko" },
-            { "emoji": "🌈", "label": "Zažiari dúha" }
+            {
+              "emoji": "☁️",
+              "label": "Na oblohe sa objavia tmavé mraky"
+            },
+            {
+              "emoji": "🌧️",
+              "label": "Spustí sa dážď"
+            },
+            {
+              "emoji": "☀️",
+              "label": "Vykukne slnko"
+            },
+            {
+              "emoji": "🌈",
+              "label": "Zažiari dúha"
+            }
           ],
           "retellPrompt": "Porozprávaj, čo sa dialo na oblohe. Skús použiť slová najprv, potom a nakoniec.",
           "hint": "Kedy vidíme dúhu — pred dažďom, alebo po ňom?"
@@ -87,10 +138,22 @@
         {
           "title": "Zablatený psík",
           "cards": [
-            { "emoji": "🐕", "label": "Psík sa vyváľa v blate" },
-            { "emoji": "🛁", "label": "Dáme ho do vane" },
-            { "emoji": "🧴", "label": "Umyjeme ho šampónom" },
-            { "emoji": "✨", "label": "Psík je zase čistučký" }
+            {
+              "emoji": "🐕",
+              "label": "Psík sa vyváľa v blate"
+            },
+            {
+              "emoji": "🛁",
+              "label": "Dáme ho do vane"
+            },
+            {
+              "emoji": "🧴",
+              "label": "Umyjeme ho šampónom"
+            },
+            {
+              "emoji": "✨",
+              "label": "Psík je zase čistučký"
+            }
           ],
           "retellPrompt": "Porozprávaj psíkov príbeh. Prečo sa musel kúpať a ako to dopadlo?",
           "hint": "Čo sa muselo stať, aby psík potreboval kúpeľ?"
@@ -116,12 +179,30 @@
         {
           "title": "Mačiatko na strome",
           "cards": [
-            { "emoji": "🐱", "label": "Mačiatko vybehne z domu" },
-            { "emoji": "🌳", "label": "Vylezie vysoko na strom" },
-            { "emoji": "😿", "label": "Bojí sa zliezť a smutne mňauká" },
-            { "emoji": "👧", "label": "Zuzka ho začuje a beží po pomoc" },
-            { "emoji": "🧑‍🚒", "label": "Hasič mačiatko opatrne znesie" },
-            { "emoji": "🏡", "label": "Mačiatko je doma v bezpečí" }
+            {
+              "emoji": "🐱",
+              "label": "Mačiatko vybehne z domu"
+            },
+            {
+              "emoji": "🌳",
+              "label": "Vylezie vysoko na strom"
+            },
+            {
+              "emoji": "😿",
+              "label": "Bojí sa zliezť a smutne mňauká"
+            },
+            {
+              "emoji": "👧",
+              "label": "Zuzka ho začuje a beží po pomoc"
+            },
+            {
+              "emoji": "🧑‍🚒",
+              "label": "Hasič mačiatko opatrne znesie"
+            },
+            {
+              "emoji": "🏡",
+              "label": "Mačiatko je doma v bezpečí"
+            }
           ],
           "retellPrompt": "Porozprávaj celý príbeh o mačiatku. Skús povedať aj to, prečo sa bálo a kto mu pomohol.",
           "hint": "Prečo mačiatko mňaukalo? Čo sa stalo tesne predtým?"
@@ -129,11 +210,26 @@
         {
           "title": "Tomáš a bicykel",
           "cards": [
-            { "emoji": "🚲", "label": "Tomáš sa učí jazdiť na bicykli" },
-            { "emoji": "🪨", "label": "Nevšimne si kameň na ceste" },
-            { "emoji": "🤕", "label": "Spadne a odrie si koleno" },
-            { "emoji": "🩹", "label": "Mama mu koleno ošetrí" },
-            { "emoji": "💪", "label": "Skúsi to znova a podarí sa mu to" }
+            {
+              "emoji": "🚲",
+              "label": "Tomáš sa učí jazdiť na bicykli"
+            },
+            {
+              "emoji": "🪨",
+              "label": "Nevšimne si kameň na ceste"
+            },
+            {
+              "emoji": "🤕",
+              "label": "Spadne a odrie si koleno"
+            },
+            {
+              "emoji": "🩹",
+              "label": "Mama mu koleno ošetrí"
+            },
+            {
+              "emoji": "💪",
+              "label": "Skúsi to znova a podarí sa mu to"
+            }
           ],
           "retellPrompt": "Porozprávaj Tomášov príbeh. Prečo spadol a ako sa to celé skončilo?",
           "hint": "Prečo Tomáš spadol? Čo ležalo na ceste?"
@@ -256,13 +352,23 @@
           "kicker": "Krok 1 · Naladenie",
           "title": "Ako sa cítiš pred rozprávkou?",
           "body": "Povedzte: „Chystá sa rozprávková hra! Ale najprv mi povedz, ako sa práve teraz cítiš.“ Nechajte dieťa vybrať a pocit spolu pomenujte.",
-          "choices": ["Veselo", "Zvedavo", "Pokojne", "Unavene"]
+          "choices": [
+            "Veselo",
+            "Zvedavo",
+            "Pokojne",
+            "Unavene"
+          ]
         },
         {
           "kicker": "Krok 2 · Plán",
           "title": "Vyberte si rozprávku",
           "body": "Povedzte: „Zahráme sa na tajnú reč rozprávok. Postavy nebudú na obrázkoch — zahrajú ich drobné predmety zo stola.“ Spolu si vyberte rozprávku, ktorú dieťa dobre pozná, a vymenujte jej postavy.",
-          "choices": ["O repke", "O troch prasiatkach", "Červená čiapočka", "O medovníkovom domčeku"],
+          "choices": [
+            "O repke",
+            "O troch prasiatkach",
+            "Červená čiapočka",
+            "O medovníkovom domčeku"
+          ],
           "tip": "Vyberte rozprávku, ktorú dieťa počulo veľakrát. Cieľom nie je učiť nový dej, ale rozprávať."
         },
         {
@@ -292,7 +398,11 @@
           "kicker": "Krok 6 · Reflexia",
           "title": "Ako sa nám darilo?",
           "body": "Spolu sa porozprávajte, ako sa dieťaťu rozprávalo. Spýtajte sa: „Čo ti išlo najľahšie? Kde ti pomohli predmety?“ Dieťa nech si vyberie, čo naň sedí.",
-          "choices": ["Išlo mi to ľahko", "Miestami to bolo ťažké", "Pomohli mi predmety v rade"],
+          "choices": [
+            "Išlo mi to ľahko",
+            "Miestami to bolo ťažké",
+            "Pomohli mi predmety v rade"
+          ],
           "fields": [
             {
               "label": "Čo sa dieťaťu darilo najviac?",
@@ -331,7 +441,12 @@
           "kicker": "Krok 1 · Naladenie",
           "title": "Ako sa dnes cítiš?",
           "body": "Sadnite si k dieťaťu a povedzte: „Poď mi porozprávať o svojom dni. Ale najprv — ako sa práve teraz cítiš?“ Nechajte dieťa vybrať a pocit spolu pomenujte.",
-          "choices": ["Veselo", "Pokojne", "Unavene", "Trochu namrzene"]
+          "choices": [
+            "Veselo",
+            "Pokojne",
+            "Unavene",
+            "Trochu namrzene"
+          ]
         },
         {
           "kicker": "Krok 2 · Plán",
@@ -366,6 +481,61 @@
               "placeholder": "napr. ráno — presne vedelo, čo raňajkovalo"
             }
           ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-opis-obrazok-1",
+    "domain": "narrative",
+    "modality": "speech",
+    "title": "Opíš obrázok",
+    "summary": "Rozvoj súvislého ústneho prejavu podľa metodiky rozvoja naratívnych schopností (Ďjačenko–Stanislavová): dieťa samostatne opisuje scénu celými vetami. Nahrávku prepíšeme a jazykový pomocník posúdi, či dieťa spomenulo prvky, ktoré primerane vyvíjajúce sa dieťa v tomto veku pomenuje — postavy, dej a okolnosti.",
+    "parent_guide": "Ukážte dieťaťu obrázok a povedzte: „Porozprávaj mi celými vetami, čo sa deje.“ Nechajte ho rozprávať samo a nedopĺňajte za neho — ak zamĺkne, pomôžte len otvorenou otázkou: „A čo ešte vidíš?“ alebo „Čo sa stane potom?“. Cieľom nie sú jednotlivé slová, ale súvislé rozprávanie. Ak máte zapnuté nahrávanie, nechajte dieťa hovoriť pokojne — vyhodnotenie príde o chvíľu.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 6,
+    "content": {
+      "type": "speech_items",
+      "intro": "Pozri sa na obrázok a porozprávaj celými vetami, čo sa deje. Rozprávaj, koľko len chceš!",
+      "items": [
+        {
+          "emoji": "🐶🌳⚽",
+          "text": "Povedz, čo vidíš na obrázku a čo sa deje.",
+          "expect": [
+            "pes",
+            "strom",
+            "lopta",
+            "hrá sa",
+            "vonku"
+          ],
+          "minExpected": 3,
+          "tip": "Nechajte dieťa rozprávať samostatne. Ak zamĺkne, spýtajte sa otvorene: „A čo ešte vidíš?“"
+        },
+        {
+          "emoji": "👧🌧️☂️",
+          "text": "Čo robí dievčatko a aké je počasie?",
+          "expect": [
+            "dievča",
+            "dážď",
+            "dáždnik",
+            "prší",
+            "mokro"
+          ],
+          "minExpected": 3
+        },
+        {
+          "emoji": "🐱🐟🥣",
+          "text": "Porozprávaj príbeh o mačke — čo chce a čo urobí?",
+          "expect": [
+            "mačka",
+            "ryba",
+            "miska",
+            "je",
+            "hladná"
+          ],
+          "minExpected": 3
         }
       ]
     }

@@ -7,10 +7,13 @@ export default async function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
-        <a href="#top" className="brand">
-          <span className="brand-dot brand-dot-light" aria-hidden="true" />
-          <span className="brand-name">Evolvea</span>
-        </a>
+        <div className="footer-brand">
+          <a href="#top" className="brand">
+            <span className="brand-dot brand-dot-light" aria-hidden="true" />
+            <span className="brand-name">Evolvea</span>
+          </a>
+          <span className="footer-quote">{t("quote")}</span>
+        </div>
         <small>{t("text")}</small>
       </div>
     </footer>

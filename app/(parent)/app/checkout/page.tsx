@@ -2,8 +2,29 @@ import Link from "next/link";
 import { getFormatter, getTranslations } from "next-intl/server";
 import CheckoutForm from "@/components/app/CheckoutForm";
 import RedeemInviteForm from "@/components/app/RedeemInviteForm";
+import { IconCheck } from "@/components/icons";
 import { getActiveChild, getSubscription } from "@/lib/data/parent";
 import { accessState, MONTHLY_PRICE_EUR, trialDaysLeft } from "@/lib/billing";
+
+function Benefits({ t }: { t: (k: string) => string }) {
+  return (
+    <div className="info-card">
+      <span className="section-label" style={{ margin: "0 0 0.85rem" }}>
+        {t("benefitsTitle")}
+      </span>
+      <ul className="benefits">
+        {["benefit1", "benefit2", "benefit3", "benefit4"].map((k) => (
+          <li key={k} className="benefit">
+            <span className="benefit-ico" aria-hidden="true">
+              <IconCheck size={15} />
+            </span>
+            {t(k)}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default async function CheckoutPage() {
   const t = await getTranslations("billing");
@@ -26,11 +47,22 @@ export default async function CheckoutPage() {
     return (
       <>
         <h1 className="page-h">{t("checkoutTitle")}</h1>
-        <div className="card" style={{ textAlign: "center" }}>
-          <span style={{ fontSize: "2rem" }} aria-hidden="true">✅</span>
-          <h2 className="card-title" style={{ marginTop: "0.4rem" }}>{t("alreadyActiveTitle")}</h2>
-          <p className="card-sub" style={{ marginBottom: "1rem" }}>{t("alreadyActiveLead")}</p>
-          <Link href="/app" className="btn btn-primary">{t("successCta")}</Link>
+        <div className="pane">
+          <div className="card checkout-done">
+            <span className="checkout-done-ico" aria-hidden="true">
+              <IconCheck size={30} />
+            </span>
+            <h2 className="card-title" style={{ marginTop: "0.6rem" }}>
+              {t("alreadyActiveTitle")}
+            </h2>
+            <p className="card-sub" style={{ marginBottom: "1.1rem" }}>{t("alreadyActiveLead")}</p>
+            <Link href="/app" className="btn btn-primary">
+              {t("successCta")}
+            </Link>
+          </div>
+          <aside className="pane-rail">
+            <Benefits t={t} />
+          </aside>
         </div>
       </>
     );
@@ -45,26 +77,27 @@ export default async function CheckoutPage() {
           : t("checkoutLeadExpired")}
       </p>
 
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "1rem" }}>
-          <div>
-            <h2 className="card-title">Evolvea · {t("planName")}</h2>
-            <p className="card-sub">{t("planFor", { name: child.first_name })}</p>
+      <div className="pane">
+        <div className="col-stack">
+          <div className="order-card">
+            <div className="order-top">
+              <div>
+                <h2 className="card-title">Evolvea · {t("planName")}</h2>
+                <p className="card-sub">{t("planFor", { name: child.first_name })}</p>
+              </div>
+              <b className="order-price">
+                {format.number(MONTHLY_PRICE_EUR, { style: "currency", currency: "EUR" })}
+                <span>{t("perMonth")}</span>
+              </b>
+            </div>
           </div>
-          <b style={{ fontSize: "1.5rem", whiteSpace: "nowrap" }}>
-            {format.number(MONTHLY_PRICE_EUR, { style: "currency", currency: "EUR" })}{" "}
-            <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--ink-soft)" }}>{t("perMonth")}</span>
-          </b>
+          <CheckoutForm childId={child.id} />
         </div>
-        <ul style={{ listStyle: "none", marginTop: "0.9rem", display: "flex", flexDirection: "column", gap: "0.45rem", fontSize: "0.9rem", color: "var(--ink-soft)" }}>
-          <li>✓ {t("benefit1")}</li>
-          <li>✓ {t("benefit2")}</li>
-          <li>✓ {t("benefit3")}</li>
-          <li>✓ {t("benefit4")}</li>
-        </ul>
-      </div>
 
-      <CheckoutForm childId={child.id} />
+        <aside className="pane-rail">
+          <Benefits t={t} />
+        </aside>
+      </div>
     </>
   );
 }

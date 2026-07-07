@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import MessageThread from "@/components/app/MessageThread";
-import SessionDetail from "@/components/therapist/SessionDetail";
+import SessionDetail, { hasSessionDetail } from "@/components/therapist/SessionDetail";
 import { getSessionProfile } from "@/lib/data/user";
 import { getChildSessions, getFamilyChild } from "@/lib/data/therapist";
 import { getThread } from "@/lib/data/messages";
@@ -15,7 +15,13 @@ import {
   trickyItems,
 } from "@/lib/data/parent";
 import { accessState } from "@/lib/billing";
-import { DomainTile, IconCheck } from "@/components/icons";
+import {
+  DomainTile,
+  IconCheck,
+  IconChevronDown,
+  Sparkline,
+  TrendPill,
+} from "@/components/icons";
 
 const STATE_HUE: Record<string, string> = {
   active: "hue-green",
@@ -24,6 +30,13 @@ const STATE_HUE: Record<string, string> = {
   canceled: "hue-rose",
   none: "hue-navy",
 };
+
+function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
+  if (pct === null) return "none";
+  if (pct >= 80) return "good";
+  if (pct >= 50) return "mid";
+  return "low";
+}
 
 export default async function FamilyDetailPage({
   params,
@@ -150,68 +163,109 @@ export default async function FamilyDetailPage({
           {stats.length === 0 ? (
             <p className="card-sub">{t("noDataYet")}</p>
           ) : (
-            <div className="card">
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-                {stats.map((s) => (
-                  <li key={s.domain}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem", gap: "0.6rem" }}>
-                      <span style={{ fontSize: "0.88rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.45rem" }}>
-                        <DomainTile domain={s.domain} size={22} /> {td(s.domain)}
+            <ul className="dstat-list">
+              {stats.map((s) => (
+                <li key={s.domain} className="dcard">
+                  <div className="dcard-head">
+                    <DomainTile domain={s.domain} size={34} />
+                    <span className="dcard-id">
+                      <span className="dcard-name">{td(s.domain)}</span>
+                      <span className="dcard-meta">{tp("domainMeta", { count: s.sessions })}</span>
+                    </span>
+                    <span className="dcard-score">
+                      <span className="dcard-pct" data-none={s.avgPct === null ? "" : undefined}>
+                        {s.avgPct !== null ? `${s.avgPct}%` : "—"}
                       </span>
-                      <span className="card-sub">
-                        {tp("domainMeta", { count: s.sessions })}
-                        {s.avgPct !== null ? ` · ${s.avgPct} %` : ""}
-                      </span>
+                      <TrendPill delta={s.delta} />
+                    </span>
+                  </div>
+                  <span className={`pbar bar-${s.domain}`} aria-hidden="true">
+                    <i style={{ width: `${s.avgPct ?? 6}%` }} />
+                  </span>
+                  {s.trend.length >= 3 && (
+                    <div className="dcard-spark">
+                      <span className="dcard-spark-label">{tp("trendCaption")}</span>
+                      <Sparkline domain={s.domain} values={s.trend} />
                     </div>
-                    <div className={`pbar bar-${s.domain}`} aria-hidden="true">
-                      <i style={{ width: `${s.avgPct ?? 12}%` }} />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  )}
+                </li>
+              ))}
+            </ul>
           )}
 
           <h2 className="section-label">{t("sessionsSection")}</h2>
           {sessions.length === 0 ? (
             <p className="card-sub">{t("noDataYet")}</p>
           ) : (
-            <ul className="row-list">
+            <ul className="hist-list">
               {sessions.slice(0, 20).map((s) => {
                 const ex = exercises.get(s.exercise_id);
+                const scored =
+                  !!s.score_total && s.score_total > 0 && s.score_correct !== null;
+                const pct = scored
+                  ? Math.round((100 * (s.score_correct ?? 0)) / (s.score_total ?? 1))
+                  : null;
+                const expandable = hasSessionDetail(s.detail) || !!s.parent_note;
+                const head = (
+                  <>
+                    {ex ? (
+                      <DomainTile domain={ex.domain} size={30} />
+                    ) : (
+                      <span className="row-ico" aria-hidden="true" style={{ width: 30, height: 30 }}>
+                        <IconCheck size={16} />
+                      </span>
+                    )}
+                    <span className="hist-main">
+                      <span className="hist-title">{ex?.title ?? "—"}</span>
+                      <span className="hist-note">
+                        {format.dateTime(new Date(s.started_at), {
+                          day: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                        {" · "}
+                        {t(`supportShort.${s.support_level}`)}
+                        {s.hints_used > 0 ? ` · 💡 ${s.hints_used}` : ""}
+                      </span>
+                    </span>
+                    {scored ? (
+                      <span className="score-pill" data-tone={scoreTone(pct)}>
+                        {s.score_correct}/{s.score_total}
+                      </span>
+                    ) : (
+                      <span className="hist-done">
+                        <IconCheck size={13} /> {tp("pathDone")}
+                      </span>
+                    )}
+                    {expandable && (
+                      <span className="hist-chev" aria-hidden="true">
+                        <IconChevronDown size={16} />
+                      </span>
+                    )}
+                  </>
+                );
                 return (
                   <li key={s.id}>
-                    <details className="card" style={{ padding: "0.85rem 1rem" }}>
-                      <summary style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "0.7rem", listStyle: "none" }}>
-                        {ex ? (
-                          <DomainTile domain={ex.domain} size={34} />
-                        ) : (
-                          <span aria-hidden="true"><IconCheck size={16} /></span>
-                        )}
-                        <span style={{ flex: 1, minWidth: 0 }}>
-                          <span className="row-title">{ex?.title ?? "—"}</span>
-                          <span className="row-sub" style={{ display: "block" }}>
-                            {format.dateTime(new Date(s.started_at), { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
-                            {" · "}
-                            {t(`supportShort.${s.support_level}`)}
-                            {s.hints_used > 0 ? ` · 💡 ${s.hints_used}` : ""}
-                          </span>
-                        </span>
-                        <b>{s.score_total ? `${s.score_correct}/${s.score_total}` : "✓"}</b>
-                      </summary>
-                      <div style={{ marginTop: "0.8rem", borderTop: "1px solid var(--ink-line)", paddingTop: "0.8rem" }}>
-                        {s.parent_note && (
-                          <p style={{ fontSize: "0.88rem", marginBottom: "0.6rem" }}>
-                            📝 <i>„{s.parent_note}“</i>
-                          </p>
-                        )}
-                        <SessionDetail
-                          detail={s.detail}
-                          scoreCorrect={s.score_correct}
-                          scoreTotal={s.score_total}
-                        />
+                    {expandable ? (
+                      <details className="hist-item">
+                        <summary>{head}</summary>
+                        <div className="hist-detail">
+                          {s.parent_note && (
+                            <p className="hist-parent-note">„{s.parent_note}“</p>
+                          )}
+                          <SessionDetail
+                            detail={s.detail}
+                            scoreCorrect={s.score_correct}
+                            scoreTotal={s.score_total}
+                          />
+                        </div>
+                      </details>
+                    ) : (
+                      <div className="hist-item">
+                        <div className="hist-row">{head}</div>
                       </div>
-                    </details>
+                    )}
                   </li>
                 );
               })}

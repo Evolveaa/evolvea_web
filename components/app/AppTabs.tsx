@@ -13,7 +13,7 @@ import {
   IconUsers,
 } from "@/components/icons";
 
-const TAB_ICONS = {
+export const TAB_ICONS = {
   home: IconHome,
   plan: IconCalendar,
   progress: IconChart,
@@ -23,6 +23,14 @@ const TAB_ICONS = {
   invites: IconMail,
   referrals: IconHandshake,
 } as const;
+
+/** Whether a tab is the active one for a given path (shared by tabs + sidebar). */
+export function tabIsActive(tab: TabItem, pathname: string): boolean {
+  if (pathname === tab.href) return true;
+  const prefixes = [...(tab.also ?? [])];
+  if (tab.href.split("/").filter(Boolean).length > 1) prefixes.push(tab.href);
+  return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+}
 
 export interface TabItem {
   href: string;
@@ -64,14 +72,6 @@ function TabContent({
 export default function AppTabs({ tabs, label }: { tabs: TabItem[]; label: string }) {
   const pathname = usePathname();
 
-  function isActive(tab: TabItem) {
-    if (pathname === tab.href) return true;
-    const prefixes = [...(tab.also ?? [])];
-    // nested pages under a non-root tab keep it active
-    if (tab.href.split("/").filter(Boolean).length > 1) prefixes.push(tab.href);
-    return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
-  }
-
   return (
     <nav className="app-tabs" aria-label={label}>
       {tabs.map((tab) => (
@@ -79,7 +79,7 @@ export default function AppTabs({ tabs, label }: { tabs: TabItem[]; label: strin
           key={tab.href}
           href={tab.href}
           className="app-tab"
-          aria-current={isActive(tab) ? "page" : undefined}
+          aria-current={tabIsActive(tab, pathname) ? "page" : undefined}
         >
           <TabContent Icon={TAB_ICONS[tab.icon]} label={tab.label} badge={tab.badge} />
         </Link>

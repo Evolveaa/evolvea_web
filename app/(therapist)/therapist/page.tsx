@@ -71,7 +71,7 @@ export default async function TherapistDashboard() {
           </div>
         </div>
       ) : (
-        <ul className="row-list">
+        <ul className="row-list row-grid">
           {families.map((f) => {
             const state = accessState(f.subscription);
             return (

@@ -60,6 +60,8 @@ export default async function ParentHomePage() {
     (n, e) => n + e.item.exercises.duration_minutes,
     0,
   );
+  const weekPct =
+    week.targetTotal > 0 ? Math.round((100 * week.doneTotal) / week.targetTotal) : 0;
 
   return (
     <>
@@ -112,19 +114,6 @@ export default async function ParentHomePage() {
                     <IconFlame size={14} />
                     {t("streak", { count: streak })}
                   </span>
-                  <div className="week-pills" role="img" aria-label={t("weekDaysLabel")}>
-                    {days.map((done, i) => (
-                      <span
-                        key={i}
-                        className="week-pill"
-                        data-done={done ? "" : undefined}
-                        data-today={i === todayIdx ? "" : undefined}
-                      >
-                        <IconCheck size={12} />
-                        {dayLabels[i]}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </section>
             )}
@@ -134,6 +123,34 @@ export default async function ParentHomePage() {
           </div>
 
           <aside className="dash-side">
+            <div className="info-card">
+              <span className="section-label" style={{ margin: "0 0 0.75rem" }}>
+                {t("weekSection")}
+              </span>
+              <div className="plan-week">
+                <span className="plan-week-top">
+                  <b>{t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}</b>
+                  <span className="plan-week-pct">{weekPct}%</span>
+                </span>
+                <span className="pbar" aria-hidden="true">
+                  <i style={{ width: `${Math.max(weekPct, 2)}%` }} />
+                </span>
+              </div>
+              <div className="week-pills" role="img" aria-label={t("weekDaysLabel")} style={{ marginTop: "0.9rem" }}>
+                {days.map((done, i) => (
+                  <span
+                    key={i}
+                    className="week-pill"
+                    data-done={done ? "" : undefined}
+                    data-today={i === todayIdx ? "" : undefined}
+                  >
+                    <IconCheck size={12} />
+                    {dayLabels[i]}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {plan.note && (
               <div>
                 <h2 className="section-label">{t("therapistNote")}</h2>

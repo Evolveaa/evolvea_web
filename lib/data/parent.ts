@@ -263,6 +263,10 @@ export interface DomainStat {
   /** Mean success 0–100 across scored sessions, null when nothing scored. */
   avgPct: number | null;
   lastAt: string | null;
+  /** Scored success %, oldest→newest (last ~12) — the domain's trend sparkline. */
+  trend: number[];
+  /** Signed change (pp) of the recent half vs the earlier half; null if too few. */
+  delta: number | null;
 }
 
 /** Per-domain aggregates; needs the exercise map to resolve domains. */
@@ -270,25 +274,48 @@ export function domainStats(
   sessions: SessionRow[],
   exercisesById: Map<string, ExerciseRow>,
 ): DomainStat[] {
-  const acc = new Map<string, { n: number; pctSum: number; pctN: number; last: string }>();
+  const acc = new Map<
+    string,
+    { n: number; pctSum: number; pctN: number; last: string; series: { at: string; pct: number }[] }
+  >();
   for (const s of sessions) {
     const ex = exercisesById.get(s.exercise_id);
     if (!ex) continue;
-    const entry = acc.get(ex.domain) ?? { n: 0, pctSum: 0, pctN: 0, last: s.started_at };
+    const entry =
+      acc.get(ex.domain) ?? { n: 0, pctSum: 0, pctN: 0, last: s.started_at, series: [] };
     entry.n += 1;
     if (s.score_total && s.score_total > 0 && s.score_correct !== null) {
-      entry.pctSum += (100 * s.score_correct) / s.score_total;
+      const pct = (100 * s.score_correct) / s.score_total;
+      entry.pctSum += pct;
       entry.pctN += 1;
+      entry.series.push({ at: s.started_at, pct });
     }
     if (s.started_at > entry.last) entry.last = s.started_at;
     acc.set(ex.domain, entry);
   }
-  return [...acc.entries()].map(([domain, e]) => ({
-    domain: domain as ExerciseRow["domain"],
-    sessions: e.n,
-    avgPct: e.pctN > 0 ? Math.round(e.pctSum / e.pctN) : null,
-    lastAt: e.last,
-  }));
+  return [...acc.entries()].map(([domain, e]) => {
+    // oldest→newest, last ~12 scored sessions — the direction of travel
+    const trend = e.series
+      .slice()
+      .sort((a, b) => (a.at < b.at ? -1 : 1))
+      .slice(-12)
+      .map((p) => Math.round(p.pct));
+    // recent-half vs earlier-half mean, so a single lucky day doesn't swing it
+    let delta: number | null = null;
+    if (trend.length >= 4) {
+      const mid = Math.floor(trend.length / 2);
+      const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+      delta = Math.round(mean(trend.slice(mid)) - mean(trend.slice(0, mid)));
+    }
+    return {
+      domain: domain as ExerciseRow["domain"],
+      sessions: e.n,
+      avgPct: e.pctN > 0 ? Math.round(e.pctSum / e.pctN) : null,
+      lastAt: e.last,
+      trend,
+      delta,
+    };
+  });
 }
 
 export interface TrickyItem {

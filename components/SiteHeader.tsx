@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeToggle from "./ThemeToggle";
 
 /**
  * Sticky header that mirrors the original prototype behaviour:
@@ -53,6 +54,7 @@ export default function SiteHeader() {
           <span className="brand-name">Evolvea</span>
         </a>
         <div className="header-actions">
+          <ThemeToggle />
           <LanguageSwitcher />
           <Link href="/login" className="btn btn-text">
             {t("signIn")}
