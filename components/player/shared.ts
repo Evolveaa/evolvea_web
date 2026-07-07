@@ -10,6 +10,8 @@ export interface FinishSummary {
   total: number;
   hintsUsed: number;
   detail: Json;
+  /** IDs of recorded speech attempts to attach to the session for assessment. */
+  speechAttemptIds?: string[];
 }
 
 export interface TaskProps<C> {
@@ -18,6 +20,13 @@ export interface TaskProps<C> {
   hintsEnabled: boolean;
   onProgress: (current: number, total: number) => void;
   onFinish: (summary: FinishSummary) => void;
+  /** Recording context (only used by SpeechTask "describe" items). */
+  childId?: string;
+  exerciseId?: string;
+  /** Whether the parent has consented to voice recording for this child. */
+  speechConsent?: boolean;
+  /** Live mode only — preview never records. */
+  recordingLive?: boolean;
 }
 
 const PRAISE_COUNT = 6;

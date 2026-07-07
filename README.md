@@ -121,3 +121,93 @@ BASE_URL=http://localhost:3000 node scripts/e2e-smoke.mjs   # 15-krokový prekli
 Pôvodná lokalizovaná landing page (SK/EN/DE) zostáva na `/` vrátane
 interaktívnej ukážky „Zaseknutá skladačka“ — tá istá aktivita je dnes plnou
 súčasťou knižnice (`gu-zaseknuta-skladacka-2`).
+
+## Zachytenie reči + AI vyhodnotenie (opíš obrázok)
+
+Pri cvičeniach typu **„opíš obrázok"** (`speech_items`, kde má položka pole
+`expect`) dokáže appka **nahrať, ako dieťa rozpráva**, prepísať reč na text a
+nechať jazykový model posúdiť, či dieťa spomenulo prvky, ktoré by primerane
+vyvíjajúce sa dieťa v danom veku pomenovalo (postavy, dej, okolnosti).
+
+### Ako to tečie
+
+```
+dieťa nahovorí  ──►  upload do privátneho úložiska (speech bucket)
+                     └─ createSpeechAttemptAction() vloží riadok speech_attempts (status=uploaded)
+rodič dokončí   ──►  completeSessionAction() prepojí attempty so session_id
+                     a zavolá Edge Function `assess-speech`
+Edge Function   ──►  1) stiahne audio (service role)
+(na pozadí)          2) STT: prepis reči na text (predvolene OpenAI gpt-4o-transcribe)
+                     3) LLM: Claude (claude-opus-4-8) sémanticky posúdi,
+                        ktoré `expect` koncepty dieťa spomenulo
+                     4) zapíše transcript + assessment do speech_attempts
+                        a prepočíta skóre + detail.speech v session
+rodič/logopéd   ──►  SessionDetail ukáže prepis + zelené/coral tokeny
+                     (spomenuté / chýbajúce) a jednu vetu spätnej väzby
+```
+
+Spracovanie beží **asynchrónne** (`EdgeRuntime.waitUntil`) — dokončenie
+cvičenia nikdy nečaká na STT/LLM. Kým prebieha, história ukazuje stav
+„Vyhodnocuje sa…".
+
+### Konfigurácia (tvoje API kľúče)
+
+Kľúče sú **tajomstvá Edge Function**, nikdy nie sú v prehliadači ani v `.env.local`:
+
+```bash
+supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+supabase secrets set EVOLVEA_STT_API_KEY=sk-...        # OpenAI (default) alebo Deepgram
+# voliteľné (defaulty):
+supabase secrets set EVOLVEA_LLM_MODEL=claude-opus-4-8
+supabase secrets set EVOLVEA_STT_PROVIDER=openai       # openai | deepgram
+supabase secrets set EVOLVEA_STT_MODEL=gpt-4o-transcribe
+```
+
+Nasadenie migrácie a funkcie:
+
+```bash
+supabase db push                        # aplikuje supabase/migrations/*
+supabase functions deploy assess-speech # nasadí Edge Function
+```
+
+### Súkromie a GDPR (deti = citlivé údaje)
+
+- **Explicitný súhlas per dieťa — vynútený aj v dátovej vrstve.** Nahrávanie sa
+  zapne až po zaškrtnutí súhlasu v *Profil dieťaťa → Hlasové nahrávky*
+  (`children.speech_consent_at`). Bez súhlasu sa nahrávacie UI nezobrazí, a
+  navyše **RLS** (insert policy `speech_attempts_insert` + storage upload policy)
+  odmietne akýkoľvek zápis pre dieťa bez živého súhlasu — nie len UI.
+- **Privátne úložisko.** Audio je v **neverejnom** buckete `speech`; RLS ho viaže
+  na rodinu cez `is_parent_of` / `is_therapist_of`. Prehliadač drží iba
+  publishable key — privilegované spracovanie beží v Edge Function so service role.
+- **Automatické mazanie (retencia).** Audio má `audio_delete_after` (default 30 dní).
+  Funkcia `purge_expired_speech_audio()` (denný pg_cron job) zmaže staré nahrávky,
+  no **prepis a vyhodnotenie ostávajú**. Zmazanie dieťaťa hard-maže aj audio
+  (trigger `speech_attempts_delete_audio`). Súhlas možno kedykoľvek odvolať.
+- **Minimalizácia.** Ukladá sa len to, čo je potrebné; klient nikdy neprepíše
+  výsledky (trigger `protect_speech_attempt_update` povolí len prepojenie session).
+
+## Testy, monitoring & bezpečnosť
+
+**Unit testy** (čistá logika — bez DB) cez Node test runner + `tsx`:
+
+```bash
+npm test        # tests/*.test.ts
+```
+
+Pokrývajú validáciu obsahu cvičení (`parseExerciseContent` vrátane nového
+režimu „opíš obrázok" s `expect`) a dátové agregácie, ktorým rodič verí —
+`computeStreak`, `domainStats` (vrátane trendu a delty pre sparkline grafy),
+`trickyByExercise`, `groupSessionsByDay`. `node scripts/e2e-smoke.mjs` a
+`scripts/visual-audit.mjs` pokrývajú preklik a vizuálnu reguláciu.
+
+**Chybové stavy.** `app/error.tsx` (v skupinách segmentov), `app/not-found.tsx`
+a `app/global-error.tsx` renderujú milý stav so `StateView`. `error.tsx` má
+`console.error(error)` ako **napojovací bod pre reporting** — sem stačí pridať
+Sentry (`Sentry.captureException(error)`) a `instrumentation.ts` s DSN v env.
+
+**Bezpečnosť / RLS.** Všetky privilegované operácie idú cez Postgres RLS
+(security-definer helpery `is_parent_of` / `is_therapist_of`); appka drží iba
+publishable key. Audio spracúva Edge Function so service role. Po `supabase db push`
+odporúčame `supabase` advisors (alebo MCP `get_advisors`) na kontrolu RLS a
+únikov, keďže pribudla tabuľka `speech_attempts` + storage bucket.

@@ -4,8 +4,45 @@ import type { Json } from "@/lib/database.types";
 const isObj = (v: Json | undefined): v is { [k: string]: Json | undefined } =>
   typeof v === "object" && v !== null && !Array.isArray(v);
 
-const SCORE_ICON: Record<string, string> = { great: "🌟", almost: "🙂", practice: "🌱" };
+/** Whether <SessionDetail> would render anything — so callers can skip offering
+ *  an empty expansion for sessions that carry no reviewable detail. */
+export function hasSessionDetail(detail: Json | null): boolean {
+  if (!isObj(detail)) return false;
+  if (isObj(detail.metacognition)) {
+    const m = detail.metacognition;
+    if (typeof m.strategy === "string" || typeof m.selfEval === "string") return true;
+  }
+  if (
+    Array.isArray(detail.steps) &&
+    detail.steps.some(
+      (s) =>
+        isObj(s) &&
+        ((Array.isArray(s.choices) && s.choices.length > 0) ||
+          (isObj(s.fields) && Object.keys(s.fields).length > 0)),
+    )
+  )
+    return true;
+  if (Array.isArray(detail.items) && detail.items.length > 0) return true;
+  if (typeof detail.moves === "number") return true;
+  if (Array.isArray(detail.rounds) && detail.rounds.length > 0) return true;
+  return false;
+}
+
 const SELF_ICON: Record<string, string> = { great: "🌟", ok: "🙂", hard: "🌱" };
+
+/** One per-item status → a tone. "Practice/grow" stays warm, not a failure:
+ *  growth framing matters on a screen a parent reads about their kid. */
+type Tone = "great" | "ok" | "grow";
+function itemTone(it: { [k: string]: Json | undefined }): Tone {
+  if (typeof it.score === "string") {
+    if (it.score === "great") return "great";
+    if (it.score === "almost") return "ok";
+    return "grow";
+  }
+  if (it.firstTry === true) return "great";
+  if (it.firstTry === false) return "grow";
+  return "ok";
+}
 
 /** The child's plan → self-evaluation, plus calibration vs. the real score. */
 function Metacognition({
@@ -32,44 +69,30 @@ function Metacognition({
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "0.35rem",
-        alignItems: "center",
-        marginBottom: "0.7rem",
-        paddingBottom: "0.7rem",
-        borderBottom: "1px dashed var(--ink-line)",
-      }}
-    >
-      {strategy && (
-        <span className="chip" style={{ fontSize: "0.72rem" }}>
-          🧭 {t("strategyChip", { strategy })}
-        </span>
-      )}
-      {selfEval && ["great", "ok", "hard"].includes(selfEval) && (
-        <span className="chip" style={{ fontSize: "0.72rem" }}>
-          {SELF_ICON[selfEval]} {t(`selfEval.${selfEval}`)}
-        </span>
-      )}
-      {helped && ["yes", "some", "no"].includes(helped) && (
-        <span className="chip" style={{ fontSize: "0.72rem" }}>
-          {t(`helped.${helped}`)}
-        </span>
-      )}
+    <div className="rev-meta">
+      <div className="rev-chips">
+        {strategy && <span className="rev-chip">🧭 {t("strategyChip", { strategy })}</span>}
+        {selfEval && ["great", "ok", "hard"].includes(selfEval) && (
+          <span className="rev-chip">
+            {SELF_ICON[selfEval]} {t(`selfEval.${selfEval}`)}
+          </span>
+        )}
+        {helped && ["yes", "some", "no"].includes(helped) && (
+          <span className="rev-chip">{t(`helped.${helped}`)}</span>
+        )}
+      </div>
       {calibration && (
-        <span style={{ fontSize: "0.78rem", color: "var(--ink-soft)", width: "100%" }}>
+        <p className="rev-cal" data-cal={calibration}>
           {t(`calibration.${calibration}`)}
-        </span>
+        </p>
       )}
     </div>
   );
 }
 
 /**
- * Human rendering of a session's `detail` jsonb — the therapist's window
- * into what actually happened at the table.
+ * Human rendering of a session's `detail` jsonb — the window into what actually
+ * happened at the table, per item, so a parent or therapist can browse mistakes.
  */
 export default function SessionDetail({
   detail,
@@ -91,30 +114,91 @@ export default function SessionDetail({
     />
   ) : null;
 
+  // recorded "describe the picture" attempts — transcript + LLM concept check
+  if (Array.isArray(detail.speech)) {
+    return (
+      <div className="rev">
+        {metaBlock}
+        {detail.speech.map((raw, i) => {
+          if (!isObj(raw)) return null;
+          const prompt = typeof raw.prompt === "string" ? raw.prompt : `${i + 1}.`;
+          const status = typeof raw.status === "string" ? raw.status : "pending";
+          const transcript = typeof raw.transcript === "string" ? raw.transcript : "";
+          const feedback = typeof raw.feedback === "string" ? raw.feedback : "";
+          const mentioned = new Set(
+            Array.isArray(raw.mentioned) ? raw.mentioned.map(String) : [],
+          );
+          const expected = Array.isArray(raw.expected) ? raw.expected.map(String) : [];
+          return (
+            <div className="rev-speech" key={i}>
+              <p className="rev-speech-prompt">🖼️ {prompt}</p>
+              {status === "done" ? (
+                <>
+                  {transcript && (
+                    <p className="rev-speech-said">
+                      <span className="rev-field-k">{t("saidLabel")}</span>„{transcript}“
+                    </p>
+                  )}
+                  {expected.length > 0 && (
+                    <>
+                      <span className="rev-caption">{t("mentionedLabel")}</span>
+                      <ul className="rev-items">
+                        {expected.map((c, j) => (
+                          <li
+                            className="rev-item"
+                            data-tone={mentioned.has(c) ? "great" : "grow"}
+                            key={j}
+                          >
+                            <span className="rev-label">{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {feedback && <p className="rev-note">💬 {feedback}</p>}
+                </>
+              ) : status === "failed" ? (
+                <p className="rev-note">{t("recFailed")}</p>
+              ) : (
+                <p className="rev-note">
+                  <span className="spinner" /> {t("recPending")}
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   // guided_steps: reflection answers are the payload
   if (Array.isArray(detail.steps)) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.7rem" }}>
+      <div className="rev">
         {detail.steps.map((step, i) => {
           if (!isObj(step)) return null;
-          const choices = Array.isArray(step.choices) ? step.choices.filter((c) => typeof c === "string") : [];
+          const choices = Array.isArray(step.choices)
+            ? step.choices.filter((c) => typeof c === "string")
+            : [];
           const fields = isObj(step.fields) ? Object.entries(step.fields) : [];
           if (choices.length === 0 && fields.length === 0) return null;
           return (
-            <div key={i}>
-              <b style={{ fontSize: "0.82rem" }}>{typeof step.title === "string" ? step.title : `${i + 1}.`}</b>
+            <div className="rev-step" key={i}>
+              <b className="rev-step-title">
+                {typeof step.title === "string" ? step.title : `${i + 1}.`}
+              </b>
               {choices.length > 0 && (
-                <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", marginTop: "0.3rem" }}>
+                <div className="rev-chips">
                   {choices.map((c, j) => (
-                    <span key={j} className="chip" style={{ fontSize: "0.72rem" }}>
+                    <span key={j} className="rev-chip">
                       {String(c)}
                     </span>
                   ))}
                 </div>
               )}
               {fields.map(([label, value]) => (
-                <p key={label} style={{ fontSize: "0.84rem", marginTop: "0.3rem", color: "var(--ink-soft)" }}>
-                  <span style={{ fontWeight: 600 }}>{label}:</span>{" "}
+                <p key={label} className="rev-field">
+                  <span className="rev-field-k">{label}</span>
                   {typeof value === "string" && value.trim() ? value : "—"}
                 </p>
               ))}
@@ -128,53 +212,52 @@ export default function SessionDetail({
   // per-item lists (choice / sound_boxes / memory / story / speech)
   if (Array.isArray(detail.items)) {
     return (
-      <>
+      <div className="rev">
         {metaBlock}
-        <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-        {detail.items.map((item, i) => {
-          if (!isObj(item)) return null;
-          const label =
-            (typeof item.prompt === "string" && item.prompt) ||
-            (typeof item.word === "string" && item.word) ||
-            (typeof item.text === "string" && item.text) ||
-            (typeof item.title === "string" && item.title) ||
-            `${i + 1}.`;
-          const icon =
-            typeof item.score === "string"
-              ? (SCORE_ICON[item.score] ?? "•")
-              : item.firstTry === true
-                ? "✅"
-                : item.firstTry === false
-                  ? "🔁"
-                  : "•";
-          return (
-            <li key={i} style={{ fontSize: "0.84rem", color: "var(--ink-soft)" }}>
-              {icon} {label}
-              {item.hinted === true ? ` · 💡 ${t("hinted")}` : ""}
-            </li>
-          );
-        })}
+        <ul className="rev-items">
+          {detail.items.map((item, i) => {
+            if (!isObj(item)) return null;
+            const label =
+              (typeof item.prompt === "string" && item.prompt) ||
+              (typeof item.word === "string" && item.word) ||
+              (typeof item.text === "string" && item.text) ||
+              (typeof item.title === "string" && item.title) ||
+              `${i + 1}.`;
+            return (
+              <li className="rev-item" data-tone={itemTone(item)} key={i}>
+                <span className="rev-label">{label}</span>
+                {item.hinted === true && (
+                  <span className="rev-hint" title={t("hinted")} aria-label={t("hinted")}>
+                    💡
+                  </span>
+                )}
+              </li>
+            );
+          })}
         </ul>
-      </>
+      </div>
     );
   }
 
   if (typeof detail.moves === "number") {
     return (
-      <>
+      <div className="rev">
         {metaBlock}
-        <p style={{ fontSize: "0.84rem", color: "var(--ink-soft)" }}>
-          {t("pairsMoves", { moves: detail.moves, pairs: typeof detail.pairs === "number" ? detail.pairs : 0 })}
+        <p className="rev-note">
+          {t("pairsMoves", {
+            moves: detail.moves,
+            pairs: typeof detail.pairs === "number" ? detail.pairs : 0,
+          })}
         </p>
-      </>
+      </div>
     );
   }
 
   if (Array.isArray(detail.rounds)) {
     return (
-      <>
+      <div className="rev">
         {metaBlock}
-        <p style={{ fontSize: "0.84rem", color: "var(--ink-soft)" }}>
+        <p className="rev-note">
           {detail.rounds
             .map((r, i) =>
               isObj(r) && typeof r.errors === "number"
@@ -184,7 +267,7 @@ export default function SessionDetail({
             .filter(Boolean)
             .join(" · ")}
         </p>
-      </>
+      </div>
     );
   }
 

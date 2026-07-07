@@ -256,6 +256,11 @@ export function DomainTile({
 
 /* ---------------- circular progress ring ---------------- */
 
+/**
+ * Circular progress ring. Warm, glowing arc on a soft brand-tinted track — so
+ * even a fresh 0 % week reads as "ready to begin", never a dead grey gauge.
+ * `tone` recolours the arc for contextual meters (e.g. success rate).
+ */
 export function ProgressRing({
   value,
   max,
@@ -263,6 +268,7 @@ export function ProgressRing({
   stroke = 9,
   label,
   sub,
+  tone = "brand",
 }: {
   value: number;
   max: number;
@@ -270,17 +276,27 @@ export function ProgressRing({
   stroke?: number;
   label: string;
   sub?: string;
+  tone?: "brand" | "good" | "mid" | "low";
 }) {
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const pct = max > 0 ? Math.min(1, value / max) : 0;
+  const grad = `ringGrad-${tone}`;
+  const stops: Record<string, [string, string, string]> = {
+    brand: ["#9fd0f2", "#5b9fd6", "#3f7fc4"],
+    good: ["#7fd6a3", "#43b57e", "#2e9d63"],
+    mid: ["#f6cf78", "#eea94a", "#e08c2f"],
+    low: ["#f2a98f", "#e8795a", "#d95f3c"],
+  };
+  const [s0, s1, s2] = stops[tone];
   return (
     <span className="ring-wrap" style={{ width: size, height: size }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
         <defs>
-          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#8cc0ea" />
-            <stop offset="100%" stopColor="#4f8fd0" />
+          <linearGradient id={grad} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={s0} />
+            <stop offset="55%" stopColor={s1} />
+            <stop offset="100%" stopColor={s2} />
           </linearGradient>
         </defs>
         <circle
@@ -288,7 +304,7 @@ export function ProgressRing({
           cy={size / 2}
           r={r}
           fill="none"
-          stroke="rgba(22,31,51,0.08)"
+          stroke="var(--ring-track)"
           strokeWidth={stroke}
         />
         <circle
@@ -296,11 +312,12 @@ export function ProgressRing({
           cy={size / 2}
           r={r}
           fill="none"
-          stroke="url(#ringGrad)"
+          stroke={`url(#${grad})`}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={c}
-          strokeDashoffset={c * (1 - pct)}
+          /* keep a hair of arc even at 0 so the cap shows as a friendly seed */
+          strokeDashoffset={c * (1 - Math.max(pct, pct === 0 && max > 0 ? 0.012 : 0))}
           transform={`rotate(-90 ${size / 2} ${size / 2})`}
           className="ring-arc"
         />
@@ -309,6 +326,73 @@ export function ProgressRing({
         <b>{label}</b>
         {sub && <small>{sub}</small>}
       </span>
+    </span>
+  );
+}
+
+/**
+ * Tiny trend line for a scored series (percentages, oldest→newest). Domain-hued
+ * via currentColor, with a soft area wash and a bright cap on the latest point.
+ * Honest scale: a ≥24-pt window so small wobble doesn't masquerade as a cliff.
+ */
+export function Sparkline({
+  values,
+  domain,
+  width = 116,
+  height = 36,
+}: {
+  values: number[];
+  domain: ExerciseDomain;
+  width?: number;
+  height?: number;
+}) {
+  if (values.length < 2) return null;
+  const pad = 4;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const mid = (min + max) / 2;
+  const lo = Math.min(min, mid - 12);
+  const hi = Math.max(max, mid + 12);
+  const span = hi - lo || 1;
+  const n = values.length;
+  const x = (i: number) => pad + (i * (width - 2 * pad)) / (n - 1);
+  const y = (v: number) => pad + (1 - (v - lo) / span) * (height - 2 * pad);
+  const pts = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`);
+  const line = `M ${pts.join(" L ")}`;
+  const area = `M ${x(0).toFixed(1)},${height - pad} L ${pts.join(" L ")} L ${x(
+    n - 1,
+  ).toFixed(1)},${height - pad} Z`;
+  const lastX = x(n - 1);
+  const lastY = y(values[n - 1]);
+  return (
+    <svg
+      className="spark"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      aria-hidden="true"
+      style={{ color: `var(--domain-${domain}-2)` }}
+    >
+      <path d={area} className="spark-area" />
+      <path d={line} className="spark-line" />
+      <circle cx={lastX} cy={lastY} r={3.4} className="spark-halo" />
+      <circle cx={lastX} cy={lastY} r={2.2} className="spark-dot" />
+    </svg>
+  );
+}
+
+/** Signed trend chip: ▲ up (green), ▼ down (soft red), flat = "stable". */
+export function TrendPill({ delta }: { delta: number | null }) {
+  if (delta === null) return null;
+  const dir = delta > 1 ? "up" : delta < -1 ? "down" : "flat";
+  return (
+    <span className="trend-pill" data-dir={dir}>
+      <svg width={11} height={11} viewBox="0 0 12 12" aria-hidden="true">
+        {dir === "up" && <path d="M6 2.5 10 8H2z" fill="currentColor" />}
+        {dir === "down" && <path d="M6 9.5 2 4h8z" fill="currentColor" />}
+        {dir === "flat" && <path d="M2.5 6h7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />}
+      </svg>
+      {dir === "flat" ? "" : Math.abs(delta)}
     </span>
   );
 }

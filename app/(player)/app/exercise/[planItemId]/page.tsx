@@ -29,6 +29,14 @@ export default async function ExercisePage({
   const sub = await getSubscription(item.plans.child_id);
   if (!hasAccess(sub)) redirect("/app/checkout");
 
+  // Voice recording (describe-the-picture) is opt-in per child.
+  const { data: childRow } = await supabase
+    .from("children")
+    .select("speech_consent_at")
+    .eq("id", item.plans.child_id)
+    .maybeSingle();
+  const speechConsent = !!childRow?.speech_consent_at;
+
   const exercise = item.exercises as ExerciseRow;
   const content = tryParseExerciseContent(exercise.content);
 
@@ -56,6 +64,7 @@ export default async function ExercisePage({
       planItemId={item.id}
       mode="live"
       closeHref="/app"
+      speechConsent={speechConsent}
     />
   );
 }

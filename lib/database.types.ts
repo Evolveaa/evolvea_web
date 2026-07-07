@@ -22,6 +22,7 @@ export type Database = {
           first_name: string
           id: string
           parent_id: string
+          speech_consent_at: string | null
           therapist_id: string | null
         }
         Insert: {
@@ -31,6 +32,7 @@ export type Database = {
           first_name: string
           id?: string
           parent_id: string
+          speech_consent_at?: string | null
           therapist_id?: string | null
         }
         Update: {
@@ -40,6 +42,7 @@ export type Database = {
           first_name?: string
           id?: string
           parent_id?: string
+          speech_consent_at?: string | null
           therapist_id?: string | null
         }
         Relationships: [
@@ -55,6 +58,90 @@ export type Database = {
             columns: ["therapist_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      speech_attempts: {
+        Row: {
+          assessment: Json | null
+          audio_delete_after: string
+          audio_mime: string | null
+          audio_path: string | null
+          child_id: string
+          created_at: string
+          error: string | null
+          exercise_id: string
+          expected: Json
+          id: string
+          item_index: number
+          lang: string
+          llm_model: string | null
+          min_expected: number
+          processed_at: string | null
+          prompt: string
+          session_id: string | null
+          status: Database["public"]["Enums"]["speech_status"]
+          stt_model: string | null
+          transcript: string | null
+        }
+        Insert: {
+          assessment?: Json | null
+          audio_delete_after?: string
+          audio_mime?: string | null
+          audio_path?: string | null
+          child_id: string
+          created_at?: string
+          error?: string | null
+          exercise_id: string
+          expected?: Json
+          id?: string
+          item_index?: number
+          lang?: string
+          llm_model?: string | null
+          min_expected?: number
+          processed_at?: string | null
+          prompt?: string
+          session_id?: string | null
+          status?: Database["public"]["Enums"]["speech_status"]
+          stt_model?: string | null
+          transcript?: string | null
+        }
+        Update: {
+          assessment?: Json | null
+          audio_delete_after?: string
+          audio_mime?: string | null
+          audio_path?: string | null
+          child_id?: string
+          created_at?: string
+          error?: string | null
+          exercise_id?: string
+          expected?: Json
+          id?: string
+          item_index?: number
+          lang?: string
+          llm_model?: string | null
+          min_expected?: number
+          processed_at?: string | null
+          prompt?: string
+          session_id?: string | null
+          status?: Database["public"]["Enums"]["speech_status"]
+          stt_model?: string | null
+          transcript?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "speech_attempts_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "speech_attempts_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sessions"
             referencedColumns: ["id"]
           },
         ]
@@ -481,6 +568,7 @@ export type Database = {
         | "articulation"
         | "guided"
       exercise_modality: "interactive" | "speech" | "guided"
+      speech_status: "uploaded" | "transcribing" | "assessing" | "done" | "failed"
       user_role: "parent" | "therapist"
     }
     CompositeTypes: {

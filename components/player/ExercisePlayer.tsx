@@ -60,6 +60,7 @@ export default function ExercisePlayer({
   planItemId,
   mode,
   closeHref,
+  speechConsent = false,
 }: {
   exercise: ExerciseRow;
   content: ExerciseContent;
@@ -68,6 +69,7 @@ export default function ExercisePlayer({
   planItemId?: string | null;
   mode: "live" | "preview";
   closeHref: string;
+  speechConsent?: boolean;
 }) {
   const t = useTranslations("player");
   const td = useTranslations("domains");
@@ -193,6 +195,7 @@ export default function ExercisePlayer({
       hintsUsed: summary.hintsUsed,
       detail,
       parentNote: note,
+      speechAttemptIds: summary.speechAttemptIds,
     });
     setSaving(false);
     if (ok) setPhase("saved");
@@ -341,8 +344,11 @@ export default function ExercisePlayer({
 
   /* ---------------- completion ---------------- */
   if (phase === "done" || phase === "saved") {
+    // recorded "describe" sessions are scored asynchronously — don't show a
+    // provisional 0/N; surface a "sent for assessment" message instead
+    const speechPending = !!summary?.speechAttemptIds?.length;
     const pct =
-      summary && scored && summary.total > 0
+      summary && scored && !speechPending && summary.total > 0
         ? Math.round((100 * summary.correct) / summary.total)
         : null;
     return (
@@ -369,7 +375,16 @@ export default function ExercisePlayer({
                 : t("doneLead")}
           </p>
 
-          {summary && (
+          {summary && speechPending && (
+            <div className="anchor-box" style={{ marginTop: 0 }}>
+              <span className="anchor-label">🎙️ {t("recPendingStat")}</span>
+              <p className="anchor-text" style={{ fontStyle: "normal" }}>
+                {t("recPendingSub")}
+              </p>
+            </div>
+          )}
+
+          {summary && !speechPending && (
             <div className="done-stats">
               {scored ? (
                 <div className="stat">
@@ -493,7 +508,16 @@ export default function ExercisePlayer({
           <StorySequenceTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
         )}
         {content.type === "speech_items" && (
-          <SpeechTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+          <SpeechTask
+            content={content}
+            hintsEnabled={hintsEnabled}
+            onProgress={onProgress}
+            onFinish={onFinish}
+            childId={childId}
+            exerciseId={exercise.id}
+            speechConsent={speechConsent}
+            recordingLive={mode === "live"}
+          />
         )}
         {content.type === "guided_steps" && (
           <GuidedTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />

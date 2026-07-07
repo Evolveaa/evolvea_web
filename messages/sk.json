@@ -167,7 +167,8 @@
     ]
   },
   "footer": {
-    "text": "Digitálny spoločník k logopedickej a kognitívnej terapii"
+    "text": "Digitálny spoločník k logopedickej a kognitívnej terapii",
+    "quote": "Vytvorené s láskou pre naše deti."
   },
   "lang": {
     "label": "Jazyk"
@@ -211,7 +212,11 @@
       "unknown": "Niečo sa pokazilo. Skúste to znova.",
       "callback": "Odkaz už nie je platný. Prihláste sa alebo si nechajte poslať nový."
     },
-    "confirmNotice": "Ak si klikol na potvrdzovací odkaz v e-maile, tvoj účet je už potvrdený — stačí sa prihlásiť nižšie."
+    "confirmNotice": "Ak si klikol na potvrdzovací odkaz v e-maile, tvoj účet je už potvrdený — stačí sa prihlásiť nižšie.",
+    "heroHeadline": "Logopedická terapia, ktorá pokračuje aj doma.",
+    "heroPoint1": "Cvičenia na mieru od vášho logopéda",
+    "heroPoint2": "Pekný prehľad pokroku a chýb dieťaťa",
+    "heroPoint3": "Súkromne a bezpečne — dáta v EÚ"
   },
   "shell": {
     "navLabel": "Hlavná navigácia",
@@ -240,7 +245,14 @@
     },
     "ageYears": "{age} r.",
     "ageRange": "{min}–{max} r.",
-    "loading": "Načítava sa…"
+    "loading": "Načítava sa…",
+    "errorTitle": "Niečo sa pokazilo",
+    "errorLead": "Prepáčte, túto stránku sa nepodarilo načítať. Skúste to prosím znova.",
+    "retry": "Skúsiť znova",
+    "notFoundTitle": "Stránka sa nenašla",
+    "notFoundLead": "Táto stránka neexistuje alebo bola presunutá.",
+    "goHome": "Späť na začiatok",
+    "themeToggle": "Prepnúť svetlý/tmavý režim"
   },
   "domains": {
     "phonemic_awareness": "Hlásky a zvuky",
@@ -346,7 +358,20 @@
     "pathStart": "Začať",
     "pathLater": "Potom",
     "seeWholePlan": "Pozrieť celý plán",
-    "planRhythmFoldHint": "Ako rozložiť cvičenia počas týždňa"
+    "planRhythmFoldHint": "Ako rozložiť cvičenia počas týždňa",
+    "trendCaption": "Posledné cvičenia",
+    "weekFresh": "Nový týždeň — poďme na to!",
+    "weekComplete": "Týždeň splnený. Skvelá práca! 🎉",
+    "responseWindow": "Odpovie zvyčajne do 24 hodín",
+    "messagesRailNote": "Píšte pokojne o priebehu cvičení, otázkach či pochvalách. Logopéd vidí aj poznámky z jednotlivých cvičení.",
+    "quickLinks": "Rýchle odkazy",
+    "openPlan": "Zobraziť plán",
+    "openProgress": "Zobraziť pokrok",
+    "speechConsentTitle": "Hlasové nahrávky",
+    "speechConsentLead": "Pri cvičeniach s opisom obrázka môžeme nahrať, ako dieťa rozpráva, a náš pomocník posúdi, či spomenulo, čo malo. Nahrávky sú súkromné, po 30 dňoch sa automaticky mažú a súhlas môžete kedykoľvek odvolať.",
+    "speechConsentField": "Súhlasím s nahrávaním hlasu môjho dieťaťa",
+    "speechConsentSave": "Uložiť súhlas",
+    "speechConsentActive": "Nahrávanie je zapnuté"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",
@@ -412,7 +437,11 @@
         "ok": "Sebahodnotenie dieťaťa zodpovedá výkonu.",
         "under": "Dieťa sa podceňuje — výkon bol výrazne lepší než jeho vlastný odhad.",
         "over": "Dieťa sa nadhodnocuje — výkon bol slabší než jeho vlastný odhad."
-      }
+      },
+      "recPending": "Vyhodnocuje sa…",
+      "recFailed": "Nahrávku sa nepodarilo vyhodnotiť.",
+      "saidLabel": "Dieťa povedalo",
+      "mentionedLabel": "Malo spomenúť"
     },
     "builder": {
       "pageTitle": "Plán — {name}",
@@ -616,7 +645,8 @@
     "stateExpired": "Skúšobné obdobie sa skončilo. Aktivujte predplatné a pokračujte.",
     "stateCanceled": "Predplatné je zrušené. Kedykoľvek ho môžete obnoviť.",
     "cancelBtn": "Zrušiť predplatné",
-    "cancelConfirm": "Naozaj zrušiť predplatné? Prístup k cvičeniam sa skončí, dáta zostanú uložené."
+    "cancelConfirm": "Naozaj zrušiť predplatné? Prístup k cvičeniam sa skončí, dáta zostanú uložené.",
+    "benefitsTitle": "Čo získate"
   },
   "messagesUi": {
     "emptyTitle": "Zatiaľ žiadne správy",
@@ -720,7 +750,16 @@
       "great": "Výborne",
       "almost": "Takmer",
       "practice": "Ešte trénujeme",
-      "expected": "Očakávaná odpoveď"
+      "expected": "Očakávaná odpoveď",
+      "recordHint": "Nechaj dieťa opísať obrázok vlastnými slovami. Nahrávku posúdi náš pomocník.",
+      "startRec": "Nahrať",
+      "stopRec": "Zastaviť",
+      "uploading": "Ukladám nahrávku…",
+      "recorded": "Nahraté! Vyhodnotíme to o chvíľu.",
+      "again": "Znova",
+      "next": "Ďalej",
+      "finish": "Hotovo",
+      "recError": "Nahrávanie sa nepodarilo. Skús to znova."
     },
     "guided": {
       "choicesLabel": "Možnosti",
@@ -807,6 +846,8 @@
         "1": "Hovorím pomaly a zreteľne",
         "2": "Dávam pozor na ústa a jazyk"
       }
-    }
+    },
+    "recPendingStat": "Nahrávky odoslané",
+    "recPendingSub": "Vyhodnotenie príde o chvíľu — nájdete ho v Pokroku."
   }
 }

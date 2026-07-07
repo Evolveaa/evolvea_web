@@ -167,7 +167,8 @@
     ]
   },
   "footer": {
-    "text": "A digital companion to speech and cognitive therapy"
+    "text": "A digital companion to speech and cognitive therapy",
+    "quote": "Made with love for our children."
   },
   "lang": {
     "label": "Language"
@@ -211,7 +212,11 @@
       "unknown": "Something went wrong. Please try again.",
       "callback": "This link is no longer valid. Sign in, or request a new one."
     },
-    "confirmNotice": "If you clicked the confirmation link in your e-mail, your account is already confirmed — just sign in below."
+    "confirmNotice": "If you clicked the confirmation link in your e-mail, your account is already confirmed — just sign in below.",
+    "heroHeadline": "Speech therapy that continues at home.",
+    "heroPoint1": "Tailored exercises from your therapist",
+    "heroPoint2": "A clear view of your child's progress",
+    "heroPoint3": "Private and secure — data stays in the EU"
   },
   "shell": {
     "navLabel": "Main navigation",
@@ -240,7 +245,14 @@
     },
     "ageYears": "{age} yrs",
     "ageRange": "{min}–{max} yrs",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "errorTitle": "Something went wrong",
+    "errorLead": "Sorry, this page could not be loaded. Please try again.",
+    "retry": "Try again",
+    "notFoundTitle": "Page not found",
+    "notFoundLead": "This page does not exist or was moved.",
+    "goHome": "Back to start",
+    "themeToggle": "Toggle light/dark mode"
   },
   "domains": {
     "phonemic_awareness": "Sounds in words",
@@ -346,7 +358,20 @@
     "pathStart": "Start",
     "pathLater": "Later",
     "seeWholePlan": "See the whole plan",
-    "planRhythmFoldHint": "How to spread exercises across the week"
+    "planRhythmFoldHint": "How to spread exercises across the week",
+    "trendCaption": "Recent sessions",
+    "weekFresh": "A fresh week — let's go!",
+    "weekComplete": "Week complete. Great job! 🎉",
+    "responseWindow": "Usually replies within 24 hours",
+    "messagesRailNote": "Feel free to write about how practice is going, questions, or wins. Your therapist also sees notes from individual exercises.",
+    "quickLinks": "Quick links",
+    "openPlan": "View plan",
+    "openProgress": "View progress",
+    "speechConsentTitle": "Voice recordings",
+    "speechConsentLead": "For picture-description exercises we can record your child speaking, and our helper checks whether they mentioned what they should. Recordings are private, auto-delete after 30 days, and you can withdraw consent anytime.",
+    "speechConsentField": "I consent to recording my child's voice",
+    "speechConsentSave": "Save consent",
+    "speechConsentActive": "Recording is on"
   },
   "therapist": {
     "dashTitle": "Your families",
@@ -412,7 +437,11 @@
         "ok": "The child's self-assessment matches their performance.",
         "under": "The child underrates themselves — performance was much better than their own view.",
         "over": "The child overrates themselves — performance was weaker than their own view."
-      }
+      },
+      "recPending": "Assessing…",
+      "recFailed": "Couldn't assess the recording.",
+      "saidLabel": "The child said",
+      "mentionedLabel": "Should mention"
     },
     "builder": {
       "pageTitle": "Plan for {name}",
@@ -616,7 +645,8 @@
     "stateExpired": "Your trial has ended. Activate a subscription to continue.",
     "stateCanceled": "The subscription is canceled. You can renew it anytime.",
     "cancelBtn": "Cancel subscription",
-    "cancelConfirm": "Really cancel the subscription? Access to exercises will end, but your data stays saved."
+    "cancelConfirm": "Really cancel the subscription? Access to exercises will end, but your data stays saved.",
+    "benefitsTitle": "What you get"
   },
   "messagesUi": {
     "emptyTitle": "No messages yet",
@@ -720,7 +750,16 @@
       "great": "Great",
       "almost": "Almost",
       "practice": "Still practicing",
-      "expected": "Expected answer"
+      "expected": "Expected answer",
+      "recordHint": "Let your child describe the picture in their own words. Our helper will review the recording.",
+      "startRec": "Record",
+      "stopRec": "Stop",
+      "uploading": "Saving recording…",
+      "recorded": "Recorded! We'll assess it shortly.",
+      "again": "Again",
+      "next": "Next",
+      "finish": "Done",
+      "recError": "Recording failed. Please try again."
     },
     "guided": {
       "choicesLabel": "Options",
@@ -807,6 +846,8 @@
         "1": "I speak slowly and clearly",
         "2": "I mind my mouth and tongue"
       }
-    }
+    },
+    "recPendingStat": "Recordings sent",
+    "recPendingSub": "The assessment will arrive shortly — find it in Progress."
   }
 }

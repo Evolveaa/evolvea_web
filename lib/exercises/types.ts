@@ -150,6 +150,16 @@ export interface SpeechItem {
   ask?: string;
   /** Articulation or coaching tip shown to the parent. */
   tip?: string;
+  /**
+   * "Describe the picture" mode. When present, the item becomes a recorded,
+   * open-ended task: the child describes the scene aloud, the app records it,
+   * and STT + an LLM judge which of these concepts the child mentioned. Enables
+   * the recording UI only when the parent has given voice consent — otherwise
+   * the item gracefully falls back to manual parent scoring.
+   */
+  expect?: string[];
+  /** How many `expect` concepts count as success (default: ~60% of the list). */
+  minExpected?: number;
 }
 
 /** Guided parent–child activity — scripted off-screen work with reflection. */
@@ -350,11 +360,18 @@ export function parseExerciseContent(json: Json): ExerciseContent {
     case "speech_items": {
       const items = arr(json.items, "items").map((raw, i) => {
         if (!isRecord(raw)) fail(`items[${i}] must be an object`);
+        const expect = Array.isArray(raw.expect)
+          ? raw.expect.map((e, j) => str(e, `items[${i}].expect[${j}]`))
+          : undefined;
+        const minExpected =
+          typeof raw.minExpected === "number" ? raw.minExpected : undefined;
         return {
           text: str(raw.text, `items[${i}].text`),
           emoji: optStr(raw.emoji),
           ask: optStr(raw.ask),
           tip: optStr(raw.tip),
+          expect: expect && expect.length > 0 ? expect : undefined,
+          minExpected,
         } satisfies SpeechItem;
       });
       return { type: "speech_items", intro: optStr(json.intro), items };

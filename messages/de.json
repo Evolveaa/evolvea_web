@@ -167,7 +167,8 @@
     ]
   },
   "footer": {
-    "text": "Der digitale Begleiter zur logopädischen und kognitiven Therapie"
+    "text": "Der digitale Begleiter zur logopädischen und kognitiven Therapie",
+    "quote": "Mit Liebe für unsere Kinder gemacht."
   },
   "lang": {
     "label": "Sprache"
@@ -211,7 +212,11 @@
       "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
       "callback": "Der Link ist nicht mehr gültig. Melden Sie sich an oder lassen Sie sich einen neuen senden."
     },
-    "confirmNotice": "Wenn Sie auf den Bestätigungslink in Ihrer E-Mail geklickt haben, ist Ihr Konto bereits bestätigt — melden Sie sich einfach unten an."
+    "confirmNotice": "Wenn Sie auf den Bestätigungslink in Ihrer E-Mail geklickt haben, ist Ihr Konto bereits bestätigt — melden Sie sich einfach unten an.",
+    "heroHeadline": "Logopädie, die zu Hause weitergeht.",
+    "heroPoint1": "Maßgeschneiderte Übungen von Ihrem Logopäden",
+    "heroPoint2": "Klarer Überblick über den Fortschritt",
+    "heroPoint3": "Privat und sicher — Daten in der EU"
   },
   "shell": {
     "navLabel": "Hauptnavigation",
@@ -240,7 +245,14 @@
     },
     "ageYears": "{age} J.",
     "ageRange": "{min}–{max} J.",
-    "loading": "Wird geladen…"
+    "loading": "Wird geladen…",
+    "errorTitle": "Etwas ist schiefgelaufen",
+    "errorLead": "Diese Seite konnte leider nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundLead": "Diese Seite existiert nicht oder wurde verschoben.",
+    "goHome": "Zurück zum Start",
+    "themeToggle": "Hell-/Dunkelmodus umschalten"
   },
   "domains": {
     "phonemic_awareness": "Laute & Klänge",
@@ -346,7 +358,20 @@
     "pathStart": "Starten",
     "pathLater": "Danach",
     "seeWholePlan": "Ganzen Plan ansehen",
-    "planRhythmFoldHint": "Wie Sie die Übungen über die Woche verteilen"
+    "planRhythmFoldHint": "Wie Sie die Übungen über die Woche verteilen",
+    "trendCaption": "Letzte Übungen",
+    "weekFresh": "Eine neue Woche — los geht's!",
+    "weekComplete": "Woche geschafft. Super gemacht! 🎉",
+    "responseWindow": "Antwortet meist innerhalb von 24 Stunden",
+    "messagesRailNote": "Schreiben Sie gern über den Übungsverlauf, Fragen oder Erfolge. Ihr Logopäde sieht auch Notizen zu einzelnen Übungen.",
+    "quickLinks": "Schnellzugriff",
+    "openPlan": "Plan ansehen",
+    "openProgress": "Fortschritt ansehen",
+    "speechConsentTitle": "Sprachaufnahmen",
+    "speechConsentLead": "Bei Bildbeschreibungs-Übungen können wir Ihr Kind beim Sprechen aufnehmen; unser Helfer prüft, ob es das Erwartete genannt hat. Aufnahmen sind privat, werden nach 30 Tagen gelöscht, und Sie können die Einwilligung jederzeit widerrufen.",
+    "speechConsentField": "Ich stimme der Sprachaufnahme meines Kindes zu",
+    "speechConsentSave": "Einwilligung speichern",
+    "speechConsentActive": "Aufnahme ist aktiv"
   },
   "therapist": {
     "dashTitle": "Ihre Familien",
@@ -412,7 +437,11 @@
         "ok": "Die Selbsteinschätzung des Kindes passt zur Leistung.",
         "under": "Das Kind unterschätzt sich — die Leistung war deutlich besser als seine Einschätzung.",
         "over": "Das Kind überschätzt sich — die Leistung war schwächer als seine Einschätzung."
-      }
+      },
+      "recPending": "Wird ausgewertet…",
+      "recFailed": "Aufnahme konnte nicht ausgewertet werden.",
+      "saidLabel": "Das Kind sagte",
+      "mentionedLabel": "Sollte erwähnen"
     },
     "builder": {
       "pageTitle": "Plan für {name}",
@@ -616,7 +645,8 @@
     "stateExpired": "Die Testphase ist beendet. Aktivieren Sie das Abo und machen Sie weiter.",
     "stateCanceled": "Das Abo ist gekündigt. Sie können es jederzeit wieder aktivieren.",
     "cancelBtn": "Abo kündigen",
-    "cancelConfirm": "Das Abo wirklich kündigen? Der Zugriff auf die Übungen endet, die Daten bleiben gespeichert."
+    "cancelConfirm": "Das Abo wirklich kündigen? Der Zugriff auf die Übungen endet, die Daten bleiben gespeichert.",
+    "benefitsTitle": "Was Sie erhalten"
   },
   "messagesUi": {
     "emptyTitle": "Noch keine Nachrichten",
@@ -720,7 +750,16 @@
       "great": "Ausgezeichnet",
       "almost": "Fast",
       "practice": "Wir üben noch",
-      "expected": "Erwartete Antwort"
+      "expected": "Erwartete Antwort",
+      "recordHint": "Lassen Sie Ihr Kind das Bild in eigenen Worten beschreiben. Unser Helfer prüft die Aufnahme.",
+      "startRec": "Aufnehmen",
+      "stopRec": "Stopp",
+      "uploading": "Aufnahme wird gespeichert…",
+      "recorded": "Aufgenommen! Wir werten es gleich aus.",
+      "again": "Nochmal",
+      "next": "Weiter",
+      "finish": "Fertig",
+      "recError": "Aufnahme fehlgeschlagen. Bitte erneut versuchen."
     },
     "guided": {
       "choicesLabel": "Möglichkeiten",
@@ -807,6 +846,8 @@
         "1": "Ich spreche langsam und deutlich",
         "2": "Ich achte auf Mund und Zunge"
       }
-    }
+    },
+    "recPendingStat": "Aufnahmen gesendet",
+    "recPendingSub": "Die Auswertung kommt in Kürze — im Fortschritt zu finden."
   }
 }

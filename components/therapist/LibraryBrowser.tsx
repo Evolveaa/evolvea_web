@@ -111,23 +111,26 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
         </span>
       </div>
 
-      <ul className="row-list">
+      <ul className="lib-grid">
         {filtered.map((e) => (
-          <li key={e.id} className="row-item" style={{ opacity: e.is_active ? 1 : 0.55 }}>
-            <DomainTile domain={e.domain} size={44} />
-            <span className="row-body">
-              <span className="row-title">
-                {e.title}
-                {e.mine && <span className="chip" style={{ marginLeft: 6, fontSize: "0.64rem" }}>{t("mine")}</span>}
-                {!e.is_active && <span className="chip" style={{ marginLeft: 6, fontSize: "0.64rem" }}>{t("inactive")}</span>}
+          <li key={e.id} className="lib-card" data-inactive={e.is_active ? undefined : ""}>
+            <div className="lib-card-head">
+              <DomainTile domain={e.domain} size={40} />
+              <span className="lib-card-id">
+                <span className="lib-card-title">
+                  {e.title}
+                  {e.mine && <span className="chip lib-flag">{t("mine")}</span>}
+                  {!e.is_active && <span className="chip lib-flag">{t("inactive")}</span>}
+                </span>
+                <span className="lib-card-meta">
+                  {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
+                  {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
+                  {tc("minutes", { count: e.duration_minutes })}
+                </span>
               </span>
-              <span className="row-sub">
-                {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
-                {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
-                {tc("minutes", { count: e.duration_minutes })} — {e.summary}
-              </span>
-            </span>
-            <span style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
+            </div>
+            <p className="lib-card-summary">{e.summary}</p>
+            <div className="lib-card-actions">
               <Link href={`/therapist/preview/${e.id}`} className="btn btn-sm btn-outline">
                 {t("preview")}
               </Link>
@@ -145,7 +148,7 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
                   </form>
                 </>
               )}
-            </span>
+            </div>
           </li>
         ))}
       </ul>

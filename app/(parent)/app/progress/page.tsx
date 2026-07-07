@@ -8,6 +8,8 @@ import {
   IconFlame,
   IconPlay,
   ProgressRing,
+  Sparkline,
+  TrendPill,
 } from "@/components/icons";
 import {
   buildWeekOverview,
@@ -20,7 +22,7 @@ import {
   groupSessionsByDay,
   trickyByExercise,
 } from "@/lib/data/parent";
-import SessionDetail from "@/components/therapist/SessionDetail";
+import SessionDetail, { hasSessionDetail } from "@/components/therapist/SessionDetail";
 import Link from "next/link";
 
 function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
@@ -63,6 +65,10 @@ export default async function ProgressPage() {
   const totalMinutes = Math.round(
     sessions.reduce((n, s) => n + (s.duration_seconds ?? 0), 0) / 60,
   );
+  const weekPct =
+    week.targetTotal > 0 ? Math.round((100 * week.doneTotal) / week.targetTotal) : 0;
+  const weekDone = week.targetTotal > 0 && week.doneTotal >= week.targetTotal;
+  const weekMsg = weekDone ? t("weekComplete") : week.doneTotal === 0 ? t("weekFresh") : null;
 
   return (
     <>
@@ -70,40 +76,43 @@ export default async function ProgressPage() {
       <p className="page-sub">{t("progressLead", { name: child.first_name })}</p>
 
       {/* week hero: ring + key numbers */}
-      <section className="hero-day" aria-label={t("weekSection")}>
+      <section className="hero-day hero-progress" aria-label={t("weekSection")}>
         <ProgressRing
           value={week.doneTotal}
           max={week.targetTotal}
-          label={
-            week.targetTotal > 0
-              ? `${Math.round((100 * week.doneTotal) / week.targetTotal)}%`
-              : "—"
-          }
+          size={104}
+          stroke={10}
+          label={week.targetTotal > 0 ? `${weekPct}%` : "—"}
           sub={t("weekRingSub")}
+          tone={weekDone ? "good" : "brand"}
         />
         <div className="hero-day-body">
           <p className="hero-day-title">
             {t("weekProgress", { done: week.doneTotal, target: week.targetTotal })}
           </p>
-          <div className="mini-stats">
-            <span className="mini-stat">
-              <i className="mini-stat-ico ico-sky" aria-hidden="true">
-                <IconPlay size={14} />
-              </i>
-              <b>{sessions.length}</b> {t("statSessions")}
-            </span>
-            <span className="mini-stat">
-              <i className="mini-stat-ico ico-violet" aria-hidden="true">
-                <IconClock size={14} />
-              </i>
-              <b>{totalMinutes}</b> {t("statMinutes")}
-            </span>
-            <span className="mini-stat">
-              <i className="mini-stat-ico ico-coral" aria-hidden="true">
-                <IconFlame size={14} />
-              </i>
-              <b>{streak}</b> {t("statStreak")}
-            </span>
+          {weekMsg && <p className="hero-day-sub">{weekMsg}</p>}
+        </div>
+        <div className="hero-stats">
+          <div className="hero-stat">
+            <i className="mini-stat-ico ico-sky" aria-hidden="true">
+              <IconPlay size={15} />
+            </i>
+            <b>{sessions.length}</b>
+            <span>{t("statSessions")}</span>
+          </div>
+          <div className="hero-stat">
+            <i className="mini-stat-ico ico-violet" aria-hidden="true">
+              <IconClock size={15} />
+            </i>
+            <b>{totalMinutes}</b>
+            <span>{t("statMinutes")}</span>
+          </div>
+          <div className="hero-stat">
+            <i className="mini-stat-ico ico-coral" aria-hidden="true">
+              <IconFlame size={15} />
+            </i>
+            <b>{streak}</b>
+            <span>{t("statStreak")}</span>
           </div>
         </div>
       </section>
@@ -119,27 +128,39 @@ export default async function ProgressPage() {
             {stats.length > 0 && (
               <div>
                 <h2 className="section-label">{t("domainsSection")}</h2>
-                <div className="card">
-                  <ul className="dstat-list">
-                    {stats.map((s) => (
-                      <li key={s.domain} className="dstat">
+                <ul className="dstat-list">
+                  {stats.map((s) => (
+                    <li key={s.domain} className="dcard">
+                      <div className="dcard-head">
                         <DomainTile domain={s.domain} size={38} />
-                        <span className="dstat-body">
-                          <span className="dstat-top">
-                            <span className="dstat-name">{td(s.domain)}</span>
-                            <span className="dstat-pct" data-none={s.avgPct === null ? "" : undefined}>
-                              {s.avgPct !== null ? `${s.avgPct}%` : "—"}
-                            </span>
+                        <span className="dcard-id">
+                          <span className="dcard-name">{td(s.domain)}</span>
+                          <span className="dcard-meta">
+                            {t("domainMeta", { count: s.sessions })}
                           </span>
-                          <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                            <i style={{ width: `${s.avgPct ?? 6}%` }} />
-                          </span>
-                          <span className="dstat-sub">{t("domainMeta", { count: s.sessions })}</span>
                         </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                        <span className="dcard-score">
+                          <span
+                            className="dcard-pct"
+                            data-none={s.avgPct === null ? "" : undefined}
+                          >
+                            {s.avgPct !== null ? `${s.avgPct}%` : "—"}
+                          </span>
+                          <TrendPill delta={s.delta} />
+                        </span>
+                      </div>
+                      <span className={`pbar bar-${s.domain}`} aria-hidden="true">
+                        <i style={{ width: `${s.avgPct ?? 6}%` }} />
+                      </span>
+                      {s.trend.length >= 3 && (
+                        <div className="dcard-spark">
+                          <span className="dcard-spark-label">{t("trendCaption")}</span>
+                          <Sparkline domain={s.domain} values={s.trend} />
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
@@ -190,7 +211,7 @@ export default async function ProgressPage() {
             <h2 className="section-label">{t("historySection")}</h2>
             <div className="hist-groups">
               {dayGroups.map((g) => (
-                <div key={g.dayKey}>
+                <div key={g.dayKey} className="hist-group">
                   <div className="hist-day-label">
                     {g.isToday
                       ? t("histToday")
@@ -212,47 +233,57 @@ export default async function ProgressPage() {
                       const pct = scored
                         ? Math.round((100 * (s.score_correct ?? 0)) / (s.score_total ?? 1))
                         : null;
+                      const expandable = hasSessionDetail(s.detail) || !!s.parent_note;
+                      const head = (
+                        <>
+                          {ex ? (
+                            <DomainTile domain={ex.domain} size={30} />
+                          ) : (
+                            <span className="row-ico" aria-hidden="true" style={{ width: 30, height: 30 }}>
+                              <IconCheck size={16} />
+                            </span>
+                          )}
+                          <span className="hist-main">
+                            <span className="hist-title">{ex?.title ?? "—"}</span>
+                            {shared && <span className="hist-note">{t("histSharedActivity")}</span>}
+                          </span>
+                          {scored ? (
+                            <span className="score-pill" data-tone={scoreTone(pct)}>
+                              {s.score_correct}/{s.score_total}
+                            </span>
+                          ) : (
+                            <span className="hist-done">
+                              <IconCheck size={13} /> {t("pathDone")}
+                            </span>
+                          )}
+                          {expandable && (
+                            <span className="hist-chev" aria-hidden="true">
+                              <IconChevronDown size={16} />
+                            </span>
+                          )}
+                        </>
+                      );
                       return (
                         <li key={s.id}>
-                          <details className="hist-item" data-shared={shared ? "" : undefined}>
-                            <summary>
-                              {ex ? (
-                                <DomainTile domain={ex.domain} size={30} />
-                              ) : (
-                                <span className="row-ico" aria-hidden="true" style={{ width: 30, height: 30 }}>
-                                  <IconCheck size={16} />
-                                </span>
-                              )}
-                              <span className="hist-main">
-                                <span className="hist-title">{ex?.title ?? "—"}</span>
-                                {shared && <span className="hist-note">{t("histSharedActivity")}</span>}
-                              </span>
-                              {scored ? (
-                                <span className="score-pill" data-tone={scoreTone(pct)}>
-                                  {s.score_correct}/{s.score_total}
-                                </span>
-                              ) : (
-                                <span className="hist-done">
-                                  <IconCheck size={13} /> {t("pathDone")}
-                                </span>
-                              )}
-                              <span className="hist-chev" aria-hidden="true">
-                                <IconChevronDown size={16} />
-                              </span>
-                            </summary>
-                            <div className="hist-detail">
-                              {s.parent_note && (
-                                <p className="hist-parent-note">
-                                  📝 <i>„{s.parent_note}“</i>
-                                </p>
-                              )}
-                              <SessionDetail
-                                detail={s.detail}
-                                scoreCorrect={s.score_correct}
-                                scoreTotal={s.score_total}
-                              />
+                          {expandable ? (
+                            <details className="hist-item" data-shared={shared ? "" : undefined}>
+                              <summary>{head}</summary>
+                              <div className="hist-detail">
+                                {s.parent_note && (
+                                  <p className="hist-parent-note">„{s.parent_note}“</p>
+                                )}
+                                <SessionDetail
+                                  detail={s.detail}
+                                  scoreCorrect={s.score_correct}
+                                  scoreTotal={s.score_total}
+                                />
+                              </div>
+                            </details>
+                          ) : (
+                            <div className="hist-item" data-shared={shared ? "" : undefined}>
+                              <div className="hist-row">{head}</div>
                             </div>
-                          </details>
+                          )}
                         </li>
                       );
                     })}
