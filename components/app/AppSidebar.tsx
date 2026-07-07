@@ -67,10 +67,10 @@ export default function AppSidebar({
             {userName.trim().charAt(0).toUpperCase() || "?"}
           </span>
           <span className="side-user-name">{userName}</span>
+          <ThemeToggle />
         </div>
         <div className="side-foot-row">
           <LanguageSwitcher />
-          <ThemeToggle />
           <SignOutButton />
         </div>
         <p className="side-quote">Vytvorené s láskou pre naše deti.</p>

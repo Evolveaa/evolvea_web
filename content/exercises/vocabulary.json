@@ -530,5 +530,81 @@
         }
       ]
     }
+  },
+  {
+    "slug": "vo-slova-na-prechadzke-1",
+    "domain": "vocabulary",
+    "modality": "guided",
+    "title": "Slová na prechádzke",
+    "summary": "Rozvoj slovnej zásoby v prirodzenej rutine: pomenúvanie, opis podľa vlastností a triedenie do sémantických polí počas prechádzky, s rozširovaním rodičom (naturalistická jazyková facilitácia, Hanen). Buduje aktívny slovník a sémantickú organizáciu v reálnom kontexte, nie pri obrazovke.",
+    "parent_guide": "Vyberte sa na krátku prechádzku bez telefónu a choďte za pozornosťou dieťaťa. Keď dieťa niečo pomenuje, zopakujte to a pridajte slovo navyše: „Áno, pes — veľký hnedý pes.“ Striedajte tri hry: pomenuj (čo to je), opíš (aké to je) a roztrieď (kam to patrí). Nové slová nepýtajte skúšaním — ponúknite ich v vete a nechajte ich znieť.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 8,
+    "duration_minutes": 10,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Ideme na prechádzku a budeme loviť slová! Ty budeš hovoriť, čo vidíš, a spolu k tomu pridáme ešte viac slov.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vyberte sa von",
+          "body": "Odložte telefón a vyberte sa na krátku prechádzku — okolo domu, do parku alebo do obchodu. Povedzte: „Dnes budeme na prechádzke zbierať slová. Ty budeš hlavný lovec.“ Choďte tam, kam sa pozerá dieťa.",
+          "tip": "Nemusíte prejsť veľa. Lepšie je pár krokov a veľa rozprávania než dlhá tichá cesta."
+        },
+        {
+          "kicker": "Krok 2 · Pomenuj a pridaj",
+          "title": "Čo vidíš?",
+          "body": "Nechajte dieťa pomenúvať, čo vidí. Po každom slove ho zopakujte a pridajte jedno slovo navyše: dieťa: „auto“ — vy: „áno, červené auto, ktoré rýchlo ide.“ Tak dieťa počuje nové slová prirodzene vo vete.",
+          "tip": "Nehovorte „nie, to je…“. Aj keď dieťa slovo netrafí presne, len ponúknite správne v peknej vete."
+        },
+        {
+          "kicker": "Krok 3 · Opíš",
+          "title": "Aké to je?",
+          "body": "Vyberte spolu dve–tri veci a opíšte ich podľa vlastností: akú má farbu, tvar, veľkosť, na čo slúži. Striedajte sa — jednu vlastnosť poviete vy, jednu dieťa.",
+          "tip": "Opis je viac než farba. Pýtajte sa aj „Na čo to je?“ a „Z čoho to je?“ — tak sa slovná zásoba prehlbuje."
+        },
+        {
+          "kicker": "Krok 4 · Roztrieď",
+          "title": "Kam to patrí?",
+          "body": "Vyberte tému a spolu hľadajte veci, ktoré do nej patria — napríklad „všetko, čo rastie“, „všetko, čo sa hýbe“ alebo „všetko, čo je z dreva“. Zapíšte, čo dieťa našlo.",
+          "fields": [
+            {
+              "label": "Akú skupinu sme hľadali?",
+              "placeholder": "napr. veci, ktoré rastú"
+            },
+            {
+              "label": "Čo do nej dieťa zaradilo?",
+              "placeholder": "napr. strom, tráva, kvet, ker"
+            }
+          ],
+          "tip": "Triedenie do skupín (sémantických polí) pomáha dieťaťu si slová lepšie pamätať a rýchlejšie vybavovať."
+        },
+        {
+          "kicker": "Krok 5 · Hra",
+          "title": "Vidím niečo, čo je…",
+          "body": "Zahrajte si hádanie podľa vlastnosti: „Vidím niečo, čo je okrúhle a svieti.“ Dieťa háda. Potom sa vymeňte — hádanku vymyslí dieťa a háda rodič.",
+          "choices": [
+            "Podľa farby",
+            "Podľa tvaru",
+            "Podľa zvuku",
+            "Podľa toho, na čo to je"
+          ],
+          "tip": "Keď háda rodič, občas naschvál pomýľte — dieťa s radosťou opraví a pritom precvičí slová."
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Nové slovo dňa",
+          "body": "Cestou späť si spolu vyberte jedno nové alebo pekné slovo z dnešnej prechádzky a zapíšte ho. Dieťa nech ho povie vo vete.",
+          "fields": [
+            {
+              "label": "Nové slovo dňa",
+              "placeholder": "napr. konár"
+            }
+          ],
+          "tip": "Nové slovo sa uchytí, keď ho dieťa počuje aj použije viackrát. Skúste ho spolu použiť ešte cez deň."
+        }
+      ]
+    }
   }
 ]

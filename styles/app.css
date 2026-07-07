@@ -717,8 +717,11 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0 0.35rem;
+  padding: 0.35rem 0.4rem;
   min-width: 0;
+  border-radius: 12px;
+  background: rgba(22, 31, 51, 0.03);
+  border: 1px solid var(--ink-line);
 }
 .side-avatar {
   flex: none;
@@ -734,6 +737,8 @@
   box-shadow: 0 4px 10px -5px rgba(63, 127, 196, 0.7);
 }
 .side-user-name {
+  flex: 1;
+  min-width: 0;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--ink);
@@ -746,7 +751,17 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0 0.2rem;
+  padding: 0 0.15rem;
+}
+/* keep both controls whole; never let the sign-out spill past the rail */
+.side-foot-row .lang-switch {
+  flex: none;
+}
+.side-foot-row form {
+  flex: none;
+}
+.side-foot-row .btn {
+  padding-inline: 0.85rem;
 }
 .app-header {
   position: sticky;
@@ -4293,3 +4308,6 @@ a.path-row:hover .path-card {
 [data-theme="dark"] .path-row[data-state="done"] .path-card{background:linear-gradient(135deg,rgba(102,203,143,.12),var(--cream-hi))}
 [data-theme="dark"] .path-cta-done{background:rgba(102,203,143,.16);color:#7ad39d}
 [data-theme="dark"] .path-cta-later{background:rgba(255,255,255,.06)}
+
+/* sidebar user chip in dark */
+[data-theme="dark"] .side-user{background:rgba(255,255,255,.03);border-color:var(--ink-line)}
