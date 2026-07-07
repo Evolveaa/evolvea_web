@@ -539,5 +539,174 @@
         }
       ]
     }
+  },
+  {
+    "slug": "na-spolocny-zazitok-2",
+    "domain": "narrative",
+    "modality": "guided",
+    "title": "Náš spoločný zážitok",
+    "summary": "Elaboratívne spoločné spomínanie (Reese & Fivush): rodič a dieťa spolu prerozprávajú jednu zažitú udalosť pomocou otvorených otázok a rozširovania. Preukázateľne rozvíja autobiografickú pamäť, súvislé osobné rozprávanie a porozumenie vlastným emóciám.",
+    "parent_guide": "Vyberte udalosť, ktorú ste zažili spolu a obaja si ju pamätáte (výlet, návšteva, oslava). Spomínajte ako partneri, nie ako skúšajúci: pýtajte sa otvorene („Čo sa stalo potom?“, „Ako to vyzeralo?“), nie zisťovacie otázky s odpoveďou áno/nie. Keď dieťa niečo povie, zopakujte to a pridajte jeden detail navyše: „Áno, a pršalo, tak sme sa schovali pod strom.“ Nechajte dieťa hovoriť viac než vy — vaše otázky sú mostíky, nie test pamäti.",
+    "difficulty": 2,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 10,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Poď, zaspomíname si spolu na niečo, čo sme zažili. Ty budeš hlavný rozprávač a ja ti budem pomáhať otázkami.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Výber",
+          "title": "Vyberte spoločnú spomienku",
+          "body": "Sadnite si vedľa dieťaťa bez telefónu a spolu si vyberte jednu udalosť, ktorú ste obaja zažili — napríklad výlet, návštevu babky alebo deň, keď sa niečo pokazilo a smiali ste sa na tom. Povedzte: „Poď, spomenieme si spolu, ako to celé bolo.“",
+          "tip": "Vyberte udalosť, pri ktorej má dieťa čo rozprávať. Ak si nič nevie vybrať, ponúknite dve možnosti a nechajte ho rozhodnúť."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa ti to spája?",
+          "body": "Skôr než začnete rozprávať, spýtajte sa: „Keď si na to spomenieš, ako sa cítiš?“ Nechajte dieťa vybrať pocit — pokojne aj viac naraz.",
+          "choices": [
+            "Radosť",
+            "Smiech",
+            "Prekvapenie",
+            "Trošku smútok",
+            "Hrdosť",
+            "Nadšenie"
+          ],
+          "tip": "Pocit neopravujte („veď to bolo super, prečo smútok?“). Emócie k spomienke patria — len ho prijmite: „Aha, aj trošku smútok. Rozumiem.“"
+        },
+        {
+          "kicker": "Krok 3 · Otvorené otázky",
+          "title": "Rozprávaj, ako to bolo",
+          "body": "Naštartujte spomienku a potom sa pýtajte otvorene — otázkami, ktoré sa nedajú odbaviť slovom áno/nie. Odpovede zapíšte dieťaťovými vlastnými slovami.",
+          "fields": [
+            {
+              "label": "Kde sme boli a kto tam bol?",
+              "placeholder": "napr. pri jazere, ja, mama a dedko"
+            },
+            {
+              "label": "Čo sa stalo ako prvé?",
+              "placeholder": "napr. požičali sme si loďku"
+            },
+            {
+              "label": "A čo bolo potom?",
+              "placeholder": "napr. spadla mi čiapka do vody"
+            }
+          ],
+          "tip": "Používajte „Čo…?“, „Ako…?“, „Prečo…?“ namiesto „Bolo…?“. Po každej odpovedi chvíľu počkajte — ticho dáva dieťaťu priestor pridať viac."
+        },
+        {
+          "kicker": "Krok 4 · Rozšírenie",
+          "title": "Pridajme detaily",
+          "body": "Keď dieťa niečo povie, zopakujte to a jemne rozšírte, potom vráťte otázku späť: „Áno, čiapka spadla do vody — a akú mala farbu? Čo si vtedy urobil?“ Spoločne dopĺňajte, čo bolo vidieť, počuť a cítiť.",
+          "fields": [
+            {
+              "label": "Aký detail sme si spolu vybavili?",
+              "placeholder": "napr. voda bola studená a dedko sa smial"
+            }
+          ],
+          "tip": "Rozširujte, nenahrádzajte. Nedokončujte vety za dieťa — pridajte jedno slovo a loptičku hneď vráťte jemu."
+        },
+        {
+          "kicker": "Krok 5 · Celý príbeh",
+          "title": "Prerozprávaj to odznova",
+          "body": "Povedzte: „A teraz mi to porozprávaj celé samo, od začiatku po koniec.“ Dieťa prerozpráva spomienku vlastnými slovami ako súvislý príbeh. Vy len počúvate a prikyvujete.",
+          "tip": "Neskáčte do reči ani neopravujte poradie. Ak sa zasekne, pomôžte jedinou otázkou: „A čo bolo úplne na konci?“"
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Na záver si dieťa vyberie vetu, ktorá platí, a povie ju nahlas.",
+          "choices": [
+            "Pamätám si veľa vecí.",
+            "Viem porozprávať celý príbeh.",
+            "Naše spomienky sú vzácne."
+          ],
+          "tip": "Vetu nevyberajte za dieťa. Spoločné spomínanie posilňuje puto aj pamäť — najviac vtedy, keď má dieťa pocit, že ho naozaj počúvate."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-spolu-vymyslime-pribeh-2",
+    "domain": "narrative",
+    "modality": "guided",
+    "title": "Spolu vymyslíme príbeh",
+    "summary": "Spoločné ústne rozprávanie so štruktúrou príbehu (postava – miesto – problém – pokus – riešenie – koniec) a striedaním rozprávača. Rozvíja makroštruktúru rozprávania, súdržnosť a tvorivé jazykové vyjadrovanie (naratívna metodika Ďačenko-Stanislavovej; gramatika príbehu).",
+    "parent_guide": "Vymýšľajte príbeh spolu, ale nechajte dieťa niesť dej. Držte sa jednoduchej kostry: kto je hrdina, kde je, aký má problém, ako ho rieši a ako to dopadne. Keď ste na rade vy, pridajte len jednu–dve vety a loptičku vráťte dieťaťu otázkou: „A čo urobil potom?“ Nesnažte sa príbeh spraviť dokonalý — smiech a nečakané zvraty sú vítané.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 10,
+    "duration_minutes": 10,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Poď, vymyslíme spolu úplne nový príbeh! Ja začnem vetou, ty budeš pokračovať — a uvidíme, kam to spolu dovedieme.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Hrdina a miesto",
+          "title": "Kto a kde?",
+          "body": "Sadnite si oproti sebe bez obrazoviek. Spolu vymyslite hrdinu a miesto, kde sa príbeh začne. Nechajte hlavné slovo dieťa a zapíšte, na čom ste sa dohodli.",
+          "fields": [
+            {
+              "label": "Kto je náš hrdina?",
+              "placeholder": "napr. malá odvážna myška"
+            },
+            {
+              "label": "Kde sa príbeh začína?",
+              "placeholder": "napr. v lese pri veľkom dube"
+            }
+          ],
+          "tip": "Prijmite aj bláznivé nápady (šarkan, ktorý sa bojí výšok). Tvorivosť je dôležitejšia než logika."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Aký príbeh chceme?",
+          "body": "Spýtajte sa dieťaťa, akú náladu má náš príbeh mať, a nechajte ho vybrať. To určí, ako budete spolu pokračovať.",
+          "choices": [
+            "Veselý",
+            "Napínavý",
+            "Dobrodružný",
+            "Strašidelný (ale dobre skončí)",
+            "Smiešny"
+          ],
+          "tip": "Voľbu nechajte na dieťa. Keď si zvolí náladu samo, viac sa do príbehu vloží."
+        },
+        {
+          "kicker": "Krok 3 · Problém",
+          "title": "Čo sa pokazilo?",
+          "body": "Každý dobrý príbeh má problém. Povedzte: „Náš hrdina si pokojne žil… a zrazu!“ a nechajte dieťa vymyslieť, čo sa stalo. Ak potrebuje pomôcť, ponúknite začiatok vety, nie celé riešenie.",
+          "fields": [
+            {
+              "label": "Aký problém sa objavil?",
+              "placeholder": "napr. myške zapadol domček pod lístie"
+            }
+          ],
+          "tip": "Neriešte problém za dieťa. Vaša úloha je len rozbehnúť napätie a vrátiť slovo jemu."
+        },
+        {
+          "kicker": "Krok 4 · Pokus a riešenie",
+          "title": "Rozprávajme sa na striedačku",
+          "body": "Teraz sa striedajte po vetách. Vy pridáte jednu–dve vety a vždy skončíte otázkou, ktorá vráti dej dieťaťu: „…a keď otvorila dvere, čo tam uvidela?“ Nechajte dieťa hrdinu previesť cez pokusy až k riešeniu.",
+          "tip": "Vaše vety majú byť mostíky, nie zápletka. Keď hovorí dieťa, len počúvajte a prikyvujte — neprevezmite rozprávanie."
+        },
+        {
+          "kicker": "Krok 5 · Koniec a prerozprávanie",
+          "title": "Ako to dopadlo?",
+          "body": "Nechajte dieťa vymyslieť koniec. Potom povedzte: „Paráda! A teraz mi porozprávaj celý náš príbeh od začiatku — kto, kde, čo sa pokazilo a ako to dopadlo.“ Dieťa prerozpráva celý príbeh samo.",
+          "tip": "Pri prerozprávaní nič neopravujte. Ak niečo vynechá, pomôžte jedinou otázkou: „A nezabudol si, ako sa to celé začalo?“"
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Dieťa si vyberie vetu, ktorá dnes platí, a povie ju nahlas.",
+          "choices": [
+            "Viem vymyslieť vlastný príbeh.",
+            "Mám veľkú fantáziu.",
+            "Dokážem rozprávať od začiatku po koniec."
+          ],
+          "tip": "Vetu nevyberajte za dieťa. Pochvala za vlastný nápad posilní chuť rozprávať aj nabudúce."
+        }
+      ]
+    }
   }
 ]

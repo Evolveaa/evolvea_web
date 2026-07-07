@@ -473,5 +473,76 @@
         }
       ]
     }
+  },
+  {
+    "slug": "gu-sleduj-a-cakaj-1",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Sleduj a čakaj",
+    "summary": "Stratégia OWL — Observe, Wait, Listen (Hanen, It Takes Two to Talk): rodič sa naladí na dieťa, počká a nechá ho viesť rozhovor. Rozvíja iniciatívu dieťaťa v komunikácii, striedanie v rozhovore (serve-and-return) a dlhšie spoločné výmeny.",
+    "parent_guide": "Cieľom nie je dieťa niečo naučiť, ale nechať ho viesť. Odložte telefón, buďte s dieťaťom tvárou v tvár na jeho úrovni a sledujte, čo ho práve zaujíma. Potom — a to je najťažšie — čakajte. Nechajte dieťa začať. Keď niečo urobí alebo povie, reagujte na to isté, o čo má záujem, a komentujte namiesto vypytovania: „Ty stavia vysokú vežu.“ Menej otázok, viac čakania a záujmu.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 8,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Dnes budeš viesť ty. Vyber si, čo budeme robiť, a ja pôjdem za tebou.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Nechajte dieťa vybrať",
+          "body": "Odložte obrazovky a sadnite si k dieťaťu na jeho úroveň — na zem, oproti nemu. Povedzte: „Teraz si vyber ty, čo budeme robiť. Ja idem s tebou.“ Nech si dieťa zvolí hru, hračku alebo tému.",
+          "tip": "Neponúkajte hneď svoj nápad. Dnes je vaša úloha ísť za dieťaťom, nie ho viesť."
+        },
+        {
+          "kicker": "Krok 2 · Sleduj",
+          "title": "Všímajte si, čo ho zaujíma",
+          "body": "Pozorne sledujte, na čo sa dieťa pozerá a čo robí. Buďte tvárou v tvár, aby ste videli jeho oči. Zatiaľ nič neriaďte — len sa naladíte na to, čo je preň dôležité.",
+          "tip": "Sledovanie nie je pasívne. Ukazuje dieťaťu: to, čo ťa zaujíma, je dôležité aj pre mňa."
+        },
+        {
+          "kicker": "Krok 3 · Čakaj",
+          "title": "Počkajte a mlčte",
+          "body": "Toto je najsilnejšia časť. Po tom, čo dieťa niečo urobí, potichu počkajte — pokojne narátajte v duchu do desať — a nechajte dieťa začať ďalší krok alebo prehovoriť. Tvárte sa so záujmom a čakajte.",
+          "tip": "Ticho nie je prázdne miesto, ktoré treba zaplniť. Čakanie dáva dieťaťu čas, aby začalo samo — a práve to je cieľ."
+        },
+        {
+          "kicker": "Krok 4 · Počúvaj a pridaj sa",
+          "title": "Reagujte na jeho záujem",
+          "body": "Keď sa dieťa ozve alebo niečo urobí, pripojte sa k tomu istému. Komentujte, čo vidíte, namiesto vypytovania: „Aha, červené auto ide rýchlo.“ Zapíšte si, čo dieťa dnes samo začalo.",
+          "fields": [
+            {
+              "label": "Čo dieťa samo začalo alebo povedalo?",
+              "placeholder": "napr. ukázalo na psa a povedalo „havo beží“"
+            }
+          ],
+          "tip": "Za jednu vetu dieťaťa nedávajte tri otázky. Radšej pridajte jeden komentár a zase počkajte."
+        },
+        {
+          "kicker": "Krok 5 · Reflexia",
+          "title": "Čo prinieslo čakanie",
+          "body": "Po spoločnej chvíli sa zastavte a všimnite si, čo sa zmenilo, keď ste viedli menej vy a viac dieťa.",
+          "fields": [
+            {
+              "label": "Čo ste si všimli, keď ste počkali?",
+              "placeholder": "napr. dieťa začalo rozprávať samo od seba"
+            }
+          ],
+          "tip": "Ak toho dieťa dnes veľa nepovedalo, je to v poriadku. Zmena je v tom, že dostalo priestor — a ten sa oplatí dávať znova a znova."
+        },
+        {
+          "kicker": "Krok 6 · Ukotvenie",
+          "title": "Veta pre nás",
+          "body": "Nechajte dieťa vybrať vetu a povedzte si ju spolu nahlas.",
+          "choices": [
+            "Rád sa s tebou hrám.",
+            "Počúvam ťa.",
+            "Máme na seba čas."
+          ],
+          "tip": "Toto ukotvenie je aj pre vás: čím častejšie sledujete, čakáte a počúvate, tým viac sa dieťa rozhovorí."
+        }
+      ]
+    }
   }
 ]
