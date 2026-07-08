@@ -484,7 +484,12 @@
       "preview": "Vorschau",
       "edit": "Bearbeiten",
       "deactivate": "Deaktivieren",
-      "activate": "Aktivieren"
+      "activate": "Aktivieren",
+      "focusLabel": "Kategorien",
+      "ageLabel": "Alter",
+      "allAges": "Jedes Alter",
+      "noResults": "Keine Übungen entsprechen diesen Filtern.",
+      "clearFilters": "Filter zurücksetzen"
     },
     "exerciseForm": {
       "backToLibrary": "Bibliothek",
@@ -849,5 +854,14 @@
     },
     "recPendingStat": "Aufnahmen gesendet",
     "recPendingSub": "Die Auswertung kommt in Kürze — im Fortschritt zu finden."
+  },
+  "categories": {
+    "pronunciation": "Aussprache",
+    "literacy": "Lesevorbereitung",
+    "language": "Erzählen & Wortschatz",
+    "cognition": "Gedächtnis & Aufmerksamkeit",
+    "metacognition": "Metakognitive Entwicklung",
+    "younger": "Jüngere Kinder",
+    "older": "Ältere Kinder"
   }
 }

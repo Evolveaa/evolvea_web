@@ -3,8 +3,10 @@
 import { useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { publishPlanAction, type PlanItemInput } from "@/lib/therapist/actions";
-import { DomainGlyph, DomainTile } from "@/components/icons";
-import { DOMAINS, type ExerciseDomain } from "@/lib/exercises/types";
+import { DomainTile } from "@/components/icons";
+import CategoryFilter from "@/components/exercises/CategoryFilter";
+import type { ExerciseDomain } from "@/lib/exercises/types";
+import { focusOf, inAgeBand, type FocusKey, type AgeBandKey } from "@/lib/exercises/categories";
 
 /** Trimmed exercise row — the builder never needs the content payload. */
 export interface LibraryItem {
@@ -30,6 +32,7 @@ export default function PlanBuilder({
   initialTitle,
   initialNote,
   initialItems,
+  defaultAgeBand = "all",
 }: {
   childId: string;
   childName: string;
@@ -37,10 +40,10 @@ export default function PlanBuilder({
   initialTitle: string;
   initialNote: string;
   initialItems: PlanItemInput[];
+  defaultAgeBand?: AgeBandKey | "all";
 }) {
   const t = useTranslations("therapist.builder");
   const tc = useTranslations("common");
-  const td = useTranslations("domains");
   const tt = useTranslations("therapist");
 
   const [title, setTitle] = useState(initialTitle);
@@ -48,7 +51,8 @@ export default function PlanBuilder({
   const [items, setItems] = useState<DraftItem[]>(
     initialItems.map((item, i) => ({ ...item, key: i })),
   );
-  const [domain, setDomain] = useState<ExerciseDomain | "all">("all");
+  const [focus, setFocus] = useState<FocusKey | "all">("all");
+  const [ageBand, setAgeBand] = useState<AgeBandKey | "all">(defaultAgeBand);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -59,10 +63,11 @@ export default function PlanBuilder({
     const q = search.trim().toLowerCase();
     return library.filter(
       (e) =>
-        (domain === "all" || e.domain === domain) &&
+        (focus === "all" || focusOf(e.domain) === focus) &&
+        (ageBand === "all" || inAgeBand(ageBand, e.age_min, e.age_max)) &&
         (q === "" || e.title.toLowerCase().includes(q) || e.summary.toLowerCase().includes(q)),
     );
-  }, [library, domain, search]);
+  }, [library, focus, ageBand, search]);
 
   function add(id: string) {
     setItems((prev) =>
@@ -113,28 +118,8 @@ export default function PlanBuilder({
       {/* ------- library pane ------- */}
       <div>
         <h2 className="section-label">{t("libraryPane")}</h2>
-        <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", marginBottom: "0.7rem" }}>
-          <button
-            type="button"
-            className="chip"
-            aria-pressed={domain === "all"}
-            style={domain === "all" ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
-            onClick={() => setDomain("all")}
-          >
-            {t("allDomains")}
-          </button>
-          {DOMAINS.map((d) => (
-            <button
-              key={d}
-              type="button"
-              className="chip"
-              aria-pressed={domain === d}
-              style={domain === d ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
-              onClick={() => setDomain(d)}
-            >
-              <DomainGlyph domain={d} size={14} /> {td(d)}
-            </button>
-          ))}
+        <div style={{ marginBottom: "0.5rem" }}>
+          <CategoryFilter focus={focus} setFocus={setFocus} ageBand={ageBand} setAgeBand={setAgeBand} />
         </div>
         <input
           className="input"
