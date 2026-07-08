@@ -484,7 +484,12 @@
       "preview": "Preview",
       "edit": "Edit",
       "deactivate": "Disable",
-      "activate": "Enable"
+      "activate": "Enable",
+      "focusLabel": "Categories",
+      "ageLabel": "Age",
+      "allAges": "Any age",
+      "noResults": "No exercises match these filters.",
+      "clearFilters": "Clear filters"
     },
     "exerciseForm": {
       "backToLibrary": "Library",
@@ -849,5 +854,14 @@
     },
     "recPendingStat": "Recordings sent",
     "recPendingSub": "The assessment will arrive shortly — find it in Progress."
+  },
+  "categories": {
+    "pronunciation": "Pronunciation",
+    "literacy": "Reading readiness",
+    "language": "Storytelling & vocabulary",
+    "cognition": "Memory & attention",
+    "metacognition": "Metacognitive growth",
+    "younger": "Younger children",
+    "older": "Older children"
   }
 }

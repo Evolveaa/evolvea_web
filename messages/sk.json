@@ -484,7 +484,12 @@
       "preview": "Náhľad",
       "edit": "Upraviť",
       "deactivate": "Vypnúť",
-      "activate": "Zapnúť"
+      "activate": "Zapnúť",
+      "focusLabel": "Kategórie",
+      "ageLabel": "Vek",
+      "allAges": "Každý vek",
+      "noResults": "Žiadne cvičenia nezodpovedajú filtru.",
+      "clearFilters": "Zrušiť filtre"
     },
     "exerciseForm": {
       "backToLibrary": "Knižnica",
@@ -849,5 +854,14 @@
     },
     "recPendingStat": "Nahrávky odoslané",
     "recPendingSub": "Vyhodnotenie príde o chvíľu — nájdete ho v Pokroku."
+  },
+  "categories": {
+    "pronunciation": "Výslovnosť",
+    "literacy": "Príprava na čítanie a písanie",
+    "language": "Rozprávanie a slovná zásoba",
+    "cognition": "Pamäť a pozornosť",
+    "metacognition": "Metakognitívny rozvoj",
+    "younger": "Mladšie deti",
+    "older": "Staršie deti"
   }
 }

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toggleExerciseActiveAction } from "@/lib/therapist/actions";
-import { DomainGlyph, DomainTile } from "@/components/icons";
-import { DOMAINS, type ExerciseDomain, type ExerciseModality } from "@/lib/exercises/types";
+import { DomainTile } from "@/components/icons";
+import CategoryFilter from "@/components/exercises/CategoryFilter";
+import type { ExerciseDomain, ExerciseModality } from "@/lib/exercises/types";
+import { focusOf, inAgeBand, type FocusKey, type AgeBandKey } from "@/lib/exercises/categories";
 
 export interface LibraryRow {
   id: string;
@@ -33,7 +35,8 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
   const tc = useTranslations("common");
   const td = useTranslations("domains");
 
-  const [domain, setDomain] = useState<ExerciseDomain | "all">("all");
+  const [focus, setFocus] = useState<FocusKey | "all">("all");
+  const [ageBand, setAgeBand] = useState<AgeBandKey | "all">("all");
   const [difficulty, setDifficulty] = useState(0);
   const [search, setSearch] = useState("");
   const [onlyMine, setOnlyMine] = useState(false);
@@ -42,40 +45,30 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
     const q = search.trim().toLowerCase();
     return exercises.filter(
       (e) =>
-        (domain === "all" || e.domain === domain) &&
+        (focus === "all" || focusOf(e.domain) === focus) &&
+        (ageBand === "all" || inAgeBand(ageBand, e.age_min, e.age_max)) &&
         (difficulty === 0 || e.difficulty === difficulty) &&
         (!onlyMine || e.mine) &&
-        (q === "" || e.title.toLowerCase().includes(q) || e.summary.toLowerCase().includes(q)),
+        (q === "" ||
+          e.title.toLowerCase().includes(q) ||
+          e.summary.toLowerCase().includes(q) ||
+          td(e.domain).toLowerCase().includes(q)),
     );
-  }, [exercises, domain, difficulty, search, onlyMine]);
+  }, [exercises, focus, ageBand, difficulty, search, onlyMine, td]);
+
+  function clearFilters() {
+    setFocus("all");
+    setAgeBand("all");
+    setDifficulty(0);
+    setSearch("");
+    setOnlyMine(false);
+  }
 
   return (
     <>
-      <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", marginBottom: "0.7rem" }}>
-        <button
-          type="button"
-          className="chip"
-          aria-pressed={domain === "all"}
-          style={domain === "all" ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
-          onClick={() => setDomain("all")}
-        >
-          {t("all")}
-        </button>
-        {DOMAINS.map((d) => (
-          <button
-            key={d}
-            type="button"
-            className="chip"
-            aria-pressed={domain === d}
-            style={domain === d ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" } : undefined}
-            onClick={() => setDomain(d)}
-          >
-            <DomainGlyph domain={d} size={14} /> {td(d)}
-          </button>
-        ))}
-      </div>
+      <CategoryFilter focus={focus} setFocus={setFocus} ageBand={ageBand} setAgeBand={setAgeBand} />
 
-      <div style={{ display: "flex", gap: "0.7rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
+      <div style={{ display: "flex", gap: "0.7rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem", marginTop: "0.9rem" }}>
         <input
           className="input"
           type="search"
@@ -111,47 +104,59 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
         </span>
       </div>
 
-      <ul className="lib-grid">
-        {filtered.map((e) => (
-          <li key={e.id} className="lib-card" data-inactive={e.is_active ? undefined : ""}>
-            <div className="lib-card-head">
-              <DomainTile domain={e.domain} size={40} />
-              <span className="lib-card-id">
-                <span className="lib-card-title">
-                  {e.title}
-                  {e.mine && <span className="chip lib-flag">{t("mine")}</span>}
-                  {!e.is_active && <span className="chip lib-flag">{t("inactive")}</span>}
+      {filtered.length === 0 ? (
+        <div className="empty">
+          <span className="empty-emoji" aria-hidden="true">
+            🔍
+          </span>
+          <p>{t("noResults")}</p>
+          <button type="button" className="btn btn-sm btn-outline" onClick={clearFilters}>
+            {t("clearFilters")}
+          </button>
+        </div>
+      ) : (
+        <ul className="lib-grid">
+          {filtered.map((e) => (
+            <li key={e.id} className="lib-card" data-inactive={e.is_active ? undefined : ""}>
+              <div className="lib-card-head">
+                <DomainTile domain={e.domain} size={40} />
+                <span className="lib-card-id">
+                  <span className="lib-card-title">
+                    {e.title}
+                    {e.mine && <span className="chip lib-flag">{t("mine")}</span>}
+                    {!e.is_active && <span className="chip lib-flag">{t("inactive")}</span>}
+                  </span>
+                  <span className="lib-card-meta">
+                    {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
+                    {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
+                    {tc("minutes", { count: e.duration_minutes })}
+                  </span>
                 </span>
-                <span className="lib-card-meta">
-                  {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
-                  {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
-                  {tc("minutes", { count: e.duration_minutes })}
-                </span>
-              </span>
-            </div>
-            <p className="lib-card-summary">{e.summary}</p>
-            <div className="lib-card-actions">
-              <Link href={`/therapist/preview/${e.id}`} className="btn btn-sm btn-outline">
-                {t("preview")}
-              </Link>
-              {e.mine && (
-                <>
-                  <Link href={`/therapist/library/${e.id}`} className="btn btn-sm btn-outline">
-                    {t("edit")}
-                  </Link>
-                  <form action={toggleExerciseActiveAction}>
-                    <input type="hidden" name="exercise_id" value={e.id} />
-                    <input type="hidden" name="active" value={String(!e.is_active)} />
-                    <button type="submit" className="btn btn-sm btn-danger-ghost">
-                      {e.is_active ? t("deactivate") : t("activate")}
-                    </button>
-                  </form>
-                </>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+              </div>
+              <p className="lib-card-summary">{e.summary}</p>
+              <div className="lib-card-actions">
+                <Link href={`/therapist/preview/${e.id}`} className="btn btn-sm btn-outline">
+                  {t("preview")}
+                </Link>
+                {e.mine && (
+                  <>
+                    <Link href={`/therapist/library/${e.id}`} className="btn btn-sm btn-outline">
+                      {t("edit")}
+                    </Link>
+                    <form action={toggleExerciseActiveAction}>
+                      <input type="hidden" name="exercise_id" value={e.id} />
+                      <input type="hidden" name="active" value={String(!e.is_active)} />
+                      <button type="submit" className="btn btn-sm btn-danger-ghost">
+                        {e.is_active ? t("deactivate") : t("activate")}
+                      </button>
+                    </form>
+                  </>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

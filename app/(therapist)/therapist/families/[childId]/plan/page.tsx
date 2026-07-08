@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import PlanBuilder, { type LibraryItem } from "@/components/therapist/PlanBuilder";
 import { getFamilyChild, getLibrary } from "@/lib/data/therapist";
 import { getActivePlan } from "@/lib/data/parent";
+import { ageBandFor } from "@/lib/exercises/categories";
 
 export default async function PlanBuilderPage({
   params,
@@ -51,6 +52,9 @@ export default async function PlanBuilderPage({
         childId={childId}
         childName={family.child.first_name}
         library={slim}
+        defaultAgeBand={ageBandFor(
+          family.child.birth_year ? new Date().getFullYear() - family.child.birth_year : null,
+        )}
         initialTitle={plan?.title ?? t("defaultTitle", { name: family.child.first_name })}
         initialNote={plan?.note ?? ""}
         initialItems={

@@ -1066,6 +1066,23 @@
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 0.8rem;
 }
+/* library category / age filter rows */
+.lib-filter-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.55rem;
+}
+.lib-filter-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-right: 0.2rem;
+  min-width: 4.6rem;
+}
 .lib-card {
   display: flex;
   flex-direction: column;
