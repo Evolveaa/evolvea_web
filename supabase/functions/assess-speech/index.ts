@@ -3,12 +3,17 @@
 // Evolvea — assess-speech Edge Function
 //
 // Async pipeline for one recorded speech attempt:
-//   audio (private storage) → STT → Claude judges transcript vs. expected
-//   concepts → write transcript + assessment → recompute the session score.
+//   audio (private storage) → STT → a light LLM judges the transcript vs.
+//   expected concepts → write transcript + assessment → recompute the score.
 //
 // Runs with the SERVICE ROLE (never exposed to the browser). Secrets come
 // from Edge Function env vars — set them with:
-//   supabase secrets set ANTHROPIC_API_KEY=... EVOLVEA_STT_API_KEY=...
+//   supabase secrets set EVOLVEA_STT_API_KEY=sk-...   # OpenAI: covers STT AND judging
+//
+// The semantic judging is a small task — a light model is plenty. By default
+// it runs on OpenAI (gpt-4o-mini) with the SAME key as STT, so one key runs
+// the whole pipeline. Set ANTHROPIC_API_KEY to judge with Claude instead
+// (default claude-haiku-4-5), or force a provider via EVOLVEA_LLM_PROVIDER.
 //
 // Invoked from the Next.js server action once the parent finishes the
 // exercise: supabase.functions.invoke("assess-speech", { body: { attempt_id } })
@@ -22,11 +27,20 @@ const CORS = {
 };
 
 // ---- config (all overridable via `supabase secrets set`) ----
-const LLM_MODEL = Deno.env.get("EVOLVEA_LLM_MODEL") ?? "claude-opus-4-8";
 const STT_PROVIDER = (Deno.env.get("EVOLVEA_STT_PROVIDER") ?? "openai").toLowerCase();
 const STT_MODEL = Deno.env.get("EVOLVEA_STT_MODEL") ?? "gpt-4o-transcribe";
 const STT_KEY = Deno.env.get("EVOLVEA_STT_API_KEY") ?? "";
 const ANTHROPIC_KEY = Deno.env.get("ANTHROPIC_API_KEY") ?? "";
+// OpenAI judging reuses the STT key unless a dedicated one is provided
+const OPENAI_LLM_KEY =
+  Deno.env.get("EVOLVEA_LLM_API_KEY") ?? (STT_PROVIDER === "openai" ? STT_KEY : "");
+
+const LLM_PROVIDER = (
+  Deno.env.get("EVOLVEA_LLM_PROVIDER") ?? (ANTHROPIC_KEY ? "anthropic" : "openai")
+).toLowerCase();
+const LLM_MODEL =
+  Deno.env.get("EVOLVEA_LLM_MODEL") ??
+  (LLM_PROVIDER === "anthropic" ? "claude-haiku-4-5" : "gpt-4o-mini");
 
 /** Speech-to-text. Default: OpenAI transcription; swap provider via env. */
 async function transcribe(audio: Blob, lang: string): Promise<string> {
@@ -74,14 +88,13 @@ const ASSESS_SCHEMA = {
 
 const LANG_NAME: Record<string, string> = { sk: "Slovak", en: "English", de: "German" };
 
-/** Claude decides — semantically — which expected concepts the child mentioned. */
+/** A light LLM decides — semantically — which expected concepts the child mentioned. */
 async function assess(
   transcript: string,
   expected: string[],
   prompt: string,
   lang: string,
 ): Promise<{ mentioned: string[]; missed: string[]; extra: string[]; feedback: string }> {
-  const anthropic = new Anthropic({ apiKey: ANTHROPIC_KEY });
   const language = LANG_NAME[lang] ?? "Slovak";
   const system =
     "You are a supportive speech & language therapist reviewing a young child's spoken picture description. " +
@@ -94,15 +107,45 @@ async function assess(
     `The child said (transcript):\n"""${transcript}"""\n\n` +
     "Return which expected concepts were mentioned vs. missed, any extra relevant things described, and one warm sentence of feedback.";
 
-  const resp: any = await anthropic.messages.create({
-    model: LLM_MODEL,
-    max_tokens: 1024,
-    thinking: { type: "adaptive" },
-    output_config: { effort: "low", format: { type: "json_schema", schema: ASSESS_SCHEMA } },
-    system,
-    messages: [{ role: "user", content: user }],
-  });
-  const text = (resp.content ?? []).find((b: any) => b.type === "text")?.text ?? "{}";
+  let text = "{}";
+
+  if (LLM_PROVIDER === "anthropic") {
+    const anthropic = new Anthropic({ apiKey: ANTHROPIC_KEY });
+    // no `thinking`/`effort` — the task is simple and claude-haiku-4-5
+    // (the default here) accepts neither adaptive thinking nor effort
+    const resp: any = await anthropic.messages.create({
+      model: LLM_MODEL,
+      max_tokens: 1024,
+      output_config: { format: { type: "json_schema", schema: ASSESS_SCHEMA } },
+      system,
+      messages: [{ role: "user", content: user }],
+    });
+    text = (resp.content ?? []).find((b: any) => b.type === "text")?.text ?? "{}";
+  } else {
+    // OpenAI (default) — same key as STT, structured via json_schema
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${OPENAI_LLM_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: LLM_MODEL,
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: user },
+        ],
+        response_format: {
+          type: "json_schema",
+          json_schema: { name: "assessment", schema: ASSESS_SCHEMA, strict: true },
+        },
+      }),
+    });
+    if (!res.ok) throw new Error(`LLM ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    const json = await res.json();
+    text = json?.choices?.[0]?.message?.content ?? "{}";
+  }
+
   const parsed = JSON.parse(text);
   return {
     mentioned: Array.isArray(parsed.mentioned) ? parsed.mentioned.map(String) : [],
@@ -127,7 +170,7 @@ async function process(admin: any, attemptId: string) {
 
   try {
     // 1. transcribe
-    await admin.from("speech_attempts").update({ status: "transcribing", stt_model: `${STT_PROVIDER}:${STT_MODEL}`, llm_model: LLM_MODEL }).eq("id", attemptId);
+    await admin.from("speech_attempts").update({ status: "transcribing", stt_model: `${STT_PROVIDER}:${STT_MODEL}`, llm_model: `${LLM_PROVIDER}:${LLM_MODEL}` }).eq("id", attemptId);
     const { data: file, error: dlErr } = await admin.storage.from("speech").download(attempt.audio_path);
     if (dlErr || !file) throw new Error(`download failed: ${dlErr?.message ?? "no file"}`);
     const transcript = await transcribe(file, attempt.lang ?? "sk");

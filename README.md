@@ -144,8 +144,9 @@ rodič dokončí   ──►  completeSessionAction() prepojí attempty so sessi
                      a zavolá Edge Function `assess-speech`
 Edge Function   ──►  1) stiahne audio (service role)
 (na pozadí)          2) STT: prepis reči na text (predvolene OpenAI gpt-4o-transcribe)
-                     3) LLM: Claude (claude-opus-4-8) sémanticky posúdi,
-                        ktoré `expect` koncepty dieťa spomenulo
+                     3) LLM: ľahký model (default OpenAI gpt-4o-mini, ten istý
+                        kľúč ako STT) sémanticky posúdi, ktoré `expect`
+                        koncepty dieťa spomenulo
                      4) zapíše transcript + assessment do speech_attempts
                         a prepočíta skóre + detail.speech v session
 rodič/logopéd   ──►  SessionDetail ukáže prepis + zelené/coral tokeny
@@ -158,13 +159,17 @@ cvičenia nikdy nečaká na STT/LLM. Kým prebieha, história ukazuje stav
 
 ### Konfigurácia (tvoje API kľúče)
 
-Kľúče sú **tajomstvá Edge Function**, nikdy nie sú v prehliadači ani v `.env.local`:
+Kľúče sú **tajomstvá Edge Function**, nikdy nie sú v prehliadači ani v `.env.local`.
+Celý reťazec (prepis aj sémantické posúdenie) beží na **jednom OpenAI kľúči** —
+posúdenie je malá úloha, stačí naň ľahký model:
 
 ```bash
-supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
-supabase secrets set EVOLVEA_STT_API_KEY=sk-...        # OpenAI (default) alebo Deepgram
+supabase secrets set EVOLVEA_STT_API_KEY=sk-...        # OpenAI kľúč: STT aj posudzovanie
 # voliteľné (defaulty):
-supabase secrets set EVOLVEA_LLM_MODEL=claude-opus-4-8
+supabase secrets set EVOLVEA_LLM_PROVIDER=openai       # openai | anthropic
+supabase secrets set EVOLVEA_LLM_MODEL=gpt-4o-mini     # pri anthropic: claude-haiku-4-5
+supabase secrets set EVOLVEA_LLM_API_KEY=sk-...        # vlastný kľúč na posudzovanie (inak sa použije STT kľúč)
+supabase secrets set ANTHROPIC_API_KEY=sk-ant-...      # len ak chcete posudzovať Claudom
 supabase secrets set EVOLVEA_STT_PROVIDER=openai       # openai | deepgram
 supabase secrets set EVOLVEA_STT_MODEL=gpt-4o-transcribe
 ```
