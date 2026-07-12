@@ -35,7 +35,7 @@ Demo účty (heslo pre všetky: `EvolveaDemo2026`):
 | Rola | E-mail |
 |---|---|
 | Logopéd | `stuodstrelovaci+logoped@gmail.com` |
-| Rodič — test, všetkých 53 cvičení + aktívne predplatné | `stuodstrelovaci+test@gmail.com` |
+| Rodič — test, všetky cvičenia + aktívne predplatné | `stuodstrelovaci+test@gmail.com` |
 | Rodič — aktívne predplatné, 3 týždne dát | `stuodstrelovaci+rodic1@gmail.com` |
 | Rodič — čerstvý trial | `stuodstrelovaci+rodic2@gmail.com` |
 
@@ -50,16 +50,18 @@ app/
                   Profil dieťaťa · /app/checkout (mock platobná brána)
   (player)/       full-screen prehrávač cvičení (/app/exercise/[planItemId],
                   /therapist/preview/[exerciseId])
-  (therapist)/    Rodiny · detail dieťaťa (výsledky, reflexie, správy) ·
-                  plán builder · knižnica + builder vlastných cvičení ·
-                  pozvánky · provízie
+  (therapist)/    Rodiny (triáž „potrebujú pozornosť“) · detail dieťaťa
+                  (výsledky, reflexie, správy, ciele terapie, klinické
+                  poznámky) · tlačiteľná správa o pokroku · plán builder
+                  (+ šablóny plánov) · knižnica + builder vlastných cvičení
+                  + duplikovanie · pozvánky · provízie
 components/       auth/ app/ player/ therapist/ + landing komponenty
 lib/
   supabase/       browser/server klienti (SSR cookies)
   exercises/      typový model obsahu + runtime validácia
   data/           dotazy + čisté odvodené funkcie (odporúčania, séria, štatistiky)
   auth|parent|therapist/actions.ts   server actions (mutácie len na serveri)
-content/exercises/  zdrojové JSON knižnice (53 cvičení, 7 domén) + SPEC.md
+content/exercises/  zdrojové JSON knižnice (73 cvičení, 7 domén) + SPEC.md
 supabase/
   migrations/     schéma + RLS (aplikované cez Supabase MCP)
   seed/           generovaný SQL seed knižnice
@@ -69,12 +71,16 @@ proxy.ts          session refresh + gating /app a /therapist (Next 16 proxy)
 
 ### Dátovo riadené cvičenia
 
-`exercises.content` (jsonb) je diskriminovaná únia 8 typov úloh
+`exercises.content` (jsonb) je diskriminovaná únia 13 typov úloh
 (`lib/exercises/types.ts`): `choice`, `sound_boxes` (Eľkoninove žetóny),
 `memory_sequence`, `pairs`, `number_track` (Škola pozornosti),
-`story_sequence`, `speech_items` (hodnotí rodič — nič sa nenahráva),
+`story_sequence`, `speech_items` (hodnotí rodič; voliteľné AI „opíš obrázok“),
 `guided_steps` (metakognitívny oblúk pocit → plán → pokus → reflexia →
-ukotvenie). Prehrávač renderuje čisto z dát; nové cvičenia nevyžadujú kód.
+ukotvenie), `minimal_pairs` (minimálne páry, Barlow & Gierut),
+`sound_hunt` (sluchové bombardovanie + detekcia hlásky, Hodson),
+`sentence_builder` (stavba a expanzia viet), `sorting` (sémantické triedenie)
+a `scene_directions` (porozumenie pokynom, Token Test). Prehrávač renderuje
+čisto z dát; nové cvičenia nevyžadujú kód.
 
 Scaffolding: každá položka plánu má `support_level` 3 → 1 (plná opora →
 samostatnosť) — mení správanie prehrávača (sprievodca pre rodiča, dostupnosť

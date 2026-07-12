@@ -247,7 +247,9 @@ export default function SoundBoxesTask({
         <p className="hint-bubble">
           {content.mode === "count"
             ? (item.hint ?? t("soundBoxes.countHint"))
-            : t("soundBoxes.colorsHint", { kind: kindLabel(phonemes[pos].kind) })}
+            : (item.hint ??
+              // guide the decision procedure — never reveal the kind itself
+              t("soundBoxes.colorsHintAsk", { sound: phonemes[pos].sound }))}
         </p>
       )}
     </>

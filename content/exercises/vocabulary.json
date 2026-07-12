@@ -606,5 +606,305 @@
         }
       ]
     }
+  },
+  {
+    "slug": "vo-triedenie-1",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Roztrieď karty",
+    "summary": "Triedenie obrázkov do dvoch základných kategórií (ovocie a zvieratá) — budovanie sémantických polí, teda usporiadania slovnej zásoby do skupín. Rozsah a organizácia slovnej zásoby patria medzi najsilnejšie prediktory porozumenia čítaného textu; slová utriedené do sémantických polí si dieťa ľahšie pamätá aj vybavuje.",
+    "parent_guide": "Každú kartu najprv nahlas pomenujte a nechajte dieťa slovo zopakovať. Potom sa spýtajte: „Je to niečo živé, čo behá a papá, alebo niečo, čo môžeš zjesť ty?“ Keď dieťa kartu zaradí, poproste ho o zdôvodnenie: „Prečo patrí sem?“ Ak sa pomýli, neopravujte hneď — spýtajte sa na vlastnosť: „Šteká jablko? Behá hruška?“ a nechajte dieťa kartu preložiť samo. Na záver spolu každú skupinu vymenujte jedným slovom.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "sorting",
+      "intro": "Karty sa nám pomiešali! Ovocie patrí do košíka a zvieratká k sebe do ohrady. Roztriediš ich?",
+      "categories": [
+        { "label": "Ovocie", "emoji": "🧺" },
+        { "label": "Zvieratá", "emoji": "🐾" }
+      ],
+      "items": [
+        {
+          "label": "jablko",
+          "emoji": "🍎",
+          "category": 0,
+          "hint": "Rastie na strome a môžeš si z neho zahryznúť. Kam patrí?"
+        },
+        {
+          "label": "pes",
+          "emoji": "🐶",
+          "category": 1,
+          "hint": "Šteká a behá po dvore. Je to na papanie, alebo je to živé?"
+        },
+        {
+          "label": "banán",
+          "emoji": "🍌",
+          "category": 0,
+          "hint": "Je žltý, ošúpeš ho a zješ. Kam patrí?"
+        },
+        {
+          "label": "mačka",
+          "emoji": "🐱",
+          "category": 1,
+          "hint": "Mňauká a naháňa myšky. Rastie na strome, alebo sa hýbe sama?"
+        },
+        {
+          "label": "hruška",
+          "emoji": "🍐",
+          "category": 0,
+          "hint": "Visí na strome a je sladká. Kam patrí?"
+        },
+        {
+          "label": "krava",
+          "emoji": "🐮",
+          "category": 1,
+          "hint": "Hovorí múú a pasie sa na lúke. Rastie, alebo sa hýbe sama?"
+        },
+        {
+          "label": "jahoda",
+          "emoji": "🍓",
+          "category": 0,
+          "hint": "Je červená a sladučká. Hýbe sa sama, alebo ju zješ?"
+        },
+        {
+          "label": "zajac",
+          "emoji": "🐰",
+          "category": 1,
+          "hint": "Má dlhé uši a skáče. Dá sa odhryznúť z neho ako z jablka?"
+        },
+        {
+          "label": "čerešňa",
+          "emoji": "🍒",
+          "category": 0,
+          "hint": "Visí na strome za stopku a je sladká. Kam patrí?"
+        },
+        {
+          "label": "sliepka",
+          "emoji": "🐔",
+          "category": 1,
+          "hint": "Kotkodáka a znáša vajíčka. Rastie na strome, alebo behá po dvore?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-triedenie-2",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Lieta, pláva alebo chodí?",
+    "summary": "Triedenie do troch kategórií podľa spôsobu pohybu, so zámerne rozmýšľacími položkami (netopier lieta, hoci nie je vták; sliepka je vták, a predsa chodí; veľryba je obrovský cicavec, a predsa pláva). Jemnejšia klasifikácia podľa vlastností prehlbuje sémantické polia — organizácia slovnej zásoby je prediktorom porozumenia čítaného textu.",
+    "parent_guide": "Kartu najprv spolu pomenujte. Ak dieťa váha, pýtajte sa na vlastnosti: „Má krídla? Žije vo vode? Má nohy a kráča po zemi?“ Pri záludných kartách — netopier, veľryba, sliepka — nechajte dieťa najprv rozhodnúť a až potom sa spýtajte: „Prečo si ju dal práve sem?“ Ak sa pomýli, neprezrádzajte — vráťte sa k otázke „Ako sa naozaj pohybuje?“ a nechajte dieťa kartu preložiť. Prekvapenie („naozaj lieta, aj keď nie je vták!“) je najcennejší moment cvičenia.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 6,
+    "content": {
+      "type": "sorting",
+      "intro": "Zvieratká sa vybrali na cesty! Niektoré lietajú, iné plávajú a ďalšie chodia po zemi. Pošli každé tou správnou cestou — ale pozor, niektoré ťa poriadne potrápia!",
+      "categories": [
+        { "label": "Lieta", "emoji": "☁️" },
+        { "label": "Pláva", "emoji": "🌊" },
+        { "label": "Chodí", "emoji": "🐾" }
+      ],
+      "items": [
+        {
+          "label": "motýľ",
+          "emoji": "🦋",
+          "category": 0,
+          "hint": "Má krídla. Ako sa dostane z kvetu na kvet?"
+        },
+        {
+          "label": "ryba",
+          "emoji": "🐟",
+          "category": 1,
+          "hint": "Má plutvy a celý život žije vo vode. Ako sa pohybuje?"
+        },
+        {
+          "label": "slon",
+          "emoji": "🐘",
+          "category": 2,
+          "hint": "Je veľký a ťažký, má štyri silné nohy. Ako sa presúva?"
+        },
+        {
+          "label": "včela",
+          "emoji": "🐝",
+          "category": 0,
+          "hint": "Bzučí okolo kvetov. Ako sa k nim dostane?"
+        },
+        {
+          "label": "veľryba",
+          "emoji": "🐳",
+          "category": 1,
+          "hint": "Je obrovská a celý život žije v mori. Ako sa v ňom pohybuje?"
+        },
+        {
+          "label": "kôň",
+          "emoji": "🐴",
+          "category": 2,
+          "hint": "Má štyri nohy s kopýtkami. Čo s nimi robí?"
+        },
+        {
+          "label": "sova",
+          "emoji": "🦉",
+          "category": 0,
+          "hint": "V noci sa ticho vznáša pomedzi stromy. Ako to robí?"
+        },
+        {
+          "label": "chobotnica",
+          "emoji": "🐙",
+          "category": 1,
+          "hint": "Má osem ramien a žije hlboko vo vode. Ako sa pohybuje?"
+        },
+        {
+          "label": "sliepka",
+          "emoji": "🐔",
+          "category": 2,
+          "hint": "Je to vták, ale jej krídla ju vysoko nevynesú. Ako sa dostane po dvore?"
+        },
+        {
+          "label": "netopier",
+          "emoji": "🦇",
+          "category": 0,
+          "hint": "Nie je to vták, a predsa sa v noci vznáša vzduchom. Ako sa pohybuje?"
+        },
+        {
+          "label": "mravec",
+          "emoji": "🐜",
+          "category": 2,
+          "hint": "Je maličký a má šesť nôžok. Čo s nimi celý deň robí?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-predlozky-1",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Kam to položíš?",
+    "summary": "Porozumenie priestorovým predložkám nad, pod a vedľa: rodič prečíta pokyn, dieťa ukladá žetóny na obrázkový plán — receptívna úloha v tradícii Token Testu. Porozumenie reči a slovná zásoba patria medzi kľúčové prediktory porozumenia čítaného textu, preto porozumenie trénujeme skôr, než dieťa číta.",
+    "parent_guide": "Pokyn prečítajte pomaly a zreteľne — dieťa ho nevidí, iba počúva. Nechajte ho položiť žetón samo; na plán nikdy neukazujte. Ak váha, pokyn zopakujte a predložku zdôraznite hlasom: „priamo NAD dom“. Pomôžte otázkou: „Kde je dom? A ktoré políčko je hneď nad ním?“ Po každom kole spolu zopakujte, čo dieťa urobilo: „Áno, slnko je nad domom.“ Chybu neopravujte rukou — prečítajte pokyn znova a nechajte dieťa žetón presunúť.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 6,
+    "content": {
+      "type": "scene_directions",
+      "intro": "Toto je naša záhrada. Ja ti prečítam, kam čo patrí, a ty to tam položíš. Dobre počúvaj!",
+      "board": {
+        "rows": 3,
+        "cols": 3,
+        "anchors": [
+          { "emoji": "🏠", "label": "dom", "row": 2, "col": 0 },
+          { "emoji": "🌳", "label": "strom", "row": 2, "col": 2 },
+          { "emoji": "🌸", "label": "kvet", "row": 0, "col": 1 }
+        ]
+      },
+      "rounds": [
+        {
+          "instruction": "Polož slnko priamo nad dom.",
+          "tokens": ["☀️"],
+          "places": [{ "token": "☀️", "row": 1, "col": 0 }],
+          "hint": "Nad znamená o jedno políčko vyššie v tom istom stĺpci. Kde je dom? A ktoré políčko je hneď nad ním?"
+        },
+        {
+          "instruction": "Polož vtáčika priamo nad strom.",
+          "tokens": ["🐦"],
+          "places": [{ "token": "🐦", "row": 1, "col": 2 }],
+          "hint": "Kde je strom? Ktoré políčko je hneď nad ním, v tom istom stĺpci?"
+        },
+        {
+          "instruction": "Polož jablko vedľa domu.",
+          "tokens": ["🍎"],
+          "places": [{ "token": "🍎", "row": 2, "col": 1 }],
+          "hint": "Vedľa znamená hneď pri ňom, v tom istom riadku. Ktoré políčko sa dotýka domu zboku?"
+        },
+        {
+          "instruction": "Polož motýľa priamo pod kvet.",
+          "tokens": ["🦋"],
+          "places": [{ "token": "🦋", "row": 1, "col": 1 }],
+          "hint": "Pod znamená o jedno políčko nižšie. Kde je kvet? A ktoré políčko je hneď pod ním?"
+        },
+        {
+          "instruction": "Polož loptu vedľa stromu.",
+          "tokens": ["⚽"],
+          "places": [{ "token": "⚽", "row": 2, "col": 1 }],
+          "hint": "Ktoré políčko sa dotýka stromu zboku, v tom istom riadku?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "vo-predlozky-2",
+    "domain": "vocabulary",
+    "modality": "interactive",
+    "title": "Najprv a potom",
+    "summary": "Dvojkrokové pokyny „Najprv…, potom…“ s predložkami nad, pod, vedľa a medzi: dieťa musí celý pokyn udržať v pracovnej pamäti a vykonať kroky v správnom poradí — viackroková receptívna úloha v tradícii Token Testu, spájajúca porozumenie reči s pracovnou pamäťou. Obe schopnosti patria medzi silné prediktory čítania.",
+    "parent_guide": "Celý pokyn — obidva kroky — prečítajte naraz a pomaly, kým dieťa iba počúva. Až potom nechajte dieťa ukladať. Ak si druhý krok nepamätá, prečítajte pokyn znova celý; držať oba kroky v hlave je presne to, čo trénujeme. Ak si poradie pomýli, spýtajte sa: „Čo bolo najprv? A čo potom?“ Na plán neukazujte a žetóny nepresúvajte — po každom kole spolu nahlas zopakujte, čo dieťa urobilo: „Najprv jablko nad dom, potom hviezdu pod slnko. Výborne!“",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 9,
+    "duration_minutes": 7,
+    "content": {
+      "type": "scene_directions",
+      "intro": "Teraz to bude ťažšie: poviem ti dve veci naraz. Dobre počúvaj, zapamätaj si obidve — najprv jednu, potom druhú!",
+      "board": {
+        "rows": 3,
+        "cols": 4,
+        "anchors": [
+          { "emoji": "🏠", "label": "dom", "row": 2, "col": 0 },
+          { "emoji": "🌳", "label": "strom", "row": 2, "col": 2 },
+          { "emoji": "☀️", "label": "slnko", "row": 0, "col": 3 }
+        ]
+      },
+      "rounds": [
+        {
+          "instruction": "Najprv polož jablko priamo nad dom. Potom polož hviezdu priamo pod slnko.",
+          "tokens": ["🍎", "⭐"],
+          "places": [
+            { "token": "🍎", "row": 1, "col": 0 },
+            { "token": "⭐", "row": 1, "col": 3 }
+          ],
+          "hint": "Čo bolo najprv? Nad znamená o políčko vyššie, pod o políčko nižšie — vždy v tom istom stĺpci."
+        },
+        {
+          "instruction": "Najprv polož loptu medzi dom a strom. Potom polož vtáčika priamo nad strom.",
+          "tokens": ["⚽", "🐦"],
+          "places": [
+            { "token": "⚽", "row": 2, "col": 1 },
+            { "token": "🐦", "row": 1, "col": 2 }
+          ],
+          "hint": "Medzi znamená presne v strede. Ktoré políčko je medzi domom a stromom, v tom istom riadku?"
+        },
+        {
+          "instruction": "Najprv polož motýľa priamo nad strom. Potom polož jahodu vedľa domu.",
+          "tokens": ["🦋", "🍓"],
+          "places": [
+            { "token": "🦋", "row": 1, "col": 2 },
+            { "token": "🍓", "row": 2, "col": 1 }
+          ],
+          "hint": "Čo bolo najprv — motýľ, alebo jahoda? Vedľa znamená hneď pri ňom, v tom istom riadku."
+        },
+        {
+          "instruction": "Najprv polož psíka priamo pod slnko. Potom polož kvet medzi dom a strom.",
+          "tokens": ["🐶", "🌸"],
+          "places": [
+            { "token": "🐶", "row": 1, "col": 3 },
+            { "token": "🌸", "row": 2, "col": 1 }
+          ],
+          "hint": "Kde je slnko a ktoré políčko je hneď pod ním? A ktoré políčko je presne v strede medzi domom a stromom?"
+        },
+        {
+          "instruction": "Najprv polož loptu priamo nad strom. Potom polož hviezdu priamo nad loptu.",
+          "tokens": ["⚽", "⭐"],
+          "places": [
+            { "token": "⚽", "row": 1, "col": 2 },
+            { "token": "⭐", "row": 0, "col": 2 }
+          ],
+          "hint": "Druhé políčko nájdeš, až keď je lopta na mieste. Ktoré políčko je hneď nad ňou?"
+        }
+      ]
+    }
   }
 ]

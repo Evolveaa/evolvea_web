@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import PlanBuilder, { type LibraryItem } from "@/components/therapist/PlanBuilder";
 import { getFamilyChild, getLibrary } from "@/lib/data/therapist";
+import { getPlanTemplates, parseTemplateItems } from "@/lib/data/clinical";
 import { getActivePlan } from "@/lib/data/parent";
 import { ageBandFor } from "@/lib/exercises/categories";
 
@@ -14,10 +15,11 @@ export default async function PlanBuilderPage({
   const { childId } = await params;
   const t = await getTranslations("therapist.builder");
 
-  const [family, library, plan] = await Promise.all([
+  const [family, library, plan, templateRows] = await Promise.all([
     getFamilyChild(childId),
     getLibrary(),
     getActivePlan(childId),
+    getPlanTemplates(),
   ]);
   if (!family) notFound();
 
@@ -35,6 +37,23 @@ export default async function PlanBuilderPage({
       is_builtin: e.is_builtin,
     }));
 
+  const templates = templateRows.map((row) => ({
+    ...row,
+    parsedItems: parseTemplateItems(row.items),
+  }));
+
+  const initialItems =
+    plan?.plan_items
+      .filter((item) => slim.some((e) => e.id === item.exercise_id))
+      .map((item) => ({
+        exerciseId: item.exercise_id,
+        timesPerWeek: item.times_per_week,
+        supportLevel: item.support_level,
+      })) ?? [];
+  // items whose exercise left the active library are dropped from the draft —
+  // but the therapist must LEARN about it, not silently republish less
+  const droppedCount = (plan?.plan_items.length ?? 0) - initialItems.length;
+
   return (
     <>
       <p style={{ marginBottom: "0.8rem" }}>
@@ -48,6 +67,12 @@ export default async function PlanBuilderPage({
       <h1 className="page-h">{t("pageTitle", { name: family.child.first_name })}</h1>
       <p className="page-sub">{t("pageLead")}</p>
 
+      {droppedCount > 0 && (
+        <p className="form-error" role="alert" style={{ maxWidth: "72ch" }}>
+          {t("droppedItems", { count: droppedCount })}
+        </p>
+      )}
+
       <PlanBuilder
         childId={childId}
         childName={family.child.first_name}
@@ -57,17 +82,8 @@ export default async function PlanBuilderPage({
         )}
         initialTitle={plan?.title ?? t("defaultTitle", { name: family.child.first_name })}
         initialNote={plan?.note ?? ""}
-        initialItems={
-          // items whose exercise left the active library would be invisible
-          // yet still counted and re-published — drop them from the draft
-          plan?.plan_items
-            .filter((item) => slim.some((e) => e.id === item.exercise_id))
-            .map((item) => ({
-              exerciseId: item.exercise_id,
-              timesPerWeek: item.times_per_week,
-              supportLevel: item.support_level,
-            })) ?? []
-        }
+        initialItems={initialItems}
+        templates={templates}
       />
     </>
   );

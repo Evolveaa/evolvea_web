@@ -3,8 +3,11 @@ import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import MessageThread from "@/components/app/MessageThread";
 import SessionDetail, { hasSessionDetail } from "@/components/therapist/SessionDetail";
+import GoalsPanel from "@/components/therapist/GoalsPanel";
+import NotesPanel from "@/components/therapist/NotesPanel";
 import { getSessionProfile } from "@/lib/data/user";
 import { getChildSessions, getFamilyChild } from "@/lib/data/therapist";
+import { getGoals, getTherapistNotes } from "@/lib/data/clinical";
 import { getThread } from "@/lib/data/messages";
 import {
   computeStreak,
@@ -12,9 +15,11 @@ import {
   getActivePlan,
   getExercisesByIds,
   getSubscription,
+  localDayKey,
   trickyItems,
 } from "@/lib/data/parent";
 import { accessState } from "@/lib/billing";
+import type { ExerciseDomain } from "@/lib/exercises/types";
 import {
   DomainTile,
   IconCheck,
@@ -40,10 +45,13 @@ function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
 
 export default async function FamilyDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ childId: string }>;
+  searchParams: Promise<{ history?: string }>;
 }) {
   const { childId } = await params;
+  const { history } = await searchParams;
   const t = await getTranslations("therapist");
   const tc = await getTranslations("common");
   const td = await getTranslations("domains");
@@ -54,14 +62,54 @@ export default async function FamilyDetailPage({
   if (!session || !family) notFound();
   const { child, parentName } = family;
 
-  const [sessions, plan, sub, thread] = await Promise.all([
+  const [sessions, plan, sub, thread, goals, notes] = await Promise.all([
     getChildSessions(childId),
     getActivePlan(childId),
     getSubscription(childId),
     getThread(childId),
+    getGoals(childId),
+    getTherapistNotes(childId),
   ]);
 
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
+
+  // current 14-day mean % per domain — feeds goal progress
+  const now = new Date();
+  const since14 = now.getTime() - 14 * 86_400_000;
+  const recent14 = sessions.filter((s) => new Date(s.started_at).getTime() >= since14);
+  const domainPct: Partial<Record<ExerciseDomain, number>> = {};
+  for (const st of domainStats(recent14, exercises))
+    if (st.avgPct !== null) domainPct[st.domain] = st.avgPct;
+
+  // home-practice summary since the newest clinical note (notes are newest-first);
+  // noted_on is a YYYY-MM-DD date — compare via the shared app-timezone day key
+  const lastNotedOn = notes[0]?.noted_on ?? null;
+  let sinceLastNote: { sessions: number; avgPct: number | null; days: number } | null = null;
+  if (lastNotedOn) {
+    const after = sessions.filter((s) => localDayKey(s.started_at) >= lastNotedOn);
+    const scoredAfter = after.filter(
+      (s) => s.score_total && s.score_total > 0 && s.score_correct !== null,
+    );
+    const pct =
+      scoredAfter.length > 0
+        ? Math.round(
+            scoredAfter.reduce(
+              (n, s) => n + (100 * (s.score_correct ?? 0)) / (s.score_total ?? 1),
+              0,
+            ) / scoredAfter.length,
+          )
+        : null;
+    sinceLastNote = {
+      sessions: after.length,
+      avgPct: pct,
+      days: Math.max(
+        0,
+        Math.floor((now.getTime() - new Date(`${lastNotedOn}T00:00:00`).getTime()) / 86_400_000),
+      ),
+    };
+  }
+
+  const historyCount = Math.min(Math.max(Number.parseInt(history ?? "", 10) || 20, 20), 200);
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
   const tricky = trickyItems(sessions, exercises);
   const streak = computeStreak(sessions);
@@ -97,9 +145,14 @@ export default async function FamilyDetailPage({
             <span className={`chip chip-hue ${STATE_HUE[subState]}`}>{t(`subState.${subState}`)}</span>
           </p>
         </div>
-        <Link href={`/therapist/families/${childId}/plan`} className="btn btn-primary btn-sm">
-          {plan ? t("editPlan") : t("createPlan")}
-        </Link>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          <Link href={`/therapist/families/${childId}/report`} className="btn btn-outline btn-sm">
+            🖨️ {t("openReport")}
+          </Link>
+          <Link href={`/therapist/families/${childId}/plan`} className="btn btn-primary btn-sm">
+            {plan ? t("editPlan") : t("createPlan")}
+          </Link>
+        </div>
       </div>
 
       <div className="stat-grid" style={{ margin: "1.1rem 0 1.4rem" }}>
@@ -111,7 +164,10 @@ export default async function FamilyDetailPage({
           <b>{avgPct !== null ? `${avgPct} %` : "—"}</b>
           <span>{t("statAvg")}</span>
         </div>
-        <div className="stat">
+        <div
+          className="stat"
+          data-tone={streak === 0 && sessions.length > 0 ? "warn" : undefined}
+        >
           <b>🔥 {streak}</b>
           <span>{tp("statStreak")}</span>
         </div>
@@ -123,6 +179,8 @@ export default async function FamilyDetailPage({
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.2rem", alignItems: "start" }}>
         <div>
+          <GoalsPanel childId={childId} goals={goals} domainPct={domainPct} />
+
           <h2 className="section-label">{t("planSection")}</h2>
           {!plan ? (
             <div className="empty">
@@ -180,7 +238,7 @@ export default async function FamilyDetailPage({
                     </span>
                   </div>
                   <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                    <i style={{ width: `${s.avgPct ?? 6}%` }} />
+                    {s.avgPct !== null && <i style={{ width: `${s.avgPct}%` }} />}
                   </span>
                   {s.trend.length >= 3 && (
                     <div className="dcard-spark">
@@ -198,7 +256,7 @@ export default async function FamilyDetailPage({
             <p className="card-sub">{t("noDataYet")}</p>
           ) : (
             <ul className="hist-list">
-              {sessions.slice(0, 20).map((s) => {
+              {sessions.slice(0, historyCount).map((s) => {
                 const ex = exercises.get(s.exercise_id);
                 const scored =
                   !!s.score_total && s.score_total > 0 && s.score_correct !== null;
@@ -271,6 +329,17 @@ export default async function FamilyDetailPage({
               })}
             </ul>
           )}
+          {sessions.length > historyCount && (
+            <p style={{ textAlign: "center", marginTop: "0.8rem" }}>
+              <Link
+                href={`/therapist/families/${childId}?history=${historyCount + 20}`}
+                className="btn btn-outline btn-sm"
+                scroll={false}
+              >
+                {t("showMoreSessions", { count: sessions.length - historyCount })}
+              </Link>
+            </p>
+          )}
         </div>
 
         <div>
@@ -283,6 +352,8 @@ export default async function FamilyDetailPage({
               hasUnread={hasUnread}
             />
           </div>
+
+          <NotesPanel childId={childId} notes={notes} sinceLastNote={sinceLastNote} />
 
           <h2 className="section-label" style={{ marginTop: "1.4rem" }}>{t("trickySection")}</h2>
           {tricky.length === 0 ? (

@@ -165,6 +165,19 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: String(e) }), { status: 400, headers: CORS });
   }
 
+  // Authorize: the caller must be able to SEE this attempt under RLS
+  // (parent or therapist of the child) — not just hold any valid JWT.
+  const caller = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: req.headers.get("Authorization") ?? "" } } },
+  );
+  const { data: visible } = await caller
+    .from("speech_attempts").select("id").eq("id", attemptId).maybeSingle();
+  if (!visible) {
+    return new Response(JSON.stringify({ error: "not found" }), { status: 404, headers: CORS });
+  }
+
   // Respond immediately; STT + LLM run in the background (seconds).
   const job = process(admin, attemptId);
   const rt = (globalThis as any).EdgeRuntime;

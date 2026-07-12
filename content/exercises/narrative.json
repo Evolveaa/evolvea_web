@@ -536,6 +536,44 @@
             "hladná"
           ],
           "minExpected": 3
+        },
+        {
+          "emoji": "👦🚲⛅",
+          "text": "Povedz, kto je na obrázku, čo robí a aké je počasie.",
+          "expect": [
+            "chlapec",
+            "bicykel",
+            "bicykluje sa",
+            "slnko",
+            "oblaky"
+          ],
+          "minExpected": 3,
+          "tip": "Ak dieťa len vymenúva veci, spýtajte sa: „A čo ten chlapec robí?“"
+        },
+        {
+          "emoji": "👵🐱🛋️",
+          "text": "Porozprávaj, kto je na obrázku a čo spolu robia.",
+          "expect": [
+            "babka",
+            "mačka",
+            "gauč",
+            "sedí",
+            "hladká"
+          ],
+          "minExpected": 3
+        },
+        {
+          "emoji": "🐦🌳🐥",
+          "text": "Porozprávaj o vtáčikoch — kde sú a čo robia?",
+          "expect": [
+            "vtáčik",
+            "strom",
+            "mláďa",
+            "hniezdo",
+            "letí"
+          ],
+          "minExpected": 3,
+          "tip": "Pomôžte otvorenou otázkou: „Kde vtáčik sedí? Kto naňho čaká?“"
         }
       ]
     }
@@ -705,6 +743,427 @@
             "Dokážem rozprávať od začiatku po koniec."
           ],
           "tip": "Vetu nevyberajte za dieťa. Pochvala za vlastný nápad posilní chuť rozprávať aj nabudúce."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-stavaj-vety-1",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Postav vetu",
+    "summary": "Skladanie krátkych viet podmet – prísudok zo slovných kariet s obrázkovou oporou. Tvorenie vety je základ súvislej výpovede podľa naratívnej metodiky Ďjačenko–Stanislavovej a postup od konkrétnych kariet k hovorenej vete napĺňa Mikulajovej princíp od konkrétneho k abstraktnému.",
+    "parent_guide": "Najprv spolu pomenujte obrázky a povedzte vetu nahlas, napríklad: „Pes spí.“ Potom sa spýtajte: „Kto je na obrázku?“ — dieťa nájde prvé slovo. „A čo robí?“ — dieťa priloží ďalšie slovo. Pripomeňte, že veta začína veľkým písmenom. Hotovú vetu nechajte dieťa povedať celú nahlas — až vyslovená veta je hotová veta.",
+    "difficulty": 1,
+    "age_min": 5,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "sentence_builder",
+      "intro": "Slovíčka sa pomiešali! Poskladaj z nich vetu a povedz ju nahlas.",
+      "items": [
+        {
+          "scene": [
+            "🐶",
+            "💤"
+          ],
+          "words": [
+            "Pes",
+            "spí"
+          ],
+          "hint": "Kto je na obrázku? A čo robí?"
+        },
+        {
+          "scene": [
+            "👩",
+            "🍲"
+          ],
+          "words": [
+            "Mama",
+            "varí"
+          ],
+          "hint": "Kto stojí pri hrnci? Čo robí?"
+        },
+        {
+          "scene": [
+            "🚗",
+            "💨"
+          ],
+          "words": [
+            "Auto",
+            "ide"
+          ],
+          "hint": "Čo je na obrázku? Čo robí?"
+        },
+        {
+          "scene": [
+            "👧",
+            "🖍️"
+          ],
+          "words": [
+            "Ema",
+            "kreslí"
+          ],
+          "hint": "Ako sa volá dievčatko? Čo robí s ceruzkou?"
+        },
+        {
+          "scene": [
+            "🐱",
+            "🥛"
+          ],
+          "words": [
+            "Mačka",
+            "pije",
+            "mlieko"
+          ],
+          "hint": "Kto je na obrázku? Čo robí? A čo pije?"
+        },
+        {
+          "scene": [
+            "👨",
+            "📖"
+          ],
+          "words": [
+            "Ocko",
+            "číta",
+            "knihu"
+          ],
+          "hint": "Kto je na obrázku? Čo robí? Čo drží v rukách?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-stavaj-vety-2",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Postav a predĺž vetu",
+    "summary": "Skladanie viet z 3 – 4 slov s jednou kartou navyše a rozvíjacími kolami: dieťa vetu predĺži o prídavné meno a povie ju celú nahlas. Rozvíjanie jednoduchej vety smeruje k súvislej výpovedi (naratívna metodika Ďjačenko–Stanislavovej); slovné karty ako vonkajšia opora napĺňajú Mikulajovej princíp od konkrétneho k abstraktnému.",
+    "parent_guide": "Spolu pomenujte obrázky a upozornite: „Pozor, jedna kartička do vety nepatrí.“ Veďte dieťa otázkami: „Kto? Čo robí? Čo?“ — na každú otázku nech nájde jedno slovo. Kartu navyše spolu odložte bokom so slovami: „Táto sa do vety nehodí.“ Keď sa objaví otázka na predĺženie vety, prečítajte ju nahlas, nechajte dieťa vybrať slovko a celú dlhšiu vetu spolu zopakujte.",
+    "difficulty": 2,
+    "age_min": 6,
+    "age_max": 8,
+    "duration_minutes": 6,
+    "content": {
+      "type": "sentence_builder",
+      "intro": "Poskladaj vetu zo slovíčok. Pozor — jedno slovíčko do vety nepatrí! Niektoré vety potom ešte predĺžime.",
+      "items": [
+        {
+          "scene": [
+            "👧",
+            "🖍️",
+            "🏠"
+          ],
+          "words": [
+            "Ema",
+            "kreslí",
+            "dom"
+          ],
+          "distractors": [
+            "spí"
+          ],
+          "expansion": {
+            "prompt": "Aký je ten dom? Vyber slovko a povedz dlhšiu vetu.",
+            "options": [
+              "veľký",
+              "pekný",
+              "žltý"
+            ],
+            "insertAt": 2
+          },
+          "hint": "Kto kreslí? A čo kreslí? Ktoré slovíčko sa na obrázok vôbec nehodí?"
+        },
+        {
+          "scene": [
+            "🐶",
+            "🌳"
+          ],
+          "words": [
+            "Pes",
+            "beží",
+            "do",
+            "záhrady"
+          ],
+          "distractors": [
+            "mlieko"
+          ],
+          "hint": "Kto beží? Kam beží? Ktoré dve slovíčka idú spolu?"
+        },
+        {
+          "scene": [
+            "👩",
+            "🍲"
+          ],
+          "words": [
+            "Mama",
+            "varí",
+            "polievku"
+          ],
+          "distractors": [
+            "kameň"
+          ],
+          "expansion": {
+            "prompt": "Aká je tá polievka? Vyber slovko a povedz dlhšiu vetu.",
+            "options": [
+              "teplú",
+              "dobrú",
+              "zeleninovú"
+            ],
+            "insertAt": 2
+          },
+          "hint": "Kto varí? Čo varí? Hodí sa do polievky všetko, čo vidíš na kartách?"
+        },
+        {
+          "scene": [
+            "🧒",
+            "⚽",
+            "🌞"
+          ],
+          "words": [
+            "Deti",
+            "sa",
+            "hrajú",
+            "vonku"
+          ],
+          "distractors": [
+            "kniha"
+          ],
+          "hint": "Kto sa hrá? Kde? Ktoré malé slovíčko patrí k slovu hrajú?"
+        },
+        {
+          "scene": [
+            "👵",
+            "🥧"
+          ],
+          "words": [
+            "Babka",
+            "pečie",
+            "koláč"
+          ],
+          "distractors": [
+            "pláva"
+          ],
+          "expansion": {
+            "prompt": "Aký koláč babka pečie? Vyber slovko a povedz dlhšiu vetu.",
+            "options": [
+              "sladký",
+              "jablkový",
+              "voňavý"
+            ],
+            "insertAt": 2
+          },
+          "hint": "Kto pečie? Čo pečie? Čo babka pri pečení určite nerobí?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-stavaj-vety-3",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Dlhé vety a spojky",
+    "summary": "Stavba dlhších viet (4 – 7 slov) s kartami navyše a rozširovaním o príslovkové určenia a spojkové dovetky (pretože, a preto, a potom). Práca s konektormi buduje kohéziu a kauzálnu štruktúru výpovede — krok od jednotlivej vety k súvislému naratívu podľa metodiky Ďjačenko–Stanislavovej.",
+    "parent_guide": "Nechajte dieťa najprv prečítať všetky kartičky nahlas. Pripomeňte: „Prvé slovo spoznáš podľa veľkého písmena a niektoré kartičky sú navyše.“ Ak sa dieťa zasekne, pýtajte sa po častiach: „Kto? Čo urobil? Kde? Prečo?“ Pri predlžovaní vety prečítajte otázku, nechajte dieťa vybrať dovetok a celú dlhú vetu nech povie samo od začiatku — práve vyslovenie celej vety je cieľ.",
+    "difficulty": 3,
+    "age_min": 8,
+    "age_max": 10,
+    "duration_minutes": 8,
+    "content": {
+      "type": "sentence_builder",
+      "intro": "Poskladaj dlhé vety. Niektoré slovíčka sú navyše — a niektoré vety spolu ešte predĺžime!",
+      "items": [
+        {
+          "scene": [
+            "🐱",
+            "😨"
+          ],
+          "words": [
+            "Mačka",
+            "sa",
+            "schovala",
+            "pod",
+            "stôl,"
+          ],
+          "distractors": [
+            "spieva",
+            "jablko"
+          ],
+          "expansion": {
+            "prompt": "Prečo sa mačka schovala? Vyber dovetok a povedz celú dlhú vetu.",
+            "options": [
+              "pretože sa bála búrky",
+              "pretože počula psa",
+              "lebo sa chcela hrať"
+            ],
+            "insertAt": 5
+          },
+          "hint": "Kto sa schoval? Kam? Kde asi stojí malé slovíčko sa?"
+        },
+        {
+          "scene": [
+            "🥣",
+            "🌞"
+          ],
+          "words": [
+            "Najprv",
+            "sa",
+            "najeme",
+            "a",
+            "potom",
+            "ideme",
+            "von"
+          ],
+          "distractors": [
+            "nikdy"
+          ],
+          "hint": "Ktoré slovo hovorí, čo bolo prvé? Ktoré slovíčka spájajú dve časti vety?"
+        },
+        {
+          "scene": [
+            "🌙",
+            "📖"
+          ],
+          "words": [
+            "Večer",
+            "si",
+            "čítame",
+            "peknú",
+            "rozprávku"
+          ],
+          "distractors": [
+            "stolička",
+            "skáče"
+          ],
+          "hint": "Kedy čítame? Čo čítame? Aká je tá rozprávka?"
+        },
+        {
+          "scene": [
+            "👧",
+            "😢"
+          ],
+          "words": [
+            "Zuzka",
+            "spadla",
+            "a",
+            "plakala"
+          ],
+          "distractors": [
+            "smiala",
+            "pod"
+          ],
+          "expansion": {
+            "prompt": "Kde Zuzka spadla? Vyber miesto a povedz celú dlhú vetu.",
+            "options": [
+              "na dvore",
+              "na ihrisku",
+              "pri škole"
+            ],
+            "insertAt": 2
+          },
+          "hint": "Čo sa stalo najprv? Čo bolo potom? Ktoré slovíčka hovoria prečo?"
+        },
+        {
+          "scene": [
+            "👴",
+            "🌉"
+          ],
+          "words": [
+            "Dedko",
+            "kráčal",
+            "cez",
+            "starý",
+            "most"
+          ],
+          "distractors": [
+            "rýchlo",
+            "mlieko"
+          ],
+          "expansion": {
+            "prompt": "A čo bolo potom? Vyber dovetok a povedz celú dlhú vetu.",
+            "options": [
+              "a potom si sadol na lavičku",
+              "a potom pozdravil suseda",
+              "a potom sa vrátil domov"
+            ],
+            "insertAt": 5
+          },
+          "hint": "Kto kráčal? Cez čo kráčal? Aký bol most?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "na-pribehovy-detektiv-3",
+    "domain": "narrative",
+    "modality": "interactive",
+    "title": "Príbehový detektív",
+    "summary": "Päť- až šesťkartové sekvencie s reťazou príčin a následkov: dieťa musí pri ukladaní zdôvodniť, prečo udalosti nasledujú za sebou, a pri prerozprávaní použiť kauzálne konektory (pretože, preto, a tak) — rozvoj komplexnej makroštruktúry naratívu podľa metodiky Ďjačenko–Stanislavovej.",
+    "parent_guide": "Povedzte dieťaťu, že bude detektívom príbehu: každá karta je stopa. Nechajte ho najprv všetky karty v tichosti prezrieť a odhadnúť, o čom príbeh bude. Pri ukladaní sa pýtajte na príčiny: „Prečo sa to stalo? Mohlo sa to stať skôr?“ Pri prerozprávaní počúvajte, či dieťa použije slová pretože, preto alebo a tak — ak nie, začnite vetu vy: „Čiapka odletela, pretože…“ a nechajte ho dokončiť.",
+    "difficulty": 3,
+    "age_min": 7,
+    "age_max": 10,
+    "duration_minutes": 8,
+    "content": {
+      "type": "story_sequence",
+      "intro": "Si detektív príbehu! Ulož stopy po poriadku a vysvetli, prečo sa veci stali práve takto.",
+      "items": [
+        {
+          "title": "Odfúknutá čiapka",
+          "cards": [
+            {
+              "emoji": "💨",
+              "label": "Fúka silný vietor"
+            },
+            {
+              "emoji": "🧢",
+              "label": "Vietor odfúkne Miškovi čiapku"
+            },
+            {
+              "emoji": "🏃",
+              "label": "Miško za ňou beží"
+            },
+            {
+              "emoji": "🌳",
+              "label": "Čiapka sa zachytí na strome"
+            },
+            {
+              "emoji": "👴",
+              "label": "Dedko ju dočiahne palicou"
+            },
+            {
+              "emoji": "😊",
+              "label": "Miško sa poďakuje a čiapku si nasadí"
+            }
+          ],
+          "retellPrompt": "Porozprávaj celý príbeh od začiatku do konca. Skús povedať, prečo čiapka odletela, kto Miškovi pomohol a ako sa Miško cítil na konci.",
+          "hint": "Mohla čiapka odletieť skôr, ako začal fúkať vietor? Čo sa muselo stať ako prvé?"
+        },
+        {
+          "title": "Smädný kvietok",
+          "cards": [
+            {
+              "emoji": "🌺",
+              "label": "Katka má na okne pekný kvet"
+            },
+            {
+              "emoji": "⚽",
+              "label": "Celý týždeň sa len hrá a na kvet zabudne"
+            },
+            {
+              "emoji": "🥀",
+              "label": "Kvet od smädu ovädne"
+            },
+            {
+              "emoji": "💧",
+              "label": "Katka ho poleje a dá na slnko"
+            },
+            {
+              "emoji": "🌷",
+              "label": "Kvet sa vystrie a znova kvitne"
+            }
+          ],
+          "retellPrompt": "Porozprávaj, čo sa stalo s kvetom. Prečo ovädol, čo Katka urobila a čo si z toho vzala? Skús použiť slová pretože a preto.",
+          "hint": "Prečo kvet ovädol? Čo Katka celý týždeň nerobila?"
         }
       ]
     }

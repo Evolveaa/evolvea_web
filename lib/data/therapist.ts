@@ -7,6 +7,9 @@ import type { Child, SessionRow } from "@/lib/data/parent";
 
 export type InviteRow = Database["public"]["Tables"]["invites"]["Row"];
 
+/** Clinical triage state — the dashboard's first question is "who needs me". */
+export type FamilyEngagement = "fresh" | "active" | "slowed" | "silent";
+
 export interface FamilyOverview {
   child: Child;
   parentName: string;
@@ -15,6 +18,11 @@ export interface FamilyOverview {
   sessionsWeek: number;
   sessions30: number;
   unread: number;
+  /** Sum of times_per_week across the child's active plan (0 = no plan). */
+  weeklyTarget: number;
+  engagement: FamilyEngagement;
+  /** Whole days since the last completed session (null = never). */
+  daysSinceLast: number | null;
 }
 
 /** Everything the dashboard table needs, aggregated client-side from 4 queries. */
@@ -26,7 +34,7 @@ export const getFamilies = cache(async (therapistId: string): Promise<FamilyOver
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
 
-  const [childrenRes, subsRes, sessionsRes, unreadRes] = await Promise.all([
+  const [childrenRes, subsRes, sessionsRes, unreadRes, plansRes] = await Promise.all([
     supabase
       .from("children")
       .select("*, parent:profiles!children_parent_id_fkey(full_name)")
@@ -44,11 +52,24 @@ export const getFamilies = cache(async (therapistId: string): Promise<FamilyOver
       .is("read_at", null)
       .neq("sender_id", therapistId)
       .eq("kind", "message"),
+    supabase
+      .from("plans")
+      .select("child_id, plan_items(times_per_week)")
+      .eq("status", "active"),
   ]);
 
   const subs = new Map((subsRes.data ?? []).map((s) => [s.child_id, s]));
   const sessions = sessionsRes.data ?? [];
   const unread = unreadRes.data ?? [];
+  const targets = new Map(
+    (plansRes.data ?? []).map((p) => [
+      p.child_id,
+      (p.plan_items ?? []).reduce((n, i) => n + (i.times_per_week ?? 0), 0),
+    ]),
+  );
+
+  const DAY = 86_400_000;
+  const now = Date.now();
 
   return (childrenRes.data ?? []).map((row) => {
     const { parent, ...child } = row as Child & { parent: { full_name: string } | null };
@@ -57,6 +78,18 @@ export const getFamilies = cache(async (therapistId: string): Promise<FamilyOver
       (acc, s) => (acc === null || s.started_at > acc ? s.started_at : acc),
       null,
     );
+    const daysSinceLast = last ? Math.floor((now - new Date(last).getTime()) / DAY) : null;
+    const childDays = Math.floor((now - new Date(child.created_at).getTime()) / DAY);
+    const engagement: FamilyEngagement =
+      daysSinceLast === null
+        ? childDays <= 14
+          ? "fresh"
+          : "silent"
+        : daysSinceLast <= 3
+          ? "active"
+          : daysSinceLast <= 7
+            ? "slowed"
+            : "silent";
     return {
       child,
       parentName: parent?.full_name ?? "—",
@@ -65,6 +98,9 @@ export const getFamilies = cache(async (therapistId: string): Promise<FamilyOver
       sessionsWeek: mine.filter((s) => new Date(s.started_at) >= weekAgo).length,
       sessions30: mine.length,
       unread: unread.filter((m) => m.child_id === child.id).length,
+      weeklyTarget: targets.get(child.id) ?? 0,
+      engagement,
+      daysSinceLast,
     };
   });
 });

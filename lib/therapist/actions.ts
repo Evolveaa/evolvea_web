@@ -2,8 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
-import { parseExerciseContent, type ExerciseDomain } from "@/lib/exercises/types";
+import {
+  modalityForContent,
+  parseExerciseContent,
+  type ExerciseDomain,
+} from "@/lib/exercises/types";
 import type { Json } from "@/lib/database.types";
 
 export type InviteState = { error?: "fields" | "unknown"; code?: string } | null;
@@ -178,12 +183,7 @@ export async function saveExerciseAction(
   }
 
   const parsed = parseExerciseContent(content);
-  const modality =
-    parsed.type === "speech_items"
-      ? "speech"
-      : parsed.type === "guided_steps"
-        ? "guided"
-        : "interactive";
+  const modality = modalityForContent(parsed.type);
 
   const supabase = await createClient();
   const {
@@ -211,6 +211,47 @@ export async function saveExerciseAction(
   if (error) return { error: "unknown" };
   revalidatePath("/therapist/library");
   redirect("/therapist/library?saved=1");
+}
+
+/**
+ * Duplicate any library exercise (built-in or own) into an editable own copy.
+ * The content jsonb is copied verbatim — the form preserves types it cannot
+ * edit item-by-item, so even sound_boxes/scene_directions duplicate safely.
+ */
+export async function duplicateExerciseAction(formData: FormData): Promise<void> {
+  const id = String(formData.get("exercise_id") ?? "");
+  if (!id) return;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { data: src } = await supabase.from("exercises").select("*").eq("id", id).maybeSingle();
+  if (!src) return;
+
+  const t = await getTranslations("therapist.library");
+  const { data: created } = await supabase
+    .from("exercises")
+    .insert({
+      domain: src.domain,
+      modality: src.modality,
+      title: `${src.title} ${t("copySuffix")}`.slice(0, 200),
+      summary: src.summary,
+      parent_guide: src.parent_guide,
+      difficulty: src.difficulty,
+      age_min: src.age_min,
+      age_max: src.age_max,
+      duration_minutes: src.duration_minutes,
+      content: src.content,
+      created_by: user.id,
+    })
+    .select("id")
+    .single();
+
+  revalidatePath("/therapist/library");
+  if (created) redirect(`/therapist/library/${created.id}`);
 }
 
 export async function toggleExerciseActiveAction(formData: FormData): Promise<void> {

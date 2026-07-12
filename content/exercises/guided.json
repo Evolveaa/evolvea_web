@@ -544,5 +544,85 @@
         }
       ]
     }
+  },
+  {
+    "slug": "gu-ako-som-sa-to-naucil-3",
+    "domain": "guided",
+    "modality": "guided",
+    "title": "Ako som sa to naučil",
+    "summary": "Reflexia vlastných stratégií učenia: dieťa skúma, ako sa naučilo niečo, čo už bezpečne vie, pomenuje svoje stratégie a jednu hneď overí na novej malej úlohe. Rozvíja metakognitívne stratégie podľa Mikulajovej — plánovanie, monitorovanie a hodnotenie vlastného učenia — a buduje profil dobrého používateľa stratégií (Borkowski, 1992): poznať viacero stratégií, vedieť, kedy ich použiť, a veriť, že úsilie vedie k úspechu.",
+    "parent_guide": "Vyberte pokojnú chvíľu bez časového tlaku. Povedzte: „Ty už toho veľa vieš. Dnes budeme skúmať, AKO si sa to naučil — ako detektívi vlastnej hlavy.“ Nechajte dieťa vybrať jednu vec, ktorú nedávno zvládlo — báseň, násobilku, jazdu na bicykli. Pýtajte sa ako zvedavý novinár: „Ako si to robil? Čo ti pomohlo najviac? Čo vôbec nepomohlo?“ Stratégie zapisujte presne jeho slovami a žiadnu nehodnoťte. Keď potom dieťa skúša stratégiu na novej úlohe, mlčte a nechajte ju pracovať — na konci sa len spýtajte: „Fungovala? Ako to vieš?“",
+    "difficulty": 3,
+    "age_min": 8,
+    "age_max": 10,
+    "duration_minutes": 12,
+    "content": {
+      "type": "guided_steps",
+      "intro": "Ty už veľa vecí vieš! Dnes preskúmame, AKO si sa ich naučil — a tvoje najlepšie triky si odložíš do vlastnej krabičky stratégií.",
+      "steps": [
+        {
+          "kicker": "Krok 1 · Príprava",
+          "title": "Vyber, čo už vieš",
+          "body": "Povedzte: „Vyber si jednu vec, ktorú si sa nedávno naučil a dnes ti už ide — báseň, násobilku, bicyklovanie, čokoľvek.“ Výber zapíšte slovami dieťaťa.",
+          "fields": [
+            { "label": "Čo si dieťa vybralo?", "placeholder": "napr. básnička do školy, násobilka šiestich, jazda na bicykli" }
+          ],
+          "tip": "Nevyberajte za dieťa, ani keď máte lepší nápad. Skúmať sa dá len to, na čo je dieťa samo hrdé."
+        },
+        {
+          "kicker": "Krok 2 · Pocity",
+          "title": "Ako sa cítiš, keď na to pomyslíš?",
+          "body": "Spýtajte sa: „Keď si spomenieš, že to dnes už vieš — aký pocit to v tebe robí?“ Nechajte dieťa vybrať, pokojne aj viac pocitov naraz.",
+          "choices": ["Hrdosť", "Radosť", "Prekvapenie", "Pokoj", "Rozpaky"],
+          "tip": "Pocit len prijmite a zopakujte: „Aha, hrdosť. Právom.“ Nepridávajte vlastné hodnotenie výkonu."
+        },
+        {
+          "kicker": "Krok 3 · Skúmanie",
+          "title": "Rozhovor s majstrom",
+          "body": "Robte dieťaťu novinára: „Ako si to robil? Čo ti pomohlo najviac? Čo vôbec nepomohlo? Kedy ti to išlo najlepšie?“ Každú stratégiu, ktorú dieťa objaví, zapíšte jeho vlastnými slovami.",
+          "fields": [
+            { "label": "Aké stratégie dieťa objavilo?", "placeholder": "napr. opakoval som si to nahlas, rozdelil som si to na časti" },
+            { "label": "Čo nepomohlo?", "placeholder": "napr. učiť sa všetko naraz večer" }
+          ],
+          "tip": "Stratégie nedopĺňajte za dieťa. Ak sa zasekne, zúžte otázku: „Robil si to sám, alebo s niekým? Potichu, alebo nahlas?“"
+        },
+        {
+          "kicker": "Krok 4 · Plán",
+          "title": "Vyber stratégiu na novú úlohu",
+          "body": "Povedzte: „Teraz svoj najlepší trik vyskúšame na niečom novom.“ Dohodnite malú novú úlohu — krátku básničku, päť nových slovíčok, telefónne číslo — a nechajte dieťa vybrať, ktorú stratégiu použije.",
+          "choices": [
+            "Opakujem si to nahlas",
+            "Rozdelím si to na menšie časti",
+            "Nakreslím si k tomu obrázok",
+            "Vysvetlím to niekomu inému",
+            "Sám sa vyskúšam"
+          ],
+          "tip": "Úlohu aj stratégiu si volí dieťa. Neraďte, ktorá je „správna“ — overenie príde samo v ďalšom kroku."
+        },
+        {
+          "kicker": "Krok 5 · Samostatný pokus",
+          "title": "Teraz skúšaš ty",
+          "body": "Dieťa asi päť minút pracuje samo a používa vybranú stratégiu. Vy iba sledujete čas a mlčíte. Ak si dieťa pýta pomoc, vráťte mu otázku: „Čo ti hovorí tvoja stratégia?“",
+          "tip": "Nezasahujte, ani keď stratégia škrípe — všimnúť si, že nefunguje, je presne to monitorovanie, ktoré sa dieťa učí. Nikdy neriešte úlohu za neho."
+        },
+        {
+          "kicker": "Krok 6 · Reflexia",
+          "title": "Fungovalo to?",
+          "body": "Spýtajte sa: „Fungovala tvoja stratégia? Ako to vieš?“ a „Kedy ju použiješ nabudúce?“ Odpovede zapíšte slovami dieťaťa.",
+          "fields": [
+            { "label": "Fungovala stratégia? Ako to dieťa vie?", "placeholder": "napr. básničku povedal bez pomoci — opakovanie nahlas fungovalo" },
+            { "label": "Kedy ju dieťa použije nabudúce?", "placeholder": "napr. pri učení vybraných slov" }
+          ],
+          "tip": "Hodnotíme stratégiu, nie dieťa. Aj „nefungovala“ je výborný výsledok — znamená to, že nabudúce vyberie inú."
+        },
+        {
+          "kicker": "Krok 7 · Ukotvenie",
+          "title": "Veta pre mňa",
+          "body": "Povedzte: „Vyber si vetu, ktorá dnes platí o tebe, a povedz ju nahlas.“",
+          "choices": ["Viem, ako sa učím.", "Mám svoje stratégie a viem ich použiť.", "Úsilie ma dovedie k cieľu."],
+          "tip": "Vetu si volí dieťa samo — presvedčenie, že úsilie vedie k úspechu, sa nedá darovať, len objaviť."
+        }
+      ]
+    }
   }
 ]

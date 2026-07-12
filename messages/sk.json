@@ -8,7 +8,7 @@
     "homeAria": "Evolvea — domovská stránka"
   },
   "hero": {
-    "eyebrow": "Metakognitívne učenie · Vek 6 – 14 rokov",
+    "eyebrow": "Metakognitívne učenie · Vek 5 – 10 rokov",
     "title": "Desať minút večer, ktoré zmenia spôsob, akým vaše dieťa premýšľa.",
     "lead": "Evolvea je každodenné cvičenie, ktoré rodič a dieťa robia spoločne. Každá otázka nadväzuje na poslednú odpoveď vášho dieťaťa — takže uvažovanie, sebareflexia a zvedavosť rastú rozhovor po rozhovore.",
     "ctaDemo": "Vyskúšať živú ukážku",
@@ -53,7 +53,7 @@
     "intro": {
       "kicker": "Sedenie · s Leom",
       "h": "Zaseknutá skladačka",
-      "sub": "Vedené rodičom · 10 – 15 min · Vek 6 – 10 rokov",
+      "sub": "Vedené rodičom · 10 – 15 min · Vek 5 – 10 rokov",
       "text": "Dajte Leovi malú skladačku (10 – 20 dielikov) — riešiteľnú, no nie na prvý pohľad zrejmú. Myslenie je na ňom. Vy ste sprievodca, nie inštruktor: neriešte, neopravujte.",
       "noteLabel": "Čo to buduje",
       "noteBody": "Odolnosť voči ťažkostiam, <b>adaptívny vnútorný dialóg</b> a sebadôveru založenú na úsilí."
@@ -216,7 +216,35 @@
     "heroHeadline": "Logopedická terapia, ktorá pokračuje aj doma.",
     "heroPoint1": "Cvičenia na mieru od vášho logopéda",
     "heroPoint2": "Pekný prehľad pokroku a chýb dieťaťa",
-    "heroPoint3": "Súkromne a bezpečne — dáta v EÚ"
+    "heroPoint3": "Súkromne a bezpečne — dáta v EÚ",
+    "forgotPassword": "Zabudnuté heslo?",
+    "reset": {
+      "forgotTitle": "Zabudnuté heslo",
+      "forgotLead": "Zadajte e-mail, s ktorým ste sa registrovali. Pošleme vám odkaz na nastavenie nového hesla.",
+      "email": "E-mail",
+      "sendLink": "Poslať odkaz",
+      "sending": "Posielam…",
+      "sentNotice": "Ak účet existuje, poslali sme naň odkaz na obnovenie hesla. Skontrolujte si schránku (aj spam).",
+      "backToLogin": "Späť na prihlásenie",
+      "newTitle": "Nové heslo",
+      "newLead": "Zvoľte si nové heslo. Po uložení budete rovno prihlásení.",
+      "newPassword": "Nové heslo",
+      "confirmPassword": "Zopakujte nové heslo",
+      "passwordHint": "Aspoň 8 znakov.",
+      "save": "Uložiť nové heslo",
+      "saving": "Ukladám…",
+      "expiredTitle": "Odkaz už nie je platný",
+      "expiredLead": "Odkaz na obnovenie hesla vypršal alebo už bol použitý. Nechajte si poslať nový.",
+      "goForgot": "Poslať nový odkaz",
+      "errors": {
+        "fields": "Zadajte platný e-mail.",
+        "rate_limit": "Priveľa pokusov. Skúste to prosím o chvíľu.",
+        "unknown": "Niečo sa pokazilo. Skúste to prosím znova.",
+        "weak_password": "Heslo musí mať aspoň 8 znakov.",
+        "mismatch": "Heslá sa nezhodujú.",
+        "session": "Platnosť odkazu vypršala. Nechajte si poslať nový odkaz na stránke Zabudnuté heslo."
+      }
+    }
   },
   "shell": {
     "navLabel": "Hlavná navigácia",
@@ -371,7 +399,12 @@
     "speechConsentLead": "Pri cvičeniach s opisom obrázka môžeme nahrať, ako dieťa rozpráva, a náš pomocník posúdi, či spomenulo, čo malo. Nahrávky sú súkromné, po 30 dňoch sa automaticky mažú a súhlas môžete kedykoľvek odvolať.",
     "speechConsentField": "Súhlasím s nahrávaním hlasu môjho dieťaťa",
     "speechConsentSave": "Uložiť súhlas",
-    "speechConsentActive": "Nahrávanie je zapnuté"
+    "speechConsentActive": "Nahrávanie je zapnuté",
+    "weekDoneTitle": "Tento týždeň máte splnený! 🌟",
+    "weekDoneLead": "Všetky cvičenia z plánu sú hotové. Oddych je zaslúžený — alebo si dajte niečo navyše.",
+    "weekDoneCta": "Cvičiť navyše z plánu",
+    "goalsSection": "Na čom pracujeme",
+    "goalsHint": "Ciele nastavuje logopéd — každé domáce cvičenie k nim kúsok pridáva."
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",
@@ -379,7 +412,7 @@
     "newInvite": "Nová pozvánka",
     "statFamilies": "rodín v starostlivosti",
     "statActiveWeek": "cvičilo tento týždeň",
-    "statUnread": "neprečítané správy",
+    "statUnread": "{count, plural, =0 {neprečítaných správ} one {neprečítaná správa} few {neprečítané správy} other {neprečítaných správ}}",
     "statCommission": "provízia mesačne",
     "noFamiliesTitle": "Zatiaľ žiadne rodiny",
     "noFamiliesLead": "Vytvorte pozvánku, dajte rodičovi kód a po registrácii sa tu rodina objaví aj s celým priebehom cvičení.",
@@ -465,7 +498,8 @@
       "publishError": "Plán sa nepodarilo uložiť. Skúste to znova.",
       "publish": "Zverejniť plán",
       "publishing": "Zverejňujem…",
-      "publishHint": "Predchádzajúci plán sa archivuje, história cvičení zostáva."
+      "publishHint": "Predchádzajúci plán sa archivuje, história cvičení zostáva.",
+      "droppedItems": "{count, plural, one {# cvičenie z pôvodného plánu už nie je v knižnici a bolo z návrhu vyradené.} few {# cvičenia z pôvodného plánu už nie sú v knižnici a boli z návrhu vyradené.} other {# cvičení z pôvodného plánu už nie je v knižnici a boli z návrhu vyradené.}}"
     },
     "library": {
       "pageTitle": "Knižnica cvičení",
@@ -489,7 +523,12 @@
       "ageLabel": "Vek",
       "allAges": "Každý vek",
       "noResults": "Žiadne cvičenia nezodpovedajú filtru.",
-      "clearFilters": "Zrušiť filtre"
+      "clearFilters": "Zrušiť filtre",
+      "duplicate": "Duplikovať",
+      "copySuffix": "– kópia",
+      "viewLabel": "Zobrazenie",
+      "viewGrid": "Mriežka",
+      "viewList": "Zoznam"
     },
     "exerciseForm": {
       "backToLibrary": "Knižnica",
@@ -559,7 +598,8 @@
       "errors": {
         "fields": "Skontrolujte vyplnené polia (názov, zhrnutie, vek, trvanie).",
         "unknown": "Uloženie zlyhalo. Skúste to znova."
-      }
+      },
+      "rawNote": "Tento typ úlohy má štruktúrovaný obsah, ktorý sa vo formulári zatiaľ nedá upravovať po položkách — obsah zostane zachovaný presne tak, ako je. Meniť môžete názov, náročnosť, vek, trvanie a sprievodné texty."
     },
     "invites": {
       "pageTitle": "Pozvánky",
@@ -589,7 +629,9 @@
       "errors": {
         "fields": "Vyplňte meno dieťaťa (a platný rok narodenia).",
         "unknown": "Pozvánku sa nepodarilo vytvoriť. Skúste to znova."
-      }
+      },
+      "createAnother": "Vytvoriť ďalšiu pozvánku",
+      "deleteConfirm": "Naozaj zmazať?"
     },
     "referrals": {
       "pageTitle": "Provízie",
@@ -604,16 +646,202 @@
       "colStatus": "Predplatné",
       "colEngagement": "Zapojenie",
       "colCommission": "Provízia",
-      "state": {
-        "active": "✅ platí",
-        "trial": "⏳ skúšobné",
-        "expired": "⚠️ po skúšobnom",
-        "canceled": "✖️ zrušené",
-        "none": "—"
-      },
       "weekSessions": "{count, plural, =0 {0 cvičení/týž.} one {# cvičenie/týž.} few {# cvičenia/týž.} other {# cvičení/týž.}}",
       "disclaimer": "Prehľad je orientačný. Vyúčtovanie provízií prebieha mesačne na základe skutočne uhradených predplatných."
-    }
+    },
+    "statAttention": "potrebujú pozornosť",
+    "attentionTitle": "Potrebujú pozornosť ({count})",
+    "calmTitle": "V dobrom rytme",
+    "weekAdherence": "{done}/{target} tento týždeň",
+    "flags": {
+      "silentDays": "{days, plural, one {# deň} few {# dni} other {# dní}} bez cvičenia",
+      "slowed": "cvičenie sa spomalilo",
+      "behindPlan": "pod týždenným plánom",
+      "unread": "neprečítaná správa",
+      "quiet30": "bez cvičenia vyše 30 dní"
+    },
+    "goals": {
+      "title": "Ciele terapie",
+      "add": "Pridať cieľ",
+      "cancel": "Zrušiť",
+      "empty": {
+        "title": "Zatiaľ žiadne ciele",
+        "lead": "Stanovte prvý merateľný cieľ — vy aj rodina uvidíte, kam terapia smeruje."
+      },
+      "form": {
+        "domain": "Oblasť",
+        "title": "Názov cieľa",
+        "titlePlaceholder": "Čo má dieťa zvládnuť?",
+        "target": "Cieľová úspešnosť",
+        "targetNone": "Bez cieľového %",
+        "targetDate": "Termín (voliteľné)",
+        "baseline": "Východisko % (voliteľné)",
+        "submit": "Vytvoriť cieľ",
+        "saving": "Ukladám…"
+      },
+      "suggestions": {
+        "phonemic_awareness": {
+          "s1": "Samostatne určí prvú hlásku v slove",
+          "s2": "Rozloží slovo na slabiky bez pomoci"
+        },
+        "working_memory": {
+          "s1": "Zopakuje postupnosť 4 prvkov v správnom poradí",
+          "s2": "Udrží a splní dvojkrokovú inštrukciu"
+        },
+        "attention": {
+          "s1": "Udrží pozornosť počas celého cvičenia",
+          "s2": "Vyhľadá cieľový podnet bez chyby"
+        },
+        "narrative": {
+          "s1": "Prerozpráva krátky príbeh v troch krokoch",
+          "s2": "Samostatne rozpráva podľa série obrázkov"
+        },
+        "vocabulary": {
+          "s1": "Aktívne používa 10 nových slov",
+          "s2": "Vymenuje predmety v danej kategórii"
+        },
+        "articulation": {
+          "s1": "Správne vyslovuje precvičovanú hlásku v slovách",
+          "s2": "Prenesie hlásku do spontánnej reči"
+        },
+        "guided": {
+          "s1": "Spoločné aktivity aspoň 3× do týždňa",
+          "s2": "Strieda sa v komunikácii počas hry"
+        }
+      },
+      "metaProgress": "{current} % → cieľ {target} %",
+      "metaCurrent": "aktuálne {current} %",
+      "metaNoData": "zatiaľ bez dát (14 dní)",
+      "metaBaseline": "východisko {baseline} %",
+      "metaDate": "do {date}",
+      "achieve": "Splnený",
+      "archive": "Archivovať",
+      "delete": "Vymazať",
+      "confirmDelete": "Naozaj vymazať?",
+      "reactivate": "Obnoviť",
+      "noActive": "Žiadne aktívne ciele — pridajte nový alebo obnovte splnený.",
+      "doneGroup": "Splnené a archivované ciele ({count})",
+      "achievedOn": "Splnený {date}",
+      "status": {
+        "achieved": "Splnený",
+        "archived": "Archivovaný"
+      },
+      "errors": {
+        "fields": "Skontrolujte, prosím, vyplnené polia.",
+        "unknown": "Niečo sa nepodarilo. Skúste to, prosím, znova."
+      }
+    },
+    "notes": {
+      "title": "Klinické poznámky",
+      "privateChip": "Súkromné — rodič ich nevidí",
+      "privateHint": "Poznámky vidíte iba vy. Rodič ani nikto iný k nim nemá prístup.",
+      "sinceLast": "Od poslednej poznámky: {sessions, plural, one {1 cvičenie} few {# cvičenia} other {# cvičení}} doma, priem. úspešnosť {pct} % za {days, plural, one {1 deň} few {# dni} other {# dní}}.",
+      "sinceLastNoPct": "Od poslednej poznámky: {sessions, plural, one {1 cvičenie} few {# cvičenia} other {# cvičení}} doma za {days, plural, one {1 deň} few {# dni} other {# dní}}.",
+      "copy": "Kopírovať",
+      "copied": "Skopírované ✓",
+      "composer": {
+        "label": "Nová poznámka",
+        "placeholder": "Priebeh sedenia, pozorovania, plán na nabudúce… (SOAP-lite)",
+        "date": "Dátum",
+        "submit": "Uložiť poznámku",
+        "saving": "Ukladám…"
+      },
+      "delete": "Vymazať",
+      "confirmDelete": "Naozaj vymazať?",
+      "empty": {
+        "title": "Zatiaľ žiadne poznámky",
+        "lead": "Zapisujte si poznámky zo sedení — pozorovania, priebeh, hodnotenie a plán (SOAP-lite). Rodič ich nikdy neuvidí."
+      },
+      "errors": {
+        "fields": "Skontrolujte, prosím, text a dátum poznámky.",
+        "unknown": "Niečo sa nepodarilo. Skúste to, prosím, znova."
+      }
+    },
+    "templates": {
+      "trigger": "Šablóny",
+      "empty": "Zatiaľ nemáte uložené žiadne šablóny.",
+      "count": "{count, plural, one {1 cvičenie} few {# cvičenia} other {# cvičení}}",
+      "apply": "Použiť",
+      "confirmApply": "Nahradiť návrh?",
+      "deleteLabel": "Vymazať šablónu",
+      "confirmDelete": "Naozaj?",
+      "saveTitle": "Uložiť aktuálny plán ako šablónu",
+      "form": {
+        "title": "Názov šablóny",
+        "description": "Popis (voliteľné)",
+        "submit": "Uložiť šablónu",
+        "saving": "Ukladám…"
+      },
+      "saved": "Šablóna uložená ✓",
+      "emptyDraftHint": "Najprv pridajte do plánu cvičenia — potom ho uložíte ako šablónu.",
+      "errors": {
+        "fields": "Skontrolujte, prosím, názov a obsah šablóny.",
+        "unknown": "Niečo sa nepodarilo. Skúste to, prosím, znova."
+      }
+    },
+    "openReport": "Vygenerovať správu",
+    "report": {
+      "docTitle": "Správa o priebehu domácej terapie",
+      "backToChild": "Späť na detail dieťaťa",
+      "periodLabel": "Obdobie",
+      "weeksOption": "{weeks, plural, one {# týždeň} few {# týždne} other {# týždňov}}",
+      "printButton": "Vytlačiť / uložiť PDF",
+      "childLabel": "Dieťa",
+      "therapistLabel": "Logopéd",
+      "parentLabel": "Rodič",
+      "generatedLabel": "Vygenerované",
+      "summaryTitle": "Súhrn",
+      "statSessions": "dokončené cvičenia",
+      "statMinutes": "minút cvičenia",
+      "statDays": "dní s cvičením",
+      "statStreak": "dní v rade",
+      "statAvg": "priemerná úspešnosť",
+      "domainsTitle": "Oblasti",
+      "noData": "Za zvolené obdobie nie sú žiadne dáta.",
+      "thDomain": "Oblasť",
+      "thSessions": "Cvičenia",
+      "thAvg": "Priemer",
+      "thTrend": "Trend",
+      "thTricky": "Problémové položky",
+      "goalsTitle": "Ciele terapie",
+      "goalsEmpty": "Zatiaľ nie sú nastavené žiadne ciele.",
+      "thGoal": "Cieľ",
+      "goalBaseline": "Východisko",
+      "goalCurrent": "Aktuálne (14 dní)",
+      "goalTarget": "Cieľová hodnota",
+      "thStatus": "Stav",
+      "goalAchieved": "Splnený {date}",
+      "goalActiveUntil": "Aktívny do {date}",
+      "goalActive": "Aktívny",
+      "metaTitle": "Metakognícia",
+      "metaEmpty": "Dokončené cvičenia zatiaľ neobsahujú metakognitívne dáta.",
+      "metaStrategies": "Voľba stratégie",
+      "metaSelfEval": "Sebahodnotenie dieťaťa",
+      "metaCalibration": "Kalibrácia sebahodnotenia",
+      "selfEval": {
+        "great": "Išlo mi to výborne",
+        "ok": "Celkom dobre",
+        "hard": "Bolo to ťažké"
+      },
+      "calib": {
+        "under": "Podceňuje sa",
+        "ok": "Presné",
+        "over": "Nadhodnocuje sa"
+      },
+      "trickyTitle": "Čo robí problém",
+      "trickyEmpty": "Žiadne opakovane problémové položky — výborný priebeh.",
+      "thItem": "Položka",
+      "thMisses": "Nepodarilo sa",
+      "thAttempts": "Pokusy",
+      "notesTitle": "Poznámky rodiča",
+      "notesEmpty": "Rodič zatiaľ nepridal žiadne poznámky.",
+      "commentTitle": "Odkaz logopéda",
+      "signature": "Podpis logopéda",
+      "dateLabel": "Dátum",
+      "brandFooter": "Evolvea — digitálny spoločník logopedickej terapie"
+    },
+    "showMoreSessions": "Zobraziť staršie ({count})",
+    "noRecentActivity": "žiadne cvičenie za posledných 30 dní"
   },
   "billing": {
     "trialTitle": "Skúšobné obdobie: {count, plural, =0 {posledný deň} one {ešte # deň} few {ešte # dni} other {ešte # dní}}",
@@ -717,14 +945,14 @@
       "showSolution": "Pozri, slovo má {count, plural, one {# hlásku} few {# hlásky} other {# hlások}}.",
       "tokensSoFar": "{count, plural, one {# žetón} few {# žetóny} other {# žetónov}}",
       "countHint": "Povedzte slovo pomaličky a pri každej hláske ťuknite žetón.",
-      "colorsHint": "Táto hláska je {kind}.",
       "kinds": {
         "vowel": "krátka samohláska",
         "long_vowel": "dlhá samohláska",
         "diphthong": "dvojhláska",
         "consonant": "spoluhláska"
       },
-      "paletteLabel": "Vyber druh hlásky"
+      "paletteLabel": "Vyber druh hlásky",
+      "colorsHintAsk": "Natiahni hlásku „{sound}“ a počúvaj: dá sa spievať? Ak áno, je krátka alebo dlhá? Ak sa spievať nedá, aká je to hláska?"
     },
     "memory": {
       "watchPrompt": "Dobre si zapamätaj poradie…",
@@ -850,10 +1078,94 @@
         "0": "Najprv počúvam, potom hovorím",
         "1": "Hovorím pomaly a zreteľne",
         "2": "Dávam pozor na ústa a jazyk"
+      },
+      "minimal_pairs": {
+        "0": "Počúvam ušami, nie očami",
+        "1": "Zopakujem si slovo v hlave",
+        "2": "Neponáhľam sa, počúvam pozorne"
+      },
+      "sound_hunt": {
+        "0": "Nastražím uši ako zajačik",
+        "1": "Poviem si slovo pomaličky",
+        "2": "Hľadám hlásku na začiatku aj vnútri"
+      },
+      "sentence_builder": {
+        "0": "Najprv si vetu poviem v hlave",
+        "1": "Hľadám, kto niečo robí",
+        "2": "Po každom slove si vetu zopakujem"
+      },
+      "sorting": {
+        "0": "Poviem si nahlas, čo vidím",
+        "1": "Spýtam sa: kam to patrí a prečo?",
+        "2": "Skontrolujem sa, kým ťuknem"
+      },
+      "scene_directions": {
+        "0": "Pozorne počúvam celú vetu",
+        "1": "Zopakujem si, kam čo patrí",
+        "2": "Ukladám pekne po jednom"
       }
     },
     "recPendingStat": "Nahrávky odoslané",
-    "recPendingSub": "Vyhodnotenie príde o chvíľu — nájdete ho v Pokroku."
+    "recPendingSub": "Vyhodnotenie príde o chvíľu — nájdete ho v Pokroku.",
+    "nextUp": "Ďalšie cvičenie",
+    "dayDoneTitle": "Dnešná dávka hotová! 🎉",
+    "dayDoneLead": "Krásne. Krátko a pravidelne — presne takto sa rastie. Vidíme sa zajtra!",
+    "streakLine": "{count, plural, one {# deň v rade} few {# dni v rade} other {# dní v rade}}",
+    "minimalPairs": {
+      "parentLabel": "Pre rodiča",
+      "parentSay": "Povedzte dieťaťu slovo: „{word}“. Nenaznačujte ústami ani pohľadom.",
+      "parentPair": "Prečítajte pomaly a zreteľne obe slová: „{first}“ … „{second}“.",
+      "contrast": "Kontrast: {contrast}",
+      "playWord": "Prehrať slovo",
+      "playPair": "Prehrať dvojicu",
+      "listenPrompt": "Ktoré slovo to bolo? Ťukni na obrázok!",
+      "sdPrompt": "Nastraž ušká! Zneli slová rovnako, alebo inak?",
+      "same": "Rovnaké",
+      "different": "Iné",
+      "revealSame": "Bolo to dvakrát to isté slovo!",
+      "revealDifferent": "Boli to dve rôzne slová – počuješ ten rozdiel?"
+    },
+    "soundHunt": {
+      "parentLabel": "Pre rodiča",
+      "parentSay": "Povedzte slovo: „{word}“. Hlásku {target} nezvýrazňujte – dieťa ju má nájsť samo.",
+      "parentBombard": "Čítajte každé slovo pomaly a hlásku {target} poriadne natiahnite (napríklad „ššš“). Dieťa len počúva.",
+      "playWord": "Prehrať slovo",
+      "targetLabel": "Hľadaná hláska: {target}",
+      "detectPrompt": "Skrýva sa v slove hláska {target}?",
+      "hear": "Počujem {target}!",
+      "notThere": "Nie je tam",
+      "bombardPrompt": "Len počúvaj a pozeraj. Tvoje ušká pracujú!",
+      "wordProgress": "Slovo {current} z {total}",
+      "next": "Ďalej",
+      "pause": "Prestávka",
+      "play": "Pokračovať"
+    },
+    "sentenceBuilder": {
+      "buildPrompt": "Poskladaj vetu — ťukaj na slová v správnom poradí.",
+      "slotsLabel": "Tvoja veta",
+      "trayLabel": "Slová na výber",
+      "pickWord": "Vyber slovko, ktoré vetu predĺži.",
+      "parentReads": "Rodič číta nahlas:",
+      "readAloud": "Skvelé! Povedz celú vetu nahlas.",
+      "saidIt": "Povedal(a) som vetu ✓"
+    },
+    "sorting": {
+      "prompt": "Kam to patrí? Ťukni na správnu skupinu.",
+      "bucketsLabel": "Skupiny",
+      "inBucket": "{count} v skupine"
+    },
+    "sceneDirections": {
+      "prompt": "Počúvaj a ulož obrázky tam, kam patria.",
+      "parentReads": "Prečítajte nahlas",
+      "boardLabel": "Hracia plocha",
+      "trayLabel": "Obrázky na uloženie",
+      "cellPos": "riadok {row}, stĺpec {col}",
+      "emptyCell": "Prázdne políčko",
+      "filledCell": "Ťukni a obrázok sa vráti do zásobníka",
+      "lockedCell": "Správne uložený obrázok",
+      "tokenAria": "Zdvihni obrázok {token} a potom vyber políčko",
+      "check": "Hotovo!"
+    }
   },
   "categories": {
     "pronunciation": "Výslovnosť",

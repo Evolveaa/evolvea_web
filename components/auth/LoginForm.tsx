@@ -64,6 +64,9 @@ export default function LoginForm({
             autoComplete="current-password"
             required
           />
+          <p className="form-hint" style={{ textAlign: "right", marginTop: "0.35rem" }}>
+            <Link href="/forgot-password">{t("forgotPassword")}</Link>
+          </p>
         </div>
         <button type="submit" className="btn btn-primary btn-block" disabled={pending}>
           {pending ? t("signingIn") : t("signIn")}

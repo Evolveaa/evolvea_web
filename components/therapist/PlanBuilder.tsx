@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { publishPlanAction, type PlanItemInput } from "@/lib/therapist/actions";
 import { DomainTile } from "@/components/icons";
 import CategoryFilter from "@/components/exercises/CategoryFilter";
+import TemplatesMenu from "@/components/therapist/TemplatesMenu";
+import type { PlanTemplateRow, TemplateItem } from "@/lib/data/clinical";
 import type { ExerciseDomain } from "@/lib/exercises/types";
 import { focusOf, inAgeBand, type FocusKey, type AgeBandKey } from "@/lib/exercises/categories";
 
@@ -33,6 +35,7 @@ export default function PlanBuilder({
   initialNote,
   initialItems,
   defaultAgeBand = "all",
+  templates = [],
 }: {
   childId: string;
   childName: string;
@@ -41,6 +44,7 @@ export default function PlanBuilder({
   initialNote: string;
   initialItems: PlanItemInput[];
   defaultAgeBand?: AgeBandKey | "all";
+  templates?: (PlanTemplateRow & { parsedItems: TemplateItem[] })[];
 }) {
   const t = useTranslations("therapist.builder");
   const tc = useTranslations("common");
@@ -162,7 +166,25 @@ export default function PlanBuilder({
 
       {/* ------- plan pane ------- */}
       <div>
-        <h2 className="section-label">{t("planPane", { name: childName })}</h2>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.6rem" }}>
+          <h2 className="section-label">{t("planPane", { name: childName })}</h2>
+          <TemplatesMenu
+            templates={templates}
+            currentItems={items.map(({ exerciseId, timesPerWeek, supportLevel }) => ({
+              exerciseId,
+              timesPerWeek,
+              supportLevel,
+            }))}
+            onApply={(tplItems) =>
+              setItems(
+                tplItems
+                  // drop items whose exercise is no longer visible (deleted custom)
+                  .filter((it) => byId.has(it.exerciseId))
+                  .map((it, i) => ({ ...it, key: Date.now() + i })),
+              )
+            }
+          />
+        </div>
         <div className="card">
           <div className="field">
             <label className="label" htmlFor="plan-title">{t("titleLabel")}</label>
@@ -183,7 +205,12 @@ export default function PlanBuilder({
               maxLength={2000}
               placeholder={t("notePlaceholder")}
               value={note}
-              onChange={(e) => setNote(e.target.value)}
+              onChange={(e) => {
+                setNote(e.target.value);
+                // auto-grow: the therapist's message must never clip mid-sentence
+                e.target.style.height = "auto";
+                e.target.style.height = `${e.target.scrollHeight + 2}px`;
+              }}
             />
           </div>
 
@@ -203,33 +230,37 @@ export default function PlanBuilder({
                       <button type="button" className="icon-btn" style={{ width: 32, height: 32 }} aria-label={t("moveDown")} disabled={i === items.length - 1} onClick={() => move(i, 1)}>↓</button>
                       <button type="button" className="icon-btn" style={{ width: 32, height: 32, color: "var(--danger-ink)" }} aria-label={t("remove")} onClick={() => setItems((prev) => prev.filter((_, j) => j !== i))}>✕</button>
                     </div>
-                    <div style={{ display: "flex", gap: "0.6rem", marginTop: "0.5rem", flexWrap: "wrap" }}>
-                      <label style={{ fontSize: "0.76rem", color: "var(--ink-soft)", display: "flex", alignItems: "center", gap: "0.35rem" }}>
-                        {t("perWeek")}
-                        <select
-                          className="select"
-                          style={{ minHeight: 36, padding: "0.25rem 0.5rem", width: "auto" }}
-                          value={item.timesPerWeek}
-                          onChange={(e) => patch(i, { timesPerWeek: Number(e.target.value) })}
-                        >
+                    <div style={{ display: "flex", gap: "0.8rem", marginTop: "0.55rem", flexWrap: "wrap", alignItems: "center" }}>
+                      <span className="seg-field">
+                        <span className="seg-label">{t("perWeek")}</span>
+                        <span className="seg" role="group" aria-label={t("perWeek")}>
                           {[1, 2, 3, 4, 5, 6, 7].map((n) => (
-                            <option key={n} value={n}>{n}×</option>
+                            <button
+                              key={n}
+                              type="button"
+                              aria-pressed={item.timesPerWeek === n}
+                              onClick={() => patch(i, { timesPerWeek: n })}
+                            >
+                              {n}×
+                            </button>
                           ))}
-                        </select>
-                      </label>
-                      <label style={{ fontSize: "0.76rem", color: "var(--ink-soft)", display: "flex", alignItems: "center", gap: "0.35rem" }}>
-                        {t("support")}
-                        <select
-                          className="select"
-                          style={{ minHeight: 36, padding: "0.25rem 0.5rem", width: "auto" }}
-                          value={item.supportLevel}
-                          onChange={(e) => patch(i, { supportLevel: Number(e.target.value) })}
-                        >
+                        </span>
+                      </span>
+                      <span className="seg-field">
+                        <span className="seg-label">{t("support")}</span>
+                        <span className="seg" role="group" aria-label={t("support")}>
                           {[3, 2, 1].map((n) => (
-                            <option key={n} value={n}>{tt(`supportShort.${n}`)}</option>
+                            <button
+                              key={n}
+                              type="button"
+                              aria-pressed={item.supportLevel === n}
+                              onClick={() => patch(i, { supportLevel: n })}
+                            >
+                              {tt(`supportShort.${n}`)}
+                            </button>
                           ))}
-                        </select>
-                      </label>
+                        </span>
+                      </span>
                     </div>
                   </li>
                 );

@@ -188,6 +188,163 @@ export interface GuidedField {
   placeholder?: string;
 }
 
+/**
+ * Minimal pairs (Barlow & Gierut) — hear the one-phoneme contrast that
+ * changes meaning. The parent (or TTS) speaks; the child listens and taps.
+ */
+export interface MinimalPairsContent {
+  type: "minimal_pairs";
+  intro?: string;
+  /**
+   * listen         — the parent says one word of the pair, the child taps
+   *                  the matching picture (perception, auto-scored)
+   * same_different — the parent reads two words aloud (the pair, or one word
+   *                  twice), the child judges whether they sounded the same
+   */
+  mode: "listen" | "same_different";
+  /** The trained contrast, e.g. "s–š" (shown to the parent, not the child). */
+  contrast: string;
+  items: MinimalPairItem[];
+}
+
+export interface MinimalPairWord {
+  word: string;
+  emoji: string;
+}
+
+export interface MinimalPairItem {
+  a: MinimalPairWord;
+  b: MinimalPairWord;
+  /** listen mode: which word the parent says aloud this round. */
+  say?: "a" | "b";
+  /** same_different mode: true → the parent reads the SAME word twice. */
+  same?: boolean;
+  hint?: string;
+}
+
+/**
+ * Sound hunt — auditory bombardment & phoneme detection (Hodson's cycles
+ * home component): the child only listens, or taps whether the target
+ * phoneme hides in the word.
+ */
+export interface SoundHuntContent {
+  type: "sound_hunt";
+  intro?: string;
+  /** Target phoneme as written, e.g. "š". */
+  target: string;
+  /**
+   * bombardment — a slow carousel of words rich in the target; the child
+   *               ONLY listens (no scoring — exposure counts as completion)
+   * detect      — the parent reads the word aloud, the child taps whether
+   *               the target phoneme is in it (auto-scored)
+   */
+  mode: "bombardment" | "detect";
+  items: SoundHuntItem[];
+}
+
+export interface SoundHuntItem {
+  word: string;
+  emoji?: string;
+  /** Whether the word contains the target phoneme. */
+  has: boolean;
+  hint?: string;
+}
+
+/** Sentence builder — arrange word tiles into a correct Slovak sentence. */
+export interface SentenceBuilderContent {
+  type: "sentence_builder";
+  intro?: string;
+  items: SentenceBuilderItem[];
+}
+
+export interface SentenceBuilderItem {
+  /** Scene emojis that ground the sentence, e.g. ["👧","🥛"]. */
+  scene?: string[];
+  /** Words in the CORRECT order; the player shuffles them into tiles. */
+  words: string[];
+  /** Extra word tiles that do not belong in the sentence. */
+  distractors?: string[];
+  /**
+   * Optional expansion round: after building the base sentence the child
+   * picks a developing word, it slides into the sentence at insertAt, and
+   * the child reads the longer sentence aloud.
+   */
+  expansion?: SentenceExpansion;
+  hint?: string;
+}
+
+export interface SentenceExpansion {
+  /** Question the parent asks, e.g. "Aké je mlieko? Povedz dlhšiu vetu." */
+  prompt: string;
+  /** Candidate expanding words (all are valid — this is enrichment). */
+  options: string[];
+  /** Word index in `words` before which the picked option is inserted. */
+  insertAt: number;
+}
+
+/** Sorting — build the semantic network by placing items into buckets. */
+export interface SortingContent {
+  type: "sorting";
+  intro?: string;
+  /** 2–3 labelled buckets. */
+  categories: SortingCategory[];
+  items: SortingItem[];
+}
+
+export interface SortingCategory {
+  label: string;
+  emoji: string;
+}
+
+export interface SortingItem {
+  label: string;
+  emoji: string;
+  /** Index into `categories`. */
+  category: number;
+  hint?: string;
+}
+
+/**
+ * Scene directions (Token Test / barrier game) — receptive language:
+ * the parent reads a spatial instruction, the child places tokens on a board.
+ */
+export interface SceneDirectionsContent {
+  type: "scene_directions";
+  intro?: string;
+  board: SceneBoard;
+  rounds: SceneRound[];
+}
+
+export interface SceneBoard {
+  rows: number;
+  cols: number;
+  /** Fixed landmarks the instructions refer to ("nad dom", "vedľa stromu"). */
+  anchors: SceneAnchor[];
+}
+
+export interface SceneAnchor {
+  emoji: string;
+  label: string;
+  row: number;
+  col: number;
+}
+
+export interface SceneRound {
+  /** Instruction the parent reads aloud (not revealed to the child). */
+  instruction: string;
+  /** Token tray for this round — every token must be placed. */
+  tokens: string[];
+  /** Required placement per token, checked when the tray is empty. */
+  places: ScenePlacement[];
+  hint?: string;
+}
+
+export interface ScenePlacement {
+  token: string;
+  row: number;
+  col: number;
+}
+
 export type ExerciseContent =
   | ChoiceContent
   | SoundBoxesContent
@@ -196,7 +353,12 @@ export type ExerciseContent =
   | NumberTrackContent
   | StorySequenceContent
   | SpeechItemsContent
-  | GuidedStepsContent;
+  | GuidedStepsContent
+  | MinimalPairsContent
+  | SoundHuntContent
+  | SentenceBuilderContent
+  | SortingContent
+  | SceneDirectionsContent;
 
 export type ExerciseContentType = ExerciseContent["type"];
 
@@ -377,6 +539,175 @@ export function parseExerciseContent(json: Json): ExerciseContent {
       return { type: "speech_items", intro: optStr(json.intro), items };
     }
 
+    case "minimal_pairs": {
+      const mode = json.mode === "same_different" ? "same_different" : "listen";
+      const items = arr(json.items, "items").map((raw, i) => {
+        if (!isRecord(raw)) fail(`items[${i}] must be an object`);
+        const side = (v: unknown, what: string): MinimalPairWord => {
+          if (!isRecord(v)) fail(`${what} must be an object`);
+          return { word: str(v.word, `${what}.word`), emoji: str(v.emoji, `${what}.emoji`) };
+        };
+        const a = side(raw.a, `items[${i}].a`);
+        const b = side(raw.b, `items[${i}].b`);
+        if (a.word === b.word) fail(`items[${i}] pair words must differ`);
+        const say = raw.say === "a" || raw.say === "b" ? raw.say : undefined;
+        if (mode === "listen" && !say) fail(`items[${i}].say is required in listen mode`);
+        return {
+          a,
+          b,
+          say,
+          same: raw.same === true,
+          hint: optStr(raw.hint),
+        } satisfies MinimalPairItem;
+      });
+      return {
+        type: "minimal_pairs",
+        intro: optStr(json.intro),
+        mode,
+        contrast: str(json.contrast, "contrast"),
+        items,
+      };
+    }
+
+    case "sound_hunt": {
+      const mode = json.mode === "bombardment" ? "bombardment" : "detect";
+      const items = arr(json.items, "items").map((raw, i) => {
+        if (!isRecord(raw)) fail(`items[${i}] must be an object`);
+        return {
+          word: str(raw.word, `items[${i}].word`),
+          emoji: optStr(raw.emoji),
+          has: raw.has === true,
+          hint: optStr(raw.hint),
+        } satisfies SoundHuntItem;
+      });
+      return {
+        type: "sound_hunt",
+        intro: optStr(json.intro),
+        target: str(json.target, "target"),
+        mode,
+        items,
+      };
+    }
+
+    case "sentence_builder": {
+      const items = arr(json.items, "items").map((raw, i) => {
+        if (!isRecord(raw)) fail(`items[${i}] must be an object`);
+        const words = arr(raw.words, `items[${i}].words`).map((w, j) =>
+          str(w, `items[${i}].words[${j}]`),
+        );
+        if (words.length < 2) fail(`items[${i}] needs at least 2 words`);
+        let expansion: SentenceExpansion | undefined;
+        if (isRecord(raw.expansion)) {
+          const e = raw.expansion;
+          const insertAt = typeof e.insertAt === "number" ? e.insertAt : -1;
+          if (insertAt < 0 || insertAt > words.length)
+            fail(`items[${i}].expansion.insertAt out of range`);
+          expansion = {
+            prompt: str(e.prompt, `items[${i}].expansion.prompt`),
+            options: arr(e.options, `items[${i}].expansion.options`).map((o, j) =>
+              str(o, `items[${i}].expansion.options[${j}]`),
+            ),
+            insertAt,
+          };
+        }
+        return {
+          scene: Array.isArray(raw.scene)
+            ? raw.scene.map((s, j) => str(s, `items[${i}].scene[${j}]`))
+            : undefined,
+          words,
+          distractors: Array.isArray(raw.distractors)
+            ? raw.distractors.map((d, j) => str(d, `items[${i}].distractors[${j}]`))
+            : undefined,
+          expansion,
+          hint: optStr(raw.hint),
+        } satisfies SentenceBuilderItem;
+      });
+      return { type: "sentence_builder", intro: optStr(json.intro), items };
+    }
+
+    case "sorting": {
+      const categories = arr(json.categories, "categories").map((raw, i) => {
+        if (!isRecord(raw)) fail(`categories[${i}] must be an object`);
+        return {
+          label: str(raw.label, `categories[${i}].label`),
+          emoji: str(raw.emoji, `categories[${i}].emoji`),
+        } satisfies SortingCategory;
+      });
+      if (categories.length < 2 || categories.length > 3)
+        fail("sorting needs 2–3 categories");
+      const items = arr(json.items, "items").map((raw, i) => {
+        if (!isRecord(raw)) fail(`items[${i}] must be an object`);
+        const category = typeof raw.category === "number" ? raw.category : -1;
+        if (category < 0 || category >= categories.length)
+          fail(`items[${i}].category out of range`);
+        return {
+          label: str(raw.label, `items[${i}].label`),
+          emoji: str(raw.emoji, `items[${i}].emoji`),
+          category,
+          hint: optStr(raw.hint),
+        } satisfies SortingItem;
+      });
+      return { type: "sorting", intro: optStr(json.intro), categories, items };
+    }
+
+    case "scene_directions": {
+      if (!isRecord(json.board)) fail("board must be an object");
+      const rows = typeof json.board.rows === "number" ? json.board.rows : 0;
+      const cols = typeof json.board.cols === "number" ? json.board.cols : 0;
+      if (rows < 2 || rows > 5 || cols < 2 || cols > 5)
+        fail("board needs 2–5 rows and 2–5 cols");
+      const inBoard = (r: unknown, c: unknown): r is number =>
+        typeof r === "number" && typeof c === "number" &&
+        r >= 0 && r < rows && c >= 0 && c < cols;
+      const anchors = arr(json.board.anchors, "board.anchors").map((raw, i) => {
+        if (!isRecord(raw)) fail(`board.anchors[${i}] must be an object`);
+        if (!inBoard(raw.row, raw.col)) fail(`board.anchors[${i}] outside the board`);
+        return {
+          emoji: str(raw.emoji, `board.anchors[${i}].emoji`),
+          label: str(raw.label, `board.anchors[${i}].label`),
+          row: raw.row as number,
+          col: raw.col as number,
+        } satisfies SceneAnchor;
+      });
+      const anchorCells = new Set(anchors.map((a) => `${a.row}:${a.col}`));
+      if (anchorCells.size !== anchors.length) fail("anchors overlap on the board");
+      const rounds = arr(json.rounds, "rounds").map((raw, i) => {
+        if (!isRecord(raw)) fail(`rounds[${i}] must be an object`);
+        const tokens = arr(raw.tokens, `rounds[${i}].tokens`).map((t, j) =>
+          str(t, `rounds[${i}].tokens[${j}]`),
+        );
+        if (new Set(tokens).size !== tokens.length) fail(`rounds[${i}] tokens must be unique`);
+        const places = arr(raw.places, `rounds[${i}].places`).map((p, j) => {
+          if (!isRecord(p)) fail(`rounds[${i}].places[${j}] must be an object`);
+          const token = str(p.token, `rounds[${i}].places[${j}].token`);
+          if (!tokens.includes(token))
+            fail(`rounds[${i}].places[${j}].token is not in the tray`);
+          if (!inBoard(p.row, p.col)) fail(`rounds[${i}].places[${j}] outside the board`);
+          if (anchorCells.has(`${p.row}:${p.col}`))
+            fail(`rounds[${i}].places[${j}] targets an anchor cell`);
+          return { token, row: p.row as number, col: p.col as number } satisfies ScenePlacement;
+        });
+        if (places.length !== tokens.length)
+          fail(`rounds[${i}] must place every token exactly once`);
+        if (new Set(places.map((p) => p.token)).size !== places.length)
+          fail(`rounds[${i}] places a token twice`);
+        if (new Set(places.map((p) => `${p.row}:${p.col}`)).size !== places.length)
+          fail(`rounds[${i}] places two tokens on one cell`);
+        return {
+          instruction: str(raw.instruction, `rounds[${i}].instruction`),
+          tokens,
+          places,
+          hint: optStr(raw.hint),
+        } satisfies SceneRound;
+      });
+      return {
+        type: "scene_directions",
+        intro: optStr(json.intro),
+        board: { rows, cols, anchors },
+        rounds,
+      };
+    }
+
     case "guided_steps": {
       const steps = arr(json.steps, "steps").map((raw, i) => {
         if (!isRecord(raw)) fail(`steps[${i}] must be an object`);
@@ -457,12 +788,29 @@ export function contentItemCount(content: ExerciseContent): number {
     case "memory_sequence":
     case "story_sequence":
     case "speech_items":
+    case "minimal_pairs":
+    case "sound_hunt":
+    case "sentence_builder":
+    case "sorting":
       return content.items.length;
     case "pairs":
       return content.pairs.length;
     case "number_track":
+    case "scene_directions":
       return content.rounds.length;
     case "guided_steps":
       return content.steps.length;
+  }
+}
+
+/** Modality implied by a content type (kept in sync with the DB enum). */
+export function modalityForContent(type: ExerciseContentType): ExerciseModality {
+  switch (type) {
+    case "speech_items":
+      return "speech";
+    case "guided_steps":
+      return "guided";
+    default:
+      return "interactive";
   }
 }

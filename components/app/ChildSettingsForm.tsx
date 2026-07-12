@@ -50,7 +50,7 @@ export default function ChildSettingsForm({ child }: { child: Child }) {
                   fontSize: "1.5rem",
                   borderRadius: 14,
                   border: a === avatar ? "2px solid var(--accent-ink)" : "2px solid var(--ink-line)",
-                  background: a === avatar ? "var(--accent-soft)" : "#fff",
+                  background: a === avatar ? "var(--accent-soft)" : "var(--cream-hi)",
                 }}
               >
                 {a}

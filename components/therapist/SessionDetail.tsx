@@ -222,6 +222,13 @@ export default function SessionDetail({
               (typeof item.word === "string" && item.word) ||
               (typeof item.text === "string" && item.text) ||
               (typeof item.title === "string" && item.title) ||
+              // new task types: sorting / sentence_builder / scene_directions / minimal_pairs
+              (typeof item.label === "string" && item.label) ||
+              (typeof item.sentence === "string" && item.sentence) ||
+              (typeof item.instruction === "string" && item.instruction) ||
+              (typeof item.a === "string" && typeof item.b === "string"
+                ? `${item.a} – ${item.b}`
+                : false) ||
               `${i + 1}.`;
             return (
               <li className="rev-item" data-tone={itemTone(item)} key={i}>

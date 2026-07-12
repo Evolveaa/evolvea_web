@@ -23,6 +23,7 @@ import {
   trickyByExercise,
 } from "@/lib/data/parent";
 import SessionDetail, { hasSessionDetail } from "@/components/therapist/SessionDetail";
+import { getGoals } from "@/lib/data/clinical";
 import Link from "next/link";
 
 function scoreTone(pct: number | null): "good" | "mid" | "low" | "none" {
@@ -47,10 +48,12 @@ export default async function ProgressPage() {
     );
   }
 
-  const [sessions, plan] = await Promise.all([
+  const [sessions, plan, goals] = await Promise.all([
     getRecentSessions(child.id, 90),
     getActivePlan(child.id),
+    getGoals(child.id),
   ]);
+  const activeGoals = goals.filter((g) => g.status === "active");
   const exercises = await getExercisesByIds(sessions.map((s) => s.exercise_id));
   const stats = domainStats(sessions, exercises).sort((a, b) => b.sessions - a.sessions);
   const tricky = trickyByExercise(sessions, exercises, 6);
@@ -125,6 +128,24 @@ export default async function ProgressPage() {
       ) : (
         <div className="dash">
           <aside className="dash-side">
+            {activeGoals.length > 0 && (
+              <div className="info-card" style={{ marginBottom: "1rem" }}>
+                <span className="section-label" style={{ margin: "0 0 0.6rem" }}>
+                  {t("goalsSection")}
+                </span>
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+                  {activeGoals.map((g) => (
+                    <li key={g.id} style={{ display: "flex", alignItems: "center", gap: "0.55rem", fontSize: "0.88rem" }}>
+                      <DomainTile domain={g.domain} size={26} />
+                      <span style={{ flex: 1, minWidth: 0 }}>{g.title}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="form-hint" style={{ marginTop: "0.6rem" }}>
+                  {t("goalsHint")}
+                </p>
+              </div>
+            )}
             {stats.length > 0 && (
               <div>
                 <h2 className="section-label">{t("domainsSection")}</h2>
@@ -150,7 +171,7 @@ export default async function ProgressPage() {
                         </span>
                       </div>
                       <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                        <i style={{ width: `${s.avgPct ?? 6}%` }} />
+                        {s.avgPct !== null && <i style={{ width: `${s.avgPct}%` }} />}
                       </span>
                       {s.trend.length >= 3 && (
                         <div className="dcard-spark">

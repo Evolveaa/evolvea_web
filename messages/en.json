@@ -8,7 +8,7 @@
     "homeAria": "Evolvea — home"
   },
   "hero": {
-    "eyebrow": "Metacognitive learning · Ages 6–14",
+    "eyebrow": "Metacognitive learning · Ages 5–10",
     "title": "Ten minutes a night to rebuild how your child thinks.",
     "lead": "Evolvea is a daily exercise parents and children do together. Each prompt is chosen based on your child's last answer — so reasoning, reflection, and curiosity grow one conversation at a time.",
     "ctaDemo": "Try the live demo",
@@ -53,7 +53,7 @@
     "intro": {
       "kicker": "Session · with Leo",
       "h": "The Stuck Puzzle",
-      "sub": "Parent-guided · 10–15 min · Ages 6–10",
+      "sub": "Parent-guided · 10–15 min · Ages 5–10",
       "text": "Give Leo a small jigsaw (10–20 pieces) — solvable, but not obvious. He owns the thinking. You're a facilitator, not an instructor: no solving, no correcting.",
       "noteLabel": "What it builds",
       "noteBody": "Tolerance for difficulty, <b>adaptive self-talk</b>, and effort-based confidence."
@@ -216,7 +216,35 @@
     "heroHeadline": "Speech therapy that continues at home.",
     "heroPoint1": "Tailored exercises from your therapist",
     "heroPoint2": "A clear view of your child's progress",
-    "heroPoint3": "Private and secure — data stays in the EU"
+    "heroPoint3": "Private and secure — data stays in the EU",
+    "forgotPassword": "Forgot password?",
+    "reset": {
+      "forgotTitle": "Forgotten password",
+      "forgotLead": "Enter the e-mail you registered with. We will send you a link to set a new password.",
+      "email": "E-mail",
+      "sendLink": "Send link",
+      "sending": "Sending…",
+      "sentNotice": "If the account exists, we have sent it a password-reset link. Check your inbox (and spam).",
+      "backToLogin": "Back to sign in",
+      "newTitle": "New password",
+      "newLead": "Choose a new password. You will be signed in right after saving.",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat new password",
+      "passwordHint": "At least 8 characters.",
+      "save": "Save new password",
+      "saving": "Saving…",
+      "expiredTitle": "This link is no longer valid",
+      "expiredLead": "The password-reset link has expired or was already used. Request a fresh one.",
+      "goForgot": "Send a new link",
+      "errors": {
+        "fields": "Enter a valid e-mail address.",
+        "rate_limit": "Too many attempts. Please try again in a moment.",
+        "unknown": "Something went wrong. Please try again.",
+        "weak_password": "The password must be at least 8 characters long.",
+        "mismatch": "The passwords do not match.",
+        "session": "The link has expired. Request a new one on the Forgotten password page."
+      }
+    }
   },
   "shell": {
     "navLabel": "Main navigation",
@@ -371,7 +399,12 @@
     "speechConsentLead": "For picture-description exercises we can record your child speaking, and our helper checks whether they mentioned what they should. Recordings are private, auto-delete after 30 days, and you can withdraw consent anytime.",
     "speechConsentField": "I consent to recording my child's voice",
     "speechConsentSave": "Save consent",
-    "speechConsentActive": "Recording is on"
+    "speechConsentActive": "Recording is on",
+    "weekDoneTitle": "This week is complete! 🌟",
+    "weekDoneLead": "Every exercise in the plan is done. Rest is well earned — or do a bonus one.",
+    "weekDoneCta": "Bonus practice from the plan",
+    "goalsSection": "What we're working on",
+    "goalsHint": "Goals are set by the therapist — every home session adds a little piece."
   },
   "therapist": {
     "dashTitle": "Your families",
@@ -379,7 +412,7 @@
     "newInvite": "New invite",
     "statFamilies": "families in your care",
     "statActiveWeek": "practiced this week",
-    "statUnread": "unread messages",
+    "statUnread": "{count, plural, one {unread message} other {unread messages}}",
     "statCommission": "commission per month",
     "noFamiliesTitle": "No families yet",
     "noFamiliesLead": "Create an invite and give the code to a parent — once they register, the family appears here with their full exercise history.",
@@ -465,7 +498,8 @@
       "publishError": "The plan could not be saved. Please try again.",
       "publish": "Publish plan",
       "publishing": "Publishing…",
-      "publishHint": "The previous plan is archived; the exercise history is kept."
+      "publishHint": "The previous plan is archived; the exercise history is kept.",
+      "droppedItems": "{count, plural, one {# exercise from the previous plan is no longer in the library and was removed from the draft.} other {# exercises from the previous plan are no longer in the library and were removed from the draft.}}"
     },
     "library": {
       "pageTitle": "Exercise library",
@@ -489,7 +523,12 @@
       "ageLabel": "Age",
       "allAges": "Any age",
       "noResults": "No exercises match these filters.",
-      "clearFilters": "Clear filters"
+      "clearFilters": "Clear filters",
+      "duplicate": "Duplicate",
+      "copySuffix": "– copy",
+      "viewLabel": "View",
+      "viewGrid": "Grid",
+      "viewList": "List"
     },
     "exerciseForm": {
       "backToLibrary": "Library",
@@ -559,7 +598,8 @@
       "errors": {
         "fields": "Please check the fields (name, summary, age, duration).",
         "unknown": "Saving failed. Please try again."
-      }
+      },
+      "rawNote": "This task type has structured content that this form can't yet edit item by item — the content is kept exactly as is. You can change the title, difficulty, age range, duration and the guide texts."
     },
     "invites": {
       "pageTitle": "Invites",
@@ -589,7 +629,9 @@
       "errors": {
         "fields": "Please fill in the child's name (and a valid birth year).",
         "unknown": "The invite could not be created. Please try again."
-      }
+      },
+      "createAnother": "Create another invite",
+      "deleteConfirm": "Really delete?"
     },
     "referrals": {
       "pageTitle": "Commissions",
@@ -604,16 +646,202 @@
       "colStatus": "Subscription",
       "colEngagement": "Engagement",
       "colCommission": "Commission",
-      "state": {
-        "active": "✅ active",
-        "trial": "⏳ trial",
-        "expired": "⚠️ trial ended",
-        "canceled": "✖️ canceled",
-        "none": "—"
-      },
       "weekSessions": "{count, plural, =0 {0 exercises/wk} one {# exercise/wk} other {# exercises/wk}}",
       "disclaimer": "This overview is indicative. Commissions are settled monthly based on subscriptions that were actually paid."
-    }
+    },
+    "statAttention": "need attention",
+    "attentionTitle": "Need attention ({count})",
+    "calmTitle": "On track",
+    "weekAdherence": "{done}/{target} this week",
+    "flags": {
+      "silentDays": "{days, plural, one {# day} other {# days}} without practice",
+      "slowed": "practice slowed down",
+      "behindPlan": "behind the weekly plan",
+      "unread": "unread message",
+      "quiet30": "no practice for 30+ days"
+    },
+    "goals": {
+      "title": "Therapy goals",
+      "add": "Add goal",
+      "cancel": "Cancel",
+      "empty": {
+        "title": "No goals yet",
+        "lead": "Set the first measurable goal — both you and the family will see where therapy is heading."
+      },
+      "form": {
+        "domain": "Area",
+        "title": "Goal title",
+        "titlePlaceholder": "What should the child master?",
+        "target": "Target success rate",
+        "targetNone": "No target %",
+        "targetDate": "Due date (optional)",
+        "baseline": "Baseline % (optional)",
+        "submit": "Create goal",
+        "saving": "Saving…"
+      },
+      "suggestions": {
+        "phonemic_awareness": {
+          "s1": "Identifies the first sound in a word independently",
+          "s2": "Splits a word into syllables without help"
+        },
+        "working_memory": {
+          "s1": "Repeats a 4-item sequence in the correct order",
+          "s2": "Holds and follows a two-step instruction"
+        },
+        "attention": {
+          "s1": "Stays focused for the whole exercise",
+          "s2": "Finds the target stimulus without errors"
+        },
+        "narrative": {
+          "s1": "Retells a short story in three steps",
+          "s2": "Tells a story from a picture sequence independently"
+        },
+        "vocabulary": {
+          "s1": "Actively uses 10 new words",
+          "s2": "Names objects within a given category"
+        },
+        "articulation": {
+          "s1": "Pronounces the practised sound correctly in words",
+          "s2": "Transfers the sound into spontaneous speech"
+        },
+        "guided": {
+          "s1": "Shared activities at least 3× a week",
+          "s2": "Takes turns communicating during play"
+        }
+      },
+      "metaProgress": "{current} % → target {target} %",
+      "metaCurrent": "currently {current} %",
+      "metaNoData": "no data yet (14 days)",
+      "metaBaseline": "baseline {baseline} %",
+      "metaDate": "by {date}",
+      "achieve": "Achieved",
+      "archive": "Archive",
+      "delete": "Delete",
+      "confirmDelete": "Really delete?",
+      "reactivate": "Reactivate",
+      "noActive": "No active goals — add a new one or reactivate an achieved goal.",
+      "doneGroup": "Achieved and archived goals ({count})",
+      "achievedOn": "Achieved {date}",
+      "status": {
+        "achieved": "Achieved",
+        "archived": "Archived"
+      },
+      "errors": {
+        "fields": "Please check the entered fields.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    },
+    "notes": {
+      "title": "Clinical notes",
+      "privateChip": "Private — the parent cannot see them",
+      "privateHint": "Only you can see these notes. Neither the parent nor anyone else has access.",
+      "sinceLast": "Since the last note: {sessions, plural, one {1 exercise} other {# exercises}} at home, avg. success {pct} % over {days, plural, one {1 day} other {# days}}.",
+      "sinceLastNoPct": "Since the last note: {sessions, plural, one {1 exercise} other {# exercises}} at home over {days, plural, one {1 day} other {# days}}.",
+      "copy": "Copy",
+      "copied": "Copied ✓",
+      "composer": {
+        "label": "New note",
+        "placeholder": "Session progress, observations, plan for next time… (SOAP-lite)",
+        "date": "Date",
+        "submit": "Save note",
+        "saving": "Saving…"
+      },
+      "delete": "Delete",
+      "confirmDelete": "Really delete?",
+      "empty": {
+        "title": "No notes yet",
+        "lead": "Keep notes from your sessions here — observations, progress, assessment and plan (SOAP-lite). The parent will never see them."
+      },
+      "errors": {
+        "fields": "Please check the note text and date.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    },
+    "templates": {
+      "trigger": "Templates",
+      "empty": "You have no saved templates yet.",
+      "count": "{count, plural, one {1 exercise} other {# exercises}}",
+      "apply": "Apply",
+      "confirmApply": "Replace draft?",
+      "deleteLabel": "Delete template",
+      "confirmDelete": "Really?",
+      "saveTitle": "Save the current plan as a template",
+      "form": {
+        "title": "Template title",
+        "description": "Description (optional)",
+        "submit": "Save template",
+        "saving": "Saving…"
+      },
+      "saved": "Template saved ✓",
+      "emptyDraftHint": "Add exercises to the plan first — then you can save it as a template.",
+      "errors": {
+        "fields": "Please check the template title and contents.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    },
+    "openReport": "Generate report",
+    "report": {
+      "docTitle": "Home therapy progress report",
+      "backToChild": "Back to child detail",
+      "periodLabel": "Period",
+      "weeksOption": "{weeks, plural, one {# week} other {# weeks}}",
+      "printButton": "Print / save as PDF",
+      "childLabel": "Child",
+      "therapistLabel": "Speech therapist",
+      "parentLabel": "Parent",
+      "generatedLabel": "Generated",
+      "summaryTitle": "Summary",
+      "statSessions": "completed exercises",
+      "statMinutes": "minutes practised",
+      "statDays": "days with practice",
+      "statStreak": "day streak",
+      "statAvg": "average success",
+      "domainsTitle": "Domains",
+      "noData": "No data for the selected period.",
+      "thDomain": "Domain",
+      "thSessions": "Exercises",
+      "thAvg": "Average",
+      "thTrend": "Trend",
+      "thTricky": "Tricky items",
+      "goalsTitle": "Therapy goals",
+      "goalsEmpty": "No goals have been set yet.",
+      "thGoal": "Goal",
+      "goalBaseline": "Baseline",
+      "goalCurrent": "Current (14 days)",
+      "goalTarget": "Target",
+      "thStatus": "Status",
+      "goalAchieved": "Achieved {date}",
+      "goalActiveUntil": "Active until {date}",
+      "goalActive": "Active",
+      "metaTitle": "Metacognition",
+      "metaEmpty": "Completed exercises contain no metacognitive data yet.",
+      "metaStrategies": "Strategy choices",
+      "metaSelfEval": "Child's self-evaluation",
+      "metaCalibration": "Self-evaluation calibration",
+      "selfEval": {
+        "great": "It went great",
+        "ok": "Quite well",
+        "hard": "It was hard"
+      },
+      "calib": {
+        "under": "Underestimates",
+        "ok": "Accurate",
+        "over": "Overestimates"
+      },
+      "trickyTitle": "What is causing trouble",
+      "trickyEmpty": "No repeatedly tricky items — excellent progress.",
+      "thItem": "Item",
+      "thMisses": "Missed",
+      "thAttempts": "Attempts",
+      "notesTitle": "Parent notes",
+      "notesEmpty": "The parent has not added any notes yet.",
+      "commentTitle": "Therapist's remarks",
+      "signature": "Therapist's signature",
+      "dateLabel": "Date",
+      "brandFooter": "Evolvea — a digital companion for speech therapy"
+    },
+    "showMoreSessions": "Show older ({count})",
+    "noRecentActivity": "no practice in the last 30 days"
   },
   "billing": {
     "trialTitle": "Trial period: {count, plural, =0 {last day} one {# day left} other {# days left}}",
@@ -717,14 +945,14 @@
       "showSolution": "Look — the word has {count, plural, one {# sound} other {# sounds}}.",
       "tokensSoFar": "{count, plural, one {# token} other {# tokens}}",
       "countHint": "Say the word very slowly (the words are in Slovak — that's the language being practiced) and tap a token for each sound.",
-      "colorsHint": "This sound is a {kind}.",
       "kinds": {
         "vowel": "short vowel",
         "long_vowel": "long vowel",
         "diphthong": "diphthong",
         "consonant": "consonant"
       },
-      "paletteLabel": "Pick the sound type"
+      "paletteLabel": "Pick the sound type",
+      "colorsHintAsk": "Stretch the sound “{sound}” and listen: can you sing it? If yes — is it short or long? If you can’t sing it, what kind of sound is it?"
     },
     "memory": {
       "watchPrompt": "Remember the order carefully…",
@@ -850,10 +1078,94 @@
         "0": "First I listen, then I speak",
         "1": "I speak slowly and clearly",
         "2": "I mind my mouth and tongue"
+      },
+      "minimal_pairs": {
+        "0": "I listen with my ears, not my eyes",
+        "1": "I repeat the word in my head",
+        "2": "I take my time and listen carefully"
+      },
+      "sound_hunt": {
+        "0": "I prick up my ears like a bunny",
+        "1": "I say the word slowly to myself",
+        "2": "I hunt for the sound at the start and inside"
+      },
+      "sentence_builder": {
+        "0": "First I say the sentence in my head",
+        "1": "I look for who is doing something",
+        "2": "After each word I repeat the sentence"
+      },
+      "sorting": {
+        "0": "I say out loud what I see",
+        "1": "I ask: where does it belong and why?",
+        "2": "I check before I tap"
+      },
+      "scene_directions": {
+        "0": "I listen to the whole sentence carefully",
+        "1": "I repeat to myself where each picture goes",
+        "2": "I place the pictures one at a time"
       }
     },
     "recPendingStat": "Recordings sent",
-    "recPendingSub": "The assessment will arrive shortly — find it in Progress."
+    "recPendingSub": "The assessment will arrive shortly — find it in Progress.",
+    "nextUp": "Next exercise",
+    "dayDoneTitle": "Today's dose is done! 🎉",
+    "dayDoneLead": "Beautiful. Short and regular — that's exactly how growth happens. See you tomorrow!",
+    "streakLine": "{count, plural, one {# day in a row} other {# days in a row}}",
+    "minimalPairs": {
+      "parentLabel": "For the parent",
+      "parentSay": "Say this word to your child: “{word}”. Don't give hints with your mouth or eyes.",
+      "parentPair": "Read both words aloud, slowly and clearly: “{first}” … “{second}”.",
+      "contrast": "Contrast: {contrast}",
+      "playWord": "Play the word",
+      "playPair": "Play the pair",
+      "listenPrompt": "Which word was it? Tap the picture!",
+      "sdPrompt": "Ears ready! Did the words sound the same or different?",
+      "same": "Same",
+      "different": "Different",
+      "revealSame": "It was the same word twice!",
+      "revealDifferent": "They were two different words – can you hear the difference?"
+    },
+    "soundHunt": {
+      "parentLabel": "For the parent",
+      "parentSay": "Say the word: “{word}”. Don't stress the sound {target} – your child should find it on their own.",
+      "parentBombard": "Read each word slowly and really stretch the sound {target} (like “shhh”). Your child just listens.",
+      "playWord": "Play the word",
+      "targetLabel": "Target sound: {target}",
+      "detectPrompt": "Is the sound {target} hiding in the word?",
+      "hear": "I hear {target}!",
+      "notThere": "It's not there",
+      "bombardPrompt": "Just listen and watch. Your ears are doing the work!",
+      "wordProgress": "Word {current} of {total}",
+      "next": "Next",
+      "pause": "Pause",
+      "play": "Continue"
+    },
+    "sentenceBuilder": {
+      "buildPrompt": "Build the sentence — tap the words in the right order.",
+      "slotsLabel": "Your sentence",
+      "trayLabel": "Word tiles",
+      "pickWord": "Pick a word that makes the sentence longer.",
+      "parentReads": "Parent reads aloud:",
+      "readAloud": "Great! Say the whole sentence out loud.",
+      "saidIt": "I said the sentence ✓"
+    },
+    "sorting": {
+      "prompt": "Where does it belong? Tap the right group.",
+      "bucketsLabel": "Groups",
+      "inBucket": "{count} in this group"
+    },
+    "sceneDirections": {
+      "prompt": "Listen and put the pictures where they belong.",
+      "parentReads": "Read aloud",
+      "boardLabel": "Game board",
+      "trayLabel": "Pictures to place",
+      "cellPos": "row {row}, column {col}",
+      "emptyCell": "Empty cell",
+      "filledCell": "Tap to send the picture back to the tray",
+      "lockedCell": "Correctly placed picture",
+      "tokenAria": "Pick up picture {token}, then choose a cell",
+      "check": "Done!"
+    }
   },
   "categories": {
     "pronunciation": "Pronunciation",

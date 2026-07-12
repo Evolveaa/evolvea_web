@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { toggleExerciseActiveAction } from "@/lib/therapist/actions";
+import { duplicateExerciseAction, toggleExerciseActiveAction } from "@/lib/therapist/actions";
 import { DomainTile } from "@/components/icons";
 import CategoryFilter from "@/components/exercises/CategoryFilter";
-import type { ExerciseDomain, ExerciseModality } from "@/lib/exercises/types";
+import { DOMAINS, type ExerciseDomain, type ExerciseModality } from "@/lib/exercises/types";
 import { focusOf, inAgeBand, type FocusKey, type AgeBandKey } from "@/lib/exercises/categories";
 
 export interface LibraryRow {
@@ -40,6 +40,7 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
   const [difficulty, setDifficulty] = useState(0);
   const [search, setSearch] = useState("");
   const [onlyMine, setOnlyMine] = useState(false);
+  const [view, setView] = useState<"grid" | "list">("grid");
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -102,6 +103,24 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
         <span className="card-sub" style={{ marginLeft: "auto" }}>
           {t("count", { count: filtered.length })}
         </span>
+        <span className="seg" role="group" aria-label={t("viewLabel")}>
+          <button
+            type="button"
+            aria-pressed={view === "grid"}
+            aria-label={t("viewGrid")}
+            onClick={() => setView("grid")}
+          >
+            ▦
+          </button>
+          <button
+            type="button"
+            aria-pressed={view === "list"}
+            aria-label={t("viewList")}
+            onClick={() => setView("list")}
+          >
+            ☰
+          </button>
+        </span>
       </div>
 
       {filtered.length === 0 ? (
@@ -115,47 +134,66 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
           </button>
         </div>
       ) : (
-        <ul className="lib-grid">
-          {filtered.map((e) => (
-            <li key={e.id} className="lib-card" data-inactive={e.is_active ? undefined : ""}>
-              <div className="lib-card-head">
-                <DomainTile domain={e.domain} size={40} />
-                <span className="lib-card-id">
-                  <span className="lib-card-title">
-                    {e.title}
-                    {e.mine && <span className="chip lib-flag">{t("mine")}</span>}
-                    {!e.is_active && <span className="chip lib-flag">{t("inactive")}</span>}
-                  </span>
-                  <span className="lib-card-meta">
-                    {MODALITY_ICON[e.modality]} {td(e.domain)} · {"★".repeat(e.difficulty)} ·{" "}
-                    {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
-                    {tc("minutes", { count: e.duration_minutes })}
-                  </span>
-                </span>
-              </div>
-              <p className="lib-card-summary">{e.summary}</p>
-              <div className="lib-card-actions">
-                <Link href={`/therapist/preview/${e.id}`} className="btn btn-sm btn-outline">
-                  {t("preview")}
-                </Link>
-                {e.mine && (
-                  <>
-                    <Link href={`/therapist/library/${e.id}`} className="btn btn-sm btn-outline">
-                      {t("edit")}
-                    </Link>
-                    <form action={toggleExerciseActiveAction}>
-                      <input type="hidden" name="exercise_id" value={e.id} />
-                      <input type="hidden" name="active" value={String(!e.is_active)} />
-                      <button type="submit" className="btn btn-sm btn-danger-ghost">
-                        {e.is_active ? t("deactivate") : t("activate")}
-                      </button>
-                    </form>
-                  </>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+        DOMAINS.map((domain) => {
+          const group = filtered.filter((e) => e.domain === domain);
+          if (group.length === 0) return null;
+          return (
+            <section key={domain} className="lib-group">
+              <h2 className="lib-group-head">
+                <DomainTile domain={domain} size={26} />
+                <span>{td(domain)}</span>
+                <span className="lib-group-count">{group.length}</span>
+              </h2>
+              <ul className={view === "grid" ? "lib-grid" : "lib-grid lib-list"}>
+                {group.map((e) => (
+                  <li key={e.id} className="lib-card" data-inactive={e.is_active ? undefined : ""}>
+                    <div className="lib-card-head">
+                      <DomainTile domain={e.domain} size={40} />
+                      <span className="lib-card-id">
+                        <span className="lib-card-title">
+                          {e.title}
+                          {e.mine && <span className="chip lib-flag">{t("mine")}</span>}
+                          {!e.is_active && <span className="chip lib-flag">{t("inactive")}</span>}
+                        </span>
+                        <span className="lib-card-meta">
+                          {MODALITY_ICON[e.modality]} {"★".repeat(e.difficulty)} ·{" "}
+                          {tc("ageRange", { min: e.age_min, max: e.age_max })} ·{" "}
+                          {tc("minutes", { count: e.duration_minutes })}
+                        </span>
+                      </span>
+                    </div>
+                    <p className="lib-card-summary">{e.summary}</p>
+                    <div className="lib-card-actions">
+                      <Link href={`/therapist/preview/${e.id}`} className="btn btn-sm btn-outline">
+                        {t("preview")}
+                      </Link>
+                      <form action={duplicateExerciseAction}>
+                        <input type="hidden" name="exercise_id" value={e.id} />
+                        <button type="submit" className="btn btn-sm btn-outline">
+                          {t("duplicate")}
+                        </button>
+                      </form>
+                      {e.mine && (
+                        <>
+                          <Link href={`/therapist/library/${e.id}`} className="btn btn-sm btn-outline">
+                            {t("edit")}
+                          </Link>
+                          <form action={toggleExerciseActiveAction}>
+                            <input type="hidden" name="exercise_id" value={e.id} />
+                            <input type="hidden" name="active" value={String(!e.is_active)} />
+                            <button type="submit" className="btn btn-sm btn-danger-ghost">
+                              {e.is_active ? t("deactivate") : t("activate")}
+                            </button>
+                          </form>
+                        </>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })
       )}
     </>
   );

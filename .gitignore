@@ -36,3 +36,4 @@ next-env.d.ts
 # Production / misc
 *.tsbuildinfo
 .vercel
+/e2e-shots/

@@ -119,7 +119,9 @@ export default async function ParentHomePage() {
             )}
 
             <h2 className="section-label">{t("todaySection")}</h2>
-            <TodayPath done={doneToday} queue={week.today} />
+            {/* a plan whose items are all hidden (deactivated custom exercises)
+                must not celebrate a "completed week" */}
+            {week.all.length > 0 && <TodayPath done={doneToday} queue={week.today} />}
           </div>
 
           <aside className="dash-side">

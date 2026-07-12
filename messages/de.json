@@ -8,7 +8,7 @@
     "homeAria": "Evolvea — Startseite"
   },
   "hero": {
-    "eyebrow": "Metakognitives Lernen · Alter 6–14 Jahre",
+    "eyebrow": "Metakognitives Lernen · Alter 5–10 Jahre",
     "title": "Zehn Minuten am Abend, die verändern, wie Ihr Kind denkt.",
     "lead": "Evolvea ist eine tägliche Übung, die Eltern und Kind gemeinsam machen. Jede Frage knüpft an die letzte Antwort Ihres Kindes an — so wachsen Denken, Reflexion und Neugier, ein Gespräch nach dem anderen.",
     "ctaDemo": "Live-Demo ausprobieren",
@@ -53,7 +53,7 @@
     "intro": {
       "kicker": "Sitzung · mit Leo",
       "h": "Das festgefahrene Puzzle",
-      "sub": "Elternbegleitet · 10–15 Min. · Alter 6–10 Jahre",
+      "sub": "Elternbegleitet · 10–15 Min. · Alter 5–10 Jahre",
       "text": "Geben Sie Leo ein kleines Puzzle (10–20 Teile) — lösbar, aber nicht offensichtlich. Das Denken liegt bei ihm. Sie sind Begleiter, nicht Lehrer: nicht lösen, nicht korrigieren.",
       "noteLabel": "Was es aufbaut",
       "noteBody": "Toleranz gegenüber Schwierigkeiten, <b>adaptives Selbstgespräch</b> und Selbstvertrauen, das auf Anstrengung beruht."
@@ -216,7 +216,35 @@
     "heroHeadline": "Logopädie, die zu Hause weitergeht.",
     "heroPoint1": "Maßgeschneiderte Übungen von Ihrem Logopäden",
     "heroPoint2": "Klarer Überblick über den Fortschritt",
-    "heroPoint3": "Privat und sicher — Daten in der EU"
+    "heroPoint3": "Privat und sicher — Daten in der EU",
+    "forgotPassword": "Passwort vergessen?",
+    "reset": {
+      "forgotTitle": "Passwort vergessen",
+      "forgotLead": "Geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. Wir senden Ihnen einen Link zum Festlegen eines neuen Passworts.",
+      "email": "E-Mail",
+      "sendLink": "Link senden",
+      "sending": "Wird gesendet…",
+      "sentNotice": "Falls das Konto existiert, haben wir einen Link zum Zurücksetzen des Passworts gesendet. Prüfen Sie Ihr Postfach (auch Spam).",
+      "backToLogin": "Zurück zur Anmeldung",
+      "newTitle": "Neues Passwort",
+      "newLead": "Wählen Sie ein neues Passwort. Nach dem Speichern sind Sie direkt angemeldet.",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Neues Passwort wiederholen",
+      "passwordHint": "Mindestens 8 Zeichen.",
+      "save": "Neues Passwort speichern",
+      "saving": "Wird gespeichert…",
+      "expiredTitle": "Dieser Link ist nicht mehr gültig",
+      "expiredLead": "Der Link zum Zurücksetzen des Passworts ist abgelaufen oder wurde bereits verwendet. Fordern Sie einen neuen an.",
+      "goForgot": "Neuen Link senden",
+      "errors": {
+        "fields": "Geben Sie eine gültige E-Mail-Adresse ein.",
+        "rate_limit": "Zu viele Versuche. Bitte versuchen Sie es gleich noch einmal.",
+        "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+        "weak_password": "Das Passwort muss mindestens 8 Zeichen lang sein.",
+        "mismatch": "Die Passwörter stimmen nicht überein.",
+        "session": "Der Link ist abgelaufen. Fordern Sie auf der Seite „Passwort vergessen“ einen neuen an."
+      }
+    }
   },
   "shell": {
     "navLabel": "Hauptnavigation",
@@ -371,7 +399,12 @@
     "speechConsentLead": "Bei Bildbeschreibungs-Übungen können wir Ihr Kind beim Sprechen aufnehmen; unser Helfer prüft, ob es das Erwartete genannt hat. Aufnahmen sind privat, werden nach 30 Tagen gelöscht, und Sie können die Einwilligung jederzeit widerrufen.",
     "speechConsentField": "Ich stimme der Sprachaufnahme meines Kindes zu",
     "speechConsentSave": "Einwilligung speichern",
-    "speechConsentActive": "Aufnahme ist aktiv"
+    "speechConsentActive": "Aufnahme ist aktiv",
+    "weekDoneTitle": "Diese Woche ist geschafft! 🌟",
+    "weekDoneLead": "Alle Übungen aus dem Plan sind erledigt. Pause ist verdient — oder macht eine Extra-Übung.",
+    "weekDoneCta": "Extra-Übung aus dem Plan",
+    "goalsSection": "Woran wir arbeiten",
+    "goalsHint": "Ziele setzt die Logopädin/der Logopäde — jede Übung zu Hause trägt ein Stück bei."
   },
   "therapist": {
     "dashTitle": "Ihre Familien",
@@ -379,7 +412,7 @@
     "newInvite": "Neue Einladung",
     "statFamilies": "Familien in Betreuung",
     "statActiveWeek": "haben diese Woche geübt",
-    "statUnread": "ungelesene Nachrichten",
+    "statUnread": "{count, plural, one {ungelesene Nachricht} other {ungelesene Nachrichten}}",
     "statCommission": "Provision pro Monat",
     "noFamiliesTitle": "Noch keine Familien",
     "noFamiliesLead": "Erstellen Sie eine Einladung und geben Sie den Code an die Eltern weiter — nach der Registrierung erscheint die Familie hier mit dem gesamten Übungsverlauf.",
@@ -465,7 +498,8 @@
       "publishError": "Der Plan konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
       "publish": "Plan veröffentlichen",
       "publishing": "Wird veröffentlicht…",
-      "publishHint": "Der vorherige Plan wird archiviert, der Übungsverlauf bleibt erhalten."
+      "publishHint": "Der vorherige Plan wird archiviert, der Übungsverlauf bleibt erhalten.",
+      "droppedItems": "{count, plural, one {# Übung aus dem bisherigen Plan ist nicht mehr in der Bibliothek und wurde aus dem Entwurf entfernt.} other {# Übungen aus dem bisherigen Plan sind nicht mehr in der Bibliothek und wurden aus dem Entwurf entfernt.}}"
     },
     "library": {
       "pageTitle": "Übungsbibliothek",
@@ -489,7 +523,12 @@
       "ageLabel": "Alter",
       "allAges": "Jedes Alter",
       "noResults": "Keine Übungen entsprechen diesen Filtern.",
-      "clearFilters": "Filter zurücksetzen"
+      "clearFilters": "Filter zurücksetzen",
+      "duplicate": "Duplizieren",
+      "copySuffix": "– Kopie",
+      "viewLabel": "Ansicht",
+      "viewGrid": "Raster",
+      "viewList": "Liste"
     },
     "exerciseForm": {
       "backToLibrary": "Bibliothek",
@@ -559,7 +598,8 @@
       "errors": {
         "fields": "Bitte prüfen Sie die ausgefüllten Felder (Titel, Zusammenfassung, Alter, Dauer).",
         "unknown": "Speichern fehlgeschlagen. Bitte versuchen Sie es erneut."
-      }
+      },
+      "rawNote": "Dieser Aufgabentyp hat strukturierte Inhalte, die dieses Formular noch nicht einzeln bearbeiten kann — der Inhalt bleibt exakt erhalten. Titel, Schwierigkeit, Alter, Dauer und Begleittexte können geändert werden."
     },
     "invites": {
       "pageTitle": "Einladungen",
@@ -589,7 +629,9 @@
       "errors": {
         "fields": "Bitte geben Sie den Namen des Kindes an (und ein gültiges Geburtsjahr).",
         "unknown": "Die Einladung konnte nicht erstellt werden. Bitte versuchen Sie es erneut."
-      }
+      },
+      "createAnother": "Weitere Einladung erstellen",
+      "deleteConfirm": "Wirklich löschen?"
     },
     "referrals": {
       "pageTitle": "Provisionen",
@@ -604,16 +646,202 @@
       "colStatus": "Abo",
       "colEngagement": "Beteiligung",
       "colCommission": "Provision",
-      "state": {
-        "active": "✅ aktiv",
-        "trial": "⏳ Testphase",
-        "expired": "⚠️ Testphase abgelaufen",
-        "canceled": "✖️ gekündigt",
-        "none": "—"
-      },
       "weekSessions": "{count, plural, =0 {0 Übungen/Woche} one {# Übung/Woche} other {# Übungen/Woche}}",
       "disclaimer": "Die Übersicht ist unverbindlich. Die Abrechnung der Provisionen erfolgt monatlich auf Basis der tatsächlich bezahlten Abos."
-    }
+    },
+    "statAttention": "brauchen Aufmerksamkeit",
+    "attentionTitle": "Brauchen Aufmerksamkeit ({count})",
+    "calmTitle": "Im guten Rhythmus",
+    "weekAdherence": "{done}/{target} diese Woche",
+    "flags": {
+      "silentDays": "{days, plural, one {# Tag} other {# Tage}} ohne Übung",
+      "slowed": "Übung hat sich verlangsamt",
+      "behindPlan": "hinter dem Wochenplan",
+      "unread": "ungelesene Nachricht",
+      "quiet30": "seit über 30 Tagen keine Übung"
+    },
+    "goals": {
+      "title": "Therapieziele",
+      "add": "Ziel hinzufügen",
+      "cancel": "Abbrechen",
+      "empty": {
+        "title": "Noch keine Ziele",
+        "lead": "Legen Sie das erste messbare Ziel fest — Sie und die Familie sehen, wohin die Therapie führt."
+      },
+      "form": {
+        "domain": "Bereich",
+        "title": "Zielname",
+        "titlePlaceholder": "Was soll das Kind erreichen?",
+        "target": "Ziel-Erfolgsquote",
+        "targetNone": "Ohne Ziel-%",
+        "targetDate": "Termin (optional)",
+        "baseline": "Ausgangswert % (optional)",
+        "submit": "Ziel erstellen",
+        "saving": "Wird gespeichert…"
+      },
+      "suggestions": {
+        "phonemic_awareness": {
+          "s1": "Bestimmt den ersten Laut eines Wortes selbstständig",
+          "s2": "Zerlegt ein Wort ohne Hilfe in Silben"
+        },
+        "working_memory": {
+          "s1": "Wiederholt eine 4er-Sequenz in richtiger Reihenfolge",
+          "s2": "Behält eine zweischrittige Anweisung und führt sie aus"
+        },
+        "attention": {
+          "s1": "Bleibt während der ganzen Übung konzentriert",
+          "s2": "Findet den Zielreiz ohne Fehler"
+        },
+        "narrative": {
+          "s1": "Erzählt eine kurze Geschichte in drei Schritten nach",
+          "s2": "Erzählt selbstständig anhand einer Bildfolge"
+        },
+        "vocabulary": {
+          "s1": "Verwendet aktiv 10 neue Wörter",
+          "s2": "Benennt Gegenstände einer Kategorie"
+        },
+        "articulation": {
+          "s1": "Spricht den geübten Laut in Wörtern korrekt aus",
+          "s2": "Überträgt den Laut in die Spontansprache"
+        },
+        "guided": {
+          "s1": "Gemeinsame Aktivitäten mindestens 3× pro Woche",
+          "s2": "Wechselt sich beim Spielen in der Kommunikation ab"
+        }
+      },
+      "metaProgress": "{current} % → Ziel {target} %",
+      "metaCurrent": "aktuell {current} %",
+      "metaNoData": "noch keine Daten (14 Tage)",
+      "metaBaseline": "Ausgangswert {baseline} %",
+      "metaDate": "bis {date}",
+      "achieve": "Erreicht",
+      "archive": "Archivieren",
+      "delete": "Löschen",
+      "confirmDelete": "Wirklich löschen?",
+      "reactivate": "Reaktivieren",
+      "noActive": "Keine aktiven Ziele — fügen Sie ein neues hinzu oder reaktivieren Sie ein erreichtes.",
+      "doneGroup": "Erreichte und archivierte Ziele ({count})",
+      "achievedOn": "Erreicht am {date}",
+      "status": {
+        "achieved": "Erreicht",
+        "archived": "Archiviert"
+      },
+      "errors": {
+        "fields": "Bitte prüfen Sie die ausgefüllten Felder.",
+        "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      }
+    },
+    "notes": {
+      "title": "Klinische Notizen",
+      "privateChip": "Privat — Eltern sehen sie nicht",
+      "privateHint": "Nur Sie sehen diese Notizen. Weder Eltern noch andere haben Zugriff.",
+      "sinceLast": "Seit der letzten Notiz: {sessions, plural, one {1 Übung} other {# Übungen}} zu Hause, Ø Erfolg {pct} % in {days, plural, one {1 Tag} other {# Tagen}}.",
+      "sinceLastNoPct": "Seit der letzten Notiz: {sessions, plural, one {1 Übung} other {# Übungen}} zu Hause in {days, plural, one {1 Tag} other {# Tagen}}.",
+      "copy": "Kopieren",
+      "copied": "Kopiert ✓",
+      "composer": {
+        "label": "Neue Notiz",
+        "placeholder": "Sitzungsverlauf, Beobachtungen, Plan für das nächste Mal… (SOAP-lite)",
+        "date": "Datum",
+        "submit": "Notiz speichern",
+        "saving": "Wird gespeichert…"
+      },
+      "delete": "Löschen",
+      "confirmDelete": "Wirklich löschen?",
+      "empty": {
+        "title": "Noch keine Notizen",
+        "lead": "Halten Sie hier Notizen aus den Sitzungen fest — Beobachtungen, Verlauf, Bewertung und Plan (SOAP-lite). Eltern sehen sie nie."
+      },
+      "errors": {
+        "fields": "Bitte prüfen Sie Text und Datum der Notiz.",
+        "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      }
+    },
+    "templates": {
+      "trigger": "Vorlagen",
+      "empty": "Sie haben noch keine gespeicherten Vorlagen.",
+      "count": "{count, plural, one {1 Übung} other {# Übungen}}",
+      "apply": "Anwenden",
+      "confirmApply": "Entwurf ersetzen?",
+      "deleteLabel": "Vorlage löschen",
+      "confirmDelete": "Wirklich?",
+      "saveTitle": "Aktuellen Plan als Vorlage speichern",
+      "form": {
+        "title": "Name der Vorlage",
+        "description": "Beschreibung (optional)",
+        "submit": "Vorlage speichern",
+        "saving": "Wird gespeichert…"
+      },
+      "saved": "Vorlage gespeichert ✓",
+      "emptyDraftHint": "Fügen Sie dem Plan zuerst Übungen hinzu — dann können Sie ihn als Vorlage speichern.",
+      "errors": {
+        "fields": "Bitte prüfen Sie Name und Inhalt der Vorlage.",
+        "unknown": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      }
+    },
+    "openReport": "Bericht erstellen",
+    "report": {
+      "docTitle": "Bericht über den Verlauf der häuslichen Therapie",
+      "backToChild": "Zurück zum Kinderprofil",
+      "periodLabel": "Zeitraum",
+      "weeksOption": "{weeks, plural, one {# Woche} other {# Wochen}}",
+      "printButton": "Drucken / als PDF speichern",
+      "childLabel": "Kind",
+      "therapistLabel": "Logopäde/Logopädin",
+      "parentLabel": "Elternteil",
+      "generatedLabel": "Erstellt am",
+      "summaryTitle": "Zusammenfassung",
+      "statSessions": "abgeschlossene Übungen",
+      "statMinutes": "Minuten geübt",
+      "statDays": "Tage mit Übungen",
+      "statStreak": "Tage in Folge",
+      "statAvg": "durchschnittlicher Erfolg",
+      "domainsTitle": "Bereiche",
+      "noData": "Für den gewählten Zeitraum liegen keine Daten vor.",
+      "thDomain": "Bereich",
+      "thSessions": "Übungen",
+      "thAvg": "Durchschnitt",
+      "thTrend": "Trend",
+      "thTricky": "Schwierige Elemente",
+      "goalsTitle": "Therapieziele",
+      "goalsEmpty": "Es wurden noch keine Ziele festgelegt.",
+      "thGoal": "Ziel",
+      "goalBaseline": "Ausgangswert",
+      "goalCurrent": "Aktuell (14 Tage)",
+      "goalTarget": "Zielwert",
+      "thStatus": "Status",
+      "goalAchieved": "Erreicht am {date}",
+      "goalActiveUntil": "Aktiv bis {date}",
+      "goalActive": "Aktiv",
+      "metaTitle": "Metakognition",
+      "metaEmpty": "Abgeschlossene Übungen enthalten noch keine metakognitiven Daten.",
+      "metaStrategies": "Strategiewahl",
+      "metaSelfEval": "Selbsteinschätzung des Kindes",
+      "metaCalibration": "Kalibrierung der Selbsteinschätzung",
+      "selfEval": {
+        "great": "Es lief sehr gut",
+        "ok": "Ganz gut",
+        "hard": "Es war schwer"
+      },
+      "calib": {
+        "under": "Unterschätzt sich",
+        "ok": "Treffend",
+        "over": "Überschätzt sich"
+      },
+      "trickyTitle": "Was Schwierigkeiten bereitet",
+      "trickyEmpty": "Keine wiederholt schwierigen Elemente — ausgezeichneter Verlauf.",
+      "thItem": "Element",
+      "thMisses": "Nicht gelungen",
+      "thAttempts": "Versuche",
+      "notesTitle": "Notizen der Eltern",
+      "notesEmpty": "Die Eltern haben noch keine Notizen hinzugefügt.",
+      "commentTitle": "Anmerkung der Logopädin / des Logopäden",
+      "signature": "Unterschrift",
+      "dateLabel": "Datum",
+      "brandFooter": "Evolvea — der digitale Begleiter der logopädischen Therapie"
+    },
+    "showMoreSessions": "Ältere anzeigen ({count})",
+    "noRecentActivity": "keine Übung in den letzten 30 Tagen"
   },
   "billing": {
     "trialTitle": "Testphase: {count, plural, =0 {letzter Tag} one {noch # Tag} other {noch # Tage}}",
@@ -717,14 +945,14 @@
       "showSolution": "Schau — das Wort hat {count, plural, one {# Laut} other {# Laute}}.",
       "tokensSoFar": "{count, plural, one {# Chip} other {# Chips}}",
       "countHint": "Sprechen Sie das slowakische Wort ganz langsam vor und tippen Sie bei jedem Laut einen Chip an.",
-      "colorsHint": "Dieser Laut ist ein {kind}.",
       "kinds": {
         "vowel": "kurzer Vokal",
         "long_vowel": "langer Vokal",
         "diphthong": "Diphthong",
         "consonant": "Konsonant"
       },
-      "paletteLabel": "Wähle die Art des Lautes"
+      "paletteLabel": "Wähle die Art des Lautes",
+      "colorsHintAsk": "Zieh den Laut „{sound}“ lang und hör hin: Kannst du ihn singen? Wenn ja — kurz oder lang? Wenn nicht, was für ein Laut ist es?"
     },
     "memory": {
       "watchPrompt": "Merk dir die Reihenfolge gut…",
@@ -850,10 +1078,94 @@
         "0": "Erst höre ich zu, dann spreche ich",
         "1": "Ich spreche langsam und deutlich",
         "2": "Ich achte auf Mund und Zunge"
+      },
+      "minimal_pairs": {
+        "0": "Ich höre mit den Ohren, nicht mit den Augen",
+        "1": "Ich wiederhole das Wort im Kopf",
+        "2": "Ich lasse mir Zeit und höre genau hin"
+      },
+      "sound_hunt": {
+        "0": "Ich spitze die Ohren wie ein Hase",
+        "1": "Ich sage mir das Wort ganz langsam",
+        "2": "Ich suche den Laut am Anfang und in der Mitte"
+      },
+      "sentence_builder": {
+        "0": "Zuerst sage ich den Satz im Kopf",
+        "1": "Ich suche, wer etwas tut",
+        "2": "Nach jedem Wort wiederhole ich den Satz"
+      },
+      "sorting": {
+        "0": "Ich sage laut, was ich sehe",
+        "1": "Ich frage: Wohin gehört es und warum?",
+        "2": "Ich prüfe, bevor ich tippe"
+      },
+      "scene_directions": {
+        "0": "Ich höre mir den ganzen Satz genau an",
+        "1": "Ich wiederhole mir, wohin jedes Bild gehört",
+        "2": "Ich lege die Bilder eins nach dem anderen"
       }
     },
     "recPendingStat": "Aufnahmen gesendet",
-    "recPendingSub": "Die Auswertung kommt in Kürze — im Fortschritt zu finden."
+    "recPendingSub": "Die Auswertung kommt in Kürze — im Fortschritt zu finden.",
+    "nextUp": "Nächste Übung",
+    "dayDoneTitle": "Tagesportion geschafft! 🎉",
+    "dayDoneLead": "Wunderbar. Kurz und regelmäßig — genau so wächst man. Bis morgen!",
+    "streakLine": "{count, plural, one {# Tag in Folge} other {# Tage in Folge}}",
+    "minimalPairs": {
+      "parentLabel": "Für die Eltern",
+      "parentSay": "Sagen Sie Ihrem Kind das Wort: „{word}“. Geben Sie keine Hinweise mit Mund oder Blick.",
+      "parentPair": "Lesen Sie beide Wörter langsam und deutlich vor: „{first}“ … „{second}“.",
+      "contrast": "Kontrast: {contrast}",
+      "playWord": "Wort abspielen",
+      "playPair": "Wortpaar abspielen",
+      "listenPrompt": "Welches Wort war das? Tippe auf das Bild!",
+      "sdPrompt": "Ohren gespitzt! Klangen die Wörter gleich oder verschieden?",
+      "same": "Gleich",
+      "different": "Anders",
+      "revealSame": "Es war zweimal dasselbe Wort!",
+      "revealDifferent": "Es waren zwei verschiedene Wörter – hörst du den Unterschied?"
+    },
+    "soundHunt": {
+      "parentLabel": "Für die Eltern",
+      "parentSay": "Sagen Sie das Wort: „{word}“. Betonen Sie den Laut {target} nicht – Ihr Kind soll ihn selbst finden.",
+      "parentBombard": "Lesen Sie jedes Wort langsam vor und ziehen Sie den Laut {target} richtig in die Länge (z. B. „schhh“). Ihr Kind hört nur zu.",
+      "playWord": "Wort abspielen",
+      "targetLabel": "Gesuchter Laut: {target}",
+      "detectPrompt": "Versteckt sich der Laut {target} im Wort?",
+      "hear": "Ich höre {target}!",
+      "notThere": "Ist nicht drin",
+      "bombardPrompt": "Hör einfach zu und schau. Deine Ohren arbeiten!",
+      "wordProgress": "Wort {current} von {total}",
+      "next": "Weiter",
+      "pause": "Pause",
+      "play": "Weiter geht's"
+    },
+    "sentenceBuilder": {
+      "buildPrompt": "Baue den Satz — tippe die Wörter in der richtigen Reihenfolge an.",
+      "slotsLabel": "Dein Satz",
+      "trayLabel": "Wortkärtchen",
+      "pickWord": "Wähle ein Wort, das den Satz länger macht.",
+      "parentReads": "Elternteil liest vor:",
+      "readAloud": "Super! Sag den ganzen Satz laut.",
+      "saidIt": "Ich habe den Satz gesagt ✓"
+    },
+    "sorting": {
+      "prompt": "Wohin gehört das? Tippe auf die richtige Gruppe.",
+      "bucketsLabel": "Gruppen",
+      "inBucket": "{count} in dieser Gruppe"
+    },
+    "sceneDirections": {
+      "prompt": "Hör zu und lege die Bilder dorthin, wo sie hingehören.",
+      "parentReads": "Lesen Sie laut vor",
+      "boardLabel": "Spielfeld",
+      "trayLabel": "Bilder zum Platzieren",
+      "cellPos": "Zeile {row}, Spalte {col}",
+      "emptyCell": "Leeres Feld",
+      "filledCell": "Tippe und das Bild kehrt in die Ablage zurück",
+      "lockedCell": "Richtig platziertes Bild",
+      "tokenAria": "Nimm das Bild {token} und wähle dann ein Feld",
+      "check": "Fertig!"
+    }
   },
   "categories": {
     "pronunciation": "Aussprache",

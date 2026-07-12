@@ -24,7 +24,22 @@ export default function TodayPath({
 }) {
   const t = useTranslations();
 
-  if (done.length === 0 && queue.length === 0) return null;
+  // Weekly targets met and nothing queued today — celebrate instead of
+  // rendering an empty section, and keep a door open for bonus practice.
+  if (done.length === 0 && queue.length === 0) {
+    return (
+      <div className="day-done">
+        <span className="day-done-star" aria-hidden="true">
+          <IconStar size={30} />
+        </span>
+        <b>{t("parent.weekDoneTitle")}</b>
+        <p>{t("parent.weekDoneLead")}</p>
+        <Link href="/app/plan" className="btn btn-outline btn-sm" style={{ marginTop: "0.6rem" }}>
+          {t("parent.weekDoneCta")}
+        </Link>
+      </div>
+    );
+  }
 
   if (queue.length === 0) {
     return (

@@ -55,13 +55,24 @@ export default function PairsTask({ content, onProgress, onFinish }: TaskProps<P
       setUp([]);
       setFeedback(praise());
       if (nextDone.size === content.pairs.length) {
+        // Honest memory score: efficiency vs. an optimal-memory baseline
+        // (~1.6 moves per pair). A flawless-luck run stays 100 %, wandering
+        // costs pairs proportionally — never below 1 (effort always counts).
+        const pairs = content.pairs.length;
+        const finalMoves = moves + 1;
+        const ideal = Math.ceil(pairs * 1.6);
+        const efficiency = Math.min(1, ideal / finalMoves);
         timer.current = setTimeout(
           () =>
             onFinish({
-              correct: content.pairs.length,
-              total: content.pairs.length,
+              correct: Math.max(1, Math.round(pairs * efficiency)),
+              total: pairs,
               hintsUsed: 0,
-              detail: { moves: moves + 1, pairs: content.pairs.length },
+              detail: {
+                moves: finalMoves,
+                pairs,
+                efficiencyPct: Math.round(100 * efficiency),
+              },
             }),
           1200,
         );

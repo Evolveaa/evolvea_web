@@ -31,11 +31,13 @@ export default function InviteForm() {
     createInviteAction,
     null,
   );
+  // lets the therapist mint several codes in a row without a page reload
+  const [dismissedCode, setDismissedCode] = useState<string | null>(null);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 13 }, (_, i) => currentYear - 3 - i);
 
-  if (state?.code) {
+  if (state?.code && state.code !== dismissedCode) {
     return (
       <div className="card" role="status">
         <h2 className="card-title">{t("createdTitle")}</h2>
@@ -64,6 +66,14 @@ export default function InviteForm() {
         <p className="form-hint" style={{ textAlign: "center", marginTop: "0.9rem" }}>
           {t("createdHint")}
         </p>
+        <button
+          type="button"
+          className="btn btn-outline btn-block"
+          style={{ marginTop: "0.6rem" }}
+          onClick={() => setDismissedCode(state.code ?? null)}
+        >
+          ＋ {t("createAnother")}
+        </button>
       </div>
     );
   }

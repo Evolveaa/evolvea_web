@@ -6,7 +6,7 @@ import { useTts } from "@/lib/tts";
 import { createClient } from "@/lib/supabase/browser";
 import { createSpeechAttemptAction } from "@/lib/parent/actions";
 import type { SpeechItemsContent } from "@/lib/exercises/types";
-import type { TaskProps } from "./shared";
+import { useFeedbackLines, type TaskProps } from "./shared";
 
 type Score = "great" | "almost" | "practice";
 type RecState = "idle" | "recording" | "uploading" | "done" | "error";
@@ -34,6 +34,7 @@ export default function SpeechTask({
   const t = useTranslations("player");
   const locale = useLocale();
   const { supported, speak } = useTts();
+  const { praise, encourage } = useFeedbackLines();
 
   const recorderSupported =
     typeof navigator !== "undefined" &&
@@ -50,6 +51,7 @@ export default function SpeechTask({
     content.items.every((i) => (i.expect?.length ?? 0) > 0);
 
   const [index, setIndex] = useState(0);
+  const [feedback, setFeedback] = useState<{ kind: "good" | "bad"; text: string } | null>(null);
   const results = useRef<Score[]>([]);
   const attemptIds = useRef<string[]>([]);
   const speechDetail = useRef<
@@ -108,16 +110,20 @@ export default function SpeechTask({
   function score(s: Score) {
     if (lock.current) return;
     lock.current = true;
+    // speaking is the hardest task in the app — the child gets a moment of
+    // praise before the next card, whatever the parent tapped
+    setFeedback({ kind: "good", text: s === "great" ? praise() : encourage() });
     const next = index + 1;
     if (next >= content.items.length) {
-      finishManual(s);
+      unlockTimer.current = setTimeout(() => finishManual(s), 900);
       return;
     }
     results.current.push(s);
-    setIndex(next);
     unlockTimer.current = setTimeout(() => {
+      setFeedback(null);
+      setIndex(next);
       lock.current = false;
-    }, 350);
+    }, 900);
   }
 
   /* ---------------- recording ---------------- */
@@ -322,6 +328,10 @@ export default function SpeechTask({
           </button>
         </div>
       )}
+
+      <p className="play-feedback" data-kind={feedback?.kind} role="status">
+        {feedback?.text}
+      </p>
     </>
   );
 }

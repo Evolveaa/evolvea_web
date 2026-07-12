@@ -44,6 +44,11 @@ jazyk). Text je určený rodičom a deťom 5 – 10 rokov: krátke vety, láskav
 | `story_sequence` | usporiadaj obrázkové karty príbehu + prerozprávaj |
 | `speech_items` | dieťa hovorí, rodič hodnotí ✓/~/✗ (artikulácia, jazykolamy, menovanie, prerozprávanie) |
 | `guided_steps` | vedená spoločná aktivita s krokmi, výberom pocitov/stratégií a poľami na reflexiu |
+| `minimal_pairs` | minimálne páry (Barlow & Gierut): mode `listen` (rodič povie slovo, dieťa ťukne obrázok) alebo `same_different` (rodič prečíta dvojicu, dieťa súdi rovnaké/iné) |
+| `sound_hunt` | lov na hlásku (Hodsonovej cykly): mode `bombardment` (dieťa LEN počúva slová s hláskou) alebo `detect` (ťukni, či hláska v slove je) |
+| `sentence_builder` | stavba vety zo zamiešaných slovných kariet + voliteľná expanzia (dlhšia veta nahlas) |
+| `sorting` | triedenie kariet do 2 – 3 košíkov (sémantické kategórie, hlásky, dĺžky) |
+| `scene_directions` | porozumenie inštrukciám (Token Test / bariérová hra): rodič prečíta pokyn s predložkami, dieťa ukladá žetóny na plán |
 
 Pravidlá kvality:
 
@@ -64,6 +69,25 @@ Pravidlá kvality:
 - `guided_steps`: 4 – 7 krokov; aspoň jeden krok s `choices` (pocity/stratégie)
   a aspoň dva kroky s `fields` (reflexia — odpovede sa ukladajú logopédovi).
   `tip` používaj na zásadu „nikdy neriešte za dieťa“.
+- `minimal_pairs`: 5 – 10 párov; pár sa musí líšiť **presne jednou hláskou**
+  (koza/kosa, rak/lak, sud/súd — dĺžka je tiež kontrast). `contrast` pomenúva
+  kontrast pre rodiča („s–š“). V `listen` striedaj `say` a/b; v `same_different`
+  miešaj `same: true/false`. Obe slová páru musia mať emoji a byť deťom známe.
+- `sound_hunt`: `bombardment` 8 – 14 slov, VŠETKY s hláskou (čisté počúvanie,
+  neskóruje sa); `detect` 6 – 12 slov, vyvážene s hláskou aj bez nej.
+  `target` je hláska tak, ako sa píše („š“). Slová vyberaj tak, aby hláska
+  bola počuteľná (bez spodobovania).
+- `sentence_builder`: 4 – 8 viet; diff 1 = 2 – 3 slová, diff 2 = 3 – 4,
+  diff 3 = 4 – 7 (+ `distractors`). Slová v `words` v SPRÁVNOM poradí,
+  prehrávač ich zamieša. `expansion` (voliteľná) rozvíja vetu — všetky
+  `options` musia byť gramaticky správne na pozícii `insertAt`.
+- `sorting`: 2 – 3 kategórie, 6 – 12 kariet, každá kategória aspoň 2 karty.
+  Kategórie musia byť disjunktné (žiadna karta nepatrí do dvoch).
+- `scene_directions`: plán 2 – 5 × 2 – 5 s pevnými `anchors` (dom, strom…);
+  3 – 6 kôl; diff 1 = 1 žetón/kolo, diff 2 = 1 – 2, diff 3 = 2 – 3.
+  `instruction` číta rodič nahlas — používaj predložky (nad, pod, vedľa,
+  medzi, za) a formuluj jednoznačne voči mriežke. Žetóny nesmú cieliť na
+  bunku kotvy.
 
 ## Slovenská fonematika (KRITICKÉ pre `sound_boxes` a hláskové úlohy)
 

@@ -32,6 +32,11 @@ const TYPES = [
   "story_sequence",
   "speech_items",
   "guided_steps",
+  "minimal_pairs",
+  "sound_hunt",
+  "sentence_builder",
+  "sorting",
+  "scene_directions",
 ];
 
 /* ---------------- Slovak phoneme segmentation ---------------- */
@@ -233,6 +238,177 @@ function checkGuided(c, at) {
   if (fields < 2) warn(at, `only ${fields} steps with fields (spec: ≥2)`);
 }
 
+function checkMinimalPairs(c, at) {
+  if (!["listen", "same_different"].includes(c.mode)) err(at, `bad mode ${c.mode}`);
+  if (!isStr(c.contrast)) err(at, "missing contrast (e.g. \"s–š\")");
+  if (!Array.isArray(c.items) || c.items.length === 0) return err(at, "needs items[]");
+  if (c.items.length < 5 || c.items.length > 10)
+    warn(at, `${c.items.length} pairs (spec: 5–10)`);
+  c.items.forEach((it, i) => {
+    const w = `${at}.items[${i}]`;
+    for (const side of ["a", "b"]) {
+      if (!isObj(it[side]) || !isStr(it[side].word) || !isStr(it[side].emoji))
+        return err(`${w}.${side}`, "needs word + emoji");
+    }
+    if (!isObj(it.a) || !isObj(it.b)) return;
+    if (it.a.word === it.b.word) err(w, "pair words must differ");
+    else {
+      // a true minimal pair differs in exactly one phoneme
+      const sa = segmentSlovak(it.a.word).map((p) => p.sound);
+      const sb = segmentSlovak(it.b.word).map((p) => p.sound);
+      if (sa.length === sb.length) {
+        const diffs = sa.filter((s, j) => s !== sb[j]).length;
+        if (diffs !== 1)
+          warn(w, `"${it.a.word}"–"${it.b.word}" differ in ${diffs} phonemes (minimal pair = exactly 1)`);
+      } else if (Math.abs(sa.length - sb.length) !== 1) {
+        warn(w, `"${it.a.word}"–"${it.b.word}" lengths differ by ${Math.abs(sa.length - sb.length)} phonemes`);
+      }
+    }
+    if (c.mode === "listen" && !["a", "b"].includes(it.say))
+      err(w, "listen mode needs say: \"a\" | \"b\"");
+    if (c.mode === "same_different" && typeof it.same !== "boolean")
+      err(w, "same_different mode needs same: true|false");
+    if (!isStr(it.hint)) warn(w, "missing hint");
+  });
+  if (c.mode === "listen") {
+    const says = c.items.map((it) => it.say);
+    if (says.length >= 4 && new Set(says).size === 1)
+      warn(at, "every item says the same side — child can pattern-match; mix a/b");
+  }
+  if (c.mode === "same_different") {
+    const sames = c.items.filter((it) => it.same === true).length;
+    if (sames === 0 || sames === c.items.length)
+      warn(at, "mix same:true and same:false items, else the answer is constant");
+  }
+}
+
+function checkSoundHunt(c, at) {
+  if (!["bombardment", "detect"].includes(c.mode)) err(at, `bad mode ${c.mode}`);
+  if (!isStr(c.target)) return err(at, "missing target phoneme");
+  if (!Array.isArray(c.items) || c.items.length === 0) return err(at, "needs items[]");
+  const lo = c.mode === "bombardment" ? 8 : 6;
+  const hi = c.mode === "bombardment" ? 14 : 12;
+  if (c.items.length < lo || c.items.length > hi)
+    warn(at, `${c.items.length} words (spec ${c.mode}: ${lo}–${hi})`);
+  const target = String(c.target).toLowerCase();
+  c.items.forEach((it, i) => {
+    const w = `${at}.items[${i}] "${it.word}"`;
+    if (!isStr(it.word)) return err(w, "missing word");
+    if (typeof it.has !== "boolean") err(w, "missing has: true|false");
+    const contains = it.word.toLowerCase().includes(target);
+    if (it.has === true && !contains) err(w, `has:true but "${target}" not in the word`);
+    if (it.has === false && contains) err(w, `has:false but "${target}" IS in the word`);
+    if (!isStr(it.emoji)) warn(w, "missing emoji");
+  });
+  if (c.mode === "bombardment" && c.items.some((it) => it.has === false))
+    err(at, "bombardment is pure exposure — every word must contain the target");
+  if (c.mode === "detect") {
+    const yes = c.items.filter((it) => it.has === true).length;
+    const no = c.items.length - yes;
+    if (yes === 0 || no === 0) err(at, "detect mode needs both has:true and has:false words");
+    else if (yes < 2 || no < 2) warn(at, `unbalanced detect mix (${yes} áno / ${no} nie)`);
+  }
+}
+
+function checkSentenceBuilder(c, at, difficulty) {
+  if (!Array.isArray(c.items) || c.items.length === 0) return err(at, "needs items[]");
+  if (c.items.length < 4 || c.items.length > 8) warn(at, `${c.items.length} sentences (spec: 4–8)`);
+  const range = { 1: [2, 3], 2: [3, 4], 3: [4, 7] }[difficulty] ?? [2, 7];
+  c.items.forEach((it, i) => {
+    const w = `${at}.items[${i}]`;
+    if (!Array.isArray(it.words) || it.words.length < 2) return err(w, "needs ≥2 words");
+    if (it.words.length < range[0] || it.words.length > range[1])
+      warn(w, `${it.words.length} words outside diff ${difficulty} range ${range[0]}–${range[1]}`);
+    it.words.forEach((word, j) => {
+      if (!isStr(word)) err(`${w}.words[${j}]`, "must be a non-empty string");
+    });
+    (it.distractors ?? []).forEach((d, j) => {
+      if (!isStr(d)) err(`${w}.distractors[${j}]`, "must be a non-empty string");
+      else if (it.words.includes(d)) err(`${w}.distractors[${j}]`, `"${d}" repeats a sentence word`);
+    });
+    if (it.expansion) {
+      if (!isStr(it.expansion.prompt)) err(`${w}.expansion`, "missing prompt");
+      if (!Array.isArray(it.expansion.options) || it.expansion.options.length < 2)
+        err(`${w}.expansion`, "needs ≥2 options");
+      const insertAt = it.expansion.insertAt;
+      if (typeof insertAt !== "number" || insertAt < 0 || insertAt > it.words.length)
+        err(`${w}.expansion`, "insertAt out of range");
+    }
+    if (!isStr(it.hint)) warn(w, "missing hint");
+  });
+}
+
+function checkSorting(c, at) {
+  if (!Array.isArray(c.categories) || c.categories.length < 2 || c.categories.length > 3)
+    return err(at, "needs 2–3 categories");
+  c.categories.forEach((cat, i) => {
+    if (!isStr(cat.label) || !isStr(cat.emoji)) err(`${at}.categories[${i}]`, "needs label + emoji");
+  });
+  if (!Array.isArray(c.items) || c.items.length === 0) return err(at, "needs items[]");
+  if (c.items.length < 6 || c.items.length > 12) warn(at, `${c.items.length} items (spec: 6–12)`);
+  const perCat = c.categories.map(() => 0);
+  c.items.forEach((it, i) => {
+    const w = `${at}.items[${i}]`;
+    if (!isStr(it.label) || !isStr(it.emoji)) err(w, "needs label + emoji");
+    if (typeof it.category !== "number" || it.category < 0 || it.category >= c.categories.length)
+      err(w, "category index out of range");
+    else perCat[it.category] += 1;
+    if (!isStr(it.hint)) warn(w, "missing hint");
+  });
+  perCat.forEach((n, i) => {
+    if (n < 2) warn(at, `category ${i} ("${c.categories[i]?.label}") has only ${n} items (want ≥2)`);
+  });
+  const labels = c.items.map((it) => it.label);
+  if (new Set(labels).size !== labels.length) err(at, "item labels must be unique");
+}
+
+function checkSceneDirections(c, at, difficulty) {
+  if (!isObj(c.board)) return err(at, "needs board");
+  const { rows, cols } = c.board;
+  if (typeof rows !== "number" || typeof cols !== "number" || rows < 2 || rows > 5 || cols < 2 || cols > 5)
+    return err(at, "board needs 2–5 rows/cols");
+  if (!Array.isArray(c.board.anchors) || c.board.anchors.length === 0)
+    return err(at, "board needs anchors[]");
+  const cells = new Set();
+  c.board.anchors.forEach((a, i) => {
+    const w = `${at}.board.anchors[${i}]`;
+    if (!isStr(a.emoji) || !isStr(a.label)) err(w, "needs emoji + label");
+    if (typeof a.row !== "number" || typeof a.col !== "number" || a.row < 0 || a.row >= rows || a.col < 0 || a.col >= cols)
+      return err(w, "outside the board");
+    const key = `${a.row}:${a.col}`;
+    if (cells.has(key)) err(w, "two anchors on one cell");
+    cells.add(key);
+  });
+  if (!Array.isArray(c.rounds) || c.rounds.length === 0) return err(at, "needs rounds[]");
+  if (c.rounds.length < 3 || c.rounds.length > 6) warn(at, `${c.rounds.length} rounds (spec: 3–6)`);
+  const stepRange = { 1: [1, 1], 2: [1, 2], 3: [2, 3] }[difficulty] ?? [1, 3];
+  c.rounds.forEach((r, i) => {
+    const w = `${at}.rounds[${i}]`;
+    if (!isStr(r.instruction)) err(w, "missing instruction");
+    if (!Array.isArray(r.tokens) || r.tokens.length === 0) return err(w, "needs tokens[]");
+    if (new Set(r.tokens).size !== r.tokens.length) err(w, "tokens must be unique");
+    if (!Array.isArray(r.places) || r.places.length !== r.tokens.length)
+      return err(w, "places must place every token exactly once");
+    const used = new Set();
+    const targets = new Set();
+    r.places.forEach((p, j) => {
+      const pw = `${w}.places[${j}]`;
+      if (!r.tokens.includes(p.token)) err(pw, `token "${p.token}" not in tray`);
+      if (used.has(p.token)) err(pw, `token "${p.token}" placed twice`);
+      used.add(p.token);
+      if (typeof p.row !== "number" || typeof p.col !== "number" || p.row < 0 || p.row >= rows || p.col < 0 || p.col >= cols)
+        return err(pw, "outside the board");
+      const key = `${p.row}:${p.col}`;
+      if (cells.has(key)) err(pw, "targets an anchor cell");
+      if (targets.has(key)) err(pw, "two tokens on one cell");
+      targets.add(key);
+    });
+    if (r.places.length < stepRange[0] || r.places.length > stepRange[1])
+      warn(w, `${r.places.length} placements outside diff ${difficulty} range ${stepRange[0]}–${stepRange[1]}`);
+    if (!isStr(r.hint)) warn(w, "missing hint");
+  });
+}
+
 /* ---------------- record validator ---------------- */
 function checkRecord(rec, at, expectedDomain) {
   if (!isObj(rec)) return err(at, "record must be an object");
@@ -271,6 +447,11 @@ function checkRecord(rec, at, expectedDomain) {
     story_sequence: "interactive",
     speech_items: "speech",
     guided_steps: "guided",
+    minimal_pairs: "interactive",
+    sound_hunt: "interactive",
+    sentence_builder: "interactive",
+    sorting: "interactive",
+    scene_directions: "interactive",
   };
   if (rec.modality !== modalityFor[c.type])
     err(at, `content.type ${c.type} implies modality ${modalityFor[c.type]}, got ${rec.modality}`);
@@ -284,6 +465,11 @@ function checkRecord(rec, at, expectedDomain) {
   if (c.type === "story_sequence") checkStory(c, ctx, rec.difficulty);
   if (c.type === "speech_items") checkSpeech(c, ctx);
   if (c.type === "guided_steps") checkGuided(c, ctx);
+  if (c.type === "minimal_pairs") checkMinimalPairs(c, ctx);
+  if (c.type === "sound_hunt") checkSoundHunt(c, ctx);
+  if (c.type === "sentence_builder") checkSentenceBuilder(c, ctx, rec.difficulty);
+  if (c.type === "sorting") checkSorting(c, ctx);
+  if (c.type === "scene_directions") checkSceneDirections(c, ctx, rec.difficulty);
 }
 
 /* ---------------- main ---------------- */

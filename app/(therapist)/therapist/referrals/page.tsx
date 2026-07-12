@@ -8,8 +8,17 @@ import {
   MONTHLY_PRICE_EUR,
 } from "@/lib/billing";
 
+const STATE_HUE: Record<string, string> = {
+  active: "hue-green",
+  trial: "hue-sky",
+  expired: "hue-amber",
+  canceled: "hue-rose",
+  none: "hue-navy",
+};
+
 export default async function ReferralsPage() {
   const t = await getTranslations("therapist.referrals");
+  const tTher = await getTranslations("therapist");
   const format = await getFormatter();
   const eur = (n: number) => format.number(n, { style: "currency", currency: "EUR" });
   const session = await getSessionProfile();
@@ -82,7 +91,11 @@ export default async function ReferralsPage() {
                       <span aria-hidden="true">{f.child.avatar}</span> {f.child.first_name}
                       <span style={{ color: "var(--ink-soft)" }}> · {f.parentName}</span>
                     </td>
-                    <td>{t(`state.${state}`)}</td>
+                    <td>
+                      <span className={`chip chip-hue ${STATE_HUE[state]}`}>
+                        {tTher(`subState.${state}`)}
+                      </span>
+                    </td>
                     <td>{t("weekSessions", { count: f.sessionsWeek })}</td>
                     <td style={{ textAlign: "right", fontVariantNumeric: "tabular-nums" }}>
                       <b>{state === "active" ? eur(COMMISSION_PER_FAMILY_EUR) : "—"}</b>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { getSessionProfile } from "@/lib/data/user";
-import { getFamilies } from "@/lib/data/therapist";
-import { accessState, COMMISSION_PER_FAMILY_EUR } from "@/lib/billing";
+import { getFamilies, type FamilyOverview } from "@/lib/data/therapist";
+import { accessState } from "@/lib/billing";
 
 const STATE_HUE: Record<string, string> = {
   active: "hue-green",
@@ -11,6 +11,16 @@ const STATE_HUE: Record<string, string> = {
   canceled: "hue-rose",
   none: "hue-navy",
 };
+
+/** A family lands in triage when the data says the therapist should act. */
+function needsAttention(f: FamilyOverview): boolean {
+  return (
+    f.unread > 0 ||
+    f.engagement === "silent" ||
+    f.engagement === "slowed" ||
+    (f.weeklyTarget > 0 && f.sessionsWeek < Math.ceil(f.weeklyTarget / 2) && f.engagement !== "fresh")
+  );
+}
 
 export default async function TherapistDashboard() {
   const t = await getTranslations("therapist");
@@ -22,11 +32,80 @@ export default async function TherapistDashboard() {
   const families = await getFamilies(session.profile.id);
   const activeWeek = families.filter((f) => f.sessionsWeek > 0).length;
   const unreadTotal = families.reduce((n, f) => n + f.unread, 0);
-  const paying = families.filter((f) => accessState(f.subscription) === "active").length;
-  const commission = format.number(paying * COMMISSION_PER_FAMILY_EUR, {
-    style: "currency",
-    currency: "EUR",
-  });
+
+  // families with no session in the 30-day window sort as most-quiet, not least
+  const quietDays = (f: FamilyOverview) =>
+    f.daysSinceLast ?? (f.engagement === "fresh" ? -1 : 9999);
+  const attention = families
+    .filter(needsAttention)
+    .sort((a, b) => quietDays(b) - quietDays(a) || b.unread - a.unread);
+  const calm = families.filter((f) => !needsAttention(f));
+
+  const renderRow = (f: FamilyOverview, triage: boolean) => {
+    const state = accessState(f.subscription);
+    const behindPlan =
+      f.weeklyTarget > 0 && f.sessionsWeek < Math.ceil(f.weeklyTarget / 2) && f.engagement !== "fresh";
+    return (
+      <li key={f.child.id}>
+        <Link href={`/therapist/families/${f.child.id}`} className="row-item" data-triage={triage ? f.engagement : undefined}>
+          <span className="row-ico" aria-hidden="true">
+            {f.child.avatar}
+          </span>
+          <span className="row-body">
+            <span className="row-title">
+              {f.child.first_name}
+              {f.child.birth_year
+                ? ` · ${tc("ageYears", { age: new Date().getFullYear() - f.child.birth_year })}`
+                : ""}
+              {f.unread > 0 && (
+                <span className="badge-count" style={{ marginLeft: "0.5rem" }}>
+                  {f.unread}
+                </span>
+              )}
+            </span>
+            <span className="row-sub">
+              {f.parentName} ·{" "}
+              {f.lastSessionAt
+                ? t("lastActivity", {
+                    date: format.relativeTime(new Date(f.lastSessionAt)),
+                  })
+                : f.engagement === "fresh"
+                  ? t("noActivityYet")
+                  : t("noRecentActivity")}
+            </span>
+            {triage && (
+              <span className="row-flags">
+                {f.engagement === "silent" && (
+                  <span className="flag flag-alert">
+                    {f.daysSinceLast === null
+                      ? t("flags.quiet30")
+                      : t("flags.silentDays", { days: f.daysSinceLast })}
+                  </span>
+                )}
+                {f.engagement === "slowed" && (
+                  <span className="flag flag-warn">{t("flags.slowed")}</span>
+                )}
+                {behindPlan && f.engagement !== "silent" && (
+                  <span className="flag flag-warn">{t("flags.behindPlan")}</span>
+                )}
+                {f.unread > 0 && <span className="flag flag-info">{t("flags.unread")}</span>}
+              </span>
+            )}
+          </span>
+          <span className="row-end">
+            <span className={`chip chip-hue ${STATE_HUE[state]}`}>
+              {t(`subState.${state}`)}
+            </span>
+            <div style={{ marginTop: 4 }}>
+              {f.weeklyTarget > 0
+                ? t("weekAdherence", { done: f.sessionsWeek, target: f.weeklyTarget })
+                : t("weekSessions", { count: f.sessionsWeek })}
+            </div>
+          </span>
+        </Link>
+      </li>
+    );
+  };
 
   return (
     <>
@@ -51,11 +130,11 @@ export default async function TherapistDashboard() {
         </div>
         <div className="stat">
           <b>{unreadTotal}</b>
-          <span>{t("statUnread")}</span>
+          <span>{t("statUnread", { count: unreadTotal })}</span>
         </div>
-        <div className="stat">
-          <b>{commission}</b>
-          <span>{t("statCommission")}</span>
+        <div className="stat" data-tone={attention.length > 0 ? "warn" : "ok"}>
+          <b>{attention.length}</b>
+          <span>{t("statAttention")}</span>
         </div>
       </div>
 
@@ -71,49 +150,26 @@ export default async function TherapistDashboard() {
           </div>
         </div>
       ) : (
-        <ul className="row-list row-grid">
-          {families.map((f) => {
-            const state = accessState(f.subscription);
-            return (
-              <li key={f.child.id}>
-                <Link href={`/therapist/families/${f.child.id}`} className="row-item">
-                  <span className="row-ico" aria-hidden="true">
-                    {f.child.avatar}
-                  </span>
-                  <span className="row-body">
-                    <span className="row-title">
-                      {f.child.first_name}
-                      {f.child.birth_year
-                        ? ` · ${tc("ageYears", { age: new Date().getFullYear() - f.child.birth_year })}`
-                        : ""}
-                      {f.unread > 0 && (
-                        <span className="badge-count" style={{ marginLeft: "0.5rem" }}>
-                          {f.unread}
-                        </span>
-                      )}
-                    </span>
-                    <span className="row-sub">
-                      {f.parentName} ·{" "}
-                      {f.lastSessionAt
-                        ? t("lastActivity", {
-                            date: format.relativeTime(new Date(f.lastSessionAt)),
-                          })
-                        : t("noActivityYet")}
-                    </span>
-                  </span>
-                  <span className="row-end">
-                    <span className={`chip chip-hue ${STATE_HUE[state]}`}>
-                      {t(`subState.${state}`)}
-                    </span>
-                    <div style={{ marginTop: 4 }}>
-                      {t("weekSessions", { count: f.sessionsWeek })}
-                    </div>
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          {attention.length > 0 && (
+            <>
+              <p className="section-label section-label-warn">
+                {t("attentionTitle", { count: attention.length })}
+              </p>
+              <ul className="row-list row-grid" style={{ marginBottom: "1.4rem" }}>
+                {attention.map((f) => renderRow(f, true))}
+              </ul>
+            </>
+          )}
+          {calm.length > 0 && (
+            <>
+              {attention.length > 0 && (
+                <p className="section-label">{t("calmTitle")}</p>
+              )}
+              <ul className="row-list row-grid">{calm.map((f) => renderRow(f, false))}</ul>
+            </>
+          )}
+        </>
       )}
     </>
   );

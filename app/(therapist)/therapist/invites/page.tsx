@@ -1,5 +1,6 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import InviteForm, { CopyButton } from "@/components/therapist/InviteForm";
+import ConfirmSubmit from "@/components/app/ConfirmSubmit";
 import { deleteInviteAction } from "@/lib/therapist/actions";
 import { getInvites } from "@/lib/data/therapist";
 
@@ -44,9 +45,7 @@ export default async function InvitesPage() {
                       <CopyButton text={inv.code} label={t("copy")} copied={t("copied")} />
                       <form action={deleteInviteAction}>
                         <input type="hidden" name="invite_id" value={inv.id} />
-                        <button type="submit" className="btn btn-sm btn-danger-ghost">
-                          {t("delete")}
-                        </button>
+                        <ConfirmSubmit label={t("delete")} confirmLabel={t("deleteConfirm")} />
                       </form>
                     </span>
                   )}

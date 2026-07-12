@@ -211,6 +211,63 @@ export type Database = {
           },
         ]
       }
+      goals: {
+        Row: {
+          achieved_at: string | null
+          baseline_pct: number | null
+          child_id: string
+          created_at: string
+          domain: Database["public"]["Enums"]["exercise_domain"]
+          id: string
+          status: string
+          target_date: string | null
+          target_pct: number | null
+          therapist_id: string
+          title: string
+        }
+        Insert: {
+          achieved_at?: string | null
+          baseline_pct?: number | null
+          child_id: string
+          created_at?: string
+          domain: Database["public"]["Enums"]["exercise_domain"]
+          id?: string
+          status?: string
+          target_date?: string | null
+          target_pct?: number | null
+          therapist_id: string
+          title: string
+        }
+        Update: {
+          achieved_at?: string | null
+          baseline_pct?: number | null
+          child_id?: string
+          created_at?: string
+          domain?: Database["public"]["Enums"]["exercise_domain"]
+          id?: string
+          status?: string
+          target_date?: string | null
+          target_pct?: number | null
+          therapist_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goals_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goals_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invites: {
         Row: {
           child_birth_year: number | null
@@ -358,6 +415,41 @@ export type Database = {
             columns: ["plan_id"]
             isOneToOne: false
             referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plan_templates: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          items: Json
+          therapist_id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          items: Json
+          therapist_id: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          items?: Json
+          therapist_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_templates_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -538,6 +630,48 @@ export type Database = {
             columns: ["child_id"]
             isOneToOne: true
             referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      therapist_notes: {
+        Row: {
+          body: string
+          child_id: string
+          created_at: string
+          id: string
+          noted_on: string
+          therapist_id: string
+        }
+        Insert: {
+          body: string
+          child_id: string
+          created_at?: string
+          id?: string
+          noted_on?: string
+          therapist_id: string
+        }
+        Update: {
+          body?: string
+          child_id?: string
+          created_at?: string
+          id?: string
+          noted_on?: string
+          therapist_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "therapist_notes_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "therapist_notes_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]

@@ -95,7 +95,7 @@ export const getRecentSessions = cache(
 const APP_TZ = "Europe/Bratislava";
 
 /** YYYY-MM-DD of the instant in the app timezone. */
-function localDayKey(date: string | Date): string {
+export function localDayKey(date: string | Date): string {
   return new Date(date).toLocaleDateString("en-CA", { timeZone: APP_TZ });
 }
 

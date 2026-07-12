@@ -11,7 +11,9 @@ import {
   tryParseExerciseContent,
 } from "@/lib/exercises/types";
 
-type BuilderType = "choice" | "speech_items" | "guided_steps";
+// "raw" = a type the form cannot edit item-by-item (duplicated built-ins);
+// the original content is preserved verbatim and only metadata is editable.
+type BuilderType = "choice" | "speech_items" | "guided_steps" | "raw";
 
 interface ChoiceDraft {
   prompt: string;
@@ -95,7 +97,8 @@ function draftsFromContent(content: ExerciseContent | null): {
         fields: (s.fields ?? []).map((f) => ({ label: f.label, placeholder: f.placeholder ?? "" })),
       })),
     };
-  return base;
+  // any other (interactive) type: keep the content untouched, edit metadata only
+  return { ...base, type: "raw" };
 }
 
 /** Form-based authoring for the three most useful task types. */
@@ -119,6 +122,8 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
   );
 
   const content = useMemo(() => {
+    // raw mode passes the original jsonb through unchanged
+    if (type === "raw") return exercise?.content ?? {};
     const introVal = intro.trim() || undefined;
     if (type === "choice")
       return {
@@ -163,7 +168,7 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
           .map((f) => ({ label: f.label.trim(), placeholder: f.placeholder.trim() || undefined })),
       })),
     };
-  }, [type, intro, choice, speech, steps]);
+  }, [type, intro, choice, speech, steps, exercise]);
 
   return (
     <form action={action}>
@@ -173,6 +178,12 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
       {state?.error && (
         <p className="form-error" role="alert">
           {state.error === "content" ? t("contentError") : t(`errors.${state.error}`)}
+          {state.error === "content" && state.contentError && (
+            <>
+              <br />
+              <code style={{ fontSize: "0.82em", opacity: 0.85 }}>{state.contentError}</code>
+            </>
+          )}
         </p>
       )}
 
@@ -229,11 +240,13 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
           <p className="form-hint">{t("parentGuideHint")}</p>
         </div>
 
+        {type !== "raw" && (
         <div className="field">
           <label className="label" htmlFor="ex-intro">{t("intro")}</label>
           <input className="input" id="ex-intro" value={intro} maxLength={300} onChange={(e) => setIntro(e.target.value)} />
           <p className="form-hint">{t("introHint")}</p>
         </div>
+        )}
       </div>
 
       <div className="card" style={{ marginBottom: "1rem" }}>
@@ -248,6 +261,12 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
               </button>
             ))}
           </div>
+        )}
+
+        {type === "raw" && (
+          <p className="form-hint" style={{ margin: "0.4rem 0 0.2rem" }}>
+            {t("rawNote")}
+          </p>
         )}
 
         {/* -------- choice editor -------- */}

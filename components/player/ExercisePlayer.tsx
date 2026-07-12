@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DomainTile, IconCheck } from "@/components/icons";
 import { completeSessionAction } from "@/lib/parent/actions";
+import { useTts } from "@/lib/tts";
 import {
   contentItemCount,
   DOMAIN_META,
   type ExerciseContent,
+  type ExerciseDomain,
   type ExerciseRow,
   type SupportLevel,
 } from "@/lib/exercises/types";
@@ -22,6 +24,11 @@ import NumberTrackTask from "./NumberTrackTask";
 import StorySequenceTask from "./StorySequenceTask";
 import SpeechTask from "./SpeechTask";
 import GuidedTask from "./GuidedTask";
+import MinimalPairsTask from "./MinimalPairsTask";
+import SoundHuntTask from "./SoundHuntTask";
+import SentenceBuilderTask from "./SentenceBuilderTask";
+import SortingTask from "./SortingTask";
+import SceneDirectionsTask from "./SceneDirectionsTask";
 
 /**
  * Every exercise runs inside Mikulajová's metacognitive cycle:
@@ -61,6 +68,8 @@ export default function ExercisePlayer({
   mode,
   closeHref,
   speechConsent = false,
+  next = null,
+  streakAfterSave = 0,
 }: {
   exercise: ExerciseRow;
   content: ExerciseContent;
@@ -70,10 +79,15 @@ export default function ExercisePlayer({
   mode: "live" | "preview";
   closeHref: string;
   speechConsent?: boolean;
+  /** Next item in today's queue — powers the "one more" chain after saving. */
+  next?: { href: string; title: string; domain: ExerciseDomain } | null;
+  /** Streak as it reads once this session lands (for the day-done moment). */
+  streakAfterSave?: number;
 }) {
   const t = useTranslations("player");
   const td = useTranslations("domains");
   const router = useRouter();
+  const { supported: ttsSupported, speak } = useTts();
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [progress, setProgress] = useState({ current: 0, total: contentItemCount(content) });
@@ -272,6 +286,23 @@ export default function ExercisePlayer({
           <p className="player-kicker">{t("strategyKicker")}</p>
           <p className="player-prompt">{t("strategyTitle")}</p>
           <p className="player-intro">{t("strategyLead")}</p>
+          {ttsSupported && (
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
+              <button
+                type="button"
+                className="say-btn"
+                onClick={() =>
+                  speak(
+                    `${t("strategyTitle")} ${[0, 1, 2]
+                      .map((i) => t(`strategy.${content.type}.${i}`))
+                      .join(". ")}`,
+                  )
+                }
+              >
+                🔊 {t("sayIt")}
+              </button>
+            </div>
+          )}
           <div className="strategy-grid">
             {[0, 1, 2].map((i) => (
               <button
@@ -297,9 +328,30 @@ export default function ExercisePlayer({
   if (phase === "selfEval") {
     return (
       <div {...wrapProps}>
+        <div className="player-top">
+          <button type="button" className="player-quit" onClick={quit} aria-label={t("close")}>
+            ✕
+          </button>
+        </div>
+        {quitModal}
         <div className="player-main" style={{ justifyContent: "center" }}>
           <p className="player-kicker">{t("selfEvalKicker")}</p>
           <p className="player-prompt">{t("selfEvalTitle")}</p>
+          {ttsSupported && (
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
+              <button
+                type="button"
+                className="say-btn"
+                onClick={() =>
+                  speak(
+                    `${t("selfEvalTitle")} ${SELF_EVAL.map((o) => t(`selfEval.${o.key}`)).join(". ")}`,
+                  )
+                }
+              >
+                🔊 {t("sayIt")}
+              </button>
+            </div>
+          )}
           <div className="strategy-grid">
             {SELF_EVAL.map((o) => (
               <button
@@ -351,6 +403,8 @@ export default function ExercisePlayer({
       summary && scored && !speechPending && summary.total > 0
         ? Math.round((100 * summary.correct) / summary.total)
         : null;
+    // Saving the last item of today's queue earns the day-done celebration.
+    const dayDone = phase === "saved" && mode === "live" && !next;
     return (
       <div {...wrapProps}>
         <div className="done-wrap">
@@ -365,15 +419,27 @@ export default function ExercisePlayer({
             ✓
           </span>
           <h1 className="done-h">
-            {phase === "saved" ? t("savedTitle") : t("doneTitle")}
+            {phase === "saved"
+              ? dayDone
+                ? t("dayDoneTitle")
+                : t("savedTitle")
+              : t("doneTitle")}
           </h1>
           <p className="done-sub">
             {phase === "saved"
-              ? t("savedLead")
+              ? dayDone
+                ? t("dayDoneLead")
+                : t("savedLead")
               : mode === "preview"
                 ? t("previewDoneLead")
                 : t("doneLead")}
           </p>
+
+          {dayDone && streakAfterSave > 0 && (
+            <p className="done-streak" role="status">
+              🔥 {t("streakLine", { count: streakAfterSave })}
+            </p>
+          )}
 
           {summary && speechPending && (
             <div className="anchor-box" style={{ marginTop: 0 }}>
@@ -418,6 +484,16 @@ export default function ExercisePlayer({
             <div className="anchor-box">
               <span className="anchor-label">{t("anchorLabel")}</span>
               <p className="anchor-text">„{t(`anchors.${anchorIdx}`)}“</p>
+              {ttsSupported && (
+                <button
+                  type="button"
+                  className="say-btn"
+                  style={{ marginTop: "0.5rem" }}
+                  onClick={() => speak(t(`anchors.${anchorIdx}`))}
+                >
+                  🔊 {t("sayIt")}
+                </button>
+              )}
             </div>
           )}
 
@@ -444,8 +520,18 @@ export default function ExercisePlayer({
           )}
 
           {(phase === "saved" || mode === "preview") && (
-            <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap", justifyContent: "center" }}>
-              <Link href={closeHref} className="btn btn-play">
+            <div className="done-next">
+              {phase === "saved" && next && (
+                <Link href={next.href} className="btn btn-play btn-block">
+                  {DOMAIN_META[next.domain].emoji} {t("nextUp")}: {next.title}
+                </Link>
+              )}
+              <Link
+                href={closeHref}
+                className={
+                  phase === "saved" && next ? "btn btn-outline btn-block" : "btn btn-play"
+                }
+              >
                 {mode === "preview" ? t("closePreview") : t("backHome")}
               </Link>
             </div>
@@ -521,6 +607,21 @@ export default function ExercisePlayer({
         )}
         {content.type === "guided_steps" && (
           <GuidedTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+        )}
+        {content.type === "minimal_pairs" && (
+          <MinimalPairsTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+        )}
+        {content.type === "sound_hunt" && (
+          <SoundHuntTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+        )}
+        {content.type === "sentence_builder" && (
+          <SentenceBuilderTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+        )}
+        {content.type === "sorting" && (
+          <SortingTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
+        )}
+        {content.type === "scene_directions" && (
+          <SceneDirectionsTask content={content} hintsEnabled={hintsEnabled} onProgress={onProgress} onFinish={onFinish} />
         )}
 
         {supportLevel >= 2 && exercise.parent_guide && !guided && (

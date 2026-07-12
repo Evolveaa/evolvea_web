@@ -104,6 +104,8 @@ async function login(page, who) {
     await page.waitForSelector(".player-prompt, .gd-step");
     await page.screenshot({ path: `${SHOTS}/15-player-play.png` });
     await page.click(".player-quit");
+    // mid-play quits ask for confirmation first
+    await page.click(".pl-modal .btn-primary");
     await page.waitForURL(/\/app$/);
   });
 
@@ -159,7 +161,7 @@ async function login(page, who) {
     await page.waitForSelector("text=Knižnica cvičení");
     await page.waitForSelector("text=Jazykolamy");
     await page.screenshot({ path: `${SHOTS}/23-library.png`, fullPage: true });
-    await page.click(".row-list >> text=Náhľad >> nth=0");
+    await page.click(".lib-card >> text=Náhľad >> nth=0");
     await page.waitForSelector("text=Sprievodca pre rodiča");
     await page.screenshot({ path: `${SHOTS}/24-preview.png`, fullPage: true });
   });

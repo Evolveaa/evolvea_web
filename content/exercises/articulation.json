@@ -95,16 +95,31 @@
           "emoji": "⚽",
           "tip": "Pred prvým slovom si spolu precvičte samotné „lll“ — špička jazyka sa opiera za horné zuby."
         },
-        { "text": "lampa", "emoji": "💡" },
-        { "text": "lyžica", "emoji": "🥄" },
+        {
+          "text": "lampa",
+          "emoji": "💡"
+        },
+        {
+          "text": "lyžica",
+          "emoji": "🥄"
+        },
         {
           "text": "lietadlo",
           "emoji": "✈️",
           "tip": "Slovo má L dvakrát — pomôže rozdelenie na slabiky: lie-ta-dlo."
         },
-        { "text": "včela", "emoji": "🐝" },
-        { "text": "škola", "emoji": "🏫" },
-        { "text": "balón", "emoji": "🎈" },
+        {
+          "text": "včela",
+          "emoji": "🐝"
+        },
+        {
+          "text": "škola",
+          "emoji": "🏫"
+        },
+        {
+          "text": "balón",
+          "emoji": "🎈"
+        },
         {
           "text": "mlieko",
           "emoji": "🥛",
@@ -114,7 +129,10 @@
           "text": "stôl",
           "tip": "L na konci slova býva ťažšie. Nech dieťa slovo dopovie pomaly a jazýček nechá hore: stôôôl."
         },
-        { "text": "anjel", "emoji": "😇" }
+        {
+          "text": "anjel",
+          "emoji": "😇"
+        }
       ]
     }
   },
@@ -148,11 +166,26 @@
           "emoji": "🚜",
           "tip": "Slovo má R dvakrát — najprv pomaly po slabikách: trak-tor."
         },
-        { "text": "trúbka", "emoji": "🎺" },
-        { "text": "mrkva", "emoji": "🥕" },
-        { "text": "more", "emoji": "🌊" },
-        { "text": "hora", "emoji": "⛰️" },
-        { "text": "koruna", "emoji": "👑" },
+        {
+          "text": "trúbka",
+          "emoji": "🎺"
+        },
+        {
+          "text": "mrkva",
+          "emoji": "🥕"
+        },
+        {
+          "text": "more",
+          "emoji": "🌊"
+        },
+        {
+          "text": "hora",
+          "emoji": "⛰️"
+        },
+        {
+          "text": "koruna",
+          "emoji": "👑"
+        },
         {
           "text": "ryba",
           "emoji": "🐟",
@@ -186,8 +219,14 @@
           "emoji": "🧀",
           "tip": "Skontrolujte úsmev a jazyk dole za spodnými zubami: ssss-yr."
         },
-        { "text": "sova", "emoji": "🦉" },
-        { "text": "slon", "emoji": "🐘" },
+        {
+          "text": "sova",
+          "emoji": "🦉"
+        },
+        {
+          "text": "slon",
+          "emoji": "🐘"
+        },
         {
           "text": "mesiac",
           "emoji": "🌙",
@@ -198,15 +237,27 @@
           "emoji": "🧅",
           "tip": "C na začiatku je krátke ako tikanie hodín: c-c-c — cibuľa."
         },
-        { "text": "citrón", "emoji": "🍋" },
-        { "text": "ovca", "emoji": "🐑" },
+        {
+          "text": "citrón",
+          "emoji": "🍋"
+        },
+        {
+          "text": "ovca",
+          "emoji": "🐑"
+        },
         {
           "text": "zajac",
           "emoji": "🐇",
           "tip": "Z bzučí ako mucha: zzz-ajac. A na konci pozor na krátke C."
         },
-        { "text": "zebra", "emoji": "🦓" },
-        { "text": "koza", "emoji": "🐐" }
+        {
+          "text": "zebra",
+          "emoji": "🦓"
+        },
+        {
+          "text": "koza",
+          "emoji": "🐐"
+        }
       ]
     }
   },
@@ -230,7 +281,10 @@
           "emoji": "🧣",
           "tip": "Pery dopredu ako komín: šššš-ál."
         },
-        { "text": "šaty", "emoji": "👗" },
+        {
+          "text": "šaty",
+          "emoji": "👗"
+        },
         {
           "text": "myš",
           "emoji": "🐭",
@@ -241,15 +295,27 @@
           "emoji": "🐸",
           "tip": "Ž bzučí a pery ostávajú dopredu: žžž-aba."
         },
-        { "text": "žirafa", "emoji": "🦒" },
-        { "text": "ruža", "emoji": "🌹" },
+        {
+          "text": "žirafa",
+          "emoji": "🦒"
+        },
+        {
+          "text": "ruža",
+          "emoji": "🌹"
+        },
         {
           "text": "čiapka",
           "emoji": "🧢",
           "tip": "Č je krátke a razantné — ako keď sa vláčik rozbieha: č-č-č."
         },
-        { "text": "čaj", "emoji": "🍵" },
-        { "text": "mačka", "emoji": "🐱" },
+        {
+          "text": "čaj",
+          "emoji": "🍵"
+        },
+        {
+          "text": "mačka",
+          "emoji": "🐱"
+        },
         {
           "text": "kľúč",
           "emoji": "🔑",
@@ -287,19 +353,29 @@
           "emoji": "🌻",
           "tip": "Pomaly po slabikách: sl-neč-ni-ca."
         },
-        { "text": "časopis", "emoji": "📰" },
+        {
+          "text": "časopis",
+          "emoji": "📰"
+        },
         {
           "text": "žiacka taška",
           "emoji": "🎒",
           "tip": "Dve slová, tri sykavky — pomaly: žiac-ka taš-ka."
         },
-        { "text": "čerstvý syr", "emoji": "🧀" },
+        {
+          "text": "čerstvý syr",
+          "emoji": "🧀"
+        },
         {
           "text": "Saša suší šaty.",
           "tip": "Vetu najprv po slovách: Sa-ša — su-ší — ša-ty."
         },
-        { "text": "Zuzka číta časopis." },
-        { "text": "Mačka sedí na streche." },
+        {
+          "text": "Zuzka číta časopis."
+        },
+        {
+          "text": "Mačka sedí na streche."
+        },
         {
           "text": "Šesť sivých myšiek sa smeje.",
           "tip": "Najťažšia veta — pokojne dvakrát pomaly a až tretí raz normálnym tempom."
@@ -419,6 +495,258 @@
           "text": "Tristo strieborných striekačiek striekalo cez tristo strieborných striech.",
           "emoji": "💦",
           "tip": "Kráľ jazykolamov! Stačí povedať raz pomaly a čisto — rýchlosť nie je cieľ."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-minimalne-pary-sykavky-1",
+    "domain": "articulation",
+    "modality": "interactive",
+    "title": "Kasa či kaša?",
+    "summary": "Percepčná fáza terapie minimálnymi pármi podľa Barlowa a Gieruta: dvojice slov sa líšia jedinou sykavkou (kontrast s–š a z–ž) a jej zámena mení význam slova. Dieťa najprv iba počúva a ukazuje počuté slovo — spoľahlivé sluchové rozlíšenie kontrastu je predpokladom jeho správnej výslovnosti.",
+    "parent_guide": "Toto cvičenie je čisté počúvanie — dieťa nemusí nič vyslovovať. Zakryte si ústa dlaňou alebo papierom, aby dieťa nevidelo vaše pery, a povedzte slovo prirodzene a zreteľne. Dieťa ťukne na obrázok, ktorý počulo. Ak váha, slovo zopakujte a sykavku mierne pretiahnite: kaššša. Odpoveď neprezrádzajte — spýtajte sa: „Syčal tam hadík sss, alebo šušťal vláčik ššš?“ Pochváľte každé pozorné počúvanie.",
+    "difficulty": 1,
+    "age_min": 4,
+    "age_max": 7,
+    "duration_minutes": 5,
+    "content": {
+      "type": "minimal_pairs",
+      "mode": "listen",
+      "contrast": "s–š, z–ž",
+      "intro": "Počúvaj ušami ako sova! Ťukni na obrázok slova, ktoré počuješ.",
+      "items": [
+        {
+          "a": {
+            "word": "kasa",
+            "emoji": "💰"
+          },
+          "b": {
+            "word": "kaša",
+            "emoji": "🥣"
+          },
+          "say": "b",
+          "hint": "Počúvaj stred slova: syčal tam hadík sss, alebo šušťal vláčik ššš?"
+        },
+        {
+          "a": {
+            "word": "Sašo",
+            "emoji": "👦"
+          },
+          "b": {
+            "word": "šašo",
+            "emoji": "🤡"
+          },
+          "say": "a",
+          "hint": "Počúvaj úplný začiatok slova: začalo sa na sss, alebo na ššš?"
+        },
+        {
+          "a": {
+            "word": "misa",
+            "emoji": "🍲"
+          },
+          "b": {
+            "word": "Miša",
+            "emoji": "👧"
+          },
+          "say": "b",
+          "hint": "Jedno je veľká miska na polievku, druhé je meno dievčatka. Čo znelo v strede — sss, alebo ššš?"
+        },
+        {
+          "a": {
+            "word": "sila",
+            "emoji": "💪"
+          },
+          "b": {
+            "word": "šila",
+            "emoji": "🧵"
+          },
+          "say": "a",
+          "hint": "Prvá hláska všetko prezradí. Zaznelo na začiatku sss, alebo ššš?"
+        },
+        {
+          "a": {
+            "word": "koza",
+            "emoji": "🐐"
+          },
+          "b": {
+            "word": "koža",
+            "emoji": "🧥"
+          },
+          "say": "a",
+          "hint": "Koza je zvieratko na dvore, koža je na bunde. Počúvaj bruško hlásky: bzučí ako z, alebo šumí ako ž?"
+        },
+        {
+          "a": {
+            "word": "mys",
+            "emoji": "⛰️"
+          },
+          "b": {
+            "word": "myš",
+            "emoji": "🐭"
+          },
+          "say": "b",
+          "hint": "Mys je skala, ktorá čnie do mora. Počúvaj koniec slova: syčí, alebo šuští?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-minimalne-pary-r-l-2",
+    "domain": "articulation",
+    "modality": "interactive",
+    "title": "Rak či lak?",
+    "summary": "Percepčná fáza terapie minimálnymi pármi podľa Barlowa a Gieruta pre kontrast r–l: dieťa počúva dvojice slov líšiace sa jedinou hláskou (rak–lak) a ukazuje počuté slovo. Sluchové ukotvenie rozdielu medzi vibrantom r a hláskou l predchádza nácviku a fixácii hlásky r vo výslovnosti.",
+    "parent_guide": "Zakryte si ústa dlaňou alebo papierom, aby dieťa nevidelo vaše pery, a povedzte jedno slovo z dvojice prirodzene a zreteľne. Dieťa ťukne na obrázok, ktorý počulo. Pri váhaní slovo zopakujte a hlásku mierne pretiahnite: rrrak. Odpoveď neprezrádzajte — spýtajte sa: „Vrčal tam motorček rrr, alebo spieval jazýček lll?“ Chváľte každé pozorné počúvanie, nie iba správne ťuknutie.",
+    "difficulty": 2,
+    "age_min": 5,
+    "age_max": 9,
+    "duration_minutes": 5,
+    "content": {
+      "type": "minimal_pairs",
+      "mode": "listen",
+      "contrast": "r–l",
+      "intro": "Motorček rrr a pesnička lll znejú inak. Ťukni na obrázok slova, ktoré počuješ!",
+      "items": [
+        {
+          "a": {
+            "word": "rak",
+            "emoji": "🦞"
+          },
+          "b": {
+            "word": "lak",
+            "emoji": "💅"
+          },
+          "say": "a",
+          "hint": "Počúvaj prvú hlásku: vrčala ako motorček, alebo spievala ako jazýček?"
+        },
+        {
+          "a": {
+            "word": "rampa",
+            "emoji": "🚧"
+          },
+          "b": {
+            "word": "lampa",
+            "emoji": "💡"
+          },
+          "say": "b",
+          "hint": "Jedno svieti v izbe, druhé sa dvíha pred parkoviskom. Čo znelo na začiatku?"
+        },
+        {
+          "a": {
+            "word": "vrak",
+            "emoji": "🚢"
+          },
+          "b": {
+            "word": "vlak",
+            "emoji": "🚂"
+          },
+          "say": "b",
+          "hint": "Hláska sa schovala hneď za v. Vrčalo tam rrr, alebo spievalo lll?"
+        },
+        {
+          "a": {
+            "word": "krik",
+            "emoji": "😱"
+          },
+          "b": {
+            "word": "klik",
+            "emoji": "🖱️"
+          },
+          "say": "a",
+          "hint": "Povedz si obe slová pošepky a počúvaj druhú hlásku. Ktorú si počul?"
+        },
+        {
+          "a": {
+            "word": "more",
+            "emoji": "🌊"
+          },
+          "b": {
+            "word": "mole",
+            "emoji": "🐛"
+          },
+          "say": "a",
+          "hint": "Počúvaj stred slova: vrčí tam rrr, alebo spieva lll?"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ar-kupel-hlasky-s-1",
+    "domain": "articulation",
+    "modality": "interactive",
+    "title": "Kúpeľ v hláske Š",
+    "summary": "Sluchové bombardovanie podľa Hodsonovej (cyklický prístup): dieťa si v pokoji vypočuje sériu slov nasýtených hláskou š bez nároku na vlastnú produkciu. Opakovaná zosilnená expozícia ladí sluchovú predstavu hlásky a pripravuje pôdu pre jej správnu výslovnosť.",
+    "parent_guide": "Dieťa počas cvičenia iba počúva — nič nehovorí, nič neopakuje a nič neťuká. Sadnite si blízko, čítajte slová pomaly a pokojným hlasom ako rozprávku pred spaním a hlásku š v každom slove mierne pretiahnite: šššiška. Medzi slovami nechajte krátku pauzu. Ak dieťa slovo samo od seba zopakuje, nechajte ho, ale opakovanie nevyžadujte a výslovnosť neopravujte.",
+    "difficulty": 1,
+    "age_min": 4,
+    "age_max": 7,
+    "duration_minutes": 4,
+    "content": {
+      "type": "sound_hunt",
+      "mode": "bombardment",
+      "target": "š",
+      "intro": "Teraz nič nehovor — pohodlne sa usaď a nechaj ušká kúpať sa v hláske š.",
+      "items": [
+        {
+          "word": "šiška",
+          "emoji": "🌰",
+          "has": true
+        },
+        {
+          "word": "šál",
+          "emoji": "🧣",
+          "has": true
+        },
+        {
+          "word": "šaty",
+          "emoji": "👗",
+          "has": true
+        },
+        {
+          "word": "šašo",
+          "emoji": "🤡",
+          "has": true
+        },
+        {
+          "word": "škola",
+          "emoji": "🏫",
+          "has": true
+        },
+        {
+          "word": "šálka",
+          "emoji": "☕",
+          "has": true
+        },
+        {
+          "word": "mašľa",
+          "emoji": "🎀",
+          "has": true
+        },
+        {
+          "word": "hruška",
+          "emoji": "🍐",
+          "has": true
+        },
+        {
+          "word": "myš",
+          "emoji": "🐭",
+          "has": true
+        },
+        {
+          "word": "kôš",
+          "emoji": "🗑️",
+          "has": true
+        },
+        {
+          "word": "košík",
+          "emoji": "🧺",
+          "has": true
+        },
+        {
+          "word": "fľaša",
+          "emoji": "🍼",
+          "has": true
         }
       ]
     }

@@ -30,7 +30,7 @@
   --container:1140px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --radius:18px;
-  --radius-lg:22px;
+  --radius-lg:20px; /* keep in lockstep with styles/app.css — both define :root */
 
   /* warm editorial display serif for headlines */
   --font-display:var(--font-fraunces),"Fraunces",Georgia,"Times New Roman",serif;
@@ -236,7 +236,8 @@ h1,h2,h3{letter-spacing:-.03em;line-height:1.06;font-weight:700;color:var(--ink)
     radial-gradient(600px 500px at 60% 120%,rgba(40,70,120,.18),transparent 60%);
 }
 .demo-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
-.eyebrow-dark{color:#7f93b4}
+/* on the dark demo band the pill must stay legible: glass pill, light text */
+.eyebrow-dark{color:#cdd6e6;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);box-shadow:none}
 .eyebrow-dark .dot{background:var(--sky)}
 .demo-title{
   font-family:var(--font-display);
