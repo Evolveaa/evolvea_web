@@ -238,7 +238,7 @@ export default function ExercisePlayer({
           <div style={{ textAlign: "center", marginBottom: "1.4rem" }}>
             <DomainTile
               domain={exercise.domain}
-              size={72}
+              size={88}
               className="intro-tile"
             />
             <span className={`chip chip-hue hue-${meta.hue}`}>{td(exercise.domain)}</span>
