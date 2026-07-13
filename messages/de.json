@@ -404,7 +404,8 @@
     "weekDoneLead": "Alle Übungen aus dem Plan sind erledigt. Pause ist verdient — oder macht eine Extra-Übung.",
     "weekDoneCta": "Extra-Übung aus dem Plan",
     "goalsSection": "Woran wir arbeiten",
-    "goalsHint": "Ziele setzt die Logopädin/der Logopäde — jede Übung zu Hause trägt ein Stück bei."
+    "goalsHint": "Ziele setzt die Logopädin/der Logopäde — jede Übung zu Hause trägt ein Stück bei.",
+    "domainQualitative": "Verbale Bewertung"
   },
   "therapist": {
     "dashTitle": "Ihre Familien",
@@ -1168,7 +1169,8 @@
       "check": "Fertig!"
     },
     "methodBasis": "Methodische Grundlage",
-    "methodMore": "Ganze Methodik & Quellen →"
+    "methodMore": "Ganze Methodik & Quellen →",
+    "statSpoken": "Aufgaben"
   },
   "categories": {
     "pronunciation": "Aussprache",

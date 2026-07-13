@@ -109,7 +109,14 @@ export default function ExercisePlayer({
   const meta = DOMAIN_META[exercise.domain];
   const hintsEnabled = supportLevel >= 2;
   const guided = content.type === "guided_steps";
-  const scored = !guided;
+  // Speaking is judged subjectively (parent) or qualitatively (AI) — and
+  // auditory bombardment is pure listening exposure. Neither has an objective
+  // right/wrong, so they must NOT produce an accuracy percentage in progress.
+  const isSpeech = content.type === "speech_items";
+  const scored =
+    !guided &&
+    !isSpeech &&
+    !(content.type === "sound_hunt" && content.mode === "bombardment");
   const strategyLabel =
     strategyIdx !== null ? t(`strategy.${content.type}.${strategyIdx}`) : null;
 
@@ -443,7 +450,7 @@ export default function ExercisePlayer({
               ) : (
                 <div className="stat">
                   <b>{summary.total}</b>
-                  <span>{t("statSteps")}</span>
+                  <span>{isSpeech ? t("statSpoken") : t("statSteps")}</span>
                 </div>
               )}
               {pct !== null && (

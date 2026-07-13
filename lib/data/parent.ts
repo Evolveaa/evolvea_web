@@ -257,6 +257,14 @@ export function appWeekdayIndex(now = new Date()): number {
   return localWeekdayIndex(now);
 }
 
+/**
+ * Expressive / interactional domains have no objective right-wrong: speaking
+ * and parent–child activities are judged qualitatively. Showing them as an
+ * accuracy percentage ("Rozprávanie 100 %") misrepresents the child's ability,
+ * so their progress is reported as activity, not a score.
+ */
+export const QUALITATIVE_DOMAINS = new Set<ExerciseRow["domain"]>(["narrative", "guided"]);
+
 export interface DomainStat {
   domain: ExerciseRow["domain"];
   sessions: number;
@@ -267,6 +275,8 @@ export interface DomainStat {
   trend: number[];
   /** Signed change (pp) of the recent half vs the earlier half; null if too few. */
   delta: number | null;
+  /** True for expressive domains reported by activity, not accuracy. */
+  qualitative: boolean;
 }
 
 /** Per-domain aggregates; needs the exercise map to resolve domains. */
@@ -294,12 +304,16 @@ export function domainStats(
     acc.set(ex.domain, entry);
   }
   return [...acc.entries()].map(([domain, e]) => {
+    const qualitative = QUALITATIVE_DOMAINS.has(domain as ExerciseRow["domain"]);
+    // Expressive domains carry no accuracy trend — report activity only.
     // oldest→newest, last ~12 scored sessions — the direction of travel
-    const trend = e.series
-      .slice()
-      .sort((a, b) => (a.at < b.at ? -1 : 1))
-      .slice(-12)
-      .map((p) => Math.round(p.pct));
+    const trend = qualitative
+      ? []
+      : e.series
+          .slice()
+          .sort((a, b) => (a.at < b.at ? -1 : 1))
+          .slice(-12)
+          .map((p) => Math.round(p.pct));
     // recent-half vs earlier-half mean, so a single lucky day doesn't swing it
     let delta: number | null = null;
     if (trend.length >= 4) {
@@ -310,10 +324,11 @@ export function domainStats(
     return {
       domain: domain as ExerciseRow["domain"],
       sessions: e.n,
-      avgPct: e.pctN > 0 ? Math.round(e.pctSum / e.pctN) : null,
+      avgPct: qualitative || e.pctN === 0 ? null : Math.round(e.pctSum / e.pctN),
       lastAt: e.last,
       trend,
       delta,
+      qualitative,
     };
   });
 }

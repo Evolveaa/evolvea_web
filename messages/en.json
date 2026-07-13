@@ -404,7 +404,8 @@
     "weekDoneLead": "Every exercise in the plan is done. Rest is well earned — or do a bonus one.",
     "weekDoneCta": "Bonus practice from the plan",
     "goalsSection": "What we're working on",
-    "goalsHint": "Goals are set by the therapist — every home session adds a little piece."
+    "goalsHint": "Goals are set by the therapist — every home session adds a little piece.",
+    "domainQualitative": "Verbal assessment"
   },
   "therapist": {
     "dashTitle": "Your families",
@@ -1168,7 +1169,8 @@
       "check": "Done!"
     },
     "methodBasis": "Methodological basis",
-    "methodMore": "Full methodology & sources →"
+    "methodMore": "Full methodology & sources →",
+    "statSpoken": "tasks"
   },
   "categories": {
     "pronunciation": "Pronunciation",

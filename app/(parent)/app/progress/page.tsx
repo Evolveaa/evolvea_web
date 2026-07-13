@@ -161,18 +161,26 @@ export default async function ProgressPage() {
                           </span>
                         </span>
                         <span className="dcard-score">
-                          <span
-                            className="dcard-pct"
-                            data-none={s.avgPct === null ? "" : undefined}
-                          >
-                            {s.avgPct !== null ? `${s.avgPct}%` : "—"}
-                          </span>
-                          <TrendPill delta={s.delta} />
+                          {s.qualitative ? (
+                            <span className="dcard-qual">🗣️ {t("domainQualitative")}</span>
+                          ) : (
+                            <>
+                              <span
+                                className="dcard-pct"
+                                data-none={s.avgPct === null ? "" : undefined}
+                              >
+                                {s.avgPct !== null ? `${s.avgPct}%` : "—"}
+                              </span>
+                              <TrendPill delta={s.delta} />
+                            </>
+                          )}
                         </span>
                       </div>
-                      <span className={`pbar bar-${s.domain}`} aria-hidden="true">
-                        {s.avgPct !== null && <i style={{ width: `${s.avgPct}%` }} />}
-                      </span>
+                      {!s.qualitative && (
+                        <span className={`pbar bar-${s.domain}`} aria-hidden="true">
+                          {s.avgPct !== null && <i style={{ width: `${s.avgPct}%` }} />}
+                        </span>
+                      )}
                       {s.trend.length >= 3 && (
                         <div className="dcard-spark">
                           <span className="dcard-spark-label">{t("trendCaption")}</span>

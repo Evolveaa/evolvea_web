@@ -2074,6 +2074,17 @@ button.chip {
   font-size: 1rem;
   color: var(--ink-line);
 }
+/* expressive domains (speaking, shared activities): no accuracy % */
+.dcard-qual {
+  flex: none;
+  max-width: 8.5rem;
+  text-align: right;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
 .dcard .pbar {
   display: block;
   height: 8px;

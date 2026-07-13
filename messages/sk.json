@@ -404,7 +404,8 @@
     "weekDoneLead": "Všetky cvičenia z plánu sú hotové. Oddych je zaslúžený — alebo si dajte niečo navyše.",
     "weekDoneCta": "Cvičiť navyše z plánu",
     "goalsSection": "Na čom pracujeme",
-    "goalsHint": "Ciele nastavuje logopéd — každé domáce cvičenie k nim kúsok pridáva."
+    "goalsHint": "Ciele nastavuje logopéd — každé domáce cvičenie k nim kúsok pridáva.",
+    "domainQualitative": "Slovné hodnotenie"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",
@@ -1168,7 +1169,8 @@
       "check": "Hotovo!"
     },
     "methodBasis": "Metodický základ",
-    "methodMore": "Celá metodika a zdroje →"
+    "methodMore": "Celá metodika a zdroje →",
+    "statSpoken": "úloh"
   },
   "categories": {
     "pronunciation": "Výslovnosť",
