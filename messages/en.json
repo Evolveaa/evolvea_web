@@ -1166,7 +1166,9 @@
       "lockedCell": "Correctly placed picture",
       "tokenAria": "Pick up picture {token}, then choose a cell",
       "check": "Done!"
-    }
+    },
+    "methodBasis": "Methodological basis",
+    "methodMore": "Full methodology & sources →"
   },
   "categories": {
     "pronunciation": "Pronunciation",
@@ -1176,5 +1178,12 @@
     "metacognition": "Metacognitive growth",
     "younger": "Younger children",
     "older": "Older children"
+  },
+  "metodika": {
+    "title": "Methodology & sources",
+    "lead": "Every Evolvea exercise is grounded in verified language-cognitive methods for preventing and treating reading difficulties. These are the sources we draw on.",
+    "domainsTitle": "Method by area",
+    "sourcesTitle": "Sources",
+    "back": "Back"
   }
 }

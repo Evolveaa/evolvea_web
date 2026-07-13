@@ -29,6 +29,7 @@ import SentenceBuilderTask from "./SentenceBuilderTask";
 import SortingTask from "./SortingTask";
 import SceneDirectionsTask from "./SceneDirectionsTask";
 import Glyph from "./Glyph";
+import { DOMAIN_METHOD } from "@/lib/exercises/methodology";
 
 /**
  * Every exercise runs inside Mikulajová's metacognitive cycle:
@@ -266,6 +267,19 @@ export default function ExercisePlayer({
           <button type="button" className="btn btn-play btn-block" onClick={start}>
             {t("start")}
           </button>
+
+          <div className="intro-method">
+            <span className="intro-method-label">📚 {t("methodBasis")}</span>
+            <p className="intro-method-text">
+              {DOMAIN_METHOD[exercise.domain].work}
+              <span className="intro-method-authors">{DOMAIN_METHOD[exercise.domain].authors}</span>
+            </p>
+            {mode === "live" && (
+              <Link href="/app/metodika" className="intro-method-link">
+                {t("methodMore")}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     );

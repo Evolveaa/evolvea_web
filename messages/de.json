@@ -1166,7 +1166,9 @@
       "lockedCell": "Richtig platziertes Bild",
       "tokenAria": "Nimm das Bild {token} und wähle dann ein Feld",
       "check": "Fertig!"
-    }
+    },
+    "methodBasis": "Methodische Grundlage",
+    "methodMore": "Ganze Methodik & Quellen →"
   },
   "categories": {
     "pronunciation": "Aussprache",
@@ -1176,5 +1178,12 @@
     "metacognition": "Metakognitive Entwicklung",
     "younger": "Jüngere Kinder",
     "older": "Ältere Kinder"
+  },
+  "metodika": {
+    "title": "Methodik & Quellen",
+    "lead": "Jede Evolvea-Übung basiert auf bewährten sprachlich-kognitiven Methoden zur Prävention und Therapie von Leseschwierigkeiten. Dies sind unsere Quellen.",
+    "domainsTitle": "Methode nach Bereich",
+    "sourcesTitle": "Quellen",
+    "back": "Zurück"
   }
 }

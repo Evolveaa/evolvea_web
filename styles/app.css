@@ -3240,6 +3240,14 @@ a.path-row:hover .path-card {
   display: flex;
   flex-direction: column;
 }
+/* On desktop the exercise shouldn't sit in a narrow mobile column lost in
+   whitespace — give it room so illustrations and content feel confident. */
+@media (min-width: 1024px) {
+  .player-main {
+    max-width: 760px;
+    padding-top: 1.4rem;
+  }
+}
 .player-prompt {
   font-size: clamp(1.25rem, 4.5vw, 1.6rem);
   font-weight: 700;
@@ -3692,21 +3700,129 @@ a.path-row:hover .path-card {
   vertical-align: -0.28em;
 }
 
+/* per-exercise methodological citation on the intro screen */
+.intro-method {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ink-line);
+  text-align: center;
+}
+.intro-method-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.intro-method-text {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.intro-method-authors {
+  display: block;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.intro-method-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+/* Metodika a zdroje page */
+.metho-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.7rem;
+}
+.metho-card {
+  background: var(--cream-hi);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  padding: 0.95rem 1.05rem;
+}
+.metho-domain {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.metho-work {
+  margin: 0.35rem 0 0.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.metho-authors {
+  margin: 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.src-list {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: src;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.src-item {
+  counter-increment: src;
+  position: relative;
+  padding-left: 2.1rem;
+}
+.src-item::before {
+  content: counter(src);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.src-work {
+  margin: 0.1rem 0 0.1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.src-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
 /* Hero illustrations scale with the viewport — tidy on phones, large and
    confident on the desktop player (CSS width overrides the inline SVG size). */
 .sbx-glyph,
 .sp-emoji > svg,
 .sh-word-emoji > svg {
-  width: clamp(148px, 21vw, 224px);
+  width: clamp(150px, 24vw, 300px);
   height: auto;
 }
 /* each object in a composed describe-scene (🐶🌳⚽) */
 .sp-emoji .glyph-scene svg {
-  width: clamp(104px, 15vw, 158px);
+  width: clamp(112px, 17vw, 208px);
   height: auto;
 }
 .sp-emoji .glyph-scene {
-  gap: clamp(0.4rem, 2vw, 1.1rem);
+  gap: clamp(0.5rem, 2.4vw, 1.4rem);
 }
 .sp-text {
   font-size: clamp(1.3rem, 5vw, 1.7rem);

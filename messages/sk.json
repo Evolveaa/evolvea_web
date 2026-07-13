@@ -1166,7 +1166,9 @@
       "lockedCell": "Správne uložený obrázok",
       "tokenAria": "Zdvihni obrázok {token} a potom vyber políčko",
       "check": "Hotovo!"
-    }
+    },
+    "methodBasis": "Metodický základ",
+    "methodMore": "Celá metodika a zdroje →"
   },
   "categories": {
     "pronunciation": "Výslovnosť",
@@ -1176,5 +1178,12 @@
     "metacognition": "Metakognitívny rozvoj",
     "younger": "Mladšie deti",
     "older": "Staršie deti"
+  },
+  "metodika": {
+    "title": "Metodika a zdroje",
+    "lead": "Každé cvičenie v Evolvea vychádza z overených jazykovo-kognitívnych metód prevencie a terapie porúch čítania. Tu sú pramene, z ktorých čerpáme.",
+    "domainsTitle": "Metóda podľa oblasti",
+    "sourcesTitle": "Zdroje",
+    "back": "Späť"
   }
 }
