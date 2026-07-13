@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { PairsContent } from "@/lib/exercises/types";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
+import Glyph from "./Glyph";
 
 interface Card {
   id: number;
@@ -103,7 +104,7 @@ export default function PairsTask({ content, onProgress, onFinish }: TaskProps<P
               onClick={() => flip(card)}
               aria-label={state === "down" ? t("pairs.hiddenCard") : card.motif}
             >
-              <span aria-hidden="true">{card.motif}</span>
+              <Glyph emoji={card.motif} size={56} className="px-glyph" />
             </button>
           );
         })}

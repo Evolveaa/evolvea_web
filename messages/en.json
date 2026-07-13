@@ -894,7 +894,6 @@
     "sendingBtn": "Sending…"
   },
   "player": {
-    "sayIt": "Listen",
     "hint": "Hint",
     "back": "Back",
     "next": "Next",
@@ -937,7 +936,6 @@
     "soundBoxes": {
       "countPrompt": "How many sounds do you hear?",
       "colorsPrompt": "What kind of sound is it?",
-      "sayWord": "Hear the word",
       "addToken": "Add a token",
       "removeToken": "Take one away",
       "check": "Done",
@@ -992,7 +990,13 @@
       "again": "Again",
       "next": "Next",
       "finish": "Done",
-      "recError": "Recording failed. Please try again."
+      "recError": "Recording failed. Please try again.",
+      "recordPreviewTitle": "Voice recording + AI feedback",
+      "recordPreview": {
+        "consent": "Here your child records their answer and the language helper reviews it. It turns on once you give consent in Child settings.",
+        "preview": "Here your child records their answer and the language helper reviews it. Recording is off in preview — it runs in the live exercise.",
+        "unsupported": "Here your child records and the language helper reviews the answer. This browser doesn't support recording yet."
+      }
     },
     "guided": {
       "choicesLabel": "Options",
@@ -1116,8 +1120,6 @@
       "parentSay": "Say this word to your child: “{word}”. Don't give hints with your mouth or eyes.",
       "parentPair": "Read both words aloud, slowly and clearly: “{first}” … “{second}”.",
       "contrast": "Contrast: {contrast}",
-      "playWord": "Play the word",
-      "playPair": "Play the pair",
       "listenPrompt": "Which word was it? Tap the picture!",
       "sdPrompt": "Ears ready! Did the words sound the same or different?",
       "same": "Same",
@@ -1129,7 +1131,6 @@
       "parentLabel": "For the parent",
       "parentSay": "Say the word: “{word}”. Don't stress the sound {target} – your child should find it on their own.",
       "parentBombard": "Read each word slowly and really stretch the sound {target} (like “shhh”). Your child just listens.",
-      "playWord": "Play the word",
       "targetLabel": "Target sound: {target}",
       "detectPrompt": "Is the sound {target} hiding in the word?",
       "hear": "I hear {target}!",

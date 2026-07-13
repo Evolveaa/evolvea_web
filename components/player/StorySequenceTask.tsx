@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { StorySequenceContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
 
 type Phase = "order" | "retell";
@@ -105,7 +106,7 @@ export default function StorySequenceTask({
             {i < placed && (
               <>
                 <span className="story-emoji" aria-hidden="true">
-                  {card.emoji}
+                  <Glyph emoji={card.emoji} size={58} />
                 </span>
                 <span className="story-label">{card.label}</span>
               </>
@@ -128,7 +129,7 @@ export default function StorySequenceTask({
                 onClick={() => pick(card.orig, i)}
               >
                 <span className="story-emoji" aria-hidden="true">
-                  {card.emoji}
+                  <Glyph emoji={card.emoji} size={58} />
                 </span>
                 <span className="story-label">{card.label}</span>
               </button>

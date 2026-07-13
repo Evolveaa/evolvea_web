@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DomainTile, IconCheck } from "@/components/icons";
 import { completeSessionAction } from "@/lib/parent/actions";
-import { useTts } from "@/lib/tts";
 import {
   contentItemCount,
   DOMAIN_META,
@@ -29,6 +28,7 @@ import SoundHuntTask from "./SoundHuntTask";
 import SentenceBuilderTask from "./SentenceBuilderTask";
 import SortingTask from "./SortingTask";
 import SceneDirectionsTask from "./SceneDirectionsTask";
+import Glyph from "./Glyph";
 
 /**
  * Every exercise runs inside Mikulajová's metacognitive cycle:
@@ -87,7 +87,6 @@ export default function ExercisePlayer({
   const t = useTranslations("player");
   const td = useTranslations("domains");
   const router = useRouter();
-  const { supported: ttsSupported, speak } = useTts();
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [progress, setProgress] = useState({ current: 0, total: contentItemCount(content) });
@@ -286,23 +285,6 @@ export default function ExercisePlayer({
           <p className="player-kicker">{t("strategyKicker")}</p>
           <p className="player-prompt">{t("strategyTitle")}</p>
           <p className="player-intro">{t("strategyLead")}</p>
-          {ttsSupported && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
-              <button
-                type="button"
-                className="say-btn"
-                onClick={() =>
-                  speak(
-                    `${t("strategyTitle")} ${[0, 1, 2]
-                      .map((i) => t(`strategy.${content.type}.${i}`))
-                      .join(". ")}`,
-                  )
-                }
-              >
-                🔊 {t("sayIt")}
-              </button>
-            </div>
-          )}
           <div className="strategy-grid">
             {[0, 1, 2].map((i) => (
               <button
@@ -337,21 +319,6 @@ export default function ExercisePlayer({
         <div className="player-main" style={{ justifyContent: "center" }}>
           <p className="player-kicker">{t("selfEvalKicker")}</p>
           <p className="player-prompt">{t("selfEvalTitle")}</p>
-          {ttsSupported && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
-              <button
-                type="button"
-                className="say-btn"
-                onClick={() =>
-                  speak(
-                    `${t("selfEvalTitle")} ${SELF_EVAL.map((o) => t(`selfEval.${o.key}`)).join(". ")}`,
-                  )
-                }
-              >
-                🔊 {t("sayIt")}
-              </button>
-            </div>
-          )}
           <div className="strategy-grid">
             {SELF_EVAL.map((o) => (
               <button
@@ -362,7 +329,7 @@ export default function ExercisePlayer({
                 onClick={() => setSelfEval((prev) => prev ?? o.key)}
               >
                 <span className="opt-emoji" aria-hidden="true">
-                  {o.emoji}
+                  <Glyph emoji={o.emoji} size={52} />
                 </span>
                 <span>{t(`selfEval.${o.key}`)}</span>
               </button>
@@ -484,16 +451,6 @@ export default function ExercisePlayer({
             <div className="anchor-box">
               <span className="anchor-label">{t("anchorLabel")}</span>
               <p className="anchor-text">„{t(`anchors.${anchorIdx}`)}“</p>
-              {ttsSupported && (
-                <button
-                  type="button"
-                  className="say-btn"
-                  style={{ marginTop: "0.5rem" }}
-                  onClick={() => speak(t(`anchors.${anchorIdx}`))}
-                >
-                  🔊 {t("sayIt")}
-                </button>
-              )}
             </div>
           )}
 

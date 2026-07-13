@@ -253,34 +253,64 @@
       "intro": "Pozri sa na obrázky a povedz celou vetou, čo sa deje.",
       "items": [
         {
-          "text": "Povedz celou vetou, čo sa deje: 🐱🌳",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "🐱🌳",
-          "tip": "Ak dieťa povie len jedno slovo, pýtajte sa: Kto to je? Čo robí? Kde je? Vzorová veta: „Mačka vyliezla na strom.“"
+          "tip": "Ak dieťa povie len jedno slovo, pýtajte sa: Kto to je? Čo robí? Kde je? Vzorová veta: „Mačka vyliezla na strom.“",
+          "expect": [
+            "mačka",
+            "strom"
+          ],
+          "minExpected": 2
         },
         {
-          "text": "Povedz celou vetou, čo sa deje: 👦⚽",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "👦⚽",
-          "tip": "Pomôžte otázkami: Kto je na obrázku? Čo robí? S čím sa hrá?"
+          "tip": "Pomôžte otázkami: Kto je na obrázku? Čo robí? S čím sa hrá?",
+          "expect": [
+            "chlapec",
+            "lopta"
+          ],
+          "minExpected": 2
         },
         {
-          "text": "Povedz celou vetou, čo sa deje: 🐶🦴",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "🐶🦴",
-          "tip": "Ak vznikne len krátka veta, poproste dieťa, nech pridá, kde sa to deje alebo aká je kosť."
+          "tip": "Ak vznikne len krátka veta, poproste dieťa, nech pridá, kde sa to deje alebo aká je kosť.",
+          "expect": [
+            "pes",
+            "kosť"
+          ],
+          "minExpected": 2
         },
         {
-          "text": "Povedz celou vetou, čo sa deje: 👧📖",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "👧📖",
-          "tip": "Rozšírte vetu otázkami: Kde dievčatko číta? O čom asi tá kniha je?"
+          "tip": "Rozšírte vetu otázkami: Kde dievčatko číta? O čom asi tá kniha je?",
+          "expect": [
+            "dievča",
+            "kniha"
+          ],
+          "minExpected": 2
         },
         {
-          "text": "Povedz celou vetou, čo sa deje: 🐰🥕",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "🐰🥕",
-          "tip": "Opýtajte sa: Kto to je? Čo chrúme? Ako mu asi chutí?"
+          "tip": "Opýtajte sa: Kto to je? Čo chrúme? Ako mu asi chutí?",
+          "expect": [
+            "zajac",
+            "mrkva"
+          ],
+          "minExpected": 2
         },
         {
-          "text": "Povedz celou vetou, čo sa deje: 🐟🌊",
+          "text": "Povedz celou vetou, čo sa deje.",
           "emoji": "🐟🌊",
-          "tip": "Skúste vetu spoločne predĺžiť: Kde rybka pláva? Pláva rýchlo, či pomaly?"
+          "tip": "Skúste vetu spoločne predĺžiť: Kde rybka pláva? Pláva rýchlo, či pomaly?",
+          "expect": [
+            "ryba",
+            "voda"
+          ],
+          "minExpected": 2
         }
       ]
     }
@@ -763,10 +793,6 @@
       "intro": "Slovíčka sa pomiešali! Poskladaj z nich vetu a povedz ju nahlas.",
       "items": [
         {
-          "scene": [
-            "🐶",
-            "💤"
-          ],
           "words": [
             "Pes",
             "spí"
@@ -774,10 +800,6 @@
           "hint": "Kto je na obrázku? A čo robí?"
         },
         {
-          "scene": [
-            "👩",
-            "🍲"
-          ],
           "words": [
             "Mama",
             "varí"
@@ -785,10 +807,6 @@
           "hint": "Kto stojí pri hrnci? Čo robí?"
         },
         {
-          "scene": [
-            "🚗",
-            "💨"
-          ],
           "words": [
             "Auto",
             "ide"
@@ -796,10 +814,6 @@
           "hint": "Čo je na obrázku? Čo robí?"
         },
         {
-          "scene": [
-            "👧",
-            "🖍️"
-          ],
           "words": [
             "Ema",
             "kreslí"
@@ -807,10 +821,6 @@
           "hint": "Ako sa volá dievčatko? Čo robí s ceruzkou?"
         },
         {
-          "scene": [
-            "🐱",
-            "🥛"
-          ],
           "words": [
             "Mačka",
             "pije",
@@ -819,10 +829,6 @@
           "hint": "Kto je na obrázku? Čo robí? A čo pije?"
         },
         {
-          "scene": [
-            "👨",
-            "📖"
-          ],
           "words": [
             "Ocko",
             "číta",
@@ -849,11 +855,6 @@
       "intro": "Poskladaj vetu zo slovíčok. Pozor — jedno slovíčko do vety nepatrí! Niektoré vety potom ešte predĺžime.",
       "items": [
         {
-          "scene": [
-            "👧",
-            "🖍️",
-            "🏠"
-          ],
           "words": [
             "Ema",
             "kreslí",
@@ -874,10 +875,6 @@
           "hint": "Kto kreslí? A čo kreslí? Ktoré slovíčko sa na obrázok vôbec nehodí?"
         },
         {
-          "scene": [
-            "🐶",
-            "🌳"
-          ],
           "words": [
             "Pes",
             "beží",
@@ -890,10 +887,6 @@
           "hint": "Kto beží? Kam beží? Ktoré dve slovíčka idú spolu?"
         },
         {
-          "scene": [
-            "👩",
-            "🍲"
-          ],
           "words": [
             "Mama",
             "varí",
@@ -914,11 +907,6 @@
           "hint": "Kto varí? Čo varí? Hodí sa do polievky všetko, čo vidíš na kartách?"
         },
         {
-          "scene": [
-            "🧒",
-            "⚽",
-            "🌞"
-          ],
           "words": [
             "Deti",
             "sa",
@@ -931,10 +919,6 @@
           "hint": "Kto sa hrá? Kde? Ktoré malé slovíčko patrí k slovu hrajú?"
         },
         {
-          "scene": [
-            "👵",
-            "🥧"
-          ],
           "words": [
             "Babka",
             "pečie",
@@ -973,10 +957,6 @@
       "intro": "Poskladaj dlhé vety. Niektoré slovíčka sú navyše — a niektoré vety spolu ešte predĺžime!",
       "items": [
         {
-          "scene": [
-            "🐱",
-            "😨"
-          ],
           "words": [
             "Mačka",
             "sa",
@@ -1000,10 +980,6 @@
           "hint": "Kto sa schoval? Kam? Kde asi stojí malé slovíčko sa?"
         },
         {
-          "scene": [
-            "🥣",
-            "🌞"
-          ],
           "words": [
             "Najprv",
             "sa",
@@ -1019,10 +995,6 @@
           "hint": "Ktoré slovo hovorí, čo bolo prvé? Ktoré slovíčka spájajú dve časti vety?"
         },
         {
-          "scene": [
-            "🌙",
-            "📖"
-          ],
           "words": [
             "Večer",
             "si",
@@ -1037,10 +1009,6 @@
           "hint": "Kedy čítame? Čo čítame? Aká je tá rozprávka?"
         },
         {
-          "scene": [
-            "👧",
-            "😢"
-          ],
           "words": [
             "Zuzka",
             "spadla",
@@ -1063,10 +1031,6 @@
           "hint": "Čo sa stalo najprv? Čo bolo potom? Ktoré slovíčka hovoria prečo?"
         },
         {
-          "scene": [
-            "👴",
-            "🌉"
-          ],
           "words": [
             "Dedko",
             "kráčal",

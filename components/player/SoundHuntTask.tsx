@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { SoundHuntContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { useFeedbackLines, type TaskProps } from "./shared";
 
 /** Answer keys in detect mode. */
@@ -28,7 +28,6 @@ export default function SoundHuntTask({
 }: TaskProps<SoundHuntContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const [index, setIndex] = useState(0);
   const [wrong, setWrong] = useState<Set<string>>(new Set());
@@ -148,13 +147,6 @@ export default function SoundHuntTask({
             ? t("soundHunt.parentBombard", { target })
             : t("soundHunt.parentSay", { word: item.word, target })}
         </p>
-        {supported && (
-          <div className="sh-parent-row">
-            <button type="button" className="say-btn" onClick={() => speak(item.word, 0.65)}>
-              🔊 {t("soundHunt.playWord")}
-            </button>
-          </div>
-        )}
       </aside>
 
       {isBombard ? (
@@ -168,7 +160,7 @@ export default function SoundHuntTask({
             aria-label={t("soundHunt.wordProgress", { current: index + 1, total })}
           >
             <span className="sh-word-emoji" aria-hidden="true">
-              {item.emoji ?? "🔉"}
+              <Glyph emoji={item.emoji ?? "🔉"} size={150} />
             </span>
             <span className="sh-word">{item.word}</span>
           </div>
@@ -216,7 +208,7 @@ export default function SoundHuntTask({
                 onClick={() => answer(key)}
               >
                 <span className="opt-emoji" aria-hidden="true">
-                  {key === "hear" ? "🔔" : "➖"}
+                  <Glyph emoji={key === "hear" ? "🔔" : "➖"} size={54} />
                 </span>
                 <span>
                   {key === "hear" ? t("soundHunt.hear", { target }) : t("soundHunt.notThere")}
@@ -230,7 +222,7 @@ export default function SoundHuntTask({
             <div className="sh-reveal" role="status">
               <span className="sh-reveal-card">
                 <span className="sh-reveal-emoji" aria-hidden="true">
-                  {item.emoji ?? "🔉"}
+                  <Glyph emoji={item.emoji ?? "🔉"} size={52} />
                 </span>
                 {item.word}
               </span>

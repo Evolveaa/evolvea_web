@@ -894,7 +894,6 @@
     "sendingBtn": "Wird gesendet…"
   },
   "player": {
-    "sayIt": "Anhören",
     "hint": "Tipp",
     "back": "Zurück",
     "next": "Weiter",
@@ -937,7 +936,6 @@
     "soundBoxes": {
       "countPrompt": "Wie viele Laute hörst du?",
       "colorsPrompt": "Was für ein Laut ist das?",
-      "sayWord": "Wort anhören",
       "addToken": "Leg einen Chip dazu",
       "removeToken": "Nimm einen weg",
       "check": "Fertig",
@@ -992,7 +990,13 @@
       "again": "Nochmal",
       "next": "Weiter",
       "finish": "Fertig",
-      "recError": "Aufnahme fehlgeschlagen. Bitte erneut versuchen."
+      "recError": "Aufnahme fehlgeschlagen. Bitte erneut versuchen.",
+      "recordPreviewTitle": "Sprachaufnahme + KI-Feedback",
+      "recordPreview": {
+        "consent": "Hier nimmt Ihr Kind seine Antwort auf und der Sprachhelfer wertet sie aus. Sie wird aktiviert, sobald Sie in den Kindeinstellungen zustimmen.",
+        "preview": "Hier nimmt Ihr Kind seine Antwort auf und der Sprachhelfer wertet sie aus. In der Vorschau wird nicht aufgenommen — es läuft in der echten Übung.",
+        "unsupported": "Hier nimmt Ihr Kind auf und der Sprachhelfer wertet die Antwort aus. Dieser Browser unterstützt die Aufnahme noch nicht."
+      }
     },
     "guided": {
       "choicesLabel": "Möglichkeiten",
@@ -1116,8 +1120,6 @@
       "parentSay": "Sagen Sie Ihrem Kind das Wort: „{word}“. Geben Sie keine Hinweise mit Mund oder Blick.",
       "parentPair": "Lesen Sie beide Wörter langsam und deutlich vor: „{first}“ … „{second}“.",
       "contrast": "Kontrast: {contrast}",
-      "playWord": "Wort abspielen",
-      "playPair": "Wortpaar abspielen",
       "listenPrompt": "Welches Wort war das? Tippe auf das Bild!",
       "sdPrompt": "Ohren gespitzt! Klangen die Wörter gleich oder verschieden?",
       "same": "Gleich",
@@ -1129,7 +1131,6 @@
       "parentLabel": "Für die Eltern",
       "parentSay": "Sagen Sie das Wort: „{word}“. Betonen Sie den Laut {target} nicht – Ihr Kind soll ihn selbst finden.",
       "parentBombard": "Lesen Sie jedes Wort langsam vor und ziehen Sie den Laut {target} richtig in die Länge (z. B. „schhh“). Ihr Kind hört nur zu.",
-      "playWord": "Wort abspielen",
       "targetLabel": "Gesuchter Laut: {target}",
       "detectPrompt": "Versteckt sich der Laut {target} im Wort?",
       "hear": "Ich höre {target}!",

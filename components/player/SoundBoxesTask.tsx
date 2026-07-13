@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { PhonemePiece, SoundBoxesContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { useFeedbackLines, type TaskProps } from "./shared";
 
 const KINDS: PhonemePiece["kind"][] = ["vowel", "long_vowel", "diphthong", "consonant"];
@@ -21,7 +21,6 @@ export default function SoundBoxesTask({
 }: TaskProps<SoundBoxesContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const [index, setIndex] = useState(0);
   const [tokens, setTokens] = useState(0); // count mode
@@ -132,7 +131,7 @@ export default function SoundBoxesTask({
 
       {item.emoji && (
         <span className="sbx-emoji" aria-hidden="true">
-          {item.emoji}
+          <Glyph emoji={item.emoji} size={150} className="sbx-glyph" />
         </span>
       )}
 
@@ -144,13 +143,6 @@ export default function SoundBoxesTask({
         </p>
       )}
 
-      {supported && (
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.2rem" }}>
-          <button type="button" className="say-btn" onClick={() => speak(item.word, 0.7)}>
-            🔊 {t("soundBoxes.sayWord")}
-          </button>
-        </div>
-      )}
 
       {content.mode === "count" ? (
         <>
