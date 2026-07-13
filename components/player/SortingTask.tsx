@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { SortingContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
 
 interface ItemResult {
@@ -131,7 +132,7 @@ export default function SortingTask({
               {counts[i]}
             </span>
             <span className="srt-bucket-emoji" aria-hidden="true">
-              {cat.emoji}
+              <Glyph emoji={cat.emoji} size={42} />
             </span>
             <span>{cat.label}</span>
           </button>
@@ -144,7 +145,7 @@ export default function SortingTask({
           data-state={flying ? "fly" : wrongBucket !== null ? "wrong" : undefined}
         >
           <span className="srt-card-emoji" aria-hidden="true">
-            {card.emoji}
+            <Glyph emoji={card.emoji} size={94} />
           </span>
           <span className="srt-card-label">{card.label}</span>
         </div>

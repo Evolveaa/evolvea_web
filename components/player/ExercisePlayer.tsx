@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DomainTile, IconCheck } from "@/components/icons";
 import { completeSessionAction } from "@/lib/parent/actions";
-import { useTts } from "@/lib/tts";
 import {
   contentItemCount,
   DOMAIN_META,
@@ -29,6 +28,8 @@ import SoundHuntTask from "./SoundHuntTask";
 import SentenceBuilderTask from "./SentenceBuilderTask";
 import SortingTask from "./SortingTask";
 import SceneDirectionsTask from "./SceneDirectionsTask";
+import Glyph from "./Glyph";
+import { DOMAIN_METHOD } from "@/lib/exercises/methodology";
 
 /**
  * Every exercise runs inside Mikulajová's metacognitive cycle:
@@ -87,7 +88,6 @@ export default function ExercisePlayer({
   const t = useTranslations("player");
   const td = useTranslations("domains");
   const router = useRouter();
-  const { supported: ttsSupported, speak } = useTts();
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [progress, setProgress] = useState({ current: 0, total: contentItemCount(content) });
@@ -109,7 +109,14 @@ export default function ExercisePlayer({
   const meta = DOMAIN_META[exercise.domain];
   const hintsEnabled = supportLevel >= 2;
   const guided = content.type === "guided_steps";
-  const scored = !guided;
+  // Speaking is judged subjectively (parent) or qualitatively (AI) — and
+  // auditory bombardment is pure listening exposure. Neither has an objective
+  // right/wrong, so they must NOT produce an accuracy percentage in progress.
+  const isSpeech = content.type === "speech_items";
+  const scored =
+    !guided &&
+    !isSpeech &&
+    !(content.type === "sound_hunt" && content.mode === "bombardment");
   const strategyLabel =
     strategyIdx !== null ? t(`strategy.${content.type}.${strategyIdx}`) : null;
 
@@ -231,7 +238,7 @@ export default function ExercisePlayer({
           <div style={{ textAlign: "center", marginBottom: "1.4rem" }}>
             <DomainTile
               domain={exercise.domain}
-              size={72}
+              size={88}
               className="intro-tile"
             />
             <span className={`chip chip-hue hue-${meta.hue}`}>{td(exercise.domain)}</span>
@@ -267,6 +274,19 @@ export default function ExercisePlayer({
           <button type="button" className="btn btn-play btn-block" onClick={start}>
             {t("start")}
           </button>
+
+          <div className="intro-method">
+            <span className="intro-method-label">📚 {t("methodBasis")}</span>
+            <p className="intro-method-text">
+              {DOMAIN_METHOD[exercise.domain].work}
+              <span className="intro-method-authors">{DOMAIN_METHOD[exercise.domain].authors}</span>
+            </p>
+            {mode === "live" && (
+              <Link href="/app/metodika" className="intro-method-link">
+                {t("methodMore")}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -286,23 +306,6 @@ export default function ExercisePlayer({
           <p className="player-kicker">{t("strategyKicker")}</p>
           <p className="player-prompt">{t("strategyTitle")}</p>
           <p className="player-intro">{t("strategyLead")}</p>
-          {ttsSupported && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
-              <button
-                type="button"
-                className="say-btn"
-                onClick={() =>
-                  speak(
-                    `${t("strategyTitle")} ${[0, 1, 2]
-                      .map((i) => t(`strategy.${content.type}.${i}`))
-                      .join(". ")}`,
-                  )
-                }
-              >
-                🔊 {t("sayIt")}
-              </button>
-            </div>
-          )}
           <div className="strategy-grid">
             {[0, 1, 2].map((i) => (
               <button
@@ -337,21 +340,6 @@ export default function ExercisePlayer({
         <div className="player-main" style={{ justifyContent: "center" }}>
           <p className="player-kicker">{t("selfEvalKicker")}</p>
           <p className="player-prompt">{t("selfEvalTitle")}</p>
-          {ttsSupported && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.9rem" }}>
-              <button
-                type="button"
-                className="say-btn"
-                onClick={() =>
-                  speak(
-                    `${t("selfEvalTitle")} ${SELF_EVAL.map((o) => t(`selfEval.${o.key}`)).join(". ")}`,
-                  )
-                }
-              >
-                🔊 {t("sayIt")}
-              </button>
-            </div>
-          )}
           <div className="strategy-grid">
             {SELF_EVAL.map((o) => (
               <button
@@ -362,7 +350,7 @@ export default function ExercisePlayer({
                 onClick={() => setSelfEval((prev) => prev ?? o.key)}
               >
                 <span className="opt-emoji" aria-hidden="true">
-                  {o.emoji}
+                  <Glyph emoji={o.emoji} size={52} />
                 </span>
                 <span>{t(`selfEval.${o.key}`)}</span>
               </button>
@@ -462,7 +450,7 @@ export default function ExercisePlayer({
               ) : (
                 <div className="stat">
                   <b>{summary.total}</b>
-                  <span>{t("statSteps")}</span>
+                  <span>{isSpeech ? t("statSpoken") : t("statSteps")}</span>
                 </div>
               )}
               {pct !== null && (
@@ -484,16 +472,6 @@ export default function ExercisePlayer({
             <div className="anchor-box">
               <span className="anchor-label">{t("anchorLabel")}</span>
               <p className="anchor-text">„{t(`anchors.${anchorIdx}`)}“</p>
-              {ttsSupported && (
-                <button
-                  type="button"
-                  className="say-btn"
-                  style={{ marginTop: "0.5rem" }}
-                  onClick={() => speak(t(`anchors.${anchorIdx}`))}
-                >
-                  🔊 {t("sayIt")}
-                </button>
-              )}
             </div>
           )}
 

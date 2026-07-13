@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { SceneAnchor, SceneDirectionsContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { useFeedbackLines, type TaskProps } from "./shared";
 
 interface CellPos {
@@ -26,7 +26,6 @@ export default function SceneDirectionsTask({
 }: TaskProps<SceneDirectionsContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const { board, rounds } = content;
 
@@ -169,15 +168,6 @@ export default function SceneDirectionsTask({
       <div className="scd-parent">
         <span className="scd-parent-kicker">🗣️ {t("sceneDirections.parentReads")}</span>
         <p className="scd-parent-text">{round.instruction}</p>
-        {supported && (
-          <button
-            type="button"
-            className="say-btn"
-            onClick={() => speak(round.instruction, 0.8)}
-          >
-            🔊 {t("sayIt")}
-          </button>
-        )}
       </div>
 
       <div
@@ -200,7 +190,7 @@ export default function SceneDirectionsTask({
                   aria-label={`${anchor.label} — ${cellPos(row, col)}`}
                 >
                   <span className="scd-cell-emoji" aria-hidden="true">
-                    {anchor.emoji}
+                    <Glyph emoji={anchor.emoji} size={40} />
                   </span>
                   <span className="scd-anchor-label" aria-hidden="true">
                     {anchor.label}
@@ -233,7 +223,7 @@ export default function SceneDirectionsTask({
                   }
                 >
                   <span className="scd-cell-token" aria-hidden="true">
-                    {token}
+                    <Glyph emoji={token} size={40} />
                   </span>
                 </button>
               );
@@ -266,7 +256,7 @@ export default function SceneDirectionsTask({
               onClick={() => liftToken(token)}
               aria-label={t("sceneDirections.tokenAria", { token })}
             >
-              <span aria-hidden="true">{token}</span>
+              <span aria-hidden="true"><Glyph emoji={token} size={46} /></span>
             </button>
           );
         })}

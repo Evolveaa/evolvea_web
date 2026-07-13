@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { SentenceBuilderContent } from "@/lib/exercises/types";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
 
@@ -33,7 +32,6 @@ export default function SentenceBuilderTask({
 }: TaskProps<SentenceBuilderContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const [index, setIndex] = useState(0);
   const [filled, setFilled] = useState(0);
@@ -73,7 +71,6 @@ export default function SentenceBuilderTask({
     return [...item.words.slice(0, at), picked, ...item.words.slice(at)];
   }, [item, picked]);
 
-  const sentenceText = finalWords.join(" ");
   const expansionPending = phase === "done" && !!item.expansion && picked === null;
 
   function tapTile(tile: Tile) {
@@ -157,14 +154,6 @@ export default function SentenceBuilderTask({
             : t("sentenceBuilder.readAloud")}
       </p>
 
-      {item.scene && item.scene.length > 0 && (
-        <div className="snt-scene" aria-hidden="true">
-          {item.scene.map((emoji, i) => (
-            <span key={i}>{emoji}</span>
-          ))}
-        </div>
-      )}
-
       {phase === "build" ? (
         <>
           <div className="snt-slots" aria-label={t("sentenceBuilder.slotsLabel")}>
@@ -211,14 +200,6 @@ export default function SentenceBuilderTask({
               </span>
             ))}
           </p>
-
-          {supported && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.2rem" }}>
-              <button type="button" className="say-btn" onClick={() => speak(sentenceText, 0.8)}>
-                🔊 {t("sayIt")}
-              </button>
-            </div>
-          )}
 
           {expansionPending && item.expansion ? (
             <>

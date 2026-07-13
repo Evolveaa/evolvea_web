@@ -583,12 +583,29 @@
    App shell
    =========================================================== */
 .app-shell {
+  position: relative;
   min-height: 100dvh;
-  /* one calm, warm backdrop tying every screen together */
+  /* one calm, warm backdrop tying every screen together — layered orbs + a
+     whisper of grain so it reads as fine paper, not a flat screen */
   background:
-    radial-gradient(120% 60% at 100% -5%, rgba(160, 142, 232, 0.06), transparent 60%),
-    radial-gradient(120% 55% at 0% -5%, rgba(140, 192, 234, 0.09), transparent 60%),
+    radial-gradient(90% 55% at 100% -8%, rgba(160, 142, 232, 0.1), transparent 58%),
+    radial-gradient(90% 55% at 0% -6%, rgba(140, 192, 234, 0.13), transparent 58%),
+    radial-gradient(120% 60% at 50% 108%, rgba(224, 169, 78, 0.06), transparent 62%),
     var(--cream);
+}
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.app-shell > * {
+  position: relative;
+  z-index: 1;
 }
 .app-viewport {
   display: flex;
@@ -1606,10 +1623,12 @@
 }
 
 .page-h {
-  font-size: clamp(1.5rem, 4.4vw, 1.85rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  margin-bottom: 0.3rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4.6vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  margin-bottom: 0.35rem;
 }
 .page-sub {
   font-size: 0.95rem;
@@ -2073,6 +2092,17 @@ button.chip {
 .dcard-pct[data-none] {
   font-size: 1rem;
   color: var(--ink-line);
+}
+/* expressive domains (speaking, shared activities): no accuracy % */
+.dcard-qual {
+  flex: none;
+  max-width: 8.5rem;
+  text-align: right;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink-soft);
+  text-wrap: balance;
 }
 .dcard .pbar {
   display: block;
@@ -2991,21 +3021,42 @@ a.path-row:hover .path-card {
    Exercise player
    =========================================================== */
 .player-wrap {
+  --pl-hue: var(--cream-hi);
+  position: relative;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  /* layered "aurora": three soft orbs of the domain hue over cream — depth and
+     warmth instead of one flat wash. Each area feels like its own little world. */
   background:
-    radial-gradient(110% 70% at 50% 0%, var(--cream-hi), transparent 60%),
+    radial-gradient(58% 44% at 10% 2%, color-mix(in srgb, var(--pl-hue) 82%, transparent), transparent 56%),
+    radial-gradient(52% 40% at 96% 6%, color-mix(in srgb, var(--pl-hue) 60%, transparent), transparent 52%),
+    radial-gradient(96% 56% at 50% 114%, color-mix(in srgb, var(--pl-hue) 46%, transparent), transparent 60%),
     var(--cream);
 }
+/* a whisper of grain so large flat areas read as printed paper, not a screen */
+.player-wrap::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.player-wrap > * {
+  position: relative;
+  z-index: 1;
+}
 /* soft domain tint so every area feels like its own little world */
-.player-wrap[data-hue="sky"]    { background: radial-gradient(120% 75% at 50% 0%, var(--hue-sky), transparent 62%), var(--cream); }
-.player-wrap[data-hue="violet"] { background: radial-gradient(120% 75% at 50% 0%, var(--hue-violet), transparent 62%), var(--cream); }
-.player-wrap[data-hue="amber"]  { background: radial-gradient(120% 75% at 50% 0%, var(--hue-amber), transparent 62%), var(--cream); }
-.player-wrap[data-hue="rose"]   { background: radial-gradient(120% 75% at 50% 0%, var(--hue-rose), transparent 62%), var(--cream); }
-.player-wrap[data-hue="green"]  { background: radial-gradient(120% 75% at 50% 0%, var(--hue-green), transparent 62%), var(--cream); }
-.player-wrap[data-hue="coral"]  { background: radial-gradient(120% 75% at 50% 0%, var(--hue-coral), transparent 62%), var(--cream); }
-.player-wrap[data-hue="navy"]   { background: radial-gradient(120% 75% at 50% 0%, var(--hue-navy), transparent 62%), var(--cream); }
+.player-wrap[data-hue="sky"] { --pl-hue: var(--hue-sky); }
+.player-wrap[data-hue="violet"] { --pl-hue: var(--hue-violet); }
+.player-wrap[data-hue="amber"] { --pl-hue: var(--hue-amber); }
+.player-wrap[data-hue="rose"] { --pl-hue: var(--hue-rose); }
+.player-wrap[data-hue="green"] { --pl-hue: var(--hue-green); }
+.player-wrap[data-hue="coral"] { --pl-hue: var(--hue-coral); }
+.player-wrap[data-hue="navy"] { --pl-hue: var(--hue-navy); }
 
 /* child-facing primary button: friendly sky gradient, large */
 .btn-play {
@@ -3031,8 +3082,29 @@ a.path-row:hover .path-card {
 }
 
 .intro-tile {
-  margin: 0 auto 0.9rem;
+  position: relative;
+  z-index: 0;
+  margin: 0 auto 1rem;
   display: grid;
+  place-items: center;
+  filter: drop-shadow(0 12px 22px rgba(42, 38, 32, 0.16));
+}
+/* hero spotlight behind the domain tile on the exercise intro */
+.intro-tile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 52%;
+  width: 210%;
+  height: 210%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--accent) 15%, transparent),
+    transparent 64%
+  );
+  pointer-events: none;
 }
 
 .player-kicker {
@@ -3240,11 +3312,20 @@ a.path-row:hover .path-card {
   display: flex;
   flex-direction: column;
 }
+/* On desktop the exercise shouldn't sit in a narrow mobile column lost in
+   whitespace — give it room so illustrations and content feel confident. */
+@media (min-width: 1024px) {
+  .player-main {
+    max-width: 760px;
+    padding-top: 1.4rem;
+  }
+}
 .player-prompt {
-  font-size: clamp(1.25rem, 4.5vw, 1.6rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4.8vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   text-align: center;
   margin: 0.8rem 0 1.4rem;
   text-wrap: balance;
@@ -3258,24 +3339,6 @@ a.path-row:hover .path-card {
 }
 
 /* speaker (TTS) button */
-.say-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-inline: auto;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent-ink);
-  background: var(--accent-soft);
-  border-radius: 999px;
-  padding: 0.55rem 1rem;
-  min-height: 44px;
-  transition: filter 0.18s;
-}
-.say-btn:hover {
-  filter: brightness(0.96);
-}
-
 /* big tappable option cards (child-facing) */
 .opt-grid {
   display: grid;
@@ -3444,10 +3507,34 @@ a.path-row:hover .path-card {
 .sbx-box[data-filled="consonant"]   { background: #4f7fbf; border-color: #4f7fbf; color: #fff; }
 .sbx-box[data-filled="neutral"]     { background: var(--ink); border-color: var(--ink); color: #fff; }
 .sbx-emoji {
-  font-size: 3rem;
   text-align: center;
   display: block;
-  margin-bottom: 0.8rem;
+  width: fit-content;
+  margin: 0.6rem auto 1.4rem;
+}
+/* single-illustration heroes share the exercise "stage": a soft spotlight
+   behind and a ground shadow beneath, so the picture feels placed */
+.sbx-emoji,
+.sh-word-emoji {
+  position: relative;
+  z-index: 0;
+}
+.sbx-emoji::before,
+.sh-word-emoji::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: 46%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 66%
+  );
+  pointer-events: none;
 }
 .sbx-chips {
   display: flex;
@@ -3534,6 +3621,8 @@ a.path-row:hover .path-card {
   cursor: pointer;
 }
 /* face-down back — a calm emblem instead of an empty square */
+.px-card[data-state="down"] svg,
+.px-card[data-state="down"] .px-glyph { visibility: hidden; }
 .px-card[data-state="down"]::after {
   content: "";
   position: absolute;
@@ -3674,17 +3763,221 @@ a.path-row:hover .path-card {
 
 /* speech items (parent-scored) */
 .sp-card {
+  position: relative;
+  background:
+    radial-gradient(130% 90% at 50% 0%, color-mix(in srgb, var(--cream) 55%, transparent), transparent 72%),
+    var(--cream-hi);
+  border: 1px solid var(--ink-line);
+  border-radius: 26px;
+  padding: 2.1rem 1.6rem 1.7rem;
+  text-align: center;
+  margin-bottom: 1.1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), var(--shadow-card);
+  animation: exStageIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+/* the illustration is "placed" on a stage: a soft spotlight behind + a ground
+   shadow beneath, so objects feel real rather than floating on white */
+.sp-emoji {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: fit-content;
+  margin: 0.3rem auto 1.2rem;
+}
+.sp-emoji::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: 46%;
+  width: 138%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--accent) 13%, transparent),
+    transparent 66%
+  );
+  pointer-events: none;
+}
+/* ground shadow only under composed multi-object scenes, where objects are
+   reliably bottom-aligned — a single wide illustration would float above it */
+.glyph-scene {
+  position: relative;
+}
+.glyph-scene::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: -0.6rem;
+  width: 84%;
+  height: 15px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(42, 38, 32, 0.15), transparent 72%);
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+@keyframes exStageIn {
+  from {
+    opacity: 0;
+    transform: translateY(9px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-card {
+    animation: none;
+  }
+}
+
+/* composed illustration scene (🐶🌳⚽ → three glyphs sharing a ground line) */
+.glyph-scene {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  vertical-align: middle;
+}
+/* an emoji swapped for its glyph inside a line of text (counting prompts) */
+.glyph-inline {
+  vertical-align: -0.24em;
+  margin: 0 0.05em;
+}
+/* small category-chip icon */
+.chip-glyph {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: -0.28em;
+}
+
+/* per-exercise methodological citation on the intro screen */
+.intro-method {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ink-line);
+  text-align: center;
+}
+.intro-method-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.intro-method-text {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.intro-method-authors {
+  display: block;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.intro-method-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+/* Metodika a zdroje page */
+.metho-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.7rem;
+}
+.metho-card {
   background: var(--cream-hi);
   border: 1px solid var(--ink-line);
   border-radius: var(--radius-lg);
-  padding: 1.6rem 1.3rem;
-  text-align: center;
-  margin-bottom: 1rem;
+  padding: 0.95rem 1.05rem;
 }
-.sp-emoji {
-  font-size: 2.8rem;
-  display: block;
-  margin-bottom: 0.6rem;
+.metho-domain {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.metho-work {
+  margin: 0.35rem 0 0.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.metho-authors {
+  margin: 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.src-list {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: src;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.src-item {
+  counter-increment: src;
+  position: relative;
+  padding-left: 2.1rem;
+}
+.src-item::before {
+  content: counter(src);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.src-work {
+  margin: 0.1rem 0 0.1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.src-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* Hero illustrations scale with the viewport — tidy on phones, large and
+   confident on the desktop player (CSS width overrides the inline SVG size). */
+.sbx-glyph,
+.sp-emoji > svg,
+.sh-word-emoji > svg {
+  width: clamp(150px, 24vw, 300px);
+  height: auto;
+}
+/* each object in a composed describe-scene (🐶🌳⚽) */
+.sp-emoji .glyph-scene svg {
+  width: clamp(112px, 17vw, 208px);
+  height: auto;
+}
+.sp-emoji .glyph-scene {
+  gap: clamp(0.5rem, 2.4vw, 1.4rem);
 }
 .sp-text {
   font-size: clamp(1.3rem, 5vw, 1.7rem);
@@ -3694,10 +3987,11 @@ a.path-row:hover .path-card {
 }
 /* speech-question prompt — a sentence the parent asks aloud */
 .sp-ask {
-  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.4vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
   text-wrap: balance;
 }
 /* expected answer — a quiet reference for the parent, not a label for the child */
@@ -4061,9 +4355,29 @@ a.path-row:hover .path-card {
   min-height: 56px;
   box-shadow: 0 14px 30px -14px rgba(217, 83, 122, 0.75);
   transition: transform 0.14s var(--ease), box-shadow 0.16s;
+  animation: micInvite 2.6s ease-in-out infinite;
 }
 .sp-rec-btn:hover {
   transform: translateY(-1px);
+  animation-play-state: paused;
+}
+.sp-rec-btn.is-live {
+  animation: none;
+}
+@keyframes micInvite {
+  0%, 100% {
+    box-shadow: 0 14px 30px -14px rgba(217, 83, 122, 0.75),
+      0 0 0 0 rgba(217, 83, 122, 0.28);
+  }
+  55% {
+    box-shadow: 0 14px 30px -14px rgba(217, 83, 122, 0.75),
+      0 0 0 12px rgba(217, 83, 122, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-rec-btn {
+    animation: none;
+  }
 }
 .sp-rec-btn.is-live {
   background: linear-gradient(135deg, var(--domain-articulation), var(--domain-articulation-2));
@@ -4116,6 +4430,46 @@ a.path-row:hover .path-card {
 }
 @media (prefers-reduced-motion: reduce) {
   .sp-rec-pulse { animation: none; }
+}
+
+/* recording preview — shows the voice-recording feature is part of the
+   exercise even when it can't run yet (preview / consent off). Deliberately
+   quiet + dashed so it reads as "coming here", not an active control. */
+.sp-rec-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 1.3rem auto 0;
+  max-width: 30rem;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  border: 1.5px dashed color-mix(in srgb, var(--domain-narrative) 45%, var(--ink-line));
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--domain-narrative) 7%, var(--cream-hi));
+}
+.sp-rec-preview-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.sp-rec-preview-mic {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  background: color-mix(in srgb, var(--domain-narrative) 20%, transparent);
+}
+.sp-rec-preview-note {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.45;
+  text-wrap: balance;
 }
 
 /* recorded-speech review (SessionDetail) */
@@ -5016,11 +5370,7 @@ button.chip:hover {
   color: var(--hue-navy-ink);
   line-height: 1.5;
 }
-.scd-parent .say-btn {
-  margin-inline: 0;
-  margin-top: 0.15rem;
-}
-.scd-board {
+.scd-parent .scd-board {
   display: grid;
   gap: 8px;
   width: 100%;

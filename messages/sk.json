@@ -404,7 +404,8 @@
     "weekDoneLead": "Všetky cvičenia z plánu sú hotové. Oddych je zaslúžený — alebo si dajte niečo navyše.",
     "weekDoneCta": "Cvičiť navyše z plánu",
     "goalsSection": "Na čom pracujeme",
-    "goalsHint": "Ciele nastavuje logopéd — každé domáce cvičenie k nim kúsok pridáva."
+    "goalsHint": "Ciele nastavuje logopéd — každé domáce cvičenie k nim kúsok pridáva.",
+    "domainQualitative": "Slovné hodnotenie"
   },
   "therapist": {
     "dashTitle": "Vaše rodiny",
@@ -894,7 +895,6 @@
     "sendingBtn": "Odosielam…"
   },
   "player": {
-    "sayIt": "Vypočuť",
     "hint": "Pomôcka",
     "back": "Späť",
     "next": "Ďalej",
@@ -937,7 +937,6 @@
     "soundBoxes": {
       "countPrompt": "Koľko hlások počuješ?",
       "colorsPrompt": "Aká je to hláska?",
-      "sayWord": "Vypočuť slovo",
       "addToken": "Pridaj žetón",
       "removeToken": "Uber",
       "check": "Hotovo",
@@ -992,7 +991,13 @@
       "again": "Znova",
       "next": "Ďalej",
       "finish": "Hotovo",
-      "recError": "Nahrávanie sa nepodarilo. Skús to znova."
+      "recError": "Nahrávanie sa nepodarilo. Skús to znova.",
+      "recordPreviewTitle": "Nahrávanie hlasu + AI spätná väzba",
+      "recordPreview": {
+        "consent": "Tu dieťa nahrá svoju odpoveď a jazykový pomocník ju vyhodnotí. Zapne sa po udelení súhlasu v Nastaveniach dieťaťa.",
+        "preview": "Tu dieťa nahrá svoju odpoveď a jazykový pomocník ju vyhodnotí. V náhľade sa nenahráva — spustí sa v ostrom cvičení.",
+        "unsupported": "Tu sa dieťa nahráva a jazykový pomocník odpoveď vyhodnotí. Tento prehliadač zatiaľ nahrávanie nepodporuje."
+      }
     },
     "guided": {
       "choicesLabel": "Možnosti",
@@ -1116,8 +1121,6 @@
       "parentSay": "Povedzte dieťaťu slovo: „{word}“. Nenaznačujte ústami ani pohľadom.",
       "parentPair": "Prečítajte pomaly a zreteľne obe slová: „{first}“ … „{second}“.",
       "contrast": "Kontrast: {contrast}",
-      "playWord": "Prehrať slovo",
-      "playPair": "Prehrať dvojicu",
       "listenPrompt": "Ktoré slovo to bolo? Ťukni na obrázok!",
       "sdPrompt": "Nastraž ušká! Zneli slová rovnako, alebo inak?",
       "same": "Rovnaké",
@@ -1129,7 +1132,6 @@
       "parentLabel": "Pre rodiča",
       "parentSay": "Povedzte slovo: „{word}“. Hlásku {target} nezvýrazňujte – dieťa ju má nájsť samo.",
       "parentBombard": "Čítajte každé slovo pomaly a hlásku {target} poriadne natiahnite (napríklad „ššš“). Dieťa len počúva.",
-      "playWord": "Prehrať slovo",
       "targetLabel": "Hľadaná hláska: {target}",
       "detectPrompt": "Skrýva sa v slove hláska {target}?",
       "hear": "Počujem {target}!",
@@ -1165,7 +1167,10 @@
       "lockedCell": "Správne uložený obrázok",
       "tokenAria": "Zdvihni obrázok {token} a potom vyber políčko",
       "check": "Hotovo!"
-    }
+    },
+    "methodBasis": "Metodický základ",
+    "methodMore": "Celá metodika a zdroje →",
+    "statSpoken": "úloh"
   },
   "categories": {
     "pronunciation": "Výslovnosť",
@@ -1175,5 +1180,12 @@
     "metacognition": "Metakognitívny rozvoj",
     "younger": "Mladšie deti",
     "older": "Staršie deti"
+  },
+  "metodika": {
+    "title": "Metodika a zdroje",
+    "lead": "Každé cvičenie v Evolvea vychádza z overených jazykovo-kognitívnych metód prevencie a terapie porúch čítania. Tu sú pramene, z ktorých čerpáme.",
+    "domainsTitle": "Metóda podľa oblasti",
+    "sourcesTitle": "Zdroje",
+    "back": "Späť"
   }
 }

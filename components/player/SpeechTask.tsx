@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import { createClient } from "@/lib/supabase/browser";
 import { createSpeechAttemptAction } from "@/lib/parent/actions";
 import type { SpeechItemsContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { useFeedbackLines, type TaskProps } from "./shared";
 
 type Score = "great" | "almost" | "practice";
@@ -33,7 +33,6 @@ export default function SpeechTask({
 }: TaskProps<SpeechItemsContent>) {
   const t = useTranslations("player");
   const locale = useLocale();
-  const { supported, speak } = useTts();
   const { praise, encourage } = useFeedbackLines();
 
   const recorderSupported =
@@ -41,14 +40,29 @@ export default function SpeechTask({
     !!navigator.mediaDevices?.getUserMedia &&
     typeof MediaRecorder !== "undefined";
 
-  // Record mode only when every item is a describe item and consent is given.
+  // A "describe" exercise is one built for voice recording + AI feedback
+  // (every item carries the concepts the language helper checks for).
+  const isDescribe = content.items.every((i) => (i.expect?.length ?? 0) > 0);
+
+  // Record mode only when it's a describe exercise AND recording can truly run
+  // (live, with parental consent, in a browser that supports it).
   const recordMode =
+    isDescribe &&
     !!recordingLive &&
     !!speechConsent &&
     !!childId &&
     !!exerciseId &&
-    recorderSupported &&
-    content.items.every((i) => (i.expect?.length ?? 0) > 0);
+    recorderSupported;
+
+  // When it's a describe exercise but recording can't run yet, we still SHOW
+  // the feature — a calm preview that makes clear the child records here, and
+  // says what turns it on — so it's visibly part of the exercise.
+  const recordPreview = isDescribe && !recordMode;
+  const previewReason: "consent" | "preview" | "unsupported" = !recorderSupported
+    ? "unsupported"
+    : recordingLive && !speechConsent
+      ? "consent"
+      : "preview";
 
   const [index, setIndex] = useState(0);
   const [feedback, setFeedback] = useState<{ kind: "good" | "bad"; text: string } | null>(null);
@@ -226,24 +240,13 @@ export default function SpeechTask({
       <div className="sp-card">
         {item.emoji && (
           <span className="sp-emoji" aria-hidden="true">
-            {item.emoji}
+            <Glyph emoji={item.emoji} size={176} className="sp-glyph" />
           </span>
         )}
         {item.ask || recordMode ? (
           <p className="sp-ask">{promptText}</p>
         ) : (
           <p className="sp-text">{item.text}</p>
-        )}
-        {supported && (
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "0.9rem" }}>
-            <button
-              type="button"
-              className="say-btn"
-              onClick={() => speak(promptText, item.ask || recordMode ? 0.9 : 0.75)}
-            >
-              🔊 {t("sayIt")}
-            </button>
-          </div>
         )}
         {item.ask && !recordMode && (
           <p className="sp-expect">
@@ -313,11 +316,21 @@ export default function SpeechTask({
           )}
         </div>
       ) : (
-        <div className="sp-score" role="group" aria-label={t("speech.scoreLabel")}>
-          <button type="button" className="sp-score-btn" data-tone="good" onClick={() => score("great")}>
-            <i aria-hidden="true">🌟</i>
-            {t("speech.great")}
-          </button>
+        <>
+          {recordPreview && (
+            <div className="sp-rec-preview" role="note">
+              <span className="sp-rec-preview-head">
+                <span className="sp-rec-preview-mic" aria-hidden="true">🎙️</span>
+                {t("speech.recordPreviewTitle")}
+              </span>
+              <p className="sp-rec-preview-note">{t(`speech.recordPreview.${previewReason}`)}</p>
+            </div>
+          )}
+          <div className="sp-score" role="group" aria-label={t("speech.scoreLabel")}>
+            <button type="button" className="sp-score-btn" data-tone="good" onClick={() => score("great")}>
+              <i aria-hidden="true">🌟</i>
+              {t("speech.great")}
+            </button>
           <button type="button" className="sp-score-btn" data-tone="mid" onClick={() => score("almost")}>
             <i aria-hidden="true">🙂</i>
             {t("speech.almost")}
@@ -326,7 +339,8 @@ export default function SpeechTask({
             <i aria-hidden="true">🌱</i>
             {t("speech.practice")}
           </button>
-        </div>
+          </div>
+        </>
       )}
 
       <p className="play-feedback" data-kind={feedback?.kind} role="status">

@@ -7,6 +7,7 @@ import {
   type FocusKey,
   type AgeBandKey,
 } from "@/lib/exercises/categories";
+import Glyph from "@/components/player/Glyph";
 
 const activeAllStyle = {
   background: "var(--accent-soft)",
@@ -71,7 +72,10 @@ export default function CategoryFilter({
               style={active ? hueStyle(c.hue) : undefined}
               onClick={() => setFocus(active ? "all" : c.key)}
             >
-              <span aria-hidden="true">{c.emoji}</span> {tcat(c.key)}
+              <span className="chip-glyph" aria-hidden="true">
+                <Glyph emoji={c.emoji} size={20} />
+              </span>{" "}
+              {tcat(c.key)}
             </button>
           );
         })}

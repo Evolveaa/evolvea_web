@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { ChoiceContent } from "@/lib/exercises/types";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
+import Glyph, { GlyphText } from "./Glyph";
 
 /** Multiple choice with big tappable emoji cards. */
 export default function ChoiceTask({
@@ -15,7 +15,6 @@ export default function ChoiceTask({
 }: TaskProps<ChoiceContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const [index, setIndex] = useState(0);
   const [wrong, setWrong] = useState<Set<number>>(new Set());
@@ -80,15 +79,9 @@ export default function ChoiceTask({
 
   return (
     <>
-      <p className="player-prompt">{item.prompt}</p>
-
-      {supported && (
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.2rem" }}>
-          <button type="button" className="say-btn" onClick={() => speak(item.say ?? item.prompt)}>
-            🔊 {t("sayIt")}
-          </button>
-        </div>
-      )}
+      <p className="player-prompt">
+        <GlyphText text={item.prompt} size={42} />
+      </p>
 
       <div className="opt-grid">
         {options.map((o) => {
@@ -110,7 +103,7 @@ export default function ChoiceTask({
             >
               {o.emoji && (
                 <span className="opt-emoji" aria-hidden="true">
-                  {o.emoji}
+                  <Glyph emoji={o.emoji} size={68} />
                 </span>
               )}
               <span>{o.label}</span>

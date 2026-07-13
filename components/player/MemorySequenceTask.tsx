@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { MemorySequenceContent } from "@/lib/exercises/types";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
+import Glyph from "./Glyph";
 
 type Phase = "watch" | "recall";
 
@@ -120,7 +121,7 @@ export default function MemorySequenceTask({
         {phase === "watch" ? (
           item.sequence.map((e, i) => (
             <span key={i} className="mem-tile">
-              <span aria-hidden="true">{e}</span>
+              <Glyph emoji={e} size={54} />
             </span>
           ))
         ) : (
@@ -130,7 +131,7 @@ export default function MemorySequenceTask({
               className="mem-tile mem-slot"
               data-filled={i < picked.length ? "" : undefined}
             >
-              {i < picked.length ? picked[i] : i + 1}
+              {i < picked.length ? <Glyph emoji={picked[i]} size={54} /> : i + 1}
             </span>
           ))
         )}
@@ -154,7 +155,7 @@ export default function MemorySequenceTask({
               style={{ cursor: "pointer" }}
               onClick={() => pick(e)}
             >
-              <span aria-hidden="true">{e}</span>
+              <Glyph emoji={e} size={54} />
             </button>
           ))}
         </div>

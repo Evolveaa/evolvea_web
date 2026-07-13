@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useTts } from "@/lib/tts";
 import type { MinimalPairsContent } from "@/lib/exercises/types";
+import Glyph from "./Glyph";
 import { shuffle, useFeedbackLines, type TaskProps } from "./shared";
 
 type Side = "a" | "b";
@@ -27,7 +27,6 @@ export default function MinimalPairsTask({
 }: TaskProps<MinimalPairsContent>) {
   const t = useTranslations("player");
   const { praise, encourage } = useFeedbackLines();
-  const { supported, speak } = useTts();
 
   const [index, setIndex] = useState(0);
   const [wrong, setWrong] = useState<Set<string>>(new Set());
@@ -149,19 +148,6 @@ export default function MinimalPairsTask({
             : t("minimalPairs.parentPair", { first: spokenFirst, second: spokenSecond })}
         </p>
         <div className="mp-parent-row">
-          {supported && (
-            <button
-              type="button"
-              className="say-btn"
-              onClick={() =>
-                isListen
-                  ? speak(item[saidSide].word, 0.75)
-                  : speak(`${spokenFirst}. ${spokenSecond}.`, 0.7)
-              }
-            >
-              🔊 {isListen ? t("minimalPairs.playWord") : t("minimalPairs.playPair")}
-            </button>
-          )}
           <span className="mp-contrast">
             {t("minimalPairs.contrast", { contrast: content.contrast })}
           </span>
@@ -192,7 +178,7 @@ export default function MinimalPairsTask({
                 onClick={() => pickCard(c.side)}
               >
                 <span className="opt-emoji" aria-hidden="true">
-                  {c.emoji}
+                  <Glyph emoji={c.emoji} size={118} />
                 </span>
                 <span>{c.word}</span>
               </button>
@@ -228,14 +214,14 @@ export default function MinimalPairsTask({
               <div className="mp-reveal-cards">
                 <span className="mp-reveal-card">
                   <span className="mp-reveal-emoji" aria-hidden="true">
-                    {item.a.emoji}
+                    <Glyph emoji={item.a.emoji} size={52} />
                   </span>
                   {item.a.word}
                 </span>
                 {!item.same && (
                   <span className="mp-reveal-card">
                     <span className="mp-reveal-emoji" aria-hidden="true">
-                      {item.b.emoji}
+                      <Glyph emoji={item.b.emoji} size={52} />
                     </span>
                     {item.b.word}
                   </span>
