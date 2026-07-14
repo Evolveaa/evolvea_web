@@ -177,7 +177,8 @@ export default async function FamilyDetailPage({
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.2rem", alignItems: "start" }}>
+      {/* ── Klinický stav: ciele a plán · vývoj a problémy ── */}
+      <div className="grid-2 fam-band">
         <div>
           <GoalsPanel childId={childId} goals={goals} domainPct={domainPct} />
 
@@ -200,11 +201,11 @@ export default async function FamilyDetailPage({
                   </p>
                 </div>
               </div>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <ul className="plan-list">
                 {plan.plan_items.map((item) => (
-                  <li key={item.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.9rem" }}>
+                  <li key={item.id} className="plan-row">
                     <DomainTile domain={item.exercises.domain} size={26} />
-                    <span style={{ flex: 1 }}>{item.exercises.title}</span>
+                    <span className="plan-row-title">{item.exercises.title}</span>
                     <span className="chip" style={{ fontSize: "0.7rem" }}>
                       {item.times_per_week}×/{t("week")}
                     </span>
@@ -216,8 +217,10 @@ export default async function FamilyDetailPage({
               </ul>
             </div>
           )}
+        </div>
 
-          <h2 className="section-label">{t("domainsSection")}</h2>
+        <div>
+          <h2 className="section-label" style={{ marginTop: 0 }}>{t("domainsSection")}</h2>
           {stats.length === 0 ? (
             <p className="card-sub">{t("noDataYet")}</p>
           ) : (
@@ -251,12 +254,59 @@ export default async function FamilyDetailPage({
             </ul>
           )}
 
-          <h2 className="section-label">{t("sessionsSection")}</h2>
-          {sessions.length === 0 ? (
-            <p className="card-sub">{t("noDataYet")}</p>
+          <h2 className="section-label" style={{ marginTop: "1.4rem" }}>{t("trickySection")}</h2>
+          {tricky.length === 0 ? (
+            <p className="card-sub">{t("trickyEmpty")}</p>
           ) : (
-            <ul className="hist-list">
-              {sessions.slice(0, historyCount).map((s) => {
+            <div className="card">
+              <p className="card-sub" style={{ marginBottom: "0.85rem" }}>{t("trickyLead")}</p>
+              <ul className="tricky-list">
+                {tricky.map((it) => (
+                  <li key={`${it.kind}:${it.label}`} className="tricky-row">
+                    {it.domain ? (
+                      <DomainTile domain={it.domain} size={26} />
+                    ) : (
+                      <span style={{ width: 26 }} aria-hidden="true" />
+                    )}
+                    <span className="tricky-label" title={it.label}>
+                      {it.label}
+                    </span>
+                    <span className="tricky-count">{t("trickyMisses", { count: it.misses })}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Komunikácia: správy s rodičom · klinické poznámky ── */}
+      <div className="grid-2 fam-band">
+        <div>
+          <h2 className="section-label" style={{ marginTop: 0 }}>{t("messagesSection")}</h2>
+          <div className="card">
+            <MessageThread
+              childId={childId}
+              myId={session.profile.id}
+              messages={thread}
+              hasUnread={hasUnread}
+            />
+          </div>
+        </div>
+
+        <div>
+          <NotesPanel childId={childId} notes={notes} sinceLastNote={sinceLastNote} />
+        </div>
+      </div>
+
+      {/* ── História sedení (celá šírka, 2 stĺpce) ── */}
+      <section className="fam-band">
+        <h2 className="section-label">{t("sessionsSection")}</h2>
+        {sessions.length === 0 ? (
+          <p className="card-sub">{t("noDataYet")}</p>
+        ) : (
+          <ul className="hist-list fam-hist">
+            {sessions.slice(0, historyCount).map((s) => {
                 const ex = exercises.get(s.exercise_id);
                 const scored =
                   !!s.score_total && s.score_total > 0 && s.score_correct !== null;
@@ -340,46 +390,7 @@ export default async function FamilyDetailPage({
               </Link>
             </p>
           )}
-        </div>
-
-        <div>
-          <h2 className="section-label">{t("messagesSection")}</h2>
-          <div className="card">
-            <MessageThread
-              childId={childId}
-              myId={session.profile.id}
-              messages={thread}
-              hasUnread={hasUnread}
-            />
-          </div>
-
-          <NotesPanel childId={childId} notes={notes} sinceLastNote={sinceLastNote} />
-
-          <h2 className="section-label" style={{ marginTop: "1.4rem" }}>{t("trickySection")}</h2>
-          {tricky.length === 0 ? (
-            <p className="card-sub">{t("trickyEmpty")}</p>
-          ) : (
-            <div className="card">
-              <p className="card-sub" style={{ marginBottom: "0.85rem" }}>{t("trickyLead")}</p>
-              <ul className="tricky-list">
-                {tricky.map((it) => (
-                  <li key={`${it.kind}:${it.label}`} className="tricky-row">
-                    {it.domain ? (
-                      <DomainTile domain={it.domain} size={26} />
-                    ) : (
-                      <span style={{ width: 26 }} aria-hidden="true" />
-                    )}
-                    <span className="tricky-label" title={it.label}>
-                      {it.label}
-                    </span>
-                    <span className="tricky-count">{t("trickyMisses", { count: it.misses })}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
+      </section>
     </>
   );
 }
