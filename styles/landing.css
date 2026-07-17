@@ -1,0 +1,149 @@
+/* ============================================================
+   Evolvea — landing „pre logopédov".
+   Faithful port of web_evolvea/styles.css, scoped under `.lp` so it
+   never touches the rest of the app (which uses globals.css). The source
+   design uses default content-box + Instrument Sans + its own base, all
+   re-established here inside `.lp` (the app's globals.css forces
+   border-box + Inter + a heading colour, which we override).
+   ============================================================ */
+
+.lp {
+  --acc: #23407a;
+  background: #fafaf8;
+  color: #191813;
+  font-family: var(--font-instrument), "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  min-height: 100dvh;
+}
+
+/* Source design is content-box; the app forces border-box globally. */
+.lp,
+.lp *,
+.lp *::before,
+.lp *::after {
+  box-sizing: content-box;
+}
+
+.lp a {
+  color: #191813;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.lp a:hover {
+  opacity: 0.55;
+}
+.lp h1,
+.lp h2,
+.lp h3 {
+  color: #191813;
+}
+.lp ::selection {
+  background: #191813;
+  color: #fafaf8;
+}
+
+/* anchor offset for #funguje / #panel / #prax */
+html {
+  scroll-padding-top: 32px;
+}
+
+/* Pill controls that lift on hover. */
+.lp .lift {
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s;
+}
+.lp .lift:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- Hero „guľa" (neurón) — väčšia a výraznejšia, doladená pre mobil ---- */
+.lp [data-orb] {
+  position: absolute;
+  top: clamp(-44px, 0.5vw, 18px);
+  right: clamp(-76px, -3vw, -8px);
+  width: clamp(360px, 50vw, 780px);
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  z-index: 0;
+}
+.lp [data-orb-canvas] {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+/* ---- Layout system (verbatim from the source design) ---- */
+.lp [data-wrap] {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: clamp(20px, 5vw, 64px);
+  padding-right: clamp(20px, 5vw, 64px);
+}
+.lp [data-grid2] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.lp [data-steps] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px clamp(32px, 5vw, 72px);
+}
+.lp [data-trow] {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+.lp [data-stats] {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px clamp(24px, 4vw, 64px);
+}
+.lp [data-mh] {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .lp [data-grid2] {
+    grid-template-columns: 5fr 7fr;
+  }
+  .lp [data-steps] {
+    grid-template-columns: 64px 5fr 7fr;
+  }
+  .lp [data-trow] {
+    grid-template-columns: 1.05fr 1.5fr 0.9fr 1fr;
+  }
+  .lp [data-stats] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .lp [data-mh] {
+    display: block;
+  }
+  .lp [data-bleed] {
+    margin-right: clamp(-160px, calc((1240px - 100vw) / 2 - 64px), -24px);
+  }
+}
+
+/* ---- Mobil: guľa ako jemný rohový akcent, aby nezavadzala textu ---- */
+@media (max-width: 640px) {
+  .lp [data-orb] {
+    width: clamp(230px, 66vw, 350px);
+    top: -18px;
+    right: -44px;
+  }
+}
+@media (max-width: 480px) {
+  .lp [data-orb] {
+    width: clamp(200px, 60vw, 280px);
+    top: -14px;
+    right: -38px;
+  }
+}
