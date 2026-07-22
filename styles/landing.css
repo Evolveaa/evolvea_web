@@ -59,15 +59,29 @@ html {
   transform: translateY(-2px);
 }
 
-/* ---- Hero „guľa" (neurón) — väčšia a výraznejšia, doladená pre mobil ---- */
+/* ---- Hero „guľa" (neurón) — menšia, živá, s jemnou žiarou ---- */
 .lp [data-orb] {
   position: absolute;
-  top: clamp(-44px, 0.5vw, 18px);
-  right: clamp(-76px, -3vw, -8px);
-  width: clamp(360px, 50vw, 780px);
+  top: clamp(-24px, 1.2vw, 40px);
+  right: clamp(-56px, -2vw, 8px);
+  width: clamp(330px, 42vw, 640px);
   aspect-ratio: 1 / 1;
   pointer-events: none;
   z-index: 0;
+}
+/* mäkká žiara za sférou — myseľ „svieti" */
+.lp [data-orb]::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(52, 94, 172, 0.09),
+    rgba(52, 94, 172, 0.032) 55%,
+    transparent 74%
+  );
+  pointer-events: none;
 }
 .lp [data-orb-canvas] {
   width: 100%;
@@ -135,15 +149,247 @@ html {
 /* ---- Mobil: guľa ako jemný rohový akcent, aby nezavadzala textu ---- */
 @media (max-width: 640px) {
   .lp [data-orb] {
-    width: clamp(230px, 66vw, 350px);
-    top: -18px;
-    right: -44px;
+    width: clamp(220px, 62vw, 330px);
+    top: -16px;
+    right: -40px;
   }
 }
 @media (max-width: 480px) {
   .lp [data-orb] {
-    width: clamp(200px, 60vw, 280px);
-    top: -14px;
-    right: -38px;
+    width: clamp(190px, 56vw, 260px);
+    top: -12px;
+    right: -34px;
+  }
+}
+
+/* ============================================================
+   Živá ukážka večerného cvičenia (hero) — karta, v ktorej sa
+   práve „píše" odpoveď dieťaťa. Desktop only (v ľavom stĺpci).
+   ============================================================ */
+.lp .demo-card,
+.lp .demo-card * {
+  box-sizing: border-box;
+}
+.lp .demo-card {
+  display: block;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #e6e3da;
+  border-radius: 14px;
+  box-shadow:
+    0 1px 2px rgba(25, 24, 19, 0.04),
+    0 18px 44px -24px rgba(25, 24, 19, 0.28);
+  padding: 18px 20px 14px;
+  transform: rotate(-1.4deg);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lp .demo-card:hover {
+  transform: rotate(0deg) translateY(-2px);
+}
+.lp .demo-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #f0eee7;
+}
+.lp .demo-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2e7d4f;
+  flex: none;
+  animation: demoLive 2.2s ease-in-out infinite;
+}
+@keyframes demoLive {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, 0.35); }
+  50% { box-shadow: 0 0 0 5px rgba(46, 125, 79, 0); }
+}
+.lp .demo-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.lp .demo-min {
+  margin-left: auto;
+  font-size: 12px;
+  color: #6e6b60;
+  font-variant-numeric: tabular-nums;
+}
+.lp .demo-kicker {
+  margin: 0 0 5px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #8f8c80;
+}
+.lp .demo-q {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  animation: demoIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.lp .demo-a {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #345eac;
+  min-height: calc(1.5em * 2); /* rezervované 2 riadky, nech karta neskáče */
+  animation: demoIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.lp .demo-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: #345eac;
+  animation: demoCaret 0.9s steps(2, start) infinite;
+}
+@keyframes demoCaret {
+  50% { opacity: 0; }
+}
+@keyframes demoIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.lp .demo-foot {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 11px;
+  border-top: 1px solid #f0eee7;
+  font-size: 12.5px;
+  color: #2e7d4f;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lp .demo-foot.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+.lp .demo-dots {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+}
+.lp .demo-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d8d4c9;
+  transition: background 0.3s;
+}
+.lp .demo-dots i.on {
+  background: #23407a;
+}
+
+/* ============================================================
+   168 bodiek — týždeň dieťaťa (24 × 7). Rozsvieti sa pri scrolle.
+   ============================================================ */
+.lp .dots168 {
+  margin-top: 30px;
+  max-width: 430px;
+}
+.lp .dots168 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.lp .dots168 circle {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.lp .dots168 .d-b {
+  fill: #d8d4c9;
+}
+.lp .dots168 .d-ev {
+  fill: #345eac;
+}
+.lp .dots168 .d-th {
+  fill: var(--acc, #23407a);
+}
+.lp .dots168.on circle {
+  animation: dotIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i) * 5ms);
+}
+.lp .dots168.on .d-ev {
+  animation:
+    dotIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    dotPulse 3.2s ease-in-out calc(1.1s + var(--d) * 0.3s) infinite;
+}
+@keyframes dotIn {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.lp .dots168-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: #6e6b60;
+}
+.lp .dots168-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.lp .dots168-legend i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+.lp .dots168-legend .l-th {
+  background: var(--acc, #23407a);
+}
+.lp .dots168-legend .l-ev {
+  background: #345eac;
+}
+.lp .dots168-legend .l-b {
+  background: #d8d4c9;
+}
+
+/* reduced motion: všetko statické a viditeľné */
+@media (prefers-reduced-motion: reduce) {
+  .lp .demo-live,
+  .lp .demo-caret,
+  .lp .demo-q,
+  .lp .demo-a {
+    animation: none;
+  }
+  .lp .demo-foot {
+    transition: none;
+  }
+  .lp .dots168 circle,
+  .lp .dots168.on circle,
+  .lp .dots168.on .d-ev {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

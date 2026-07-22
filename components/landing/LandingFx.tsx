@@ -18,6 +18,7 @@ export default function LandingFx() {
   useEffect(() => {
     const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timeouts: number[] = [];
 
     const lines = Array.from(document.querySelectorAll<HTMLElement>("[data-line]"));
     const items = Array.from(document.querySelectorAll<HTMLElement>("[data-r]"));
@@ -31,13 +32,21 @@ export default function LandingFx() {
       }
       const dur = 1000;
       const t0 = performance.now();
+      let done = false;
       function step(t: number) {
         const p = Math.min(1, (t - t0) / dur);
         const e = 1 - Math.pow(1 - p, 3); // easeOutCubic
         el.textContent = String(Math.round(e * target));
         if (p < 1) requestAnimationFrame(step);
+        else done = true;
       }
       requestAnimationFrame(step);
+      // fallback: keby rAF nebežal, po čase ukáž finálnu hodnotu
+      timeouts.push(
+        window.setTimeout(() => {
+          if (!done) el.textContent = String(target);
+        }, dur + 400),
+      );
     }
 
     // Reduced motion / no IntersectionObserver: show final values, never hide.
@@ -93,19 +102,27 @@ export default function LandingFx() {
       { threshold: 0.35 },
     );
 
-    const raf1 = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        lines.forEach((el, i) => {
-          el.style.transition = "transform 0.85s " + EASE + " " + (120 + i * 110) + "ms";
-          el.style.transform = "translateY(0)";
-        });
-        // Items in view → reveal now (no observer dependency); the rest → observe.
-        items.forEach((el) => {
-          if (inView(el)) revealItem(el);
-          else revealObserver.observe(el);
-        });
+    // Reveal je idempotentný a spúšťa sa cez dvojitý rAF AJ cez timeout —
+    // keby bol rAF pozastavený (webview na pozadí, šetriaci režim), obsah
+    // sa aj tak odhalí.
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      lines.forEach((el, i) => {
+        el.style.transition = "transform 0.85s " + EASE + " " + (120 + i * 110) + "ms";
+        el.style.transform = "translateY(0)";
       });
+      // Items in view → reveal now (no observer dependency); the rest → observe.
+      items.forEach((el) => {
+        if (inView(el)) revealItem(el);
+        else revealObserver.observe(el);
+      });
+    };
+    const raf1 = requestAnimationFrame(() => {
+      requestAnimationFrame(reveal);
     });
+    timeouts.push(window.setTimeout(reveal, 600));
 
     // Counts in view → run now; the rest → observe.
     nums.forEach((el) => {
@@ -115,6 +132,7 @@ export default function LandingFx() {
 
     return () => {
       cancelAnimationFrame(raf1);
+      timeouts.forEach((t) => window.clearTimeout(t));
       revealObserver.disconnect();
       countObserver.disconnect();
     };

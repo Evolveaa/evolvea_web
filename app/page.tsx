@@ -3,6 +3,8 @@ import { Instrument_Sans } from "next/font/google";
 import "@/styles/landing.css";
 import Orb from "@/components/landing/Orb";
 import LandingFx from "@/components/landing/LandingFx";
+import LiveDemoCard from "@/components/landing/LiveDemoCard";
+import Dots168 from "@/components/landing/Dots168";
 
 const instrument = Instrument_Sans({
   subsets: ["latin", "latin-ext"],
@@ -162,7 +164,9 @@ export default function Home() {
             data-grid2
             style={{ position: "relative", zIndex: 1, marginTop: "clamp(44px, 6vw, 76px)" }}
           >
-            <div data-mh />
+            <div data-mh data-r="2">
+              <LiveDemoCard />
+            </div>
             <div>
               <p
                 data-r="1"
@@ -253,6 +257,7 @@ export default function Home() {
               >
                 hodín má týždeň dieťaťa
               </p>
+              <Dots168 />
             </div>
             <div style={{ paddingTop: "clamp(0px, 1vw, 14px)" }}>
               <h2
