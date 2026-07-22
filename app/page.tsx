@@ -64,6 +64,7 @@ export default function Home() {
             Evolvea
           </span>
           <span
+            data-mh
             style={{
               fontSize: "11.5px",
               letterSpacing: "0.14em",
@@ -85,6 +86,12 @@ export default function Home() {
             Pre vašu prax
           </a>
           <a
+            href="/login"
+            style={{ fontSize: "14.5px", fontWeight: 500, color: "#2A2823", whiteSpace: "nowrap" }}
+          >
+            Prihlásiť sa
+          </a>
+          <a
             className="lift"
             href="#kontakt"
             style={{
@@ -93,6 +100,7 @@ export default function Home() {
               border: "1px solid #D8D4C9",
               borderRadius: "999px",
               padding: "9px 18px",
+              whiteSpace: "nowrap",
             }}
           >
             Požiadať o prístup
