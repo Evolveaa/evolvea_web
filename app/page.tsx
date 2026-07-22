@@ -882,6 +882,8 @@ export default function Home() {
               letterSpacing: "-0.035em",
               fontWeight: 500,
               maxWidth: "16ch",
+              // .lp h2 má ink farbu — na tmavej sekcii by bol nadpis neviditeľný
+              color: "#F5F3EC",
             }}
           >
             Prijímame prvých logopédov.
