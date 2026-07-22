@@ -15,9 +15,15 @@ export default function ResendButton({ email }: { email: string }) {
   return (
     <form action={action}>
       <input type="hidden" name="email" value={email} />
-      {state?.resent && <p className="form-success">{t("resent")}</p>}
+      {state?.resent && (
+        <p className="form-success" role="status">
+          {t("resent")}
+        </p>
+      )}
       {state?.error && (
-        <p className="form-error">{t(`errors.${state.error}`)}</p>
+        <p className="form-error" role="alert">
+          {t(`errors.${state.error}`)}
+        </p>
       )}
       <button type="submit" className="btn btn-outline btn-block" disabled={pending}>
         {pending ? t("sending") : t("resend")}

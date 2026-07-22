@@ -43,10 +43,13 @@ const LLM_MODEL =
   (LLM_PROVIDER === "anthropic" ? "claude-haiku-4-5" : "gpt-4o-mini");
 
 /** Speech-to-text. Default: OpenAI transcription; swap provider via env. */
-async function transcribe(audio: Blob, lang: string): Promise<string> {
+async function transcribe(audio: Blob, lang: string, audioPath?: string): Promise<string> {
   if (STT_PROVIDER === "openai") {
     const form = new FormData();
-    form.append("file", audio, "speech.webm");
+    // OpenAI určuje formát z prípony — odvoď ju zo skutočnej cesty nahrávky
+    // (iOS nahráva audio/mp4 → .m4a, nie .webm).
+    const ext = audioPath?.split(".").pop()?.toLowerCase() || "webm";
+    form.append("file", audio, `speech.${ext}`);
     form.append("model", STT_MODEL);
     form.append("language", lang);
     const res = await fetch("https://api.openai.com/v1/audio/transcriptions", {
@@ -173,7 +176,7 @@ async function process(admin: any, attemptId: string) {
     await admin.from("speech_attempts").update({ status: "transcribing", stt_model: `${STT_PROVIDER}:${STT_MODEL}`, llm_model: `${LLM_PROVIDER}:${LLM_MODEL}` }).eq("id", attemptId);
     const { data: file, error: dlErr } = await admin.storage.from("speech").download(attempt.audio_path);
     if (dlErr || !file) throw new Error(`download failed: ${dlErr?.message ?? "no file"}`);
-    const transcript = await transcribe(file, attempt.lang ?? "sk");
+    const transcript = await transcribe(file, attempt.lang ?? "sk", attempt.audio_path);
 
     // 2. assess
     await admin.from("speech_attempts").update({ status: "assessing", transcript }).eq("id", attemptId);

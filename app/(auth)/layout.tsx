@@ -10,6 +10,7 @@ export default async function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const t = await getTranslations("auth");
+  const tf = await getTranslations("footer");
   const points = [t("heroPoint1"), t("heroPoint2"), t("heroPoint3")];
 
   return (
@@ -36,7 +37,7 @@ export default async function AuthLayout({
             ))}
           </ul>
         </div>
-        <p className="auth-brand-quote">Vytvorené s láskou pre naše deti.</p>
+        <p className="auth-brand-quote">{tf("quote")}</p>
       </aside>
 
       {/* Right panel — the form, with a compact header (brand + language). */}

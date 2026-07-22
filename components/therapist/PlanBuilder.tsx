@@ -205,6 +205,13 @@ export default function PlanBuilder({
               maxLength={2000}
               placeholder={t("notePlaceholder")}
               value={note}
+              // auto-grow aj pri mounte — existujúca dlhá poznámka by inak
+              // ostala orezaná na 2 riadky až do prvého stlačenia klávesy
+              ref={(el) => {
+                if (el && el.scrollHeight > el.clientHeight) {
+                  el.style.height = `${el.scrollHeight + 2}px`;
+                }
+              }}
               onChange={(e) => {
                 setNote(e.target.value);
                 // auto-grow: the therapist's message must never clip mid-sentence

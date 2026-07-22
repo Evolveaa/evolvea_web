@@ -127,7 +127,7 @@ export default async function FamilyDetailPage({
   return (
     <>
       <p style={{ marginBottom: "0.8rem" }}>
-        <Link href="/therapist" style={{ color: "var(--accent-ink)", fontSize: "0.88rem", fontWeight: 600 }}>
+        <Link href="/therapist" className="back-link">
           ← {t("backToFamilies")}
         </Link>
       </p>

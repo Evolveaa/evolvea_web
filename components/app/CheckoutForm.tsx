@@ -39,7 +39,11 @@ export default function CheckoutForm({ childId }: { childId: string }) {
     <form action={action} className="card">
       <input type="hidden" name="child_id" value={childId} />
 
-      <p className="form-success" style={{ background: "var(--warn-soft)", color: "var(--warn-ink)", borderColor: "rgba(138, 97, 22, 0.25)" }}>
+      <p
+        id="pay-test-note"
+        className="form-success"
+        style={{ background: "var(--warn-soft)", color: "var(--warn-ink)", borderColor: "var(--warn-line)" }}
+      >
         🧪 {t("testNote")}
       </p>
 
@@ -58,6 +62,8 @@ export default function CheckoutForm({ childId }: { childId: string }) {
           id="cc-number"
           inputMode="numeric"
           autoComplete="off"
+          readOnly
+          aria-describedby="pay-test-note"
           defaultValue="4242 4242 4242 4242"
           style={{ fontVariantNumeric: "tabular-nums", letterSpacing: "0.08em" }}
         />
@@ -67,13 +73,27 @@ export default function CheckoutForm({ childId }: { childId: string }) {
           <label className="label" htmlFor="cc-exp">
             {t("cardExpiry")}
           </label>
-          <input className="input" id="cc-exp" autoComplete="off" defaultValue="12/29" />
+          <input
+            className="input"
+            id="cc-exp"
+            autoComplete="off"
+            readOnly
+            aria-describedby="pay-test-note"
+            defaultValue="12/29"
+          />
         </div>
         <div className="field">
           <label className="label" htmlFor="cc-cvc">
             CVC
           </label>
-          <input className="input" id="cc-cvc" autoComplete="off" defaultValue="123" />
+          <input
+            className="input"
+            id="cc-cvc"
+            autoComplete="off"
+            readOnly
+            aria-describedby="pay-test-note"
+            defaultValue="123"
+          />
         </div>
       </div>
 

@@ -26,7 +26,7 @@ export default function ReportActions({
             key={w}
             href={`/therapist/families/${childId}/report?weeks=${w}`}
             className="chip"
-            aria-pressed={w === weeks}
+            aria-current={w === weeks ? "true" : undefined}
           >
             {t("weeksOption", { weeks: w })}
           </Link>

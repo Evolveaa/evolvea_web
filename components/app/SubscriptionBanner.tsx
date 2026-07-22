@@ -36,7 +36,7 @@ export default function SubscriptionBanner({
   return (
     <div
       className="card"
-      style={{ borderColor: "rgba(179, 64, 58, 0.35)", marginBottom: "1.1rem" }}
+      style={{ borderColor: "var(--danger-line)", marginBottom: "1.1rem" }}
     >
       <b style={{ color: "var(--danger-ink)" }}>
         {state === "expired" ? t("expiredTitle") : t("canceledTitle")}

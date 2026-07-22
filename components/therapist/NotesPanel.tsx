@@ -8,44 +8,8 @@ import {
   type ClinicalFormState,
 } from "@/lib/therapist/clinical-actions";
 import type { TherapistNoteRow } from "@/lib/data/clinical";
+import TwoStepButton from "@/components/app/TwoStepButton";
 
-/** Two-step destructive button: first tap arms, second confirms. */
-function TwoStep({
-  label,
-  confirmLabel,
-  onConfirm,
-}: {
-  label: string;
-  confirmLabel: string;
-  onConfirm: () => void;
-}) {
-  const [armed, setArmed] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-  return (
-    <button
-      type="button"
-      className="btn btn-sm btn-danger-ghost"
-      aria-live="polite"
-      onClick={() => {
-        if (armed) {
-          setArmed(false);
-          onConfirm();
-          return;
-        }
-        setArmed(true);
-        timer.current = setTimeout(() => setArmed(false), 3200);
-      }}
-    >
-      {armed ? confirmLabel : label}
-    </button>
-  );
-}
 
 export default function NotesPanel({
   childId,
@@ -109,7 +73,9 @@ export default function NotesPanel({
           })
         : t("sinceLastNoPct", { sessions: sinceLastNote.sessions, days: sinceLastNote.days });
 
-  const today = new Date().toLocaleDateString("en-CA");
+  // Deň v časovej zóne aplikácie — server (UTC) by okolo polnoci predvyplnil
+  // iný dátum než prehliadač logopéda a spôsobil hydration mismatch.
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Bratislava" });
 
   function remove(noteId: string) {
     setRowError(false);
@@ -190,7 +156,14 @@ export default function NotesPanel({
             <label className="label" htmlFor="note-date">
               {t("composer.date")}
             </label>
-            <input className="input" id="note-date" name="noted_on" type="date" defaultValue={today} />
+            <input
+              className="input"
+              id="note-date"
+              name="noted_on"
+              type="date"
+              defaultValue={today}
+              max={today}
+            />
           </div>
           <button
             type="submit"
@@ -251,7 +224,7 @@ export default function NotesPanel({
                         marginTop: "0.45rem",
                       }}
                     >
-                      <TwoStep
+                      <TwoStepButton
                         label={t("delete")}
                         confirmLabel={t("confirmDelete")}
                         onConfirm={() => remove(note.id)}

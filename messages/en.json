@@ -369,6 +369,7 @@
       "dangerTitle": "Delete child data",
       "dangerLead": "Permanently removes the child's profile along with all exercises, results, and messages. This cannot be undone.",
       "deleteBtn": "Delete all data",
+      "deleteConfirmBtn": "Really delete — irreversible",
       "deleteConfirm": "Really delete all data for {name}? This cannot be undone."
     },
     "planRhythmTitle": "Suggested weekly rhythm",
@@ -879,6 +880,7 @@
     "stateExpired": "Your trial has ended. Activate a subscription to continue.",
     "stateCanceled": "The subscription is canceled. You can renew it anytime.",
     "cancelBtn": "Cancel subscription",
+    "cancelConfirmBtn": "Really cancel the subscription",
     "cancelConfirm": "Really cancel the subscription? Access to exercises will end, but your data stays saved.",
     "benefitsTitle": "What you get"
   },

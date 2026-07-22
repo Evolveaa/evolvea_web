@@ -39,29 +39,49 @@ export default function LiveDemoCard() {
   const [typed, setTyped] = useState(0); // počet napísaných znakov odpovede
   const [saved, setSaved] = useState(false);
   const [staticMode, setStaticMode] = useState(false);
+  const [running, setRunning] = useState(false); // karta je vo viewporte
+  const [paused, setPaused] = useState(false); // hover/focus = pauza (WCAG 2.2.2)
+  const cardRef = useRef<HTMLElement>(null);
   const timers = useRef<number[]>([]);
 
+  // Statický režim: reduced-motion, alebo mobil, kde je karta display:none —
+  // časovače by inak donekonečna písali do neviditeľného prvku.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setStaticMode(true);
-      setTyped(EXCHANGES[0].a.length);
-      setSaved(true);
-      return;
+    const card = cardRef.current;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(min-width: 900px)").matches
+    ) {
+      const id = requestAnimationFrame(() => setStaticMode(true));
+      return () => cancelAnimationFrame(id);
     }
-    return () => {
-      timers.current.forEach((t) => window.clearTimeout(t));
-      timers.current = [];
-    };
+    if (!card || typeof window.IntersectionObserver !== "function") {
+      const id = requestAnimationFrame(() => setRunning(true));
+      return () => cancelAnimationFrame(id);
+    }
+    const io = new IntersectionObserver(
+      (es) => setRunning(es.some((e) => e.isIntersecting)),
+      { threshold: 0.2 },
+    );
+    io.observe(card);
+    return () => io.disconnect();
   }, []);
 
   // Jedna výmena: otázka → písanie odpovede → uložené → ďalšia výmena.
   useEffect(() => {
-    if (staticMode) return;
+    if (staticMode) {
+      // statický stav nastav tu — skorší efekt by ho inak prepísal
+      setTyped(EXCHANGES[idx].a.length);
+      setSaved(true);
+      return;
+    }
+    if (!running || paused) return;
     const ex = EXCHANGES[idx];
     const push = (t: number) => timers.current.push(t);
+    // pri návrate z pauzy pokračuj, len ak výmena nebola dopísaná
+    let ch = 0;
     setTyped(0);
     setSaved(false);
-    let ch = 0;
     push(
       window.setTimeout(function type() {
         ch += 1;
@@ -80,13 +100,21 @@ export default function LiveDemoCard() {
       timers.current.forEach((t) => window.clearTimeout(t));
       timers.current = [];
     };
-  }, [idx, staticMode]);
+  }, [idx, staticMode, running, paused]);
 
   const ex = EXCHANGES[idx];
   const answer = ex.a.slice(0, typed);
 
   return (
-    <aside className="demo-card" aria-label="Ukážka večerného cvičenia">
+    <aside
+      ref={cardRef}
+      className="demo-card"
+      aria-label="Ukážka večerného cvičenia"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       <header className="demo-head">
         <span className="demo-live" aria-hidden="true" />
         <span className="demo-title">Dnešný večer · {ex.child}</span>

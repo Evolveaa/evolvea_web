@@ -146,7 +146,13 @@ export default function SpeechTask({
       const s = await navigator.mediaDevices.getUserMedia({ audio: true });
       stream.current = s;
       chunks.current = [];
-      const mr = new MediaRecorder(s);
+      // Safari/iOS nevie audio/webm — vyber prvý podporovaný formát, inak by
+      // MP4/AAC bajty išli do STT pipeline mislabelované ako webm.
+      const mime =
+        typeof MediaRecorder.isTypeSupported === "function"
+          ? ["audio/webm", "audio/mp4"].find((m) => MediaRecorder.isTypeSupported(m))
+          : undefined;
+      const mr = new MediaRecorder(s, mime ? { mimeType: mime } : undefined);
       recorder.current = mr;
       mr.ondataavailable = (e) => e.data.size > 0 && chunks.current.push(e.data);
       mr.onstop = () => void uploadRecording();
@@ -173,16 +179,19 @@ export default function SpeechTask({
   async function uploadRecording() {
     setRec("uploading");
     try {
-      const blob = new Blob(chunks.current, { type: "audio/webm" });
+      // skutočný formát nahrávky (bez codecs parametra), napr. audio/mp4 na iOS
+      const mime = recorder.current?.mimeType?.split(";")[0] || "audio/webm";
+      const ext = mime.includes("mp4") ? "m4a" : mime.includes("ogg") ? "ogg" : "webm";
+      const blob = new Blob(chunks.current, { type: mime });
       setAudioUrl((prev) => {
         if (prev) URL.revokeObjectURL(prev);
         return URL.createObjectURL(blob);
       });
       const supabase = createClient();
-      const path = `${childId}/${crypto.randomUUID()}.webm`;
+      const path = `${childId}/${crypto.randomUUID()}.${ext}`;
       const { error } = await supabase.storage
         .from("speech")
-        .upload(path, blob, { contentType: "audio/webm", upsert: false });
+        .upload(path, blob, { contentType: mime, upsert: false });
       if (error) throw error;
 
       const res = await createSpeechAttemptAction({
@@ -193,7 +202,7 @@ export default function SpeechTask({
         expect: item.expect ?? [],
         minExpected: item.minExpected,
         audioPath: path,
-        audioMime: "audio/webm",
+        audioMime: mime,
         lang: locale,
       });
       if (!res.ok || !res.attemptId) throw new Error("attempt");

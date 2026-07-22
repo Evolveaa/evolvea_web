@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
 import { markThreadReadAction, sendMessageAction, type MessageState } from "@/lib/parent/actions";
 import type { MessageRow } from "@/lib/data/messages";
@@ -44,15 +45,28 @@ export default function MessageThread({
     null,
   );
   const formRef = useRef<HTMLFormElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (hasUnread) void markThreadReadAction(childId);
   }, [childId, hasUnread]);
 
+  // Skroluj len kontajner vlákna — scrollIntoView skákal celou stránkou
+  // (na detaile rodiny logopéda odsúval obsah nad vláknom mimo obraz).
   useEffect(() => {
-    endRef.current?.scrollIntoView({ block: "end" });
+    const el = listRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages.length]);
+
+  // Odpoveď druhej strany dorazí aj bez akcie používateľa (sľubujeme 24 h) —
+  // ľahký poll, len keď je karta viditeľná.
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      if (document.visibilityState === "visible") router.refresh();
+    }, 30000);
+    return () => window.clearInterval(id);
+  }, [router]);
 
   useEffect(() => {
     if (!pending && !state?.error) formRef.current?.reset();
@@ -67,7 +81,7 @@ export default function MessageThread({
           <p>{t("emptyLead")}</p>
         </div>
       ) : (
-        <div className="msg-list" aria-live="polite">
+        <div className="msg-list" aria-live="polite" ref={listRef}>
           {messages.map((m) => {
             if (m.kind === "system")
               return (
@@ -90,7 +104,6 @@ export default function MessageThread({
               </div>
             );
           })}
-          <div ref={endRef} />
         </div>
       )}
 

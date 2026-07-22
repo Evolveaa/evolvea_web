@@ -44,9 +44,10 @@
   color: #fafaf8;
 }
 
-/* anchor offset for #funguje / #panel / #prax */
-html {
-  scroll-padding-top: 32px;
+/* anchor offset for #funguje / #panel / #prax — scoped, nech pravidlo
+   nepresakuje do zvyšku appky */
+.lp section[id] {
+  scroll-margin-top: 32px;
 }
 
 /* Pill controls that lift on hover. */
@@ -225,7 +226,7 @@ html {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 500;
-  color: #8f8c80;
+  color: #6e6b60; /* AA kontrast aj pri 10.5px */
 }
 .lp .demo-q {
   margin: 0 0 14px;

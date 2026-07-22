@@ -96,11 +96,11 @@ export default async function TherapistDashboard() {
             <span className={`chip chip-hue ${STATE_HUE[state]}`}>
               {t(`subState.${state}`)}
             </span>
-            <div style={{ marginTop: 4 }}>
+            <span style={{ display: "block", marginTop: "0.25rem" }}>
               {f.weeklyTarget > 0
                 ? t("weekAdherence", { done: f.sessionsWeek, target: f.weeklyTarget })
                 : t("weekSessions", { count: f.sessionsWeek })}
-            </div>
+            </span>
           </span>
         </Link>
       </li>

@@ -8,49 +8,8 @@ import {
   type ClinicalFormState,
 } from "@/lib/therapist/clinical-actions";
 import type { PlanTemplateRow, TemplateItem } from "@/lib/data/clinical";
+import TwoStepButton from "@/components/app/TwoStepButton";
 
-/** Two-step button: first tap arms, second confirms (no window.confirm). */
-function TwoStep({
-  label,
-  confirmLabel,
-  onConfirm,
-  className = "btn btn-sm btn-danger-ghost",
-  ariaLabel,
-}: {
-  label: string;
-  confirmLabel: string;
-  onConfirm: () => void;
-  className?: string;
-  ariaLabel?: string;
-}) {
-  const [armed, setArmed] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-  return (
-    <button
-      type="button"
-      className={className}
-      aria-live="polite"
-      aria-label={armed ? confirmLabel : ariaLabel ?? label}
-      onClick={() => {
-        if (armed) {
-          setArmed(false);
-          onConfirm();
-          return;
-        }
-        setArmed(true);
-        timer.current = setTimeout(() => setArmed(false), 3200);
-      }}
-    >
-      {armed ? confirmLabel : label}
-    </button>
-  );
-}
 
 export default function TemplatesMenu({
   templates,
@@ -168,7 +127,7 @@ export default function TemplatesMenu({
                     </span>
                   </span>
                   {currentItems.length > 0 ? (
-                    <TwoStep
+                    <TwoStepButton
                       label={t("apply")}
                       confirmLabel={t("confirmApply")}
                       className="btn btn-sm btn-outline"
@@ -183,7 +142,7 @@ export default function TemplatesMenu({
                       {t("apply")}
                     </button>
                   )}
-                  <TwoStep
+                  <TwoStepButton
                     label="✕"
                     confirmLabel={t("confirmDelete")}
                     ariaLabel={t("deleteLabel")}

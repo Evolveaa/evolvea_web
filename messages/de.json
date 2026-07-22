@@ -369,6 +369,7 @@
       "dangerTitle": "Daten des Kindes löschen",
       "dangerLead": "Entfernt das Profil des Kindes sowie alle Übungen, Ergebnisse und Nachrichten dauerhaft. Das lässt sich nicht rückgängig machen.",
       "deleteBtn": "Alle Daten löschen",
+      "deleteConfirmBtn": "Wirklich löschen — endgültig",
       "deleteConfirm": "Wirklich alle Daten von {name} löschen? Das lässt sich nicht rückgängig machen."
     },
     "planRhythmTitle": "Empfohlener Wochenrhythmus",
@@ -879,6 +880,7 @@
     "stateExpired": "Die Testphase ist beendet. Aktivieren Sie das Abo und machen Sie weiter.",
     "stateCanceled": "Das Abo ist gekündigt. Sie können es jederzeit wieder aktivieren.",
     "cancelBtn": "Abo kündigen",
+    "cancelConfirmBtn": "Abo wirklich kündigen",
     "cancelConfirm": "Das Abo wirklich kündigen? Der Zugriff auf die Übungen endet, die Daten bleiben gespeichert.",
     "benefitsTitle": "Was Sie erhalten"
   },

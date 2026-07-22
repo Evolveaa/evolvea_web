@@ -11,52 +11,8 @@ import {
   type ClinicalFormState,
 } from "@/lib/therapist/clinical-actions";
 import type { GoalRow } from "@/lib/data/clinical";
+import TwoStepButton from "@/components/app/TwoStepButton";
 
-/** Two-step destructive button: first tap arms, second confirms. */
-function TwoStep({
-  label,
-  confirmLabel,
-  onConfirm,
-  className = "btn btn-sm btn-danger-ghost",
-  disabled,
-  ariaLabel,
-}: {
-  label: string;
-  confirmLabel: string;
-  onConfirm: () => void;
-  className?: string;
-  disabled?: boolean;
-  ariaLabel?: string;
-}) {
-  const [armed, setArmed] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-  return (
-    <button
-      type="button"
-      className={className}
-      aria-live="polite"
-      aria-label={armed ? confirmLabel : ariaLabel ?? label}
-      disabled={disabled}
-      onClick={() => {
-        if (armed) {
-          setArmed(false);
-          onConfirm();
-          return;
-        }
-        setArmed(true);
-        timer.current = setTimeout(() => setArmed(false), 3200);
-      }}
-    >
-      {armed ? confirmLabel : label}
-    </button>
-  );
-}
 
 const TARGET_OPTIONS = [60, 70, 80, 90];
 const SUGGESTION_KEYS = ["s1", "s2"] as const;
@@ -325,7 +281,7 @@ export default function GoalsPanel({
                   >
                     {t("archive")}
                   </button>
-                  <TwoStep
+                  <TwoStepButton
                     label={t("delete")}
                     confirmLabel={t("confirmDelete")}
                     onConfirm={() => remove(goal.id)}
@@ -394,7 +350,7 @@ export default function GoalsPanel({
                     >
                       {t("reactivate")}
                     </button>
-                    <TwoStep
+                    <TwoStepButton
                       label={t("delete")}
                       confirmLabel={t("confirmDelete")}
                       onConfirm={() => remove(goal.id)}

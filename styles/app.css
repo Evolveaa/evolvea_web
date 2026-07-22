@@ -15,6 +15,9 @@
   --danger-soft: #f9e9e8;
   --warn-ink: #8a6116;
   --warn-soft: #f7efdc;
+  /* rámiky stavových kariet — inline rgba prebíjalo dark override */
+  --danger-line: rgba(179, 64, 58, 0.35);
+  --warn-line: rgba(138, 97, 22, 0.25);
 
   /* domain hues (decorative fills + AA ink variants) */
   --hue-sky: #dcebf8;     --hue-sky-ink: #23649f;
@@ -588,6 +591,14 @@
   font-size: 0.8rem;
   color: var(--ink-soft);
   margin-top: 0.3rem;
+}
+/* odkazy v hintoch („Zabudnuté heslo?") — inak splývajú s obyčajným textom */
+.form-hint a {
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+.form-hint a:hover {
+  text-decoration: underline;
 }
 .form-error {
   display: flex;
@@ -1806,6 +1817,16 @@ a.row-item:hover {
   color: var(--ink-soft);
 }
 
+/* návratový odkaz „← Späť" — jeden vzor namiesto 4 inline kópií */
+.back-link {
+  color: var(--accent-ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+
 /* chips + badges */
 .chip {
   display: inline-flex;
@@ -1826,13 +1847,20 @@ a.row-item:hover {
   color: var(--chip-ink, var(--accent-ink));
 }
 /* pressed filter chip — was an inline style in LibraryBrowser/PlanBuilder */
-.chip[aria-pressed="true"] {
+.chip[aria-pressed="true"],
+.chip[aria-current="true"] {
   background: var(--accent-soft);
   color: var(--accent-ink);
   border-color: transparent;
 }
 button.chip {
   cursor: pointer;
+}
+/* dotykový variant chipu (prepínač detí a pod.) — plný 44px touch target */
+.chip-tap {
+  min-height: 44px;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.85rem;
 }
 .badge-count {
   display: inline-grid;
@@ -3587,6 +3615,13 @@ a.path-row:hover .path-card {
 }
 
 /* Eľkonin sound boxes */
+.sbx-revealed-word {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.9rem;
+}
 .sbx-word {
   display: flex;
   justify-content: center;
@@ -3696,6 +3731,20 @@ a.path-row:hover .path-card {
 .mem-tile[data-hidden] {
   background: var(--hue-navy);
   color: transparent;
+}
+/* paleta v recall fáze — hmatateľná odozva ako pri .opt-card */
+button.mem-tile {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+button.mem-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-ink);
+}
+button.mem-tile:active {
+  transform: translateY(0);
 }
 .mem-slot {
   border-style: dashed;
@@ -4304,6 +4353,10 @@ a.path-row:hover .path-card {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  /* skroluje sa vlákno, nie celá stránka — dlhá história neodsunie kompozér */
+  max-height: min(62vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .msg {
   max-width: 85%;
@@ -4884,6 +4937,8 @@ button.chip:hover {
   --success-ink:#66cb8f;  --success-soft:rgba(102,203,143,.16);
   --danger-ink:#f0928d;   --danger-soft:rgba(240,146,141,.15);
   --warn-ink:#e7b869;     --warn-soft:rgba(231,184,105,.15);
+  --danger-line:rgba(240,146,141,.35);
+  --warn-line:rgba(231,184,105,.3);
 
   --hue-sky:rgba(111,177,232,.18);    --hue-sky-ink:#8fc4f0;
   --hue-violet:rgba(160,142,232,.20); --hue-violet-ink:#b6a8f2;

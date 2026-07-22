@@ -8,6 +8,7 @@ import {
   type ChildUpdateState,
 } from "@/lib/parent/actions";
 import type { Child } from "@/lib/data/parent";
+import ConfirmSubmit from "./ConfirmSubmit";
 
 const AVATARS = ["🦊", "🐻", "🐰", "🦁", "🐸", "🐼", "🦄", "🐯", "🐙", "🦉"];
 
@@ -100,11 +101,8 @@ export default function ChildSettingsForm({ child }: { child: Child }) {
 
       <form
         action={deleteChildAction}
-        onSubmit={(e) => {
-          if (!window.confirm(t("deleteConfirm", { name: child.first_name }))) e.preventDefault();
-        }}
         className="card"
-        style={{ borderColor: "rgba(179, 64, 58, 0.35)" }}
+        style={{ borderColor: "var(--danger-line)" }}
       >
         <input type="hidden" name="child_id" value={child.id} />
         <h2 className="card-title" style={{ color: "var(--danger-ink)" }}>
@@ -113,9 +111,7 @@ export default function ChildSettingsForm({ child }: { child: Child }) {
         <p className="card-sub" style={{ marginBottom: "0.9rem" }}>
           {t("dangerLead")}
         </p>
-        <button type="submit" className="btn btn-sm btn-danger-ghost">
-          {t("deleteBtn")}
-        </button>
+        <ConfirmSubmit label={t("deleteBtn")} confirmLabel={t("deleteConfirmBtn")} />
       </form>
     </>
   );

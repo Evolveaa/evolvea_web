@@ -18,7 +18,10 @@ export default function AuthOrb() {
     if (!cv || !wrap || !cv.getContext) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Brand panel je na mobile display:none — nekresli do neviditeľného canvasu.
+    const desktop = window.matchMedia("(min-width: 900px)");
     const ctx = cv.getContext("2d")!;
+    let ready = false; // guard: resize() môže bežať skôr než je frame() definovaný
 
     const N = 260;
     const pts: { x: number; y: number; z: number }[] = [];
@@ -61,6 +64,8 @@ export default function AuthOrb() {
       H = b.height;
       cv!.width = Math.max(1, Math.round(W * DPR));
       cv!.height = Math.max(1, Math.round(H * DPR));
+      // zmena veľkosti canvas vymaže — pri reduced-motion nič iné neprekreslí
+      if (reduced && ready) frame(performance.now());
     }
     resize();
     window.addEventListener("resize", resize);
@@ -186,6 +191,7 @@ export default function AuthOrb() {
     }
 
     let rafId = 0;
+    ready = true;
     // prvý frame synchrónne — viditeľné aj pri pozastavenom rAF
     frame(performance.now());
     if (reduced) {
@@ -194,7 +200,8 @@ export default function AuthOrb() {
       let lastT = performance.now();
       const loop = (now: number) => {
         rafId = requestAnimationFrame(loop);
-        if (document.hidden) {
+        // panel skrytý (mobil) alebo tab na pozadí → nepáľ CPU
+        if (document.hidden || !desktop.matches) {
           lastT = now;
           return;
         }

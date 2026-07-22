@@ -42,6 +42,7 @@ export default function ForgotPasswordForm() {
             name="email"
             type="email"
             autoComplete="email"
+            defaultValue={state?.values?.email}
             required
           />
         </div>

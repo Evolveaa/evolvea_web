@@ -7,7 +7,7 @@ export default async function NewExercisePage() {
   return (
     <div style={{ maxWidth: 760 }}>
       <p style={{ marginBottom: "0.8rem" }}>
-        <Link href="/therapist/library" style={{ color: "var(--accent-ink)", fontSize: "0.88rem", fontWeight: 600 }}>
+        <Link href="/therapist/library" className="back-link">
           ← {t("backToLibrary")}
         </Link>
       </p>

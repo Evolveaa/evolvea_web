@@ -152,7 +152,7 @@ export default function MemorySequenceTask({
               key={`${e}-${i}`}
               type="button"
               className="mem-tile"
-              style={{ cursor: "pointer" }}
+              aria-label={e}
               onClick={() => pick(e)}
             >
               <Glyph emoji={e} size={54} />

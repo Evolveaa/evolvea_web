@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DomainTile, IconCheck } from "@/components/icons";
@@ -101,6 +101,13 @@ export default function ExercisePlayer({
   const [saveError, setSaveError] = useState(false);
   const startedAt = useRef<string>("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stayBtnRef = useRef<HTMLButtonElement>(null);
+
+  // Fokus do quit dialógu pri otvorení — inak Tab chodí po pozadí a čítačka
+  // o modáli nevie.
+  useEffect(() => {
+    if (confirmQuit) stayBtnRef.current?.focus();
+  }, [confirmQuit]);
 
   // stable per exercise, varied across the library — and pure (React compiler)
   const anchorIdx =
@@ -172,11 +179,40 @@ export default function ExercisePlayer({
   }
 
   const quitModal = confirmQuit ? (
-    <div className="pl-modal-overlay" role="dialog" aria-modal="true">
+    <div
+      className="pl-modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label={t("quitConfirm")}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          setConfirmQuit(false);
+          return;
+        }
+        // jednoduchý focus-trap medzi dvomi tlačidlami dialógu
+        if (e.key === "Tab") {
+          const btns = (e.currentTarget as HTMLElement).querySelectorAll("button");
+          const first = btns[0] as HTMLElement;
+          const last = btns[btns.length - 1] as HTMLElement;
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }}
+    >
       <div className="pl-modal">
         <p className="pl-modal-title">{t("quitConfirm")}</p>
         <div className="pl-modal-actions">
-          <button type="button" className="btn btn-outline btn-block" onClick={() => setConfirmQuit(false)}>
+          <button
+            type="button"
+            className="btn btn-outline btn-block"
+            ref={stayBtnRef}
+            onClick={() => setConfirmQuit(false)}
+          >
             {t("quitStay")}
           </button>
           <button type="button" className="btn btn-primary btn-block" onClick={doQuit}>
@@ -205,22 +241,29 @@ export default function ExercisePlayer({
             strategyHelped: helped,
           },
         };
-    const { ok } = await completeSessionAction({
-      childId,
-      exerciseId: exercise.id,
-      planItemId: planItemId ?? null,
-      supportLevel,
-      startedAt: startedAt.current || new Date().toISOString(),
-      scoreCorrect: scored ? summary.correct : null,
-      scoreTotal: scored ? summary.total : null,
-      hintsUsed: summary.hintsUsed,
-      detail,
-      parentNote: note,
-      speechAttemptIds: summary.speechAttemptIds,
-    });
-    setSaving(false);
-    if (ok) setPhase("saved");
-    else setSaveError(true);
+    try {
+      const { ok } = await completeSessionAction({
+        childId,
+        exerciseId: exercise.id,
+        planItemId: planItemId ?? null,
+        supportLevel,
+        startedAt: startedAt.current || new Date().toISOString(),
+        scoreCorrect: scored ? summary.correct : null,
+        scoreTotal: scored ? summary.total : null,
+        hintsUsed: summary.hintsUsed,
+        detail,
+        parentNote: note,
+        speechAttemptIds: summary.speechAttemptIds,
+      });
+      if (ok) setPhase("saved");
+      else setSaveError(true);
+    } catch {
+      // výpadok siete: bez catchu by tlačidlo ostalo navždy na „Ukladám…“
+      // a dokončená detská session by sa nedala odoslať znova
+      setSaveError(true);
+    } finally {
+      setSaving(false);
+    }
   }
 
   const wrapProps = { className: "player-wrap", "data-hue": meta.hue } as const;
@@ -347,7 +390,10 @@ export default function ExercisePlayer({
                 type="button"
                 className="opt-card opt-strategy"
                 data-state={selfEval === o.key ? "correct" : selfEval !== null ? "dim" : undefined}
-                onClick={() => setSelfEval((prev) => prev ?? o.key)}
+                aria-pressed={selfEval === o.key}
+                // voľbu možno zmeniť, kým dieťa nezodpovie follow-up — náhodný
+                // mis-tap by inak poslal logopédovi nesprávnu sebareflexiu
+                onClick={() => helped === null && setSelfEval(o.key)}
               >
                 <span className="opt-emoji" aria-hidden="true">
                   <Glyph emoji={o.emoji} size={52} />

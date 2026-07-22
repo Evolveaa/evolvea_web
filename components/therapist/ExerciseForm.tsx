@@ -277,9 +277,10 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                 {t("itemN", { n: i + 1 })}
               </legend>
               <div className="field">
-                <label className="label">{t("choicePrompt")}</label>
+                <label className="label" htmlFor={`choice-${i}-prompt`}>{t("choicePrompt")}</label>
                 <input
                   className="input"
+                  id={`choice-${i}-prompt`}
                   value={item.prompt}
                   maxLength={300}
                   required
@@ -448,16 +449,16 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                 {t("stepN", { n: i + 1 })}
               </legend>
               <div className="field">
-                <label className="label">{t("stepTitle")}</label>
-                <input className="input" value={step.title} maxLength={120} required onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, title: e.target.value } : p)))} />
+                <label className="label" htmlFor={`step-${i}-title`}>{t("stepTitle")}</label>
+                <input className="input" id={`step-${i}-title`} value={step.title} maxLength={120} required onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, title: e.target.value } : p)))} />
               </div>
               <div className="field">
-                <label className="label">{t("stepBody")}</label>
-                <textarea className="textarea" rows={3} maxLength={1200} required value={step.body} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, body: e.target.value } : p)))} />
+                <label className="label" htmlFor={`step-${i}-body`}>{t("stepBody")}</label>
+                <textarea className="textarea" id={`step-${i}-body`} rows={3} maxLength={1200} required value={step.body} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, body: e.target.value } : p)))} />
               </div>
               <div className="field">
-                <label className="label">{t("stepChoices")}</label>
-                <input className="input" placeholder={t("stepChoicesPlaceholder")} value={step.choices} maxLength={300} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, choices: e.target.value } : p)))} />
+                <label className="label" htmlFor={`step-${i}-choices`}>{t("stepChoices")}</label>
+                <input className="input" id={`step-${i}-choices`} placeholder={t("stepChoicesPlaceholder")} value={step.choices} maxLength={300} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, choices: e.target.value } : p)))} />
               </div>
               {step.fields.map((f, k) => (
                 <div key={k} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
@@ -507,8 +508,8 @@ export default function ExerciseForm({ exercise }: { exercise?: ExerciseRow }) {
                 </div>
               ))}
               <div className="field">
-                <label className="label">{t("stepTip")}</label>
-                <input className="input" value={step.tip} maxLength={300} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, tip: e.target.value } : p)))} />
+                <label className="label" htmlFor={`step-${i}-tip`}>{t("stepTip")}</label>
+                <input className="input" id={`step-${i}-tip`} value={step.tip} maxLength={300} onChange={(e) => setSteps((prev) => prev.map((p, j) => (j === i ? { ...p, tip: e.target.value } : p)))} />
               </div>
               <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 <button

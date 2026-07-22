@@ -198,7 +198,7 @@ export default function Home() {
                   className="lift"
                   href={MAIL}
                   style={{
-                    background: "var(--acc, #BF4318)",
+                    background: "var(--acc, #23407A)",
                     color: "#FAFAF8",
                     fontWeight: 500,
                     fontSize: "15.5px",
@@ -239,7 +239,7 @@ export default function Home() {
                   lineHeight: 0.9,
                   letterSpacing: "-0.04em",
                   fontWeight: 500,
-                  color: "var(--acc, #BF4318)",
+                  color: "var(--acc, #23407A)",
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
@@ -916,7 +916,7 @@ export default function Home() {
               className="lift"
               href={MAIL}
               style={{
-                background: "var(--acc, #BF4318)",
+                background: "var(--acc, #23407A)",
                 color: "#FAFAF8",
                 fontWeight: 500,
                 fontSize: "15.5px",

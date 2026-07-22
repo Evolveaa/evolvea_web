@@ -212,7 +212,7 @@
       "unknown": "Niečo sa pokazilo. Skúste to znova.",
       "callback": "Odkaz už nie je platný. Prihláste sa alebo si nechajte poslať nový."
     },
-    "confirmNotice": "Ak si klikol na potvrdzovací odkaz v e-maile, tvoj účet je už potvrdený — stačí sa prihlásiť nižšie.",
+    "confirmNotice": "Ak ste klikli na potvrdzovací odkaz v e-maile, váš účet je už potvrdený — stačí sa prihlásiť nižšie.",
     "heroHeadline": "Logopedická terapia, ktorá pokračuje aj doma.",
     "heroPoint1": "Cvičenia na mieru od vášho logopéda",
     "heroPoint2": "Pekný prehľad pokroku a chýb dieťaťa",
@@ -369,6 +369,7 @@
       "dangerTitle": "Vymazať údaje dieťaťa",
       "dangerLead": "Natrvalo odstráni profil dieťaťa aj všetky cvičenia, výsledky a správy. Toto sa nedá vrátiť späť.",
       "deleteBtn": "Vymazať všetky údaje",
+      "deleteConfirmBtn": "Naozaj vymazať — nenávratné",
       "deleteConfirm": "Naozaj vymazať všetky údaje dieťaťa {name}? Toto sa nedá vrátiť späť."
     },
     "planRhythmTitle": "Odporúčaný rytmus týždňa",
@@ -879,6 +880,7 @@
     "stateExpired": "Skúšobné obdobie sa skončilo. Aktivujte predplatné a pokračujte.",
     "stateCanceled": "Predplatné je zrušené. Kedykoľvek ho môžete obnoviť.",
     "cancelBtn": "Zrušiť predplatné",
+    "cancelConfirmBtn": "Naozaj zrušiť predplatné",
     "cancelConfirm": "Naozaj zrušiť predplatné? Prístup k cvičeniam sa skončí, dáta zostanú uložené.",
     "benefitsTitle": "Čo získate"
   },

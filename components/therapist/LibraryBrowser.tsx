@@ -2,12 +2,24 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useFormStatus } from "react-dom";
 import { useTranslations } from "next-intl";
 import { duplicateExerciseAction, toggleExerciseActiveAction } from "@/lib/therapist/actions";
 import { DomainTile } from "@/components/icons";
 import CategoryFilter from "@/components/exercises/CategoryFilter";
 import { DOMAINS, type ExerciseDomain, type ExerciseModality } from "@/lib/exercises/types";
 import { focusOf, inAgeBand, type FocusKey, type AgeBandKey } from "@/lib/exercises/categories";
+
+/** Submit s pending stavom — dvojklik inak spustí server action dvakrát
+ *  (duplikát cvičenia v knižnici). */
+function PendingSubmit({ className, children }: { className: string; children: React.ReactNode }) {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" className={className} disabled={pending}>
+      {children}
+    </button>
+  );
+}
 
 export interface LibraryRow {
   id: string;
@@ -169,9 +181,9 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
                       </Link>
                       <form action={duplicateExerciseAction}>
                         <input type="hidden" name="exercise_id" value={e.id} />
-                        <button type="submit" className="btn btn-sm btn-outline">
+                        <PendingSubmit className="btn btn-sm btn-outline">
                           {t("duplicate")}
-                        </button>
+                        </PendingSubmit>
                       </form>
                       {e.mine && (
                         <>
@@ -181,9 +193,9 @@ export default function LibraryBrowser({ exercises }: { exercises: LibraryRow[] 
                           <form action={toggleExerciseActiveAction}>
                             <input type="hidden" name="exercise_id" value={e.id} />
                             <input type="hidden" name="active" value={String(!e.is_active)} />
-                            <button type="submit" className="btn btn-sm btn-danger-ghost">
+                            <PendingSubmit className="btn btn-sm btn-danger-ghost">
                               {e.is_active ? t("deactivate") : t("activate")}
-                            </button>
+                            </PendingSubmit>
                           </form>
                         </>
                       )}

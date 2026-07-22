@@ -29,7 +29,9 @@ export default function LoginForm({
         </p>
       )}
       {calloutError && !confirmNotice && !state && (
-        <p className="form-error">{t("errors.callback")}</p>
+        <p className="form-error" role="alert">
+          {t("errors.callback")}
+        </p>
       )}
       {state?.error && (
         <p className="form-error" role="alert">
@@ -49,6 +51,7 @@ export default function LoginForm({
             name="email"
             type="email"
             autoComplete="email"
+            defaultValue={state?.values?.email}
             required
           />
         </div>

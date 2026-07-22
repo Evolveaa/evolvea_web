@@ -26,12 +26,7 @@ export default function ChildSwitcher({
         <button
           key={kid.id}
           type="button"
-          className="chip"
-          style={
-            kid.id === activeId
-              ? { background: "var(--accent-soft)", color: "var(--accent-ink)", borderColor: "transparent" }
-              : undefined
-          }
+          className="chip chip-tap"
           aria-pressed={kid.id === activeId}
           disabled={pending}
           onClick={() => startTransition(() => setActiveChildAction(kid.id))}

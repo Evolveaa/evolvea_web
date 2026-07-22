@@ -14,6 +14,9 @@ export type AuthState = {
   error?: "invalid" | "unconfirmed" | "exists" | "weak_password" | "rate_limit" | "fields" | "unknown";
   sentTo?: string;
   resent?: boolean;
+  /** Posledné zadané hodnoty — React po dobehnutí action resetuje formulár,
+   *  formuláre ich vrátia cez defaultValue, aby chyba nezmazala vyplnené polia. */
+  values?: { email?: string; fullName?: string };
 } | null;
 
 function safeNext(next: unknown): string | null {
@@ -29,10 +32,11 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    if (error.code === "email_not_confirmed") return { error: "unconfirmed", sentTo: email };
-    if (error.code === "invalid_credentials") return { error: "invalid" };
-    if (error.status === 429) return { error: "rate_limit" };
-    return { error: "unknown" };
+    const values = { email };
+    if (error.code === "email_not_confirmed") return { error: "unconfirmed", sentTo: email, values };
+    if (error.code === "invalid_credentials") return { error: "invalid", values };
+    if (error.status === 429) return { error: "rate_limit", values };
+    return { error: "unknown", values };
   }
 
   const { data: profile } = await supabase
@@ -53,8 +57,9 @@ export async function registerAction(_prev: AuthState, formData: FormData): Prom
   const password = String(formData.get("password") ?? "");
   const consent = formData.get("consent") === "on";
 
-  if (!fullName || !email || !consent) return { error: "fields" };
-  if (password.length < 8) return { error: "weak_password" };
+  const values = { email, fullName };
+  if (!fullName || !email || !consent) return { error: "fields", values };
+  if (password.length < 8) return { error: "weak_password", values };
 
   const locale = await getLocale();
   const origin = await requestOrigin();
@@ -71,14 +76,14 @@ export async function registerAction(_prev: AuthState, formData: FormData): Prom
 
   if (error) {
     if (error.code === "user_already_exists" || error.code === "email_exists")
-      return { error: "exists" };
-    if (error.code === "weak_password") return { error: "weak_password" };
-    if (error.status === 429) return { error: "rate_limit" };
-    return { error: "unknown" };
+      return { error: "exists", values };
+    if (error.code === "weak_password") return { error: "weak_password", values };
+    if (error.status === 429) return { error: "rate_limit", values };
+    return { error: "unknown", values };
   }
 
   // Supabase obfuscates duplicate signups: existing users come back with no identities.
-  if (data.user && (data.user.identities?.length ?? 0) === 0) return { error: "exists" };
+  if (data.user && (data.user.identities?.length ?? 0) === 0) return { error: "exists", values };
 
   // If e-mail confirmation is disabled, signUp already returns a session —
   // skip the (fragile) e-mail round-trip and go straight into the app.
