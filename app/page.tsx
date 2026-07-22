@@ -5,6 +5,7 @@ import Orb from "@/components/landing/Orb";
 import LandingFx from "@/components/landing/LandingFx";
 import LiveDemoCard from "@/components/landing/LiveDemoCard";
 import Dots168 from "@/components/landing/Dots168";
+import AuthOrb from "@/components/auth/AuthOrb";
 
 const instrument = Instrument_Sans({
   subsets: ["latin", "latin-ext"],
@@ -120,6 +121,7 @@ export default function Home() {
           <Orb />
           <p
             data-r="0"
+            data-k
             style={{
               position: "relative",
               zIndex: 1,
@@ -195,7 +197,7 @@ export default function Home() {
                 }}
               >
                 <a
-                  className="lift"
+                  className="lift cta"
                   href={MAIL}
                   style={{
                     background: "var(--acc, #23407A)",
@@ -297,6 +299,7 @@ export default function Home() {
         <section id="funguje" data-wrap style={{ paddingTop: "clamp(120px, 16vw, 200px)" }}>
           <p
             data-r="0"
+            data-k
             style={{
               margin: 0,
               fontSize: "12.5px",
@@ -354,17 +357,7 @@ export default function Home() {
                   paddingBottom: "clamp(28px, 4vw, 44px)",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "13px",
-                    letterSpacing: "0.1em",
-                    color: "#6E6B60",
-                    fontWeight: 500,
-                    paddingTop: "7px",
-                  }}
-                >
-                  {s.n}
-                </div>
+                <div data-num>{s.n}</div>
                 <h3
                   style={{
                     margin: 0,
@@ -399,6 +392,7 @@ export default function Home() {
             <div>
               <p
                 data-r="0"
+                data-k
                 style={{
                   margin: 0,
                   fontSize: "12.5px",
@@ -441,10 +435,10 @@ export default function Home() {
             </div>
             <div data-bleed>
               <div
+                className="lp-panel"
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E6E3DA",
-                  borderRadius: "10px",
                   overflow: "hidden",
                 }}
               >
@@ -453,14 +447,23 @@ export default function Home() {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "baseline",
+                    alignItems: "center",
                     gap: "12px",
                     padding: "16px 22px",
                     borderBottom: "1px solid #E6E3DA",
                   }}
                 >
-                  <span style={{ fontSize: "13.5px", fontWeight: 500, letterSpacing: "-0.01em" }}>
-                    Evolvea · Panel
+                  <span style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span className="lp-win" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    <span
+                      style={{ fontSize: "13.5px", fontWeight: 500, letterSpacing: "-0.01em" }}
+                    >
+                      Evolvea · Panel
+                    </span>
                   </span>
                   <span style={{ fontSize: "12.5px", color: "#6E6B60" }}>
                     štvrtok 16. júla · 20:14
@@ -564,15 +567,7 @@ export default function Home() {
                           color: row.done ? "#6E6B60" : undefined,
                         }}
                       >
-                        <span
-                          style={{
-                            width: "6px",
-                            height: "6px",
-                            borderRadius: "50%",
-                            background: row.done ? "#C9C5B8" : "#191813",
-                            flex: "none",
-                          }}
-                        />
+                        <span data-dot data-live={row.done ? undefined : ""} />
                         {row.status}
                       </div>
                     </div>
@@ -604,6 +599,7 @@ export default function Home() {
             <div>
               <p
                 data-r="0"
+                data-k
                 style={{
                   margin: 0,
                   fontSize: "12.5px",
@@ -668,6 +664,7 @@ export default function Home() {
                 <div
                   key={it.n}
                   data-r={i}
+                  data-row
                   style={{
                     display: "grid",
                     gridTemplateColumns: "52px 1fr",
@@ -678,17 +675,7 @@ export default function Home() {
                     paddingBottom: "30px",
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      letterSpacing: "0.1em",
-                      color: "#6E6B60",
-                      fontWeight: 500,
-                      paddingTop: "4px",
-                    }}
-                  >
-                    {it.n}
-                  </div>
+                  <div data-num>{it.n}</div>
                   <div>
                     <h3
                       style={{
@@ -739,6 +726,7 @@ export default function Home() {
                     letterSpacing: "-0.03em",
                     lineHeight: 1,
                     fontVariantNumeric: "tabular-nums",
+                    color: "var(--acc, #23407A)",
                   }}
                 >
                   {s.pre}
@@ -766,6 +754,7 @@ export default function Home() {
         <section id="prax" data-wrap style={{ paddingTop: "clamp(120px, 16vw, 200px)" }}>
           <p
             data-r="0"
+            data-k
             style={{
               margin: 0,
               fontSize: "12.5px",
@@ -812,6 +801,7 @@ export default function Home() {
               <div
                 key={it.h}
                 data-grid2
+                data-row
                 data-r="0"
                 style={{
                   borderTop: "1px solid #E6E3DA",
@@ -853,14 +843,27 @@ export default function Home() {
       <section
         id="kontakt"
         aria-labelledby="kontakt-nadpis"
-        style={{ background: "#191813", color: "#F5F3EC", marginTop: "clamp(130px, 17vw, 210px)" }}
+        style={{
+          background: "#191813",
+          color: "#F5F3EC",
+          marginTop: "clamp(130px, 17vw, 210px)",
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
+        {/* biela ozvena hero gule — rovnaký motív otvára aj uzatvára stránku */}
+        <AuthOrb className="lp-kontakt-orb" />
         <div
           data-wrap
-          style={{ paddingTop: "clamp(90px, 12vw, 150px)", paddingBottom: "clamp(56px, 8vw, 90px)" }}
+          style={{
+            paddingTop: "clamp(90px, 12vw, 150px)",
+            paddingBottom: "clamp(56px, 8vw, 90px)",
+            position: "relative",
+          }}
         >
           <p
             data-r="0"
+            data-k
             style={{
               margin: 0,
               fontSize: "12.5px",
@@ -913,7 +916,7 @@ export default function Home() {
             }}
           >
             <a
-              className="lift"
+              className="lift cta"
               href={MAIL}
               style={{
                 background: "var(--acc, #23407A)",

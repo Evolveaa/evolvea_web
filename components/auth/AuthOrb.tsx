@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Mini „neurónová" sféra pre brand panel auth obrazoviek — tichšia ozvena
- * hero gule z landingu (biele bodky na tmavom pozadí, pomalé otáčanie,
- * občasná synapsia). Bez interakcie, čisto ambientná. Rešpektuje
- * prefers-reduced-motion aj document.hidden.
+ * Mini „neurónová" sféra — tichšia ozvena hero gule (biele bodky na tmavom
+ * pozadí, pomalé otáčanie, občasná synapsia). Bez interakcie, čisto
+ * ambientná. Používa ju auth brand panel aj tmavá kontakt sekcia landingu
+ * (cez className). Rešpektuje prefers-reduced-motion aj document.hidden.
  */
-export default function AuthOrb() {
+export default function AuthOrb({ className = "auth-brand-orb" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -220,7 +220,7 @@ export default function AuthOrb() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="auth-brand-orb" aria-hidden="true">
+    <div ref={wrapRef} className={className} aria-hidden="true">
       <canvas ref={canvasRef} />
     </div>
   );

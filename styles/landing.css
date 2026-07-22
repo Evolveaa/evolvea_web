@@ -9,7 +9,10 @@
 
 .lp {
   --acc: #23407a;
-  background: #fafaf8;
+  /* jemný modrastý nádych pri hero gule — hĺbka bez šumu */
+  background:
+    radial-gradient(90% 46% at 76% -6%, rgba(52, 94, 172, 0.055), transparent 62%),
+    #fafaf8;
   color: #191813;
   font-family: var(--font-instrument), "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,10 +57,135 @@
 .lp .lift {
   transition:
     transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.2s;
+    opacity 0.2s,
+    box-shadow 0.2s;
 }
 .lp .lift:hover {
   transform: translateY(-2px);
+}
+/* primárne CTA — mäkký modrý tieň, nech pôsobí hmatateľne */
+.lp .cta {
+  box-shadow: 0 14px 30px -14px rgba(35, 64, 122, 0.55);
+}
+.lp .cta:hover {
+  opacity: 1;
+  box-shadow: 0 20px 40px -16px rgba(35, 64, 122, 0.6);
+}
+
+/* ---- Kickery sekcií — krátka akcentová linka pred textom ---- */
+.lp [data-k] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.lp [data-k]::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  border-radius: 1px;
+  background: #345eac;
+  opacity: 0.55;
+  flex: none;
+}
+.lp #kontakt [data-k]::before {
+  background: #f5f3ec;
+  opacity: 0.4;
+}
+
+/* ---- Číslovanie krokov — tiché akcentové numerály ---- */
+.lp [data-num] {
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding-top: 6px;
+  color: rgba(35, 64, 122, 0.35);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.25s;
+}
+.lp [data-steps] h3,
+.lp [data-row] h3 {
+  transition: color 0.25s;
+}
+.lp [data-steps]:hover [data-num],
+.lp [data-row]:hover [data-num] {
+  color: var(--acc, #23407a);
+}
+.lp [data-steps]:hover h3,
+.lp [data-row]:hover h3 {
+  color: var(--acc, #23407a);
+}
+
+/* ---- Panel logopéda — produktové okno ---- */
+.lp .lp-panel {
+  border-radius: 14px;
+  box-shadow:
+    0 1px 2px rgba(25, 24, 19, 0.04),
+    0 26px 60px -32px rgba(25, 24, 19, 0.28);
+}
+.lp .lp-win {
+  display: inline-flex;
+  gap: 5px;
+}
+.lp .lp-win i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e6e3da;
+}
+.lp [data-trow] {
+  transition: background 0.2s;
+}
+.lp [data-trow][role="row"]:hover {
+  background: #fbfaf6;
+}
+/* stavové bodky — čakajúce sedenia jemne pulzujú (panel „žije") */
+.lp [data-dot] {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9c5b8;
+  flex: none;
+}
+.lp [data-dot][data-live] {
+  background: var(--acc, #23407a);
+  animation: lpDotPulse 2.4s ease-in-out infinite;
+}
+@keyframes lpDotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(35, 64, 122, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(35, 64, 122, 0);
+  }
+}
+
+/* ---- Kontakt — biela ozvena hero gule uzatvára stránku ---- */
+.lp .lp-kontakt-orb {
+  position: absolute;
+  top: -6%;
+  right: -8%;
+  width: clamp(280px, 36vw, 540px);
+  aspect-ratio: 1 / 1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.lp .lp-kontakt-orb canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media (max-width: 899px) {
+  .lp .lp-kontakt-orb {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp [data-dot][data-live] {
+    animation: none;
+  }
 }
 
 /* ---- Hero „guľa" (neurón) — menšia, živá, s jemnou žiarou ---- */
