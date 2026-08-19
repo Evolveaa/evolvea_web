@@ -37,3 +37,6 @@ next-env.d.ts
 *.tsbuildinfo
 .vercel
 /e2e-shots/
+
+# Vyrenderované promo video (zdroj je v tools/promo-video, výstup nie)
+/tools/promo-video/out/
