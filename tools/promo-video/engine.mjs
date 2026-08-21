@@ -61,6 +61,56 @@ export function createMix(durationSeconds) {
     }
   }
 
+  /* ---- „hracia skrinka": krátky, jasný, mäkký tón ------------------
+     Toto nesie hudbu namiesto dronového padu. Rozložený akord z týchto
+     tónov znie ako bežná príjemná hudba, nie ako hučanie. */
+  function pluck(t0, f, gain, o = {}) {
+    const decay = o.decay ?? 0.85, pan = o.pan ?? .5;
+    const dur = decay * 3.0, atk = 0.006;
+    const i0 = Math.round(t0 * SR), n = Math.round(dur * SR);
+    const gl = gain * panL(pan), gr = gain * panR(pan);
+    const P = [[1, 1], [2, .38], [3, .13], [4, .05], [5.4, .02]];
+    for (let i = 0; i < n; i++) {
+      const idx = i0 + i; if (idx < 0 || idx >= N) break;
+      const x = i / SR;
+      const a = x < atk ? x / atk : 1;
+      let s = 0;
+      for (const [k, amp] of P) {
+        if (f * k > 15000) break;
+        s += amp * Math.sin(2 * Math.PI * f * k * x) * Math.exp(-x / (decay / (1 + (k - 1) * 0.5)));
+      }
+      s *= a * 0.4;
+      put(idx, s * gl, s * gr);
+    }
+  }
+
+  /* ---- sláčiky: pomalý nábeh, vibráto, dlhý dozvuk ------------------
+     Vrstvia sa pod plstený klavír — tá istá nota znie plnšie a teplejšie,
+     bez toho, aby pribudol ďalší úder. */
+  function strings(t0, f, gain, o = {}) {
+    const dur = o.dur ?? 3.4, atk = o.atk ?? 0.55, rel = o.rel ?? 1.6, pan = o.pan ?? .5;
+    const i0 = Math.round(t0 * SR), n = Math.round((dur + rel) * SR);
+    const gl = gain * panL(pan), gr = gain * panR(pan);
+    let lp = 0, lp2 = 0;
+    for (let i = 0; i < n; i++) {
+      const idx = i0 + i; if (idx < 0 || idx >= N) break;
+      const x = i / SR;
+      const a = x < atk ? (x / atk) * (x / atk) * (3 - 2 * (x / atk)) : 1;
+      const r = x > dur ? Math.max(0, 1 - (x - dur) / rel) : 1;
+      const env = a * r * r;
+      const vib = 1 + 0.0035 * Math.sin(2 * Math.PI * 4.6 * x + f);   // jemné vibráto
+      let sig = 0;
+      for (let k = 1; k <= 6; k++) {
+        const ff = f * k * vib;
+        if (ff > 15000) break;
+        sig += Math.sin(2 * Math.PI * ff * x + k * 0.9) / Math.pow(k, 1.45);
+      }
+      lp += 0.09 * (sig - lp); lp2 += 0.09 * (lp - lp2);          // zjemnenie výšok
+      const v = lp2 * env * 0.5;
+      put(idx, v * gl, v * gr);
+    }
+  }
+
   /* ---- akordový pad s pomaly sa hýbucim filtrom --------------------- */
   function pad(t0, t1, freqs, gain, o = {}) {
     const fade = o.fade ?? 3.0, move = o.move ?? 0.031, ph = o.phase ?? 0;
@@ -180,7 +230,7 @@ export function createMix(durationSeconds) {
     return { L: Lw, R: Rw, gain: g, peak, N };
   }
 
-  return { felt, pad, swell, air, sub, render, N, noise };
+  return { felt, pluck, strings, pad, swell, air, sub, render, N, noise };
 }
 
 /* ---- zápis WAV ------------------------------------------------------ */

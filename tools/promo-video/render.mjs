@@ -10,6 +10,7 @@
  *   node tools/promo-video/render.mjs --fps=12 --scale=.5    # rýchly náhľad
  *   node tools/promo-video/render.mjs --stills=1.5,9,21,30   # kontrolné snímky
  *   node tools/promo-video/render.mjs --from=18 --to=28      # len úsek
+ *   node tools/promo-video/render.mjs --scene=scene-simple.html  # iná verzia
  */
 import { chromium } from 'playwright';
 import http from 'node:http';
@@ -33,6 +34,7 @@ const SCALE  = Number(argv.scale ?? 1);
 const OUT    = argv.out ?? path.join(DIR, 'out', 'evolvea-demo.mp4');
 const STILLS = argv.stills ? String(argv.stills).split(',').map(Number) : null;
 const KEEP   = !!argv.keep;
+const SCENE  = String(argv.scene ?? 'scene.html');   // ktorá verzia sa renderuje
 
 function serve(root) {
   return new Promise(resolve => {
@@ -65,7 +67,7 @@ const LAUNCH = {
 async function newWorker() {
   const browser = await chromium.launch(LAUNCH);
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: SCALE });
-  await page.goto(`http://127.0.0.1:${port}/scene.html`, { waitUntil: 'load' });
+  await page.goto(`http://127.0.0.1:${port}/${SCENE}`, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 30_000 });
   return { browser, page };
 }

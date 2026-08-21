@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Evolvea — demo</title>
+<style>
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-400.ttf') format('truetype');font-weight:400;font-display:block}
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-500.ttf') format('truetype');font-weight:500;font-display:block}
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-600.ttf') format('truetype');font-weight:600;font-display:block}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:#141210}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;
+    font-family:'Instrument Sans',ui-sans-serif,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+  #stage div,#stage span,#stage svg{position:absolute}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+/* =============================================================
+   Evolvea — „Odpoveď alebo otázka", ~32 s.
+
+   Jediná myšlienka, ukázaná bez vysvetľovania:
+   VĽAVO  dospelý poskladá skladačku ZA dieťa — v hlave dieťaťa
+          ostane prázdno.
+   VPRAVO dospelý sa iba spýta — a skladačka sa poskladá NAJPRV
+          V HLAVE dieťaťa, až potom na stole.
+
+   To je metakognitívny rozvoj: práca sa presunie dovnútra dieťaťa.
+   Split screen drží celý čas, tak ako v referencii. Textu minimum.
+   ============================================================= */
+const W=1920,H=1080,HALF=960;
+
+const C={
+  /* ľavá polovica — chladná, tmavá, statická */
+  lBg:'#171412', lTable:'#4A423A', lSkin:'#9A9287', lKid:'#5E564C', lAd:'#4E473E',
+  lInk:'#A8A094', lMute:'#7C7568', lPiece:'#6B6357', lLine:'#332E27',
+  /* pravá polovica — teplá, živá */
+  rBg:'#F6EEE0', rTable:'#C9A87A', rSkin:'#E8C39B', rKid:'#C4693C', rAd:'#3D5A7A',
+  rInk:'#2B2318', rMute:'#7A6F5E', rPiece:'#E8A33D', rPiece2:'#D9903A',
+  acc:'#23407a', paper:'#FAF7F1', ink:'#191813', muted:'#6E6B60',
+};
+
+const T={
+  scene:0.4, split:2.8, act:5.6,
+  lSolve:6.6,            // vľavo skladá dospelý
+  bubble:8.4,            // vpravo sa otvorí myšlienka
+  think:9.6,             // v hlave sa skladá
+  solve:14.2,            // dieťa poskladá na stole
+  smile:18.4,
+  merge:23.6, card:26.0,
+  end:32.5,
+};
+const DURATION=T.end;
+
+const cl=(x,a=0,b=1)=>x<a?a:(x>b?b:x);
+const u=(t,a,b)=>cl((t-a)/(b-a));
+const lerp=(a,b,x)=>a+(b-a)*x;
+const E={
+  o3:x=>1-Math.pow(1-x,3), o4:x=>1-Math.pow(1-x,4), o5:x=>1-Math.pow(1-x,5),
+  io3:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,
+  io5:x=>x<.5?16*Math.pow(x,5):1-Math.pow(-2*x+2,5)/2,
+  sin:x=>-(Math.cos(Math.PI*x)-1)/2,
+  back:x=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);},
+};
+const tv=(t,a,b,va,vb,e=E.o4)=>lerp(va,vb,e(u(t,a,b)));
+let _s=424242; const rnd=()=>{_s=(_s*1664525+1013904223)>>>0;return _s/4294967296;};
+const rr=(a,b)=>lerp(a,b,rnd());
+
+const stage=document.getElementById('stage');
+const el=(tag,p,st,tx)=>{const n=document.createElement(tag);if(st)Object.assign(n.style,st);
+  if(tx!=null)n.textContent=tx;(p||stage).appendChild(n);return n;};
+const box=(p,s)=>el('div',p,s);
+const txt=(p,t,s)=>el('div',p,s,t);
+function svg(p,w,h,inner,st){const n=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  n.setAttribute('width',w);n.setAttribute('height',h);n.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  n.innerHTML=inner;if(st)Object.assign(n.style,st);n.style.position='absolute';
+  (p||stage).appendChild(n);return n;}
+function set(n,o,x=0,y=0,s=1,r=0){n.style.opacity=o;
+  n.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`+(r?` rotate(${r}deg)`:'')+(s!==1?` scale(${s})`:'');}
+
+/* ---- postava: hlava, trup, dve otočné ruky, jednoduchá tvár ---- */
+let _pid=0;
+function person(parent,{x,y,s=1,skin,cloth,adult=false,ink=null}){
+  const id='q'+(_pid++);
+  const HR=adult?40:34, HY=adult?-224:-186, TW=adult?102:86, TH=adult?162:132;
+  const SY=HY+HR+24;
+  const g=box(parent,{left:x+'px',top:y+'px',width:'0',height:'0'});
+  const e=svg(g,460,460,`
+   <g transform="translate(230,460)">
+    <rect x="${-TW/2}" y="${HY+HR-6}" width="${TW}" height="${TH}" rx="${TW*0.42}" fill="${cloth}"/>
+    <g id="${id}L" transform="rotate(-28 ${-TW/2+8} ${SY})">
+      <rect x="${-TW/2-88}" y="${SY-9}" width="100" height="${adult?22:19}" rx="11" fill="${cloth}"/>
+      <circle cx="${-TW/2-88}" cy="${SY}" r="${adult?15:12}" fill="${skin}"/></g>
+    <g id="${id}R" transform="rotate(28 ${TW/2-8} ${SY})">
+      <rect x="${TW/2-12}" y="${SY-9}" width="100" height="${adult?22:19}" rx="11" fill="${cloth}"/>
+      <circle cx="${TW/2+88}" cy="${SY}" r="${adult?15:12}" fill="${skin}"/></g>
+    <circle cx="0" cy="${HY}" r="${HR}" fill="${skin}"/>
+    <rect id="${id}eL" x="${-HR*0.44}" y="${HY-HR*0.14}" width="${HR*0.24}" height="${HR*0.09}" rx="${HR*0.045}" fill="${ink||'#2B2318'}"/>
+    <rect id="${id}eR" x="${HR*0.20}"  y="${HY-HR*0.14}" width="${HR*0.24}" height="${HR*0.09}" rx="${HR*0.045}" fill="${ink||'#2B2318'}"/>
+    <path id="${id}m" stroke="${ink||'#2B2318'}" stroke-width="${HR*0.085}" stroke-linecap="round" fill="none"/>
+   </g>`,
+   {left:'-230px',top:'-460px',transformOrigin:'230px 460px',transform:`scale(${s})`});
+  const Q=k=>e.querySelector('#'+id+k);
+  const o={root:g,
+    arm(l,r){Q('L').setAttribute('transform',`rotate(${l.toFixed(1)} ${-TW/2+8} ${SY})`);
+             Q('R').setAttribute('transform',`rotate(${r.toFixed(1)} ${TW/2-8} ${SY})`);},
+    mood(m){const mw=HR*0.40,my=HY+HR*0.40,k=m*HR*0.30;
+      Q('m').setAttribute('d',`M ${-mw} ${my} Q 0 ${my+k} ${mw} ${my}`);}};
+  o.mood(0); return o;
+}
+
+const updaters=[];
+
+/* ---------------------------------------------------------------
+   Dve polovice — obe začínajú rovnako, aby bol rozdiel čitateľný
+   --------------------------------------------------------------- */
+const bgFull=box(stage,{left:'0px',top:'0px',width:W+'px',height:H+'px',background:C.rBg,opacity:'0'});
+const bgL=box(stage,{left:'0px',top:'0px',width:HALF+'px',height:H+'px',background:C.lBg});
+box(bgL,{left:0,top:0,width:HALF+'px',height:H+'px',
+  background:'radial-gradient(70% 56% at 46% 44%, rgba(255,238,214,.05), transparent 72%)'});
+const bgR=box(stage,{left:HALF+'px',top:'0px',width:HALF+'px',height:H+'px',background:C.rBg});
+box(bgR,{left:0,top:0,width:HALF+'px',height:H+'px',
+  background:'radial-gradient(72% 58% at 52% 34%, rgba(255,214,150,.30), transparent 70%)'});
+const paneL=box(stage,{left:'0px',top:'0px',width:HALF+'px',height:H+'px'});
+const paneR=box(stage,{left:HALF+'px',top:'0px',width:HALF+'px',height:H+'px'});
+const seam=box(stage,{left:(HALF-1)+'px',top:'0px',width:'2px',height:H+'px',background:'rgba(0,0,0,.16)'});
+
+/* ---- jedna polovica: stôl, dieťa, dospelý, dieliky ---- */
+const GX=418, GY=520, PS=58, PG=5;                    // cieľová mriežka 3×2
+function half(pane,c,dark){
+  const g={};
+  g.table=box(pane,{left:'146px',top:'640px',width:'668px',height:'18px',borderRadius:'7px',background:c.table});
+  g.leg1 =box(pane,{left:'214px',top:'658px',width:'18px',height:'132px',background:c.table,opacity:'.8'});
+  g.leg2 =box(pane,{left:'728px',top:'658px',width:'18px',height:'132px',background:c.table,opacity:'.8'});
+  g.kid  =person(pane,{x:322,y:700,s:1,skin:c.skin,cloth:c.kid,ink:c.ink});
+  g.ad   =person(pane,{x:690,y:716,s:1,skin:c.skin,cloth:c.ad,adult:true,ink:c.ink});
+  g.pc=[];
+  for(let i=0;i<6;i++){
+    const p=box(pane,{width:PS+'px',height:PS+'px',borderRadius:'8px',
+      background:dark?c.piece:(i%2?c.piece2:c.piece),
+      boxShadow:dark?'none':'0 6px 14px -8px rgba(60,34,6,.5)'});
+    p.__slot=[GX+(i%3)*(PS+PG), GY+Math.floor(i/3)*(PS+PG)];
+    p.__home=[GX-40+rr(-46,150), GY+26+rr(-14,34)];
+    p.__rot=rr(-24,24);
+    g.pc.push(p);
+  }
+  return g;
+}
+const L=half(paneL,{table:C.lTable,skin:C.lSkin,kid:C.lKid,ad:C.lAd,piece:C.lPiece,piece2:C.lPiece,ink:'#241F1A'},true);
+const R=half(paneR,{table:C.rTable,skin:C.rSkin,kid:C.rKid,ad:C.rAd,piece:C.rPiece,piece2:C.rPiece2,ink:'#2B2318'},false);
+
+/* ---- myšlienková bublina nad dieťaťom ---- */
+function thought(pane,{x,y,w,h,bg,border}){
+  const b=box(pane,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',borderRadius:'40px',
+    background:bg,border:`2px solid ${border}`,transformOrigin:(w*0.72)+'px '+h+'px'});
+  const d1=box(pane,{left:(x+w*0.70)+'px',top:(y+h+12)+'px',width:'26px',height:'26px',
+    borderRadius:'50%',background:bg,border:`2px solid ${border}`});
+  const d2=box(pane,{left:(x+w*0.62)+'px',top:(y+h+46)+'px',width:'15px',height:'15px',
+    borderRadius:'50%',background:bg,border:`2px solid ${border}`});
+  return {b,d1,d2,show(t,a,g=1){const p=E.back(u(t,a,a+.7));const o=cl(p*1.7)*g;
+    set(b,o,0,lerp(14,0,cl(p)),lerp(.8,1,p));
+    set(d1,cl(E.back(u(t,a+.12,a+.7))*1.7)*g,0,0);
+    set(d2,cl(E.back(u(t,a+.22,a+.78))*1.7)*g,0,0);return o;}};
+}
+const thL=thought(paneL,{x:96,y:214,w:368,h:214,bg:'rgba(255,255,255,.045)',border:'rgba(142,135,123,.42)'});
+const thR=thought(paneR,{x:96,y:214,w:368,h:214,bg:'rgba(255,255,255,.72)',border:'rgba(43,35,24,.28)'});
+
+/* dieliky VO VNÚTRI hlavy — to je celý rozdiel */
+const MS=42, MG=4, MX=96+(368-(3*MS+2*MG))/2, MY=214+(214-(2*MS+MG))/2;
+const mini=[];
+for(let i=0;i<6;i++){
+  const p=box(paneR,{width:MS+'px',height:MS+'px',borderRadius:'6px',
+    background:i%2?C.rPiece2:C.rPiece});
+  p.__slot=[MX+(i%3)*(MS+MG), MY+Math.floor(i/3)*(MS+MG)];
+  p.__home=[MX+rr(-24,120), MY+rr(-12,52)];
+  p.__rot=rr(-26,26);
+  mini.push(p);
+}
+
+/* otáznik nad dospelým vpravo — celý jeho príspevok */
+const askR=box(paneR,{left:'560px',top:'250px',width:'150px',height:'150px',borderRadius:'42px',
+  background:'rgba(255,255,255,.82)',border:'2px solid rgba(35,64,122,.30)',transformOrigin:'50px 150px'});
+txt(askR,'?',{left:'0px',top:'26px',width:'150px',textAlign:'center',color:C.acc,
+  fontSize:'86px',fontWeight:'600'});
+const askTail=svg(paneR,30,26,`<path d="M2 2 L28 2 L10 24 Z" fill="rgba(255,255,255,.82)"/>`,
+  {left:'596px',top:'399px'});
+
+/* otázniky nad dieťaťom vľavo — nič sa v ňom nedeje */
+const qs=[[176,300,58],[252,246,42],[132,236,36]].map(([x,y,s])=>
+  txt(paneL,'?',{left:x+'px',top:y+'px',color:C.lMute,fontSize:s+'px',fontWeight:'500',opacity:'0'}));
+
+/* štítky ako v referencii */
+const labL=txt(paneL,'Dostane odpoveď',{left:'96px',top:'962px',color:C.lMute,
+  fontSize:'15px',fontWeight:'500',letterSpacing:'.2em',textTransform:'uppercase'});
+const labR=txt(paneR,'Dostane otázku',{left:'520px',top:'962px',width:'344px',textAlign:'right',
+  color:C.acc,fontSize:'15px',fontWeight:'600',letterSpacing:'.2em',textTransform:'uppercase'});
+
+/* ---------------------------------------------------------------
+   ANIMÁCIA
+   --------------------------------------------------------------- */
+updaters.push(t=>{
+  const gone=E.io5(u(t,T.merge,T.merge+1.5));          // ľavá polovica odchádza
+  const fade=1-E.io3(u(t,T.card-.6,T.card+.3));
+
+  /* pozadia a šev */
+  bgL.style.transform=`translate3d(${(-HALF*gone).toFixed(1)}px,0,0)`;
+  paneL.style.transform=`translate3d(${(-HALF*gone).toFixed(1)}px,0,0)`;
+  bgL.style.opacity=String(1-E.o3(gone));
+  paneL.style.opacity=String(1-E.o3(gone));
+  const grow=E.io5(u(t,T.merge+.1,T.merge+1.6));
+  bgFull.style.opacity=String(E.io3(u(t,T.merge-.1,T.merge+.7)));
+  bgR.style.left=lerp(HALF,0,grow)+'px'; bgR.style.width=lerp(HALF,W,grow)+'px';
+  paneR.style.left=lerp(HALF,0,grow)+'px';
+  paneR.style.transform=`translate3d(${(lerp(0,480,grow)).toFixed(1)}px,0,0)`;
+  set(seam,tv(t,T.split,T.split+.8,0,1,E.o3)*(1-gone),0,0);
+
+  /* obe polovice nabehnú rovnako */
+  const inp=E.o5(u(t,T.scene,T.scene+1.2));
+  [L,R].forEach(g=>{
+    [g.table,g.leg1,g.leg2].forEach(n=>set(n,cl(inp*1.4),0,lerp(22,0,inp)));
+    set(g.kid.root,cl(inp*1.4),0,lerp(26,0,inp));
+    set(g.ad.root,cl(inp*1.4),0,lerp(26,0,inp));
+  });
+  set(labL,tv(t,T.split+.3,T.split+1.1,0,1,E.o3)*(1-gone),0,0);
+  set(labR,tv(t,T.split+.3,T.split+1.1,0,1,E.o3)*(1-E.io3(u(t,T.merge,T.merge+.6))),0,0);
+
+  /* ── VĽAVO: dospelý poskladá za dieťa ── */
+  const la=E.io3(u(t,T.act,T.lSolve));                 // ruka ide k dielikom
+  const lb=E.io3(u(t,T.lSolve,T.lSolve+2.4));          // skladá
+  L.ad.arm(lerp(-28,-4,la)+lerp(0,10,lb), 28);
+  L.ad.mood(0);
+  L.kid.arm(-32,32); L.kid.mood(lerp(0,-.55,E.io3(u(t,T.lSolve+1.6,T.lSolve+3.4))));
+  L.pc.forEach((p,i)=>{
+    const a=T.lSolve+i*.26, k=E.io3(u(t,a,a+.7));
+    const x=lerp(p.__home[0],p.__slot[0],k), y=lerp(p.__home[1],p.__slot[1],k)-Math.sin(k*Math.PI)*54;
+    p.style.left=x+'px'; p.style.top=y+'px';
+    set(p,cl(inp*1.4),0,lerp(20,0,inp),1,lerp(p.__rot,0,k));
+  });
+  thL.show(t,T.bubble,1);                              // ostane prázdna
+  qs.forEach((q,i)=>{const a=T.smile-1.2+i*.34, p=E.o4(u(t,a,a+.8));
+    set(q,p*.8,0,lerp(20,0,p)+Math.sin((t-a)*1.4)*4,lerp(.7,1,p));});
+
+  /* ── VPRAVO: dospelý sa iba spýta ── */
+  const ap=E.back(u(t,T.act,T.act+.7));
+  const aq=1-E.io3(u(t,T.solve-.6,T.solve+.2));
+  set(askR,cl(ap*1.7)*aq,0,lerp(14,0,cl(ap)),lerp(.8,1,ap));
+  set(askTail,cl(ap*1.7)*aq,0,lerp(14,0,cl(ap)));
+  R.ad.arm(-28,28); R.ad.mood(lerp(.25,.7,E.io3(u(t,T.smile,T.smile+1.2))));
+
+  /* v hlave dieťaťa sa skladačka poskladá NAJPRV */
+  thR.show(t,T.bubble,1);
+  const mo=cl(E.back(u(t,T.bubble,T.bubble+.7))*1.7);
+  mini.forEach((p,i)=>{
+    const a=T.think+i*.52, k=E.io3(u(t,a,a+.9));
+    const x=lerp(p.__home[0],p.__slot[0],k), y=lerp(p.__home[1],p.__slot[1],k);
+    p.style.left=x+'px'; p.style.top=y+'px';
+    set(p,mo,0,0,1,lerp(p.__rot,0,k));
+  });
+  /* a až potom rukami na stole */
+  const reach=Math.sin(Math.PI*cl(u(t,T.solve,T.solve+3.6)));
+  R.kid.arm(-30, 30+reach*30);
+  R.kid.mood(lerp(0,.9,E.io3(u(t,T.smile,T.smile+1.4))));
+  R.pc.forEach((p,i)=>{
+    const a=T.solve+i*.5, k=E.io3(u(t,a,a+.8));
+    const x=lerp(p.__home[0],p.__slot[0],k), y=lerp(p.__home[1],p.__slot[1],k)-Math.sin(k*Math.PI)*46;
+    p.style.left=x+'px'; p.style.top=y+'px';
+    set(p,cl(inp*1.4),0,lerp(20,0,inp),1,lerp(p.__rot,0,k));
+  });
+});
+
+/* ---------------------------------------------------------------
+   ZÁVER — jedna veta
+   --------------------------------------------------------------- */
+{
+  const card=box(stage,{left:'0px',top:'0px',width:W+'px',height:H+'px',background:C.paper});
+  const h=box(card,{left:'260px',top:'414px',width:'1400px',display:'flex',flexWrap:'wrap',
+    justifyContent:'center'});
+  const parts=[];
+  'Evolvea rozvíja to, ako deti myslia.'.split(' ').forEach(w=>{
+    const hold=el('span',h,{position:'relative',display:'inline-block',overflow:'hidden',
+      lineHeight:1.24,marginRight:'.3em',fontSize:'70px',fontWeight:'500',letterSpacing:'-.035em',color:C.ink});
+    parts.push(el('span',hold,{position:'relative',display:'inline-block',lineHeight:1.24},w));
+  });
+  const sub=txt(card,'Digitálny spoločník k terapii — pre logopédov a rodiny.',
+    {left:'0px',top:'552px',width:W+'px',textAlign:'center',color:C.muted,fontSize:'25px'});
+  const url=txt(card,'evolvea.sk',{left:'0px',top:'644px',width:W+'px',textAlign:'center',
+    color:C.acc,fontSize:'19px',fontWeight:'600',letterSpacing:'.2em',textTransform:'uppercase'});
+  updaters.push(t=>{
+    const on=E.io3(u(t,T.card-.5,T.card+.5));
+    card.style.display=on>.001?'block':'none';
+    if(on<=.001)return;
+    card.style.opacity=String(on);
+    parts.forEach((s,i)=>{const p=E.o5(u(t,T.card+.3+i*.05,T.card+1.1+i*.05));
+      s.style.transform=`translate3d(0,${lerp(112,0,p).toFixed(1)}%,0)`;
+      s.style.opacity=cl(p*2);});
+    set(sub,tv(t,T.card+1.1,T.card+1.9,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.1,T.card+2.0))));
+    set(url,tv(t,T.card+1.5,T.card+2.3,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.5,T.card+2.4))));
+  });
+}
+
+const grain=box(stage,{left:0,top:0,width:W+'px',height:H+'px',opacity:'.16',mixBlendMode:'soft-light',
+  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='7'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E\")"});
+const fadeOut=box(stage,{left:0,top:0,width:W+'px',height:H+'px',background:C.paper,opacity:'0'});
+
+window.__duration=DURATION;
+window.__seek=function(t){
+  t=Math.max(0,Math.min(DURATION,t));
+  for(const f of updaters) f(t);
+  fadeOut.style.opacity=String(E.io3(u(t,DURATION-1.0,DURATION-.05)));
+};
+window.__seek(0);
+document.fonts.ready.then(()=>{window.__ready=true;});
+</script>
+</body>
+</html>

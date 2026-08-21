@@ -1,131 +1,106 @@
-# Evolvea — promo / demo video
+# Evolvea — promo videá
 
-Video „Otázka namiesto odpovede“ — 1920×1080, 60 fps, **80 s**, s vlastnou hudobnou stopou.
-Téma je **riešenie problémov a kognitívne schopnosti**, nie výslovnosť. Príbeh nesú postavy
-a ich gestá, nie titulky. Všetko sa generuje z kódu, takže sa dá kedykoľvek prepísať replika,
-zmeniť číslo alebo prestrihať tempo bez videoeditora.
+Všetko sa generuje z kódu: animácia aj hudba. Netreba videoeditor ani licencované
+podklady — text, číslo aj tempo sa prepíšu v zdroji a video sa prerenderuje.
+
+## Verzie
+
+| verzia | dĺžka | scéna | hudba | o čom je |
+|---|---|---|---|---|
+| **promo** *(hlavná)* | 1:18 | `scene.html` | `audio.mjs` | logopédka priradí cvičenie → rodina ho robí doma → logopédka vidí, ako dieťa uvažovalo |
+| **jednoduchá** | 0:32 | `scene-simple.html` | `audio-simple.mjs` | split screen „dostane odpoveď“ vs. „dostane otázku“ |
+| **príbehová** | 1:20 | `scene-story.html` | — | starší zostrih s dlhou výmenou rodič–dieťa; hudbu treba pretimovať (`DUR` + časy v `audio.mjs`) |
 
 ## Ako to funguje
 
 | súbor | čo robí |
 |---|---|
-| `scene.html` | celá animácia vrátane systému postáv (`person()` — dve otočné ruky, náklon tela a hlavy, obočie, ústa, žmurkanie) ako **deterministická funkcia času** — `window.__seek(t)` nastaví každý prvok do stavu presne pre sekundu `t`. Žiadne CSS animácie ani `requestAnimationFrame`, takže ľubovoľná snímka sa dá vyrobiť nezávisle a opakovateľne. |
-| `render.mjs` | otvorí scénu v headless Chromiu (Playwright), odfotí snímku po snímke a poskladá MP4 cez ffmpeg (H.264, yuv420p). Renderuje **paralelne vo viacerých inštanciách prehliadača** — jedna inštancia snímkovanie serializuje, takže viac stránok v jednom prehliadači nezrýchli nič (merané 2,4 → 2,8 fps), samostatné procesy áno (≈ 12 fps). |
-| `engine.mjs` | zvukový nástroj: plstený klavír (neharmonické alikvóty, mäkký nábeh 30 ms, vyššie alikvóty doznievajú rýchlejšie), akordový pad cez pomaly sa hýbuci filter, dychové prechody, hustý dozvuk. |
-| `audio.mjs` | partitúra: pohyb harmónie Dm → B♭ → Gm → F → B♭ → F, každý tón iný. Žiadne opakované perkusívne údery. → `out/score.wav` |
+| `scene*.html` | celá animácia ako **deterministická funkcia času** — `window.__seek(t)` nastaví každý prvok do stavu presne pre sekundu `t`. Žiadne CSS animácie ani `requestAnimationFrame`, takže ľubovoľná snímka sa dá vyrobiť nezávisle a opakovateľne. Obsahuje aj systém postáv `person()` — dve otočné ruky, náklon hlavy, obočie a ústa, vlasy, líca, tieň. |
+| `render.mjs` | otvorí scénu v headless Chromiu (Playwright), odfotí snímku po snímke a poskladá MP4 cez ffmpeg. Renderuje **paralelne vo viacerých inštanciách prehliadača** — jedna inštancia snímkovanie serializuje (merané 2,4 → 2,8 fps), samostatné procesy dajú ≈ 12 fps. |
+| `engine.mjs` | zvukový nástroj: `pluck` (hracia skrinka), `felt` (plstený klavír s neharmonickými alikvótami), `strings` (sláčiky s vibrátom), `pad`, `swell`, `air`, `sub` + Schroeder dozvuk. |
+| `audio*.mjs` | partitúra. Žiadne samply, teda ani licenčné bremeno. |
 | `fonts/` | Instrument Sans (OFL) — rovnaký font ako landing. |
 
 ## Použitie
 
-Plné 1080p60 (paralelne cez viac inštancií prehliadača, ~6 minút):
+Plné 1080p60 (~9 minút pre minútové video):
 
 ```bash
-node tools/promo-video/render.mjs --fps=60 --out=tools/promo-video/out/video.mp4
+node tools/promo-video/render.mjs --fps=60 --out=tools/promo-video/out/promo.mp4
 ```
 
-Rýchly náhľad (nízke rozlíšenie, pár sekúnd):
+Iná verzia:
+
+```bash
+node tools/promo-video/render.mjs --scene=scene-simple.html --out=tools/promo-video/out/simple.mp4
+```
+
+Kontrolné snímky bez čakania na celé video:
+
+```bash
+node tools/promo-video/render.mjs --stills=8,24,40,55,70
+```
+
+Rýchly náhľad v nízkom rozlíšení:
 
 ```bash
 node tools/promo-video/render.mjs --fps=12 --scale=0.5
-```
-
-Kontrolné snímky v konkrétnych sekundách (kontrola kompozície bez čakania na video):
-
-```bash
-node tools/promo-video/render.mjs --stills=4.6,13,22,30,35
-```
-
-Len úsek (ladenie jednej scény):
-
-```bash
-node tools/promo-video/render.mjs --from=18 --to=28 --fps=30
 ```
 
 Hudba a finálny mix:
 
 ```bash
 node tools/promo-video/audio.mjs
-ffmpeg -y -i tools/promo-video/out/video.mp4 -i tools/promo-video/out/score.wav \
-  -c:v copy -c:a aac -b:a 192k -shortest tools/promo-video/out/evolvea-demo.mp4
+ffmpeg -y -i tools/promo-video/out/promo.mp4 -i tools/promo-video/out/score.wav \
+  -map 0:v:0 -map 1:a:0 -c:v copy -af "loudnorm=I=-17:TP=-1.5:LRA=9" \
+  -c:a aac -b:a 192k -movflags +faststart tools/promo-video/out/evolvea-promo.mp4
 ```
 
-## Scenár (časová os v `scene.html`, objekt `T`)
+## Scenár hlavnej verzie
 
-Jedna línia od začiatku do konca: **„Nedokážem to.“ → „Zvládnem to krok za krokom.“**
-Repliky aj kroky cvičenia sú doslovné z `content/exercises/guided.json`.
-
-### A — Problém (0 – 18 s)
-
-| čas | čo je na obrazovke |
-|---|---|
-| 0 – 6 | jedno dieťa ožiarené displejom v tme, kamera odchádza dozadu a odhalí dvadsaťštyri ďalších |
-| 6 – 10 | displeje odletia a zložia sa do grafu **41 % → 71 %** (deti denne online cez mobil, 9–10 vs 11–12 r.) |
-| 11 – 18 | os grafu sa stane stupnicou 0–60: **29 zo 60** (priemer OECD 33), „Tretina nezvládne ani základnú úroveň.“ |
-
-### B — Stôl: skutočná interakcia (18 – 50 s)
-
-Os sa stane hranou stola. Odtiaľto do konca hovoria postavy, nie titulky.
+Logopédka rámuje celé video — začína ním aj končí, takže „spoločník k terapii“ je
+štruktúra filmu, nie veta na konci.
 
 | čas | čo sa deje |
 |---|---|
-| 21 | dieťa odsunie dieliky, zosunie sa: **„Nedokážem to.“** |
-| 24 – 27 | **rodič sa nakloní a siahne po dielikoch** — telefón na stole ukáže „Nesiahajte na dieliky.“ a ruka sa stiahne |
-| 29 | rodič: **„Čo by si mohol skúsiť ďalej?“** |
-| 31 | dieťa premýšľa (bublinka s tromi bodkami) |
-| 33 – 35 | dieťa: **„Nájdem tie s rovnou hranou.“** — tá istá veta sa objaví v telefóne rodiča |
-| 37 | dieťa **samo priloží dielik**, rodič prikývne |
-| 40 – 44 | druhá výmena: „A čo teraz?“ → „Teraz rohy.“ → dva ďalšie dieliky |
-| 47 | dieťa sa usmeje: **„Zvládnem to krok za krokom.“** (kotviaca veta na výber z `guided.json`) |
+| 0 – 14 s | **U logopédky.** Pri svojom stole vyberie cvičenie na tento týždeň a priradí ho rodine. Karta odletí. |
+| 17 – 48 s | **Doma.** Cvičenie **„Kto zjedol koláčiky?“** — na stole pribúdajú stopy (prázdny tanier, omrvinky, blatistá labka, odkaz „Prepáč, bol som hladný.“), nad nimi traja podozriví. Telefón podá rodičovi otázku, dieťa vyškrtne ocka aj psa a vysvetlí prečo. |
+| 48 – 57 s | **Týždeň.** Bez Evolvey jedna hodina a šesť prázdnych dní; s Evolveou šesť večerov navyše. |
+| 57 – 70 s | **Späť u logopédky.** V paneli vidí, ktorú stopu si dieťa všimlo a ako to zdôvodnilo — a uberie oporu z 3 na 2. |
+| 70 – 78 s | **Záver.** „Evolvea rozvíja to, ako deti myslia.“ · „Spoločník k terapii. Nie jej náhrada.“ |
 
-Skladačka má 12 dielikov a **zostane nedokončená** (4 uložené) — metodika hodnotí cestu, nie obrázok.
+Cvičenie je prevzaté zo zošita *Evolvea — Parent–Child Interaction Exercises*
+(„The Case of the Missing Cookies“, logická hádanka, 8–10 rokov). Zošit ho radí
+pod *Evidence-based reasoning* a *Explanation of reasoning process* — preto panel
+logopédky neukazuje skóre, ale úvahu dieťaťa.
 
-### C — Predanie logopédke (50 – 66 s)
+## Zvuk
 
-| čas | čo sa deje |
-|---|---|
-| 50,6 | karta s odpoveďou sa zdvihne z telefónu a letí po oblúku |
-| 52,8 | **kamera prejde jedným pohybom** z kuchyne do ordinácie (svet je 3840 px široký, prechod je posun, nie strih) |
-| 56 – 62 | z obrazovky notebooku **vyrastie panel** a pribúdajú v ňom presne tie vety, ktoré zazneli pri stole |
-| 63 | logopédka **uberie oporu z 3 na 2** — jej rozhodnutie, nie algoritmu |
-
-### D — Záver (67 – 80 s)
-
-**+8 mesiacov** · „Plánovať, sledovať a hodnotiť vlastné učenie.“ (EEF) → wordmark → evolvea.sk
-
-### Zdroje čísel
-
-| číslo | zdroj |
-|---|---|
-| 41 % → 71 % | EU Kids Online IV – Slovensko (Izrael a kol., 2020), zber dát 2018 |
-| 29 / 60, priemer OECD 33, tretina pod základnou úrovňou | OECD, PISA 2022 Results (Volume III) – Creative Minds, Creative Schools, faktografia pre SR |
-| +8 mesiacov | EEF Teaching and Learning Toolkit — Metacognition and self-regulation, vysoká istota dôkazov |
-
-### Ako sa drží plynulosť
-
-1. **Pozadie je spojitá funkcia času** (`BG_STOPS`) — farba sa lerpuje, nikdy neprepne. Svetlo prichádza presne s otázkou namiesto odpovede.
-2. **Kamera sa nikdy nezastaví** — pomalý drift a zoom cez celých 80 s.
-3. **Jedna čiara, tri úlohy** (`AXIS`) — základňa grafu → stupnica 0–60 → hrana stola.
-4. **Svet je širší než plátno** — kuchyňa 0–1920, ordinácia 1920–3840. Prechod medzi nimi je posun kamery.
-5. **Karta letí ponad prechod** — nosný objekt je v obraze pred prejazdom aj po ňom.
+Bežná príjemná hudba, nie ambient: **rozložený akord** ako podklad, pod ním mäkké
+sláčiky, nad tým jednoduchá melódia. 84 BPM, celý čas v **dur** (F – C – Dm7 – B♭).
+Žiadne šumové prechody, žiadne rozladené drony, krátky dozvuk — presne tie tri veci
+robili z ranných verzií strašidelný dojem.
 
 ## Čo upraviť ako prvé
 
-- **Repliky** — pole textov v bloku „STÔL“ (`bKid.txt.textContent`, `bPar.txt.textContent`).
-- **Tempo** — objekt `T` na začiatku `scene.html`; posunutím hraníc sa celá scéna prepočíta.
-  Ak meníš dĺžku, uprav aj `DUR` a časy v `audio.mjs`.
-- **Postavy** — funkcia `person()`; `mood(-1…1)` mení obočie aj ústa, `arm(l,r)` a `lean()` držanie tela.
+- **Texty** — priamo v `scene*.html` pri svojej scéne (hľadaj `txt(`, `hLine`, `pcT`).
+- **Tempo** — objekt `T` na začiatku scény; posunutím hraníc sa všetko prepočíta.
+  Ak meníš dĺžku, uprav aj `DUR` v príslušnom `audio*.mjs`.
+- **Postavy** — funkcia `person()`; `mood(-1…1)` mení ústa, `arm(l,r)` a `head()` držanie.
   Konvencia: ľavá ruka zápornejšie = nižšie, pravá kladnejšie = nižšie.
-- **Priebeh svetla** — pole `BG_STOPS`.
-- **Farby** — objekt `C`, prevzatý z `styles/landing.css` a `styles/app.css`.
+- **Farby** — objekt `C`, vychádza z `styles/landing.css` a `styles/app.css`.
 
 ## Čo video zámerne netvrdí
 
-Overené v repozitári, aby video nesľubovalo, čo produkt nerobí:
+Overené v repozitári, aby nesľubovalo, čo produkt nerobí:
 
 - **nediagnostikuje** žiadnu poruchu a nemeria IQ ani exekutívne funkcie ako test;
 - **nenahrádza logopéda** — rodina sa do aplikácie dostane len cez jeho pozvánku;
-- **cvičenie je offline pri stole** — appka vedie rodiča, dieťa neskladá skladačku v tablete
-  (preto veta „Skladačka je na stole. Aplikácia vedie rodiča.“);
+- **cvičenie sa deje offline pri stole** — appka vedie rodiča, nie dieťa pri obrazovke;
 - **žiadna AI neprispôsobuje obtiažnosť** — plán aj mieru opory 3 → 1 nastavuje logopéd;
-- **+8 mesiacov patrí METÓDE, nie aplikácii** — je to číslo EEF o metakognitívnych
-  a sebaregulačných prístupoch, preto je pri ňom vždy uvedený zdroj. Aplikácia nemá vlastnú štúdiu.
+- **žiadne percento zlepšenia** sa nepripisuje aplikácii — nemá vlastnú štúdiu.
+
+## Vyrenderované súbory
+
+`out/` je v `.gitignore` — MP4 majú 4 – 11 MB a do repozitára nepatria.
+Ktorúkoľvek verziu vyrobíš dvoma príkazmi vyššie.
