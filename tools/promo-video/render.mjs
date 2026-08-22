@@ -11,6 +11,7 @@
  *   node tools/promo-video/render.mjs --stills=1.5,9,21,30   # kontrolné snímky
  *   node tools/promo-video/render.mjs --from=18 --to=28      # len úsek
  *   node tools/promo-video/render.mjs --scene=scene-simple.html  # iná verzia
+ *   node tools/promo-video/render.mjs --blur=3               # pohybové rozostrenie
  */
 import { chromium } from 'playwright';
 import http from 'node:http';
@@ -35,6 +36,10 @@ const OUT    = argv.out ?? path.join(DIR, 'out', 'evolvea-demo.mp4');
 const STILLS = argv.stills ? String(argv.stills).split(',').map(Number) : null;
 const KEEP   = !!argv.keep;
 const SCENE  = String(argv.scene ?? 'scene.html');   // ktorá verzia sa renderuje
+/* Pohybové rozostrenie: renderujeme SUB medzisnímok na každú výslednú snímku
+   a ffmpeg ich spriemeruje (tmix). To je presne to, čo robí uzávierka kamery —
+   bez toho pôsobí rýchly pohyb trhane. SUB=3 je dobrý kompromis. */
+const SUB = Math.max(1, Math.round(Number(argv.blur ?? 1)));
 
 function serve(root) {
   return new Promise(resolve => {
@@ -95,9 +100,9 @@ if (STILLS) {
   fs.rmSync(frames, { recursive: true, force: true });
   fs.mkdirSync(frames, { recursive: true });
 
-  const total = Math.round((TO - FROM) * FPS);
+  const total = Math.round((TO - FROM) * FPS * SUB);
   while (workers.length < WORKERS) workers.push(await newWorker());
-  console.log(`  ${total} snímok, ${workers.length} paralelných prehliadačov`);
+  console.log(`  ${total} snímok${SUB>1?` (${SUB}× pohybové rozostrenie)`:''}, ${workers.length} paralelných prehliadačov`);
 
   let next = 0, done = 0;
   const t0 = Date.now();
@@ -105,7 +110,7 @@ if (STILLS) {
     for (;;) {
       const i = next++;
       if (i >= total) return;
-      await shoot(page, FROM + i / FPS, path.join(frames, String(i).padStart(5, '0') + '.png'));
+      await shoot(page, FROM + i / (FPS * SUB), path.join(frames, String(i).padStart(6, '0') + '.png'));
       done++;
       if (done % 60 === 0 || done === total) {
         const el = (Date.now() - t0) / 1000;
@@ -116,9 +121,11 @@ if (STILLS) {
   console.log('');
 
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
+  const vf = SUB > 1 ? ['-vf', `tmix=frames=${SUB}:weights='${Array(SUB).fill(1).join(' ')}',fps=${FPS}`] : [];
   await run('ffmpeg', [
     '-y', '-loglevel', 'error', '-stats',
-    '-framerate', String(FPS), '-i', path.join(frames, '%05d.png'),
+    '-framerate', String(FPS * SUB), '-i', path.join(frames, '%06d.png'),
+    ...vf,
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '17',
     '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-level', '4.2',
     '-movflags', '+faststart', OUT,

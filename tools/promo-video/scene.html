@@ -19,16 +19,19 @@
 <div id="stage"></div>
 <script>
 /* =============================================================
-   Evolvea — promo, ~78 s.
+   Evolvea — promo, 82 s.
 
    Logopédka rámuje celé video: začína ním aj končí.
-     I.  U LOGOPÉDKY — určí, čo sa má doma trénovať
-     II. DOMA        — „najprv plán, potom stavaj"; rodič sa
-                       nedotkne ani jednej kocky
-     III.TÝŽDEŇ      — jedna hodina u nej vs. šesť večerov navyše
-     IV. SPÄŤ        — vidí, ako dieťa premýšľalo, a uberie oporu
-     V.  ZÁVER
-   Kamera prechádza medzi ordináciou a domovom jedným pohybom.
+     I.   U LOGOPÉDKY — priradí cvičenie na tento týždeň
+     II.  DOMA        — „Kto zjedol koláčiky?"; rodič podá otázku,
+                        dieťa vyškrtne podozrivých a povie prečo
+     III. SPÄŤ        — vidí, ako dieťa uvažovalo, a uberie oporu
+     IV.  168 HODÍN   — týždeň ako pole bodiek: jedna hodina u nej,
+                        šesť večerov doma. Celý produkt v jednom obraze.
+     V.   ZÁVER       — modrá bodka z mriežky doletí nad titulok
+
+   Kamera prechádza medzi ordináciou a domovom jedným pohybom,
+   nie strihom. Prechody sa nikde neprekrývajú s prázdnou snímkou.
    ============================================================= */
 const W=1920,H=1080,PAN=1920;
 
@@ -48,12 +51,12 @@ const T={
   /* II. doma */
   home:17.0, phone:19.6, clue:22.0, sus:27.4, ask:30.2, out1:34.0, out2:36.6,
   solved:39.0, say:41.4,
-  /* III. týždeň */
-  week:48.6, weekL:50.0, weekR:52.8,
-  /* IV. späť k logopédke */
-  pan2:57.4, panel:61.6, support:66.2,
+  /* III. späť k logopédke */
+  pan2:46.4, panel:50.6, support:55.2,
+  /* IV. 168 hodín */
+  dots:60.2, dotHour:63.6, dotEve:66.2, dotLine:69.4,
   /* V. záver */
-  card:70.8, end:78.5,
+  card:74.2, end:82.0,
 };
 const DURATION=T.end;
 
@@ -169,8 +172,7 @@ updaters.push(t=>{
   const p1=E.io5(u(t,T.pan1,T.pan1+3.0));
   const p2=E.io5(u(t,T.pan2,T.pan2+3.0));
   world.style.transform=`translate3d(${(-PAN*(p1-p2)).toFixed(1)}px,0,0)`;
-  const dip=E.io3(u(t,T.week-.6,T.week+.4))*(1-E.io3(u(t,T.pan2-1.4,T.pan2-.4)));
-  world.style.opacity=String((1-E.io3(u(t,T.card-1.0,T.card-.1)))*(1-0.85*dip));
+  world.style.opacity=String(1-E.io3(u(t,T.dots-1.0,T.dots-.1)));
   const z=1.03+0.035*E.sin(cl(t/DURATION))-0.012*Math.cos(t*0.1);
   cam.style.transform=`translate3d(${(9*Math.sin(t*0.07)).toFixed(1)}px,${(-7*Math.sin(t*0.055+1.1)).toFixed(1)}px,0) scale(${z.toFixed(4)})`;
 });
@@ -312,7 +314,7 @@ const Q2='Spýtajte sa: „Ktorá stopa nám povie, kto to nemohol byť?"';
 
 updaters.push(t=>{
   const inp=E.o5(u(t,T.home,T.home+1.2));
-  const out=1-E.io3(u(t,T.week-.8,T.week));
+  const out=1-E.io3(u(t,T.pan2-1.2,T.pan2-.2));
   [hDesk.top,hDesk.l1,hDesk.l2].forEach(n2=>set(n2,cl(inp*1.4)*out,0,lerp(22,0,inp)));
   set(ph,cl(inp*1.4)*out,0,lerp(20,0,inp)); set(phGlow,cl(inp)*.9*out,0,0);
 
@@ -357,46 +359,9 @@ updaters.push(t=>{
   set(ansB,ao,0,lerp(16,0,cl(E.back(u(t,T.say,T.say+.7)))),lerp(.9,1,E.back(u(t,T.say,T.say+.7))));
   set(ansT,ao,0,0);
 
-  set(hLine,tv(t,T.home+1.4,T.home+2.4,0,1,E.o3)*(1-E.io3(u(t,T.week-1.2,T.week-.4))),0,
+  set(hLine,tv(t,T.home+1.4,T.home+2.4,0,1,E.o3)*(1-E.io3(u(t,T.pan2-1.6,T.pan2-.6))),0,
       lerp(16,0,E.o5(u(t,T.home+1.4,T.home+2.5))));
 });
-
-/* ===============================================================
-   III. TÝŽDEŇ — jedna hodina u logopédky a šesť večerov navyše
-   =============================================================== */
-{
-  const g=box(cam,{left:'0px',top:'0px',width:W+'px',height:H+'px'});
-  const h=txt(g,'Jedna hodina týždenne. A šesť večerov navyše.',
-    {left:'0px',top:'246px',width:W+'px',textAlign:'center',color:C.ink,
-     fontSize:'46px',fontWeight:'500',letterSpacing:'-.03em'});
-  const X0=640, PIT=96, D=64;
-  function row(y,label,color,filled){
-    const lab=txt(g,label,{left:X0+'px',top:(y-38)+'px',color:color,...KICK});
-    const dots=[];
-    for(let i=0;i<7;i++){
-      const on=filled(i);
-      const d=box(g,{left:(X0+i*PIT)+'px',top:y+'px',width:D+'px',height:D+'px',borderRadius:'50%',
-        background:on?(i===0?C.acc:C.block):'transparent',
-        border:on?'none':'2.5px solid rgba(138,124,104,.42)',transformOrigin:'32px 32px'});
-      dots.push(d);
-    }
-    return {lab,dots};
-  }
-  const r1=row(410,'Bez Evolvey',C.muted,i=>i===0);
-  const r2=row(600,'S Evolveou',C.acc,()=>true);
-  updaters.push(t=>{
-    const on=E.io3(u(t,T.week,T.week+.7))*(1-E.io3(u(t,T.pan2-1.0,T.pan2-.2)));
-    g.style.display=on>.001?'block':'none';
-    if(on<=.001)return;
-    g.style.opacity=String(on);
-    set(h,tv(t,T.week+.2,T.week+1.1,0,1,E.o3),0,lerp(18,0,E.o5(u(t,T.week+.2,T.week+1.2))));
-    [[r1,T.weekL],[r2,T.weekR]].forEach(([r,a])=>{
-      set(r.lab,tv(t,a,a+.6,0,1,E.o3),0,0);
-      r.dots.forEach((d,i)=>{const p=E.back(u(t,a+.25+i*.1,a+.85+i*.1));
-        set(d,cl(p*1.7),0,lerp(14,0,cl(p)),lerp(.5,1,p));});
-    });
-  });
-}
 
 /* ===============================================================
    IV. SPÄŤ — logopédka vidí, ako dieťa premýšľalo
@@ -456,6 +421,98 @@ updaters.push(t=>{
 }
 
 /* ===============================================================
+   IV. STO ŠESŤDESIAT OSEM — týždeň dieťaťa ako pole hodín.
+   Jedna modrá bodka je hodina u logopédky, šesť jantárových sú
+   večery doma. To je celý produkt v jednom obraze.
+   =============================================================== */
+{
+  const g=box(cam,{left:'0px',top:'0px',width:W+'px',height:H+'px'});
+  const COLS=24, ROWS=7, PITCH=44, D=13;
+  const gw=(COLS-1)*PITCH+D, gx=(W-gw)/2, gy=344;
+  const HOUR_R=1, HOUR_C=15;
+  const EVE_C=19, EVE_R=[0,2,3,4,5,6];
+  const px=c=>gx+c*PITCH, py=r=>gy+r*PITCH;
+  const GCX=gx+gw/2, GCY=gy+(ROWS-1)*PITCH/2+D/2;
+
+  const dots=[];
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const d=box(g,{left:px(c)+'px',top:py(r)+'px',width:D+'px',height:D+'px',
+      borderRadius:'50%',background:'#2E2418',willChange:'transform,opacity'});
+    d.__w=(c*0.62+r*1.5)/(COLS*0.62+ROWS*1.5);          // uhlopriečna vlna
+    d.__hour=(r===HOUR_R&&c===HOUR_C);
+    d.__eve=(c===EVE_C&&EVE_R.includes(r));
+    d.__ei=EVE_R.indexOf(r);
+    d.__dx=px(c)+D/2-GCX; d.__dy=py(r)+D/2-GCY;    // odstup od stredu mriežky
+    dots.push(d);
+  }
+  const ring1=svg(g,180,180,`<circle cx="90" cy="90" r="42" fill="none" stroke="${C.acc}" stroke-width="2.4"/>`,
+    {left:(px(HOUR_C)+D/2-90)+'px',top:(py(HOUR_R)+D/2-90)+'px'});
+  const ring2=svg(g,260,260,`<circle cx="130" cy="130" r="64" fill="none" stroke="${C.acc}" stroke-width="1.6"/>`,
+    {left:(px(HOUR_C)+D/2-130)+'px',top:(py(HOUR_R)+D/2-130)+'px'});
+  const tagH=txt(g,'hodina u logopédky',{left:(px(HOUR_C)+D/2-150)+'px',top:(gy-52)+'px',width:'300px',
+    textAlign:'center',color:C.acc,fontSize:'13px',fontWeight:'600',letterSpacing:'.17em',textTransform:'uppercase'});
+  const leadH=box(g,{left:(px(HOUR_C)+D/2-0.75)+'px',top:(gy-26)+'px',width:'1.5px',height:'20px',
+    background:C.acc,opacity:'0',transformOrigin:'50% 0%'});
+  const tagE=txt(g,'večery doma',{left:(px(EVE_C)+D/2-150)+'px',top:(gy+(ROWS-1)*PITCH+46)+'px',width:'300px',
+    textAlign:'center',color:'#B8791E',fontSize:'13px',fontWeight:'600',letterSpacing:'.17em',textTransform:'uppercase'});
+  const leadE=box(g,{left:(px(EVE_C)+D/2-0.75)+'px',top:(gy+(ROWS-1)*PITCH+D+6)+'px',width:'1.5px',height:'20px',
+    background:'#B8791E',opacity:'0',transformOrigin:'50% 100%'});
+
+  const l1=txt(g,'Jedna hodina u logopédky.',{left:'0px',top:'722px',width:W+'px',textAlign:'center',
+    color:C.ink,fontSize:'50px',fontWeight:'500',letterSpacing:'-.032em'});
+  const l2=txt(g,'A šesť večerov, ktoré na ňu nadväzujú.',{left:'0px',top:'790px',width:W+'px',
+    textAlign:'center',color:C.ink,fontSize:'50px',fontWeight:'500',letterSpacing:'-.032em'});
+  const cap=txt(g,'168 hodín má týždeň dieťaťa',{left:'0px',top:'880px',width:W+'px',textAlign:'center',
+    color:C.muted,fontSize:'15px',fontWeight:'500',letterSpacing:'.18em',textTransform:'uppercase'});
+
+  updaters.push(t=>{
+    const on=E.io3(u(t,T.dots-.5,T.dots+.4))*(1-E.io3(u(t,T.card-.9,T.card-.2)));
+    const ex=E.io5(u(t,T.card-1.25,T.card-.1));   // stiahnutie do stredu
+    g.style.display=on>.001?'block':'none';
+    if(on<=.001)return;
+    g.style.opacity=String(on);
+    const breathe=1+0.006*Math.sin((t-T.dots)*0.9);      // mriežka jemne dýcha
+
+    dots.forEach(d=>{
+      const a=T.dots+.1+d.__w*1.5;
+      const p=E.o4(u(t,a,a+.55));
+      let s=lerp(.4,1,E.back(u(t,a,a+.65)))*breathe, o=p*.22, bg='#2E2418';
+      if(d.__hour){
+        const h=E.back(u(t,T.dotHour,T.dotHour+.7));
+        s*=lerp(1,2.0,h); o=lerp(p*.22,1,cl(h)); bg=C.acc;
+      } else if(d.__eve){
+        const a2=T.dotEve+d.__ei*.24, h=E.back(u(t,a2,a2+.6));
+        s*=lerp(1,1.75,h); o=lerp(p*.22,1,cl(h)); bg='#E8A33D';
+      } else {
+        o=p*lerp(.22,.14,E.io3(u(t,T.dotHour,T.dotHour+1.0)));
+      }
+      d.style.background=bg;
+      const px2=d.__hour?0:-d.__dx*.17*ex, py2=d.__hour?0:-d.__dy*.17*ex;
+      set(d,o,px2,lerp(8,0,p)+py2,s*(d.__hour?1:1-.28*ex));
+    });
+
+    /* prstene musia byť neviditeľné aj PRED svojím oknom, nielen po ňom */
+    const r1=u(t,T.dotHour+.1,T.dotHour+1.5), g1=t<T.dotHour+.1?0:1;
+    set(ring1,g1*(1-E.o3(r1))*.7,0,0,lerp(.4,1.5,E.o3(r1)));
+    const r2=u(t,T.dotHour+.35,T.dotHour+2.0), g2=t<T.dotHour+.35?0:1;
+    set(ring2,g2*(1-E.o3(r2))*.42,0,0,lerp(.45,1.5,E.o3(r2)));
+
+    const th=E.o4(u(t,T.dotHour+.5,T.dotHour+1.2));
+    set(tagH,th,0,lerp(8,0,th));
+    leadH.style.opacity=String(th*.5);
+    leadH.style.transform=`scaleY(${E.o4(u(t,T.dotHour+.35,T.dotHour+.9)).toFixed(3)})`;
+    const te=E.o4(u(t,T.dotEve+1.5,T.dotEve+2.2));
+    set(tagE,te,0,lerp(-8,0,te));
+    leadE.style.opacity=String(te*.5);
+    leadE.style.transform=`scaleY(${E.o4(u(t,T.dotEve+1.35,T.dotEve+1.9)).toFixed(3)})`;
+
+    set(l1,tv(t,T.dotLine,T.dotLine+.9,0,1,E.o3),0,lerp(20,0,E.o5(u(t,T.dotLine,T.dotLine+1.0))));
+    set(l2,tv(t,T.dotLine+.55,T.dotLine+1.45,0,1,E.o3),0,lerp(20,0,E.o5(u(t,T.dotLine+.55,T.dotLine+1.55))));
+    set(cap,tv(t,T.dotLine+1.3,T.dotLine+2.2,0,1,E.o3)*.9,0,lerp(12,0,E.o5(u(t,T.dotLine+1.3,T.dotLine+2.3))));
+  });
+}
+
+/* ===============================================================
    V. ZÁVER
    =============================================================== */
 {
@@ -469,19 +526,25 @@ updaters.push(t=>{
       marginRight:'.3em',fontSize:'70px',fontWeight:'500',letterSpacing:'-.035em',color:C.ink});
     parts.push(el('span',hold,{position:'relative',display:'inline-block',lineHeight:1.24},w));
   });
+  /* Modrá bodka z mriežky sem doletí a zostane ako značka nad titulkom —
+     hodina u logopédky je to, z čoho celý produkt vychádza. */
+  const mark=box(card,{left:'1101px',top:'381.5px',width:'26px',height:'26px',
+    borderRadius:'50%',background:C.acc,willChange:'transform'});
   const sub=txt(card,'Spoločník k terapii. Nie jej náhrada.',
     {left:'0px',top:'540px',width:W+'px',textAlign:'center',color:C.muted,fontSize:'26px'});
   const url=txt(card,'evolvea.sk',{left:'0px',top:'632px',width:W+'px',textAlign:'center',
     color:C.acc,fontSize:'19px',fontWeight:'600',letterSpacing:'.2em',textTransform:'uppercase'});
   updaters.push(t=>{
-    const on=E.io3(u(t,T.card-.6,T.card+.4));
+    const on=E.io3(u(t,T.card-1.0,T.card+.15));
     card.style.display=on>.001?'block':'none';
     if(on<=.001)return;
     card.style.opacity=String(on);
-    parts.forEach((s,i)=>{const p=E.o5(u(t,T.card+.3+i*.05,T.card+1.1+i*.05));
+    const fly=E.io5(u(t,T.card-.75,T.card+.75));
+    set(mark,1,lerp(0,-154,fly),lerp(0,-64.5,fly),lerp(1,.42,fly));
+    parts.forEach((s,i)=>{const p=E.o5(u(t,T.card+.55+i*.05,T.card+1.35+i*.05));
       s.style.transform=`translate3d(0,${lerp(112,0,p).toFixed(1)}%,0)`; s.style.opacity=cl(p*2);});
-    set(sub,tv(t,T.card+1.2,T.card+2.0,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.2,T.card+2.1))));
-    set(url,tv(t,T.card+1.6,T.card+2.4,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.6,T.card+2.5))));
+    set(sub,tv(t,T.card+1.5,T.card+2.3,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.5,T.card+2.4))));
+    set(url,tv(t,T.card+1.9,T.card+2.7,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.9,T.card+2.8))));
   });
 }
 

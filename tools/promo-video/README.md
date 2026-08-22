@@ -7,7 +7,7 @@ podklady — text, číslo aj tempo sa prepíšu v zdroji a video sa prerenderuj
 
 | verzia | dĺžka | scéna | hudba | o čom je |
 |---|---|---|---|---|
-| **promo** *(hlavná)* | 1:18 | `scene.html` | `audio.mjs` | logopédka priradí cvičenie → rodina ho robí doma → logopédka vidí, ako dieťa uvažovalo |
+| **promo** *(hlavná)* | 1:22 | `scene.html` | `audio.mjs` | logopédka priradí cvičenie → rodina ho robí doma → logopédka vidí, ako dieťa uvažovalo → týždeň ako 168 bodiek |
 | **jednoduchá** | 0:32 | `scene-simple.html` | `audio-simple.mjs` | split screen „dostane odpoveď“ vs. „dostane otázku“ |
 | **príbehová** | 1:20 | `scene-story.html` | — | starší zostrih s dlhou výmenou rodič–dieťa; hudbu treba pretimovať (`DUR` + časy v `audio.mjs`) |
 
@@ -23,7 +23,15 @@ podklady — text, číslo aj tempo sa prepíšu v zdroji a video sa prerenderuj
 
 ## Použitie
 
-Plné 1080p60 (~9 minút pre minútové video):
+Plné 1080p60 s pohybovým rozostrením (~20 minút; toto je master):
+
+```bash
+node tools/promo-video/render.mjs --fps=60 --blur=3 --out=tools/promo-video/out/promo-master.mp4
+```
+
+`--blur=N` vyrenderuje N medzisnímok na každú výslednú a ffmpeg ich spriemeruje
+(`tmix`). Je to presne to, čo robí uzávierka kamery — bez toho pôsobí rýchly pohyb
+trhane. Bez rozostrenia (~7 minút):
 
 ```bash
 node tools/promo-video/render.mjs --fps=60 --out=tools/promo-video/out/promo.mp4
@@ -51,7 +59,7 @@ Hudba a finálny mix:
 
 ```bash
 node tools/promo-video/audio.mjs
-ffmpeg -y -i tools/promo-video/out/promo.mp4 -i tools/promo-video/out/score.wav \
+ffmpeg -y -i tools/promo-video/out/promo-master.mp4 -i tools/promo-video/out/score.wav \
   -map 0:v:0 -map 1:a:0 -c:v copy -af "loudnorm=I=-17:TP=-1.5:LRA=9" \
   -c:a aac -b:a 192k -movflags +faststart tools/promo-video/out/evolvea-promo.mp4
 ```
@@ -64,10 +72,10 @@ Logopédka rámuje celé video — začína ním aj končí, takže „spoločn�
 | čas | čo sa deje |
 |---|---|
 | 0 – 14 s | **U logopédky.** Pri svojom stole vyberie cvičenie na tento týždeň a priradí ho rodine. Karta odletí. |
-| 17 – 48 s | **Doma.** Cvičenie **„Kto zjedol koláčiky?“** — na stole pribúdajú stopy (prázdny tanier, omrvinky, blatistá labka, odkaz „Prepáč, bol som hladný.“), nad nimi traja podozriví. Telefón podá rodičovi otázku, dieťa vyškrtne ocka aj psa a vysvetlí prečo. |
-| 48 – 57 s | **Týždeň.** Bez Evolvey jedna hodina a šesť prázdnych dní; s Evolveou šesť večerov navyše. |
-| 57 – 70 s | **Späť u logopédky.** V paneli vidí, ktorú stopu si dieťa všimlo a ako to zdôvodnilo — a uberie oporu z 3 na 2. |
-| 70 – 78 s | **Záver.** „Evolvea rozvíja to, ako deti myslia.“ · „Spoločník k terapii. Nie jej náhrada.“ |
+| 17 – 45 s | **Doma.** Cvičenie **„Kto zjedol koláčiky?“** — na stole pribúdajú stopy (prázdny tanier, omrvinky, blatistá labka, odkaz „Prepáč, bol som hladný.“), nad nimi traja podozriví. Telefón podá rodičovi otázku, dieťa vyškrtne ocka aj psa a vysvetlí prečo. |
+| 46 – 59 s | **Späť u logopédky.** V paneli vidí, ktorú stopu si dieťa všimlo a ako to zdôvodnilo — a uberie oporu z 3 na 2. |
+| 60 – 73 s | **168 hodín.** Týždeň dieťaťa ako mriežka 24 × 7 bodiek. Jedna sa rozsvieti namodro — hodina u logopédky. Potom šesť jantárových, po jednej na každý zvyšný večer. |
+| 74 – 82 s | **Záver.** Mriežka sa stiahne do stredu, modrá bodka doletí nad titulok a zostane ako značka. „Evolvea rozvíja to, ako deti myslia.“ · „Spoločník k terapii. Nie jej náhrada.“ |
 
 Cvičenie je prevzaté zo zošita *Evolvea — Parent–Child Interaction Exercises*
 („The Case of the Missing Cookies“, logická hádanka, 8–10 rokov). Zošit ho radí
@@ -80,6 +88,11 @@ Bežná príjemná hudba, nie ambient: **rozložený akord** ako podklad, pod n�
 sláčiky, nad tým jednoduchá melódia. 84 BPM, celý čas v **dur** (F – C – Dm7 – B♭).
 Žiadne šumové prechody, žiadne rozladené drony, krátky dozvuk — presne tie tri veci
 robili z ranných verzií strašidelný dojem.
+
+Partitúra je zviazaná so scénou. Pri mriežke 168 hodín podklad **úplne stíchne**
+a ostanú len držané sláčiky; hodina u logopédky dostane jeden jasný tón a šesť
+večerov šesť stúpajúcich, každý presne na svoju bodku. Ticho pred tým je to, čo
+tie tóny urobí počuteľnými — meraná dynamika ide −18,6 → −18,2 → −15,4 → −14,9 dB.
 
 ## Čo upraviť ako prvé
 
