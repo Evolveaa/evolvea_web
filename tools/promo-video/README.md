@@ -7,9 +7,10 @@ podklady — text, číslo aj tempo sa prepíšu v zdroji a video sa prerenderuj
 
 | verzia | dĺžka | scéna | hudba | o čom je |
 |---|---|---|---|---|
-| **promo** *(hlavná)* | 1:22 | `scene.html` | `audio.mjs` | logopédka priradí cvičenie → rodina ho robí doma → logopédka vidí, ako dieťa uvažovalo → týždeň ako 168 bodiek |
+| **promo** *(hlavná)* | 0:55 | `scene.html` | `audio.mjs` | abstraktná, split screen: papiere vs. záznamy → výsledok vs. úvaha → zhrnutie → 168 bodiek |
+| **s postavami** | 1:22 | `scene-people.html` | `audio-people.mjs` | konkrétny príbeh: logopédka priradí cvičenie → rodina ho robí doma → logopédka vidí, ako dieťa uvažovalo |
 | **jednoduchá** | 0:32 | `scene-simple.html` | `audio-simple.mjs` | split screen „dostane odpoveď“ vs. „dostane otázku“ |
-| **príbehová** | 1:20 | `scene-story.html` | — | starší zostrih s dlhou výmenou rodič–dieťa; hudbu treba pretimovať (`DUR` + časy v `audio.mjs`) |
+| **príbehová** | 1:20 | `scene-story.html` | — | starší zostrih s dlhou výmenou rodič–dieťa; hudbu treba pretimovať |
 
 ## Ako to funguje
 
@@ -66,21 +67,24 @@ ffmpeg -y -i tools/promo-video/out/promo-master.mp4 -i tools/promo-video/out/sco
 
 ## Scenár hlavnej verzie
 
-Logopédka rámuje celé video — začína ním aj končí, takže „spoločník k terapii“ je
-štruktúra filmu, nie veta na konci.
+Žiadne postavy, žiadny konkrétny príklad. Celý film stojí na jednom geste:
+obrazovka sa rozdelí, porovná dve cesty, a zase sa spojí.
 
 | čas | čo sa deje |
 |---|---|
-| 0 – 14 s | **U logopédky.** Pri svojom stole vyberie cvičenie na tento týždeň a priradí ho rodine. Karta odletí. |
-| 17 – 45 s | **Doma.** Cvičenie **„Kto zjedol koláčiky?“** — na stole pribúdajú stopy (prázdny tanier, omrvinky, blatistá labka, odkaz „Prepáč, bol som hladný.“), nad nimi traja podozriví. Telefón podá rodičovi otázku, dieťa vyškrtne ocka aj psa a vysvetlí prečo. |
-| 46 – 59 s | **Späť u logopédky.** V paneli vidí, ktorú stopu si dieťa všimlo a ako to zdôvodnilo — a uberie oporu z 3 na 2. |
-| 60 – 73 s | **168 hodín.** Týždeň dieťaťa ako mriežka 24 × 7 bodiek. Jedna sa rozsvieti namodro — hodina u logopédky. Potom šesť jantárových, po jednej na každý zvyšný večer. |
-| 74 – 82 s | **Záver.** Mriežka sa stiahne do stredu, modrá bodka doletí nad titulok a zostane ako značka. „Evolvea rozvíja to, ako deti myslia.“ · „Spoločník k terapii. Nie jej náhrada.“ |
+| 0 – 3,5 s | **Rozdelenie.** Bodka v strede prázdnej plochy, z nej vystrelí čiara na obe strany. Vľavo *bez Evolvey*, vpravo *s Evolveou*. |
+| 3,5 – 14 s | **Papiere vs. záznamy.** Dvanásť tých istých večerov. Vľavo z nich rastie kopa hárkov, vpravo pribúdajú záznamy. Hárky padajú presne na doby. |
+| 13 – 18,5 s | **Jeden hárok vypadne** z kopy a spadne mimo obraz: `11 hárkov · jeden chýba` proti `12 záznamov · celý týždeň naraz`. Vpravo sa zoznam zloží tak, že sa dá prečítať naraz. |
+| 19,8 – 28 s | **Výsledok vs. úvaha.** Vľavo len ✓ ✗ ✓ — *len či to vyšlo*. Vpravo sa kreslí cesta: *všimlo si → vylúčilo → zdôvodnilo* — *a prečo si to myslí*. Toto je jadro produktu. |
+| 28 – 38,5 s | **Zhrnutie.** Panely sa zlejú. Tri kroky a slučka, ktorá sa vracia na začiatok — celé to má zmysel len preto, že sa každý týždeň opakuje. |
+| 39 – 48 s | **168 hodín.** Týždeň dieťaťa ako mriežka 24 × 7 bodiek. Jedna namodro (hodina u logopéda), šesť jantárových (večery doma). |
+| 49 – 55,5 s | **Záver.** Mriežka sa stiahne do stredu, modrá bodka doletí nad titulok a zostane ako značka. |
 
-Cvičenie je prevzaté zo zošita *Evolvea — Parent–Child Interaction Exercises*
-(„The Case of the Missing Cookies“, logická hádanka, 8–10 rokov). Zošit ho radí
-pod *Evidence-based reasoning* a *Explanation of reasoning process* — preto panel
-logopédky neukazuje skóre, ale úvahu dieťaťa.
+Verzia `scene-people.html` rozpráva to isté konkrétne — cez cvičenie
+**„Kto zjedol koláčiky?“** zo zošita *Evolvea — Parent–Child Interaction
+Exercises* (logická hádanka, 8 – 10 rokov). Zošit ho radí pod *Evidence-based
+reasoning* a *Explanation of reasoning process* — preto ani tam panel logopéda
+neukazuje skóre, ale úvahu dieťaťa.
 
 ## Zvuk
 
@@ -89,10 +93,17 @@ sláčiky, nad tým jednoduchá melódia. 84 BPM, celý čas v **dur** (F – C 
 Žiadne šumové prechody, žiadne rozladené drony, krátky dozvuk — presne tie tri veci
 robili z ranných verzií strašidelný dojem.
 
-Partitúra je zviazaná so scénou. Pri mriežke 168 hodín podklad **úplne stíchne**
-a ostanú len držané sláčiky; hodina u logopédky dostane jeden jasný tón a šesť
-večerov šesť stúpajúcich, každý presne na svoju bodku. Ticho pred tým je to, čo
-tie tóny urobí počuteľnými — meraná dynamika ide −18,6 → −18,2 → −15,4 → −14,9 dB.
+Partitúra je zviazaná so scénou dvoma spôsobmi.
+
+**Časovo.** Dvanásť hárkov padá presne na doby, šesť večerných bodiek dostane
+šesť stúpajúcich tónov. Pri mriežke 168 hodín podklad **úplne stíchne** a ostanú
+len držané sláčiky; ticho pred tým je to, čo tie tóny urobí počuteľnými. Meraná
+dynamika: −18,5 → −18,9 (ticho) → −15,2 (hodina) → −14,2 dB (šesť večerov).
+
+**Priestorovo.** Film je split screen, tak je aj zvuk: čo sa deje v ľavom paneli
+znie vľavo, čo v pravom znie vpravo. Meraná šírka stereo obrazu ide −26 dB
+(otvorenie, úzke) → −7 dB (porovnanie panelov, najširšie) → −23 dB (po zlúčení).
+Panorámovanie je rovnovýkonové, takže mono na telefóne sa zloží bez strát.
 
 ## Čo upraviť ako prvé
 

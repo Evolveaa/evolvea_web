@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Evolvea — promo</title>
+<style>
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-400.ttf') format('truetype');font-weight:400;font-display:block}
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-500.ttf') format('truetype');font-weight:500;font-display:block}
+  @font-face{font-family:'Instrument Sans';src:url('fonts/instrument-600.ttf') format('truetype');font-weight:600;font-display:block}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:#F7EFE1}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;
+    font-family:'Instrument Sans',ui-sans-serif,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+  #stage div,#stage span,#stage svg{position:absolute}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+/* =============================================================
+   Evolvea — promo, 82 s.
+
+   Logopédka rámuje celé video: začína ním aj končí.
+     I.   U LOGOPÉDKY — priradí cvičenie na tento týždeň
+     II.  DOMA        — „Kto zjedol koláčiky?"; rodič podá otázku,
+                        dieťa vyškrtne podozrivých a povie prečo
+     III. SPÄŤ        — vidí, ako dieťa uvažovalo, a uberie oporu
+     IV.  168 HODÍN   — týždeň ako pole bodiek: jedna hodina u nej,
+                        šesť večerov doma. Celý produkt v jednom obraze.
+     V.   ZÁVER       — modrá bodka z mriežky doletí nad titulok
+
+   Kamera prechádza medzi ordináciou a domovom jedným pohybom,
+   nie strihom. Prechody sa nikde neprekrývajú s prázdnou snímkou.
+   ============================================================= */
+const W=1920,H=1080,PAN=1920;
+
+const C={
+  bg:'#F7EFE1', bg2:'#F2E7D5', ink:'#2E2418', muted:'#8A7C68', line:'#E6DAC4',
+  acc:'#23407a', paper:'#FBF6EC', wood:'#C9A87A', wood2:'#A9letter',
+  skinK:'#F0C79E', skinP:'#EFC49C', skinT:'#E8BE95',
+  kid:'#D2703F', par:'#3D5A7A', ther:'#4C6B54',
+  hairK:'#5A3B22', hairP:'#2E2015', hairT:'#4A3120',
+  block:'#E8A33D', block2:'#D9903A', block3:'#C97F33',
+};
+C.wood2='#A98A5E';
+
+const T={
+  /* I. u logopédky */
+  office:0.6, screen:3.2, pick:6.4, send:10.8, pan1:13.8,
+  /* II. doma */
+  home:17.0, phone:19.6, clue:22.0, sus:27.4, ask:30.2, out1:34.0, out2:36.6,
+  solved:39.0, say:41.4,
+  /* III. späť k logopédke */
+  pan2:46.4, panel:50.6, support:55.2,
+  /* IV. 168 hodín */
+  dots:60.2, dotHour:63.6, dotEve:66.2, dotLine:69.4,
+  /* V. záver */
+  card:74.2, end:82.0,
+};
+const DURATION=T.end;
+
+const cl=(x,a=0,b=1)=>x<a?a:(x>b?b:x);
+const u=(t,a,b)=>cl((t-a)/(b-a));
+const lerp=(a,b,x)=>a+(b-a)*x;
+const E={
+  o3:x=>1-Math.pow(1-x,3), o4:x=>1-Math.pow(1-x,4), o5:x=>1-Math.pow(1-x,5),
+  io3:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,
+  io5:x=>x<.5?16*Math.pow(x,5):1-Math.pow(-2*x+2,5)/2,
+  sin:x=>-(Math.cos(Math.PI*x)-1)/2,
+  back:x=>{const c1=1.45,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);},
+};
+const tv=(t,a,b,va,vb,e=E.o4)=>lerp(va,vb,e(u(t,a,b)));
+let _s=990011; const rnd=()=>{_s=(_s*1664525+1013904223)>>>0;return _s/4294967296;};
+const rr=(a,b)=>lerp(a,b,rnd());
+
+const stage=document.getElementById('stage');
+const el=(tag,p,st,tx)=>{const n=document.createElement(tag);if(st)Object.assign(n.style,st);
+  if(tx!=null)n.textContent=tx;(p||stage).appendChild(n);return n;};
+const box=(p,s)=>el('div',p,s);
+const txt=(p,t,s)=>el('div',p,s,t);
+function svg(p,w,h,inner,st){const n=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  n.setAttribute('width',w);n.setAttribute('height',h);n.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  n.innerHTML=inner;if(st)Object.assign(n.style,st);n.style.position='absolute';
+  (p||stage).appendChild(n);return n;}
+function set(n,o,x=0,y=0,s=1,r=0){n.style.opacity=o;
+  n.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`+(r?` rotate(${r}deg)`:'')+(s!==1?` scale(${s})`:'');}
+
+/* ---- postavy: mäkké tvary, vlasy, líca, tieň ---- */
+let _pid=0;
+const HAIR={
+  bob:(r,c)=>`<path d="M ${-r*1.06} ${-r*.10} A ${r*1.06} ${r*1.06} 0 0 1 ${r*1.06} ${-r*.10}
+      L ${r*1.06} ${r*.28} Q ${r*.88} ${r*.14} ${r*.76} ${-r*.34}
+      Q ${r*.2} ${r*.10} ${-r*.76} ${-r*.34} Q ${-r*.88} ${r*.14} ${-r*1.06} ${r*.28} Z" fill="${c}"/>`,
+  short:(r,c)=>`<path d="M ${-r*1.02} ${-r*.10} A ${r*1.02} ${r*1.02} 0 0 1 ${r*1.02} ${-r*.10}
+      Q ${r*.5} ${-r*.46} 0 ${-r*.34} Q ${-r*.5} ${-r*.46} ${-r*1.02} ${-r*.10} Z" fill="${c}"/>`,
+  bun:(r,c)=>`<circle cx="0" cy="${-r*1.18}" r="${r*.33}" fill="${c}"/>
+      <path d="M ${-r*1.03} ${-r*.08} A ${r*1.03} ${r*1.03} 0 0 1 ${r*1.03} ${-r*.08}
+      Q ${r*.5} ${-r*.44} 0 ${-r*.36} Q ${-r*.5} ${-r*.44} ${-r*1.03} ${-r*.08} Z" fill="${c}"/>`,
+};
+function person(parent,{x,y,s=1,skin,cloth,hair,hairStyle='short',adult=false}){
+  const id='p'+(_pid++);
+  const HR=adult?42:36, HY=adult?-232:-192, TW=adult?104:88, TH=adult?168:136;
+  const SY=HY+HR+26, ink='#3A2E20';
+  const g=box(parent,{left:x+'px',top:y+'px',width:'0',height:'0'});
+  const e=svg(g,520,520,`
+   <defs><radialGradient id="${id}s" cx="50%" cy="50%" r="50%">
+     <stop offset="0" stop-color="rgba(90,60,26,.22)"/><stop offset="1" stop-color="rgba(90,60,26,0)"/>
+   </radialGradient></defs>
+   <g transform="translate(260,520)">
+    <ellipse cx="0" cy="6" rx="${TW*0.92}" ry="14" fill="url(#${id}s)"/>
+    <g id="${id}L" transform="rotate(-24 ${-TW/2+8} ${SY})">
+      <rect x="${-TW/2-84}" y="${SY-10}" width="98" height="${adult?23:20}" rx="${adult?11.5:10}" fill="${cloth}"/>
+      <circle cx="${-TW/2-84}" cy="${SY}" r="${adult?16:13}" fill="${skin}"/></g>
+    <g id="${id}R" transform="rotate(24 ${TW/2-8} ${SY})">
+      <rect x="${TW/2-14}" y="${SY-10}" width="98" height="${adult?23:20}" rx="${adult?11.5:10}" fill="${cloth}"/>
+      <circle cx="${TW/2+84}" cy="${SY}" r="${adult?16:13}" fill="${skin}"/></g>
+    <path d="M ${-TW/2} ${HY+HR+TH-6} L ${-TW/2} ${HY+HR+34}
+      Q ${-TW/2+6} ${HY+HR-2} ${-TW*0.30} ${HY+HR-6} Q 0 ${HY+HR-16} ${TW*0.30} ${HY+HR-6}
+      Q ${TW/2-6} ${HY+HR-2} ${TW/2} ${HY+HR+34} L ${TW/2} ${HY+HR+TH-6}
+      Q 0 ${HY+HR+TH+20} ${-TW/2} ${HY+HR+TH-6} Z" fill="${cloth}"/>
+    <rect x="${-HR*0.30}" y="${HY+HR-16}" width="${HR*0.60}" height="${HR*0.42}" rx="${HR*0.24}" fill="${skin}"/>
+    <g id="${id}h">
+      <circle cx="0" cy="${HY}" r="${HR}" fill="${skin}"/>
+      <circle cx="${-HR*0.60}" cy="${HY+HR*0.30}" r="${HR*0.19}" fill="#E39A80" opacity=".38"/>
+      <circle cx="${HR*0.60}"  cy="${HY+HR*0.30}" r="${HR*0.19}" fill="#E39A80" opacity=".38"/>
+      <circle id="${id}eL" cx="${-HR*0.33}" cy="${HY-HR*0.02}" r="${HR*0.105}" fill="${ink}"/>
+      <circle id="${id}eR" cx="${HR*0.33}"  cy="${HY-HR*0.02}" r="${HR*0.105}" fill="${ink}"/>
+      <circle cx="${-HR*0.29}" cy="${HY-HR*0.07}" r="${HR*0.035}" fill="#fff" opacity=".9"/>
+      <circle cx="${HR*0.37}"  cy="${HY-HR*0.07}" r="${HR*0.035}" fill="#fff" opacity=".9"/>
+      <path id="${id}m" stroke="${ink}" stroke-width="${HR*0.075}" stroke-linecap="round" fill="none"/>
+      <g transform="translate(0 ${HY})">${HAIR[hairStyle](HR,hair)}</g>
+    </g>
+   </g>`,
+   {left:'-260px',top:'-520px',transformOrigin:'260px 520px',transform:`scale(${s})`});
+  const Q=k=>e.querySelector('#'+id+k);
+  const o={root:g,
+    arm(l,r){Q('L').setAttribute('transform',`rotate(${l.toFixed(1)} ${-TW/2+8} ${SY})`);
+             Q('R').setAttribute('transform',`rotate(${r.toFixed(1)} ${TW/2-8} ${SY})`);},
+    head(a){Q('h').setAttribute('transform',`rotate(${a.toFixed(2)} 0 ${HY+HR})`);},
+    mood(m){const mw=HR*0.34,my=HY+HR*0.44,k=m*HR*0.34;
+      Q('m').setAttribute('d',`M ${-mw} ${my} Q 0 ${my+k} ${mw} ${my}`);}};
+  o.mood(.4); return o;
+}
+
+/* ---- spoločné prvky ---- */
+function deskOf(pane,{x,w,top,wood,wood2}){
+  const g={};
+  g.top=box(pane,{left:x+'px',top:top+'px',width:w+'px',height:'20px',borderRadius:'8px',background:wood});
+  g.l1=box(pane,{left:(x+70)+'px',top:(top+20)+'px',width:'20px',height:'150px',background:wood2});
+  g.l2=box(pane,{left:(x+w-90)+'px',top:(top+20)+'px',width:'20px',height:'150px',background:wood2});
+  return g;
+}
+function cardBox(pane,{x,y,w,h,r=22}){
+  return box(pane,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',borderRadius:r+'px',
+    background:'linear-gradient(168deg,#FFFEFB,#FBF6EC)',border:'1px solid #EBE0CB',
+    boxShadow:'0 26px 58px -34px rgba(70,46,16,.34)'});
+}
+const KICK={fontSize:'12px',fontWeight:'600',letterSpacing:'.18em',textTransform:'uppercase'};
+
+const updaters=[];
+const cam=box(stage,{left:'0px',top:'0px',width:W+'px',height:H+'px',transformOrigin:'960px 540px'});
+const world=box(cam,{left:'0px',top:'0px',width:(W*2)+'px',height:H+'px'});
+const office=box(world,{left:'0px',top:'0px',width:W+'px',height:H+'px'});
+const home  =box(world,{left:W+'px',top:'0px',width:W+'px',height:H+'px'});
+box(office,{left:0,top:0,width:W+'px',height:H+'px',
+  background:'radial-gradient(66% 52% at 42% 30%, rgba(255,220,160,.34), transparent 70%)'});
+box(home,{left:0,top:0,width:W+'px',height:H+'px',
+  background:'radial-gradient(70% 54% at 56% 32%, rgba(255,214,150,.36), transparent 70%)'});
+
+updaters.push(t=>{
+  const p1=E.io5(u(t,T.pan1,T.pan1+3.0));
+  const p2=E.io5(u(t,T.pan2,T.pan2+3.0));
+  world.style.transform=`translate3d(${(-PAN*(p1-p2)).toFixed(1)}px,0,0)`;
+  world.style.opacity=String(1-E.io3(u(t,T.dots-1.0,T.dots-.1)));
+  const z=1.03+0.035*E.sin(cl(t/DURATION))-0.012*Math.cos(t*0.1);
+  cam.style.transform=`translate3d(${(9*Math.sin(t*0.07)).toFixed(1)}px,${(-7*Math.sin(t*0.055+1.1)).toFixed(1)}px,0) scale(${z.toFixed(4)})`;
+});
+
+/* ===============================================================
+   I. U LOGOPÉDKY — určí, čo sa má doma trénovať
+   =============================================================== */
+const oDesk=deskOf(office,{x:250,w:1170,top:700,wood:'#D8C3A0',wood2:'#B9A17E'});
+const ther=person(office,{x:392,y:786,s:1,skin:C.skinT,cloth:C.ther,hair:C.hairT,hairStyle:'bun',adult:true});
+const lapBase=box(office,{left:'980px',top:'672px',width:'440px',height:'16px',borderRadius:'8px',background:'#DDD3C0'});
+const LS={x:1010,y:406,w:380,h:266};
+const lap=box(office,{left:LS.x+'px',top:LS.y+'px',width:LS.w+'px',height:LS.h+'px',borderRadius:'14px',
+  background:'#FCF8EF',border:'8px solid #DDD3C0'});
+const lapGlow=box(office,{left:(LS.x-70)+'px',top:(LS.y-60)+'px',width:(LS.w+140)+'px',height:(LS.h+150)+'px',
+  background:'radial-gradient(50% 50% at 50% 50%, rgba(232,163,61,.20), transparent 70%)'});
+txt(lap,'Tento týždeň',{left:'22px',top:'20px',color:C.muted,...KICK});
+const exCard=box(lap,{left:'22px',top:'50px',width:(LS.w-60)+'px',height:'92px',borderRadius:'14px',
+  background:'#FBF4E6',border:'1px solid #EDDFC4'});
+txt(exCard,'Staviame podľa plánu',{left:'16px',top:'18px',color:C.ink,fontSize:'21px',fontWeight:'600',letterSpacing:'-.015em'});
+txt(exCard,'Plánovanie · 5 – 8 rokov · 10 min',{left:'16px',top:'50px',color:C.muted,fontSize:'14px'});
+const sendPill=box(lap,{left:'22px',top:'160px',height:'40px',padding:'0 20px',borderRadius:'20px',
+  background:C.acc,display:'flex',alignItems:'center'});
+txt(sendPill,'Priradiť rodine',{position:'relative',color:'#fff',fontSize:'15px',fontWeight:'600'});
+const oLine=txt(office,'Logopédka určí, čo sa má doma trénovať.',
+  {left:'0px',top:'906px',width:W+'px',textAlign:'center',color:C.ink,fontSize:'32px',letterSpacing:'-.02em'});
+
+/* karta, ktorá letí z ordinácie domov a späť */
+const fly=box(world,{width:'168px',height:'70px',borderRadius:'14px',
+  background:'linear-gradient(168deg,#FFFEFB,#F8F0DF)',border:'1px solid #E9DCC0',
+  boxShadow:'0 18px 40px -22px rgba(70,46,16,.5)'});
+const flyT=txt(fly,'Staviame podľa plánu',{left:'14px',top:'14px',width:'140px',color:C.ink,
+  fontSize:'12px',fontWeight:'600',lineHeight:'1.3',whiteSpace:'normal'});
+
+updaters.push(t=>{
+  const inp=E.o5(u(t,T.office,T.office+1.2));
+  [oDesk.top,oDesk.l1,oDesk.l2,lapBase,lap].forEach(n=>set(n,cl(inp*1.4),0,lerp(22,0,inp)));
+  set(lapGlow,cl(inp)*.85,0,0);
+  const nod=Math.sin(Math.PI*cl(u(t,T.pick,T.pick+.9)))*5+Math.sin(Math.PI*cl(u(t,T.panel+2.4,T.panel+3.2)))*5;
+  const tap=Math.sin(Math.PI*cl(u(t,T.send-.5,T.send+.4)))+Math.sin(Math.PI*cl(u(t,T.support-.5,T.support+.5)));
+  ther.arm(-26, lerp(24,-40,tap)); ther.head(nod);
+  ther.mood(lerp(.45,.8,E.io3(u(t,T.panel+2.0,T.panel+3.4))));
+  set(ther.root,cl(inp*1.4),0,lerp(24,0,inp));
+  set(exCard,cl(E.o5(u(t,T.screen,T.screen+.8))*1.5)*(1-E.io3(u(t,T.panel-.6,T.panel))),
+      lerp(-16,0,E.o5(u(t,T.screen,T.screen+.8))),0);
+  const sp=E.back(u(t,T.pick,T.pick+.6));
+  set(sendPill,cl(sp*1.6)*(1-E.io3(u(t,T.send,T.send+.5))),0,lerp(10,0,cl(sp)),
+      lerp(.9,1,sp)*(1+.05*Math.sin(Math.PI*cl(u(t,T.send-.4,T.send+.3)))));
+  set(oLine,tv(t,T.office+1.2,T.office+2.2,0,1,E.o3)*(1-E.io3(u(t,T.pan1-.8,T.pan1))),0,
+      lerp(16,0,E.o5(u(t,T.office+1.2,T.office+2.3))));
+
+  /* let karty tam a späť */
+  const f1=u(t,T.send,T.send+3.4), f2=u(t,T.pan2-1.2,T.pan2+2.4);
+  let fx,fy,fo,fs;
+  if(t<T.pan2-1.4){ const e=E.io3(f1);
+    fx=lerp(1150,2560,e); fy=lerp(470,596,e)-Math.sin(f1*Math.PI)*150;
+    fo=(f1<=0||f1>=1)?0:Math.min(1,f1/0.12)*Math.min(1,(1-f1)/0.16); fs=lerp(1,.82,e);
+  } else { const e=E.io3(f2);
+    fx=lerp(2540,1160,e); fy=lerp(590,470,e)-Math.sin(f2*Math.PI)*150;
+    fo=(f2<=0||f2>=1)?0:Math.min(1,f2/0.12)*Math.min(1,(1-f2)/0.16); fs=lerp(.82,1,e);
+  }
+  fly.style.left=fx+'px'; fly.style.top=fy+'px';
+  set(fly,fo,0,0,fs,lerp(-4,4,E.sin(cl(t*.1))));
+});
+
+/* ===============================================================
+   II. DOMA — „Kto zjedol koláčiky?"
+   Detektívka zo zošita cvičení: tri stopy, traja podozriví
+   a dieťa, ktoré usudzuje nahlas.
+   =============================================================== */
+const hDesk=deskOf(home,{x:440,w:1020,top:700,wood:C.wood,wood2:C.wood2});
+const kid=person(home,{x:700,y:766,s:1,skin:C.skinK,cloth:C.kid,hair:C.hairK,hairStyle:'bob'});
+const par=person(home,{x:1250,y:786,s:1,skin:C.skinP,cloth:C.par,hair:C.hairP,hairStyle:'short',adult:true});
+
+/* dôkazy na stole: prázdny tanier, omrvinky, blatistá labka, odkaz */
+const plate=svg(home,150,44,
+  `<ellipse cx="75" cy="30" rx="70" ry="13" fill="#EFE4CE"/>
+   <ellipse cx="75" cy="26" rx="70" ry="13" fill="#FCF7EC" stroke="#E3D5B8" stroke-width="2"/>`,
+  {left:'842px',top:'642px'});
+const crumbs=svg(home,120,40,
+  [[10,26,3.4],[26,31,2.6],[40,24,3.0],[58,30,2.4],[74,27,3.2],[92,31,2.6]]
+    .map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#8A5A2E"/>`).join(''),
+  {left:'740px',top:'652px'});
+const paw=svg(home,76,68,
+  `<g fill="#7A5A38" opacity=".95">
+     <ellipse cx="38" cy="45" rx="17" ry="13"/>
+     <circle cx="21" cy="24" r="6.5"/><circle cx="34" cy="17" r="7"/>
+     <circle cx="47" cy="18" r="6.8"/><circle cx="59" cy="28" r="6"/></g>`,
+  {left:'1026px',top:'616px'});
+const note=box(home,{left:'462px',top:'626px',width:'112px',height:'70px',borderRadius:'5px',
+  background:'#FFFDF6',border:'1px solid #E4D8BE',transform:'rotate(-6deg)',
+  boxShadow:'0 6px 14px -8px rgba(70,46,16,.4)'});
+txt(note,'„Prepáč,',{left:'11px',top:'16px',color:'#6B5A42',fontSize:'13px'});
+txt(note,'bol som hladný."',{left:'11px',top:'34px',color:'#6B5A42',fontSize:'13px'});
+
+/* traja podozriví */
+const SUS=[['Ocko','#3D5A7A'],['Maja','#D2703F'],['Barny','#7A6A4E']];
+const cards=SUS.map(([name,col],i)=>{
+  const c=box(home,{left:(360+i*250)+'px',top:'214px',width:'220px',height:'150px',borderRadius:'18px',
+    background:'linear-gradient(168deg,#FFFEFB,#FBF6EC)',border:'1px solid #EBE0CB',
+    boxShadow:'0 20px 44px -28px rgba(70,46,16,.34)',transformOrigin:'110px 75px'});
+  box(c,{left:'86px',top:'22px',width:'48px',height:'48px',borderRadius:'50%',background:col,opacity:'.9'});
+  txt(c,name,{left:'0px',top:'86px',width:'220px',textAlign:'center',color:C.ink,
+    fontSize:'24px',fontWeight:'600',letterSpacing:'-.015em'});
+  const cross=svg(c,220,150,
+    `<path d="M62 44 L158 116 M158 44 L62 116" stroke="#C2624A" stroke-width="7"
+       stroke-linecap="round" opacity=".85"/>`,{left:'0px',top:'0px'});
+  return {c,cross,col};
+});
+const pick=box(home,{left:'604px',top:'198px',width:'232px',height:'182px',borderRadius:'22px',
+  border:'3px solid #E8A33D',transformOrigin:'116px 91px'});
+
+/* telefón + karta pre rodiča */
+const ph=box(home,{left:'1146px',top:'658px',width:'98px',height:'42px',borderRadius:'9px',
+  background:'#FCF6E8',border:'1.5px solid #C9A97A',transform:'rotate(-5deg)'});
+box(ph,{left:'7px',top:'6px',width:'84px',height:'30px',borderRadius:'5px',background:'#FFFCF4'});
+const phGlow=box(home,{left:'1064px',top:'588px',width:'262px',height:'186px',
+  background:'radial-gradient(50% 50% at 50% 58%, rgba(232,163,61,.32), transparent 66%)'});
+const pc=cardBox(home,{x:1188,y:426,w:400,h:186});
+const pcK=txt(pc,'Evolvea · dnešné cvičenie',{left:'26px',top:'22px',color:C.acc,...KICK});
+const pcT=txt(pc,'',{left:'26px',top:'52px',width:'348px',color:C.ink,
+  fontSize:'24px',lineHeight:'1.32',fontWeight:'500',letterSpacing:'-.02em',whiteSpace:'normal'});
+const pcLine=svg(home,120,180,`<path d="M96 26 L18 150" stroke="#C9A97A" stroke-width="1.5" fill="none" opacity=".5"/>`,
+  {left:'1074px',top:'596px'});
+
+/* replika dieťaťa */
+const ansB=box(home,{left:'250px',top:'420px',width:'430px',height:'126px',borderRadius:'26px',
+  background:'rgba(255,255,255,.95)',border:'1.5px solid rgba(43,35,24,.18)',transformOrigin:'80px 126px'});
+txt(ansB,'Pes predsa nevie napísať odkaz.',{left:'0px',top:'0px',width:'430px',height:'126px',
+  display:'flex',alignItems:'center',justifyContent:'center',textAlign:'center',padding:'0 26px',
+  color:C.ink,fontSize:'29px',fontWeight:'500',letterSpacing:'-.02em',lineHeight:'1.22',whiteSpace:'normal'});
+const ansT=svg(home,32,26,`<path d="M2 2 L30 2 L11 24 Z" fill="rgba(255,255,255,.95)"/>`,
+  {left:'302px',top:'545px'});
+
+const hLine=txt(home,'Rodič sa pýta. Dieťa vysvetľuje prečo.',
+  {left:'0px',top:'906px',width:W+'px',textAlign:'center',color:C.ink,fontSize:'32px',letterSpacing:'-.02em'});
+
+const Q1='Kto zjedol koláčiky? Nechajte dieťa nájsť stopy.';
+const Q2='Spýtajte sa: „Ktorá stopa nám povie, kto to nemohol byť?"';
+
+updaters.push(t=>{
+  const inp=E.o5(u(t,T.home,T.home+1.2));
+  const out=1-E.io3(u(t,T.pan2-1.2,T.pan2-.2));
+  [hDesk.top,hDesk.l1,hDesk.l2].forEach(n2=>set(n2,cl(inp*1.4)*out,0,lerp(22,0,inp)));
+  set(ph,cl(inp*1.4)*out,0,lerp(20,0,inp)); set(phGlow,cl(inp)*.9*out,0,0);
+
+  /* karta pre rodiča: najprv zadanie, potom otázka */
+  const cp=E.o5(u(t,T.phone,T.phone+1.0));
+  set(pc,cl(cp*1.4)*out,lerp(26,0,cp),0); set(pcLine,cl(cp)*.9*out,0,0);
+  const q2=t>T.ask-.2;
+  const src=q2?Q2:Q1, from=q2?T.ask-.2:T.phone+.3;
+  pcT.textContent=src.slice(0,Math.floor(cl((t-from)*30,0,src.length)));
+
+  /* stopy pribúdajú jedna po druhej */
+  [[plate,T.clue],[crumbs,T.clue+1.1],[paw,T.clue+2.2],[note,T.clue+3.3]].forEach(([el2,a])=>{
+    const p=E.back(u(t,a,a+.7));
+    set(el2,cl(p*1.7)*out,0,lerp(-14,0,cl(p)),lerp(.8,1,p));
+  });
+
+  /* podozriví: dvaja sa vyškrtnú, jeden sa rozsvieti */
+  cards.forEach((o,i)=>{
+    const a=T.sus+i*.28, p=E.back(u(t,a,a+.7));
+    const kill=i===0?E.io3(u(t,T.out1,T.out1+.5)):(i===2?E.io3(u(t,T.out2,T.out2+.5)):0);
+    set(o.c,cl(p*1.7)*out*lerp(1,.42,kill),0,lerp(-16,0,cl(p)),lerp(.9,1,p)*lerp(1,.94,kill));
+    set(o.cross,kill,0,0);
+  });
+  const pk=E.back(u(t,T.solved,T.solved+.7));
+  set(pick,cl(pk*1.7)*out,0,0,lerp(1.14,1,pk));
+
+  /* dieťa: hľadá, ukazuje, vysvetľuje */
+  const look=Math.sin(Math.PI*cl(u(t,T.clue,T.clue+4.4)));
+  const point=Math.sin(Math.PI*cl(u(t,T.out1-.4,T.solved+1.0)));
+  kid.arm(-38, 28+look*18+point*34);
+  kid.head(lerp(0,6,look)-lerp(0,5,point));
+  kid.mood(lerp(.3,.95,E.io3(u(t,T.solved,T.solved+1.4))));
+  set(kid.root,cl(inp*1.4)*out,0,lerp(24,0,inp));
+
+  /* rodič: číta z telefónu, prikývne */
+  const nod=Math.sin(Math.PI*cl(u(t,T.solved+.3,T.solved+1.2)));
+  par.arm(-24,22); par.head(nod*5);
+  par.mood(lerp(.4,.85,E.io3(u(t,T.solved,T.solved+1.4))));
+  set(par.root,cl(inp*1.4)*out,0,lerp(24,0,inp));
+
+  const ao=cl(E.back(u(t,T.say,T.say+.7))*1.7)*out;
+  set(ansB,ao,0,lerp(16,0,cl(E.back(u(t,T.say,T.say+.7)))),lerp(.9,1,E.back(u(t,T.say,T.say+.7))));
+  set(ansT,ao,0,0);
+
+  set(hLine,tv(t,T.home+1.4,T.home+2.4,0,1,E.o3)*(1-E.io3(u(t,T.pan2-1.6,T.pan2-.6))),0,
+      lerp(16,0,E.o5(u(t,T.home+1.4,T.home+2.5))));
+});
+
+/* ===============================================================
+   IV. SPÄŤ — logopédka vidí, ako dieťa premýšľalo
+   =============================================================== */
+{
+  const PN={x:492,y:196,w:1070,h:520};
+  const pan=box(office,{left:LS.x+'px',top:LS.y+'px',width:LS.w+'px',height:LS.h+'px',borderRadius:'14px',
+    background:'linear-gradient(168deg,#FFFEFB,#FBF6EC)',border:'1px solid #EBE0CB',overflow:'hidden',
+    boxShadow:'0 34px 72px -40px rgba(70,46,16,.40)'});
+  const inn=box(pan,{left:'0px',top:'0px',width:PN.w+'px',height:PN.h+'px'});
+  txt(inn,'Panel logopéda',{left:'40px',top:'34px',color:C.muted,...KICK});
+  txt(inn,'Nina · 9 r. · Kto zjedol koláčiky?',{left:'40px',top:'62px',color:C.ink,
+    fontSize:'26px',fontWeight:'600',letterSpacing:'-.02em'});
+  /* to isté, čo dieťa doma urobilo — plán a stavba vedľa seba */
+  const c1=box(inn,{left:'40px',top:'128px',width:'508px',height:'236px',borderRadius:'16px',
+    background:'#FCFAF3',border:'1px solid #EDE3CE'});
+  txt(c1,'Stopa, ktorú si všimlo',{left:'22px',top:'18px',color:C.muted,...KICK});
+  txt(c1,'Odkaz pri prázdnom tanieri',{left:'22px',top:'58px',width:'440px',color:C.ink,
+    fontSize:'25px',fontWeight:'500',letterSpacing:'-.015em',whiteSpace:'normal'});
+  txt(c1,'„Prepáč, bol som hladný."',{left:'22px',top:'118px',color:C.muted,fontSize:'19px'});
+  const c2=box(inn,{left:'588px',top:'128px',width:'508px',height:'236px',borderRadius:'16px',
+    background:'#FCFAF3',border:'1px solid #EDE3CE'});
+  txt(c2,'Ako to zdôvodnilo',{left:'22px',top:'18px',color:C.muted,...KICK});
+  txt(c2,'„Pes predsa nevie napísať odkaz.',{left:'22px',top:'58px',width:'450px',color:C.ink,
+    fontSize:'25px',fontWeight:'500',letterSpacing:'-.015em',lineHeight:'1.28',whiteSpace:'normal'});
+  txt(c2,'A ocko bol vonku."',{left:'22px',top:'118px',color:C.ink,fontSize:'25px',fontWeight:'500'});
+  const sup=box(inn,{left:'40px',top:'392px',width:(PN.w-80)+'px',height:'88px',borderRadius:'16px',
+    background:'#F2F5FA',border:'1px solid #DCE4F0'});
+  txt(sup,'Miera opory na ďalší týždeň',{left:'24px',top:'20px',color:C.acc,...KICK});
+  const supV=txt(sup,'3 · s plnou oporou',{left:'24px',top:'46px',color:C.ink,fontSize:'24px',fontWeight:'500'});
+  const track=box(sup,{left:(PN.w-80-360)+'px',top:'48px',width:'300px',height:'7px',borderRadius:'4px',background:'#D8E1F0'});
+  const knob=box(sup,{top:'38px',width:'27px',height:'27px',borderRadius:'50%',background:C.acc,
+    boxShadow:'0 4px 10px -4px rgba(35,64,122,.6)'});
+  const line=txt(office,'A vidí, ako dieťa premýšľalo.',
+    {left:'0px',top:'906px',width:W+'px',textAlign:'center',color:C.ink,fontSize:'32px',letterSpacing:'-.02em'});
+
+  updaters.push(t=>{
+    const g=E.io5(u(t,T.panel,T.panel+1.6));
+    const off=1-E.io3(u(t,T.card-1.0,T.card-.2));
+    pan.style.left=lerp(LS.x,PN.x,g)+'px'; pan.style.top=lerp(LS.y,PN.y,g)+'px';
+    pan.style.width=lerp(LS.w,PN.w,g)+'px'; pan.style.height=lerp(LS.h,PN.h,g)+'px';
+    pan.style.borderRadius=lerp(14,20,g)+'px';
+    set(pan,cl(E.o3(u(t,T.panel-.3,T.panel+.4)))*off,0,0);
+    inn.style.left=((lerp(LS.w,PN.w,g)-PN.w)/2)+'px';
+    inn.style.top=((lerp(LS.h,PN.h,g)-PN.h)/2)+'px';
+    inn.style.opacity=String(E.io3(u(t,T.panel+.5,T.panel+1.4)));
+    set(c1,cl(E.o5(u(t,T.panel+1.0,T.panel+1.8))*1.5),lerp(-16,0,E.o5(u(t,T.panel+1.0,T.panel+1.8))),0);
+    set(c2,cl(E.o5(u(t,T.panel+1.4,T.panel+2.2))*1.5),lerp(16,0,E.o5(u(t,T.panel+1.4,T.panel+2.2))),0);
+    const sp=E.o5(u(t,T.support-.8,T.support-.1));
+    set(sup,cl(sp*1.5),0,lerp(-14,0,sp));
+    const sl=E.io3(u(t,T.support+.3,T.support+1.3));
+    knob.style.left=(PN.w-80-360+lerp(290,152,sl))+'px';
+    supV.textContent = sl>.5 ? '2 · s malou pomocou' : '3 · s plnou oporou';
+    set(track,cl(sp),0,0); set(knob,cl(sp),0,0);
+    set(line,tv(t,T.panel+2.2,T.panel+3.0,0,1,E.o3)*off,0,lerp(16,0,E.o5(u(t,T.panel+2.2,T.panel+3.1))));
+  });
+}
+
+/* ===============================================================
+   IV. STO ŠESŤDESIAT OSEM — týždeň dieťaťa ako pole hodín.
+   Jedna modrá bodka je hodina u logopédky, šesť jantárových sú
+   večery doma. To je celý produkt v jednom obraze.
+   =============================================================== */
+{
+  const g=box(cam,{left:'0px',top:'0px',width:W+'px',height:H+'px'});
+  const COLS=24, ROWS=7, PITCH=44, D=13;
+  const gw=(COLS-1)*PITCH+D, gx=(W-gw)/2, gy=344;
+  const HOUR_R=1, HOUR_C=15;
+  const EVE_C=19, EVE_R=[0,2,3,4,5,6];
+  const px=c=>gx+c*PITCH, py=r=>gy+r*PITCH;
+  const GCX=gx+gw/2, GCY=gy+(ROWS-1)*PITCH/2+D/2;
+
+  const dots=[];
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const d=box(g,{left:px(c)+'px',top:py(r)+'px',width:D+'px',height:D+'px',
+      borderRadius:'50%',background:'#2E2418',willChange:'transform,opacity'});
+    d.__w=(c*0.62+r*1.5)/(COLS*0.62+ROWS*1.5);          // uhlopriečna vlna
+    d.__hour=(r===HOUR_R&&c===HOUR_C);
+    d.__eve=(c===EVE_C&&EVE_R.includes(r));
+    d.__ei=EVE_R.indexOf(r);
+    d.__dx=px(c)+D/2-GCX; d.__dy=py(r)+D/2-GCY;    // odstup od stredu mriežky
+    dots.push(d);
+  }
+  const ring1=svg(g,180,180,`<circle cx="90" cy="90" r="42" fill="none" stroke="${C.acc}" stroke-width="2.4"/>`,
+    {left:(px(HOUR_C)+D/2-90)+'px',top:(py(HOUR_R)+D/2-90)+'px'});
+  const ring2=svg(g,260,260,`<circle cx="130" cy="130" r="64" fill="none" stroke="${C.acc}" stroke-width="1.6"/>`,
+    {left:(px(HOUR_C)+D/2-130)+'px',top:(py(HOUR_R)+D/2-130)+'px'});
+  const tagH=txt(g,'hodina u logopédky',{left:(px(HOUR_C)+D/2-150)+'px',top:(gy-52)+'px',width:'300px',
+    textAlign:'center',color:C.acc,fontSize:'13px',fontWeight:'600',letterSpacing:'.17em',textTransform:'uppercase'});
+  const leadH=box(g,{left:(px(HOUR_C)+D/2-0.75)+'px',top:(gy-26)+'px',width:'1.5px',height:'20px',
+    background:C.acc,opacity:'0',transformOrigin:'50% 0%'});
+  const tagE=txt(g,'večery doma',{left:(px(EVE_C)+D/2-150)+'px',top:(gy+(ROWS-1)*PITCH+46)+'px',width:'300px',
+    textAlign:'center',color:'#B8791E',fontSize:'13px',fontWeight:'600',letterSpacing:'.17em',textTransform:'uppercase'});
+  const leadE=box(g,{left:(px(EVE_C)+D/2-0.75)+'px',top:(gy+(ROWS-1)*PITCH+D+6)+'px',width:'1.5px',height:'20px',
+    background:'#B8791E',opacity:'0',transformOrigin:'50% 100%'});
+
+  const l1=txt(g,'Jedna hodina u logopédky.',{left:'0px',top:'722px',width:W+'px',textAlign:'center',
+    color:C.ink,fontSize:'50px',fontWeight:'500',letterSpacing:'-.032em'});
+  const l2=txt(g,'A šesť večerov, ktoré na ňu nadväzujú.',{left:'0px',top:'790px',width:W+'px',
+    textAlign:'center',color:C.ink,fontSize:'50px',fontWeight:'500',letterSpacing:'-.032em'});
+  const cap=txt(g,'168 hodín má týždeň dieťaťa',{left:'0px',top:'880px',width:W+'px',textAlign:'center',
+    color:C.muted,fontSize:'15px',fontWeight:'500',letterSpacing:'.18em',textTransform:'uppercase'});
+
+  updaters.push(t=>{
+    const on=E.io3(u(t,T.dots-.5,T.dots+.4))*(1-E.io3(u(t,T.card-.9,T.card-.2)));
+    const ex=E.io5(u(t,T.card-1.25,T.card-.1));   // stiahnutie do stredu
+    g.style.display=on>.001?'block':'none';
+    if(on<=.001)return;
+    g.style.opacity=String(on);
+    const breathe=1+0.006*Math.sin((t-T.dots)*0.9);      // mriežka jemne dýcha
+
+    dots.forEach(d=>{
+      const a=T.dots+.1+d.__w*1.5;
+      const p=E.o4(u(t,a,a+.55));
+      let s=lerp(.4,1,E.back(u(t,a,a+.65)))*breathe, o=p*.22, bg='#2E2418';
+      if(d.__hour){
+        const h=E.back(u(t,T.dotHour,T.dotHour+.7));
+        s*=lerp(1,2.0,h); o=lerp(p*.22,1,cl(h)); bg=C.acc;
+      } else if(d.__eve){
+        const a2=T.dotEve+d.__ei*.24, h=E.back(u(t,a2,a2+.6));
+        s*=lerp(1,1.75,h); o=lerp(p*.22,1,cl(h)); bg='#E8A33D';
+      } else {
+        o=p*lerp(.22,.14,E.io3(u(t,T.dotHour,T.dotHour+1.0)));
+      }
+      d.style.background=bg;
+      const px2=d.__hour?0:-d.__dx*.17*ex, py2=d.__hour?0:-d.__dy*.17*ex;
+      set(d,o,px2,lerp(8,0,p)+py2,s*(d.__hour?1:1-.28*ex));
+    });
+
+    /* prstene musia byť neviditeľné aj PRED svojím oknom, nielen po ňom */
+    const r1=u(t,T.dotHour+.1,T.dotHour+1.5), g1=t<T.dotHour+.1?0:1;
+    set(ring1,g1*(1-E.o3(r1))*.7,0,0,lerp(.4,1.5,E.o3(r1)));
+    const r2=u(t,T.dotHour+.35,T.dotHour+2.0), g2=t<T.dotHour+.35?0:1;
+    set(ring2,g2*(1-E.o3(r2))*.42,0,0,lerp(.45,1.5,E.o3(r2)));
+
+    const th=E.o4(u(t,T.dotHour+.5,T.dotHour+1.2));
+    set(tagH,th,0,lerp(8,0,th));
+    leadH.style.opacity=String(th*.5);
+    leadH.style.transform=`scaleY(${E.o4(u(t,T.dotHour+.35,T.dotHour+.9)).toFixed(3)})`;
+    const te=E.o4(u(t,T.dotEve+1.5,T.dotEve+2.2));
+    set(tagE,te,0,lerp(-8,0,te));
+    leadE.style.opacity=String(te*.5);
+    leadE.style.transform=`scaleY(${E.o4(u(t,T.dotEve+1.35,T.dotEve+1.9)).toFixed(3)})`;
+
+    set(l1,tv(t,T.dotLine,T.dotLine+.9,0,1,E.o3),0,lerp(20,0,E.o5(u(t,T.dotLine,T.dotLine+1.0))));
+    set(l2,tv(t,T.dotLine+.55,T.dotLine+1.45,0,1,E.o3),0,lerp(20,0,E.o5(u(t,T.dotLine+.55,T.dotLine+1.55))));
+    set(cap,tv(t,T.dotLine+1.3,T.dotLine+2.2,0,1,E.o3)*.9,0,lerp(12,0,E.o5(u(t,T.dotLine+1.3,T.dotLine+2.3))));
+  });
+}
+
+/* ===============================================================
+   V. ZÁVER
+   =============================================================== */
+{
+  const card=box(stage,{left:'0px',top:'0px',width:W+'px',height:H+'px',background:C.bg});
+  box(card,{left:0,top:0,width:W+'px',height:H+'px',
+    background:'radial-gradient(66% 50% at 50% 24%, rgba(255,214,150,.34), transparent 70%)'});
+  const h=box(card,{left:'260px',top:'402px',width:'1400px',display:'flex',flexWrap:'wrap',justifyContent:'center'});
+  const parts=[];
+  'Evolvea rozvíja to, ako deti myslia.'.split(' ').forEach(w=>{
+    const hold=el('span',h,{position:'relative',display:'inline-block',overflow:'hidden',lineHeight:1.24,
+      marginRight:'.3em',fontSize:'70px',fontWeight:'500',letterSpacing:'-.035em',color:C.ink});
+    parts.push(el('span',hold,{position:'relative',display:'inline-block',lineHeight:1.24},w));
+  });
+  /* Modrá bodka z mriežky sem doletí a zostane ako značka nad titulkom —
+     hodina u logopédky je to, z čoho celý produkt vychádza. */
+  const mark=box(card,{left:'1101px',top:'381.5px',width:'26px',height:'26px',
+    borderRadius:'50%',background:C.acc,willChange:'transform'});
+  const sub=txt(card,'Spoločník k terapii. Nie jej náhrada.',
+    {left:'0px',top:'540px',width:W+'px',textAlign:'center',color:C.muted,fontSize:'26px'});
+  const url=txt(card,'evolvea.sk',{left:'0px',top:'632px',width:W+'px',textAlign:'center',
+    color:C.acc,fontSize:'19px',fontWeight:'600',letterSpacing:'.2em',textTransform:'uppercase'});
+  updaters.push(t=>{
+    const on=E.io3(u(t,T.card-1.0,T.card+.15));
+    card.style.display=on>.001?'block':'none';
+    if(on<=.001)return;
+    card.style.opacity=String(on);
+    const fly=E.io5(u(t,T.card-.75,T.card+.75));
+    set(mark,1,lerp(0,-154,fly),lerp(0,-64.5,fly),lerp(1,.42,fly));
+    parts.forEach((s,i)=>{const p=E.o5(u(t,T.card+.55+i*.05,T.card+1.35+i*.05));
+      s.style.transform=`translate3d(0,${lerp(112,0,p).toFixed(1)}%,0)`; s.style.opacity=cl(p*2);});
+    set(sub,tv(t,T.card+1.5,T.card+2.3,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.5,T.card+2.4))));
+    set(url,tv(t,T.card+1.9,T.card+2.7,0,1,E.o3),0,lerp(14,0,E.o5(u(t,T.card+1.9,T.card+2.8))));
+  });
+}
+
+const grain=box(stage,{left:0,top:0,width:W+'px',height:H+'px',opacity:'.15',mixBlendMode:'soft-light',
+  backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='7'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E\")"});
+const fadeOut=box(stage,{left:0,top:0,width:W+'px',height:H+'px',background:C.bg,opacity:'0'});
+
+window.__duration=DURATION;
+window.__seek=function(t){
+  t=Math.max(0,Math.min(DURATION,t));
+  for(const f of updaters) f(t);
+  fadeOut.style.opacity=String(E.io3(u(t,DURATION-1.0,DURATION-.05)));
+};
+window.__seek(0);
+document.fonts.ready.then(()=>{window.__ready=true;});
+</script>
+</body>
+</html>
