@@ -13,7 +13,6 @@ import { createClient } from "@/lib/supabase/server";
  */
 
 export type ResetRequestState = {
-  values?: { email?: string };
   error?: "fields" | "rate_limit" | "unknown";
   sent?: boolean;
 } | null;
@@ -27,8 +26,7 @@ export async function requestPasswordResetAction(
   formData: FormData,
 ): Promise<ResetRequestState> {
   const email = String(formData.get("email") ?? "").trim();
-  if (!email || !email.includes("@") || email.length > 254)
-    return { error: "fields", values: { email } };
+  if (!email || !email.includes("@") || email.length > 254) return { error: "fields" };
 
   const origin = await siteOrigin();
   const supabase = await createClient();
@@ -41,8 +39,8 @@ export async function requestPasswordResetAction(
   if (error) {
     // Rate limiting / infrastructure problems are real errors and are shown;
     // they don't disclose account existence (unknown e-mails succeed).
-    if (error.status === 429) return { error: "rate_limit", values: { email } };
-    return { error: "unknown", values: { email } };
+    if (error.status === 429) return { error: "rate_limit" };
+    return { error: "unknown" };
   }
   return { sent: true };
 }

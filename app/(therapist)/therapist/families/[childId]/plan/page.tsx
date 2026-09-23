@@ -59,7 +59,7 @@ export default async function PlanBuilderPage({
       <p style={{ marginBottom: "0.8rem" }}>
         <Link
           href={`/therapist/families/${childId}`}
-          className="back-link"
+          style={{ color: "var(--accent-ink)", fontSize: "0.88rem", fontWeight: 600 }}
         >
           ← {family.child.first_name}
         </Link>

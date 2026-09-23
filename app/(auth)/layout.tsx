@@ -2,7 +2,6 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
-import AuthOrb from "@/components/auth/AuthOrb";
 import { IconCheck } from "@/components/icons";
 import "@/styles/app.css";
 
@@ -10,14 +9,12 @@ export default async function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const t = await getTranslations("auth");
-  const tf = await getTranslations("footer");
   const points = [t("heroPoint1"), t("heroPoint2"), t("heroPoint3")];
 
   return (
     <div className="auth-shell">
       {/* Left brand panel — desktop only; a warm, reassuring first impression. */}
       <aside className="auth-brand" aria-hidden="true">
-        <AuthOrb />
         <div className="auth-brand-head">
           <Link href="/" className="brand" aria-label="Evolvea" tabIndex={-1}>
             <span className="brand-dot" />
@@ -37,7 +34,7 @@ export default async function AuthLayout({
             ))}
           </ul>
         </div>
-        <p className="auth-brand-quote">{tf("quote")}</p>
+        <p className="auth-brand-quote">Vytvorené s láskou pre naše deti.</p>
       </aside>
 
       {/* Right panel — the form, with a compact header (brand + language). */}

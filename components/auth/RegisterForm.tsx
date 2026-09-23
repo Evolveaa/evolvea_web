@@ -70,7 +70,6 @@ export default function RegisterForm() {
             name="full_name"
             autoComplete="name"
             maxLength={120}
-            defaultValue={state?.values?.fullName}
             required
           />
         </div>
@@ -84,7 +83,6 @@ export default function RegisterForm() {
             name="email"
             type="email"
             autoComplete="email"
-            defaultValue={state?.values?.email}
             required
           />
         </div>

@@ -138,7 +138,9 @@ export default function SoundBoxesTask({
       {/* In count mode the written word stays hidden until solved — children
           must count sounds, not letters. */}
       {(content.mode === "colors" || revealed) && (
-        <p className="sbx-revealed-word">{item.word.toUpperCase()}</p>
+        <p style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "0.9rem" }}>
+          {item.word.toUpperCase()}
+        </p>
       )}
 
 

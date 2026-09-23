@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { cancelSubscriptionAction } from "@/lib/parent/actions";
 import type { AccessState } from "@/lib/billing";
-import ConfirmSubmit from "./ConfirmSubmit";
 
 /** Subscription status + management on the child settings page. */
 export default function SubscriptionManage({
@@ -29,9 +28,16 @@ export default function SubscriptionManage({
         {state === "canceled" && t("stateCanceled")}
       </p>
       {state === "active" ? (
-        <form action={cancelSubscriptionAction}>
+        <form
+          action={cancelSubscriptionAction}
+          onSubmit={(e) => {
+            if (!window.confirm(t("cancelConfirm"))) e.preventDefault();
+          }}
+        >
           <input type="hidden" name="child_id" value={childId} />
-          <ConfirmSubmit label={t("cancelBtn")} confirmLabel={t("cancelConfirmBtn")} />
+          <button type="submit" className="btn btn-sm btn-danger-ghost">
+            {t("cancelBtn")}
+          </button>
         </form>
       ) : (
         <Link href="/app/checkout" className="btn btn-sm btn-primary">
