@@ -15,7 +15,7 @@ const instrument = Instrument_Sans({
 });
 
 const MAIL =
-  "mailto:evolvea.eu@gmail.com?subject=Evolvea%20%E2%80%94%20pr%C3%ADstup%20pre%20logop%C3%A9da";
+  "mailto:info@evolvea.sk?subject=Evolvea%20%E2%80%94%20pr%C3%ADstup%20pre%20logop%C3%A9da";
 
 const DESCRIPTION =
   "Evolvea je digitálny spoločník k logopedickej a kognitívnej terapii detí od 5 do 10 rokov. Priradíte plán z panela, rodič vedie večerné cvičenie a odpovede sa vám vrátia ešte pred ďalším sedením.";
@@ -945,8 +945,8 @@ export default function Home() {
             </a>
           </div>
           <p data-r="4" style={{ margin: "20px 0 0", fontSize: "13.5px", color: "#8C8A7E" }}>
-            <a href="mailto:evolvea.eu@gmail.com" style={{ color: "inherit" }}>
-              evolvea.eu@gmail.com
+            <a href="mailto:info@evolvea.sk" style={{ color: "inherit" }}>
+              info@evolvea.sk
             </a>
           </p>
         </div>
