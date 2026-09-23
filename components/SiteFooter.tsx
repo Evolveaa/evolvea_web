@@ -14,7 +14,12 @@ export default async function SiteFooter() {
           </a>
           <span className="footer-quote">{t("quote")}</span>
         </div>
-        <small>{t("text")}</small>
+        <small>
+          {t("text")} ·{" "}
+          <a href="mailto:info@evolvea.sk" style={{ color: "inherit" }}>
+            info@evolvea.sk
+          </a>
+        </small>
       </div>
     </footer>
   );
